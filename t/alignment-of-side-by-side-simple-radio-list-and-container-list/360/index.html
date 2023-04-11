@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Alignment of side by side Simple Radio List and Container list</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Alignment of side by side Simple Radio List and Container list</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">JMatunas</div>
+          <div class="post_content">
+<p>Hi everyone - I am using a Simple Radio List and a Container list to display a list of data - side by side.  They are the same data set.  The reason I want to use two is for the alignment of the columns of data. In the first column with the radio button is a coverage amount, and in the second column is the impact on the premium selecting that coverage would have.   Also, I want to dynamically show a graphic if a condition is met, thus using a second Container list.</p>
+<p>I’ve tried to get the lists to align - looked at the padding, etc.  I can’t see what’s driving the differences between the two.  The font is the same, the padding of the radio container, etc. This is just the alignment of the text, without any graphic being displayed.</p>
+<p>Anyone have any luck doing something like this or have another work around?</p>
+<p>Thanks,<br/>
+Jon Matunas</p>
+<p>When displayed in a modal window:<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/yQAeooY8pNyw6c3iqixA8hXZNr4.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f43b9e03fa1715db40c6982514c749a2e6796dfa.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="yQAeooY8pNyw6c3iqixA8hXZNr4" data-dominant-color="F9F9FB" height="369" src="../../../images/f43b9e03fa1715db40c6982514c749a2e6796dfa_2_690x369.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f43b9e03fa1715db40c6982514c749a2e6796dfa_2_690x369.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f43b9e03fa1715db40c6982514c749a2e6796dfa.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f43b9e03fa1715db40c6982514c749a2e6796dfa.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1029×551 52.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Layout in studio:<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/9e9xzHGHv3cxECN3VTj3dF5KRRN.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/40ad27bf3f031c044515488eef1c1cefc0eadb5b.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="9e9xzHGHv3cxECN3VTj3dF5KRRN" data-dominant-color="F5F6F8" height="485" src="../../../images/40ad27bf3f031c044515488eef1c1cefc0eadb5b.png" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">840×591 36.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/26_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kyung</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@JMatunas</span>,</p>
+<p>For a more complex use cases, I like to use a straight container list and add whatever I need in the container (such as a radio button).  Here is a sample for you to checkout,</p>
+<p><a class="attachment" href="/uploads/short-url/gVGxHEJCSgmMhZ4HbAqpP1GVghY.zip">Radio_List-2023-02-24T02_07_18.792Z-full.branch.zip</a> (19.5 KB)</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/jMFHqgWlBSDgDdSYUmp0d5a2wIF.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/8aa9ce8c97449f04e4b65a324fd316f4f031c581.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="jMFHqgWlBSDgDdSYUmp0d5a2wIF" data-dominant-color="F9F9FA" height="500" src="../../../images/8aa9ce8c97449f04e4b65a324fd316f4f031c581.png" width="671"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">674×502 10 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Let me know if you have any questions.</p>
+<ul>
+<li>Kyung</li>
+</ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">JMatunas</div>
+          <div class="post_content">
+<p>Thank you <span class="mention">@kyung</span>!   This works great - thanks for the help.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>I want to open a hyperlink text into a popup on the same page</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">I want to open a hyperlink text into a popup on the same page</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/386_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">chandu.singh</div>
+          <div class="post_content">
+<p>I want to open a hyperlink text into a popup on the same page<br/>
+and it should have a X (close button) at the right top corner. is it possible?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>That doesn’t sound like a feature Airkit supports out-of-the-box, though there’s some component parts that might allow you to hack together some component parts. <a href="https://support.airkit.com/reference/the-open-modal-action">Modals</a> nearly function as pop-ups, and you could populate a modal with information pulled from another website via API request. The X at the right top corner could be fabricated out of custom styling components.</p>
+<p>But, if I’m understanding correctly, you want to <em>hyperlink</em> into a popup, meaning you want to allow the user to access another website directly through your Airkit app? If that’s the case, I don’t think we’re using the right tool for the job: Airkit apps can be embedded into existing websites, but they weren’t built to function the other way around. We have an <a href="https://support.airkit.com/docs/sdks">SDK</a> that makes it easy to blend Airkit apps and exiting website functionality - but the assumption is always that the Airkit app is the one that will be embedded (or will appear as a popup) within the website.</p>
+<p>(But if you just meant you want something styled like a hyperlink to open a popup on top of the page, and the popup is also part of your Airkit app, then you can just use a modal.)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@chandu.singh</span>, is this what you’re looking for?</p>
+<p></p><div class="video-container">
+<video controls="" height="100%" preload="metadata" width="100%">
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a391d84e95cbe4109e598f8d5136daa18a0a8bb7.mp4"/>
+<a href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a391d84e95cbe4109e598f8d5136daa18a0a8bb7.mp4">https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a391d84e95cbe4109e598f8d5136daa18a0a8bb7.mp4</a>
+</video>
+</div><p></p>
+<p><a class="attachment" href="/uploads/short-url/naxalUagMth6jmnyg24nwJP4ZJ2.zip">hyperlink-appear-onclick-2022-12-02T17_29_23.026Z-full.branch.zip</a> (17.7 KB)</p>
+<p>The zip file attached shows a very simple version of this which is essentially hiding and showing a container on click of a button.<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/mynySI0SQKV3d0oKr0xyU22fGxC.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9e12ba18e2ddaa0b162497df93cfa30ec63bdd34.png" title="2022-12-02_09-31-03"><img alt="2022-12-02_09-31-03" data-base62-sha1="mynySI0SQKV3d0oKr0xyU22fGxC" data-dominant-color="F9FAFB" height="239" src="../../../images/9e12ba18e2ddaa0b162497df93cfa30ec63bdd34_2_690x239.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9e12ba18e2ddaa0b162497df93cfa30ec63bdd34_2_690x239.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9e12ba18e2ddaa0b162497df93cfa30ec63bdd34_2_1035x358.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9e12ba18e2ddaa0b162497df93cfa30ec63bdd34.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-12-02_09-31-03</span><span class="informations">1351×468 45.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/3xM4K5OvbFx01AqE2sbxrclbEYv.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/18d7eccdf297a131d680d6e1f7912e0b7ce380ff.png" title="image"><img alt="image" data-base62-sha1="3xM4K5OvbFx01AqE2sbxrclbEYv" data-dominant-color="F8F9FA" height="230" src="../../../images/18d7eccdf297a131d680d6e1f7912e0b7ce380ff_2_690x230.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/18d7eccdf297a131d680d6e1f7912e0b7ce380ff_2_690x230.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/18d7eccdf297a131d680d6e1f7912e0b7ce380ff_2_1035x345.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/18d7eccdf297a131d680d6e1f7912e0b7ce380ff.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1353×451 46.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/386_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">chandu.singh</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@ismaen</span> for replying we customize it according to us.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

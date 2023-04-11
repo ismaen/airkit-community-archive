@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Checkboxes with variable number of options</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Checkboxes with variable number of options</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">dongeddis</div>
+          <div class="post_content">
+<p>I currently have a checkbox UI that allows the user to pick multiple dates nearby a given (variable) date.  The checkboxes have Data that looks like this:<br/>
+<img alt="dates0" data-base62-sha1="2CpVgi6T49uceFubiAjiNXgpyG0" height="227" src="../../../images/125c1a4a8f397729f24b8e9485d8b7e5cb2ab6cc.png" width="333"/><br/>
+plus some computation to find the date of the next two days (for a total of exactly 3 checkbox items).</p>
+<p>My problem: what I actually want is not always exactly 3 dates to pick from, but instead a variable number of checkboxes, between two variable dates.  I want to start at date#1, and then have a checkbox for each subsequent day, until I get to date#2.  (Let’s say there will be between 1 and 5 days in that date range.)</p>
+<p>Is there any way to make a checkbox picker, with a computed and variable number of checkbox items?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@dongeddis</span>, it sounds like you want to have a checkbox list automatically populated with dates in between a start and end date.</p>
+<p>Lets say i have a <code>startDate</code> that looks like this:</p>
+<pre><code class="lang-auto">{
+  "day": 25,
+  "month": 7,
+  "year": 2022
+}
+</code></pre>
+<p>and an <code>endDate</code> that looks like this:</p>
+<pre><code class="lang-auto">{
+  "day": 30,
+  "month": 7,
+  "year": 2022
+}
+</code></pre>
+<p>Given these two dates, you would need an list/array of dates to be put into the data property of the checkbox list. You can use this query expression:</p>
+<pre><code class="lang-auto">FROM
+  offset
+IN
+  RANGE(0, DAYS(startDate, endDate))
+SELECT
+  ADD_TO_DATE(startDate, offset, "days")
+</code></pre>
+<p>This would output the results that would look like this:</p>
+<pre><code class="lang-auto">[
+  {
+    "day": 25,
+    "month": 7,
+    "year": 2022
+  },
+  {
+    "day": 26,
+    "month": 7,
+    "year": 2022
+  },
+  {
+    "day": 27,
+    "month": 7,
+    "year": 2022
+  },
+  {
+    "day": 28,
+    "month": 7,
+    "year": 2022
+  },
+  {
+    "day": 29,
+    "month": 7,
+    "year": 2022
+  }
+]
+</code></pre>
+<p>With this, you can set a variable on an action or run it through a data flow using two date pickers to populate the checkbox list.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/wp8XjOpfPICwKiuIoJ1i2SHS7mm.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e31d346d27c5508248208aa97c6f20ef450fa946.png" title="image"><img alt="image" data-base62-sha1="wp8XjOpfPICwKiuIoJ1i2SHS7mm" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e31d346d27c5508248208aa97c6f20ef450fa946_2_10x10.png" height="308" src="../../../images/e31d346d27c5508248208aa97c6f20ef450fa946_2_690x308.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e31d346d27c5508248208aa97c6f20ef450fa946_2_690x308.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e31d346d27c5508248208aa97c6f20ef450fa946.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e31d346d27c5508248208aa97c6f20ef450fa946.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">829×371 28.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><img alt="image" data-base62-sha1="dyHN0l7ekoHqkTb7JBv0JhnKBZy" height="351" src="../../../images/5f089a3bd3c56355320b5f888a5c9a4379b39a9c.png" width="440"/></p>
+<p>Thank you <span class="mention">@joechrz</span> for the assist!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">dongeddis</div>
+          <div class="post_content">
+<p>OMG!  That was totally awesome!  A great solution to my specific problem, and it also teaches me new tricks that I might use in other contexts.  Very much appreciated.  Just implemented in my app, and it works great!</p>
+<p>(The one change I made: do a FORMAT_DATE(…,“MM/DD/yyyy”) in the SELECT around ADD_TO_DATE.)</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

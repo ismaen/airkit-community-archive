@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How Can I Create a square container</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How Can I Create a square container</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/50_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">zacharyc</div>
+          <div class="post_content">
+<p>I’m looking to make a map control be square. I want to maintain the aspect ratio while adjusting to the width of the existing container.</p>
+<p>Looking at the style properties, I cannot see how to do this? Is this possible?</p>
+<p>Thanks,<br/>
+Zack</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi, Zack!</p>
+<p>There’s isn’t a style property <em>specifically</em> for making a Container square, but I’ve had some success doing this exact thing by using the <strong>Dimensions</strong> style properties (Height and Width) of the Container in question. The idea is that if you define both Height and Width as the same number of pixels, you get a square Container.</p>
+<p>Of course, it sounds like you don’t just want to hardcode the number of pixels: you want the size of the Container to fit the size of the screen being used to view it. Fortunately, every <a href="https://support.airkit.com/docs/standard-journey-data">Journey automatically records standard data about the interface being used to access the application</a>, and so the automatically-generated variables <code>browser.height</code> and <code>browser.width</code> can be used to refer to the viewing device’s height and width respectively.</p>
+<p>For example, say you’re creating a square Container, and you want 20px of padding around it, so that it’s not running up against the edge of the screen. You’d define both the Height and Width of the Container as:</p>
+<pre><code class="lang-auto">"{{IF(browser.height&gt;browser.width, browser.width, browser.height) - 40}}px"
+</code></pre>
+<p>This uses the <a href="https://support.airkit.com/reference/if">IF</a> function to ensure that your square Container will fit on the screen regards of whether the app is being viewed in a mobile or Desktop view.</p>
+<p>Does that help you get started?</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

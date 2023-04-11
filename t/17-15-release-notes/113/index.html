@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>17.15 Release Notes</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">17.15 Release Notes</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/ruNVJxw6SUSEM6V037JHJQ7cqNI.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c0b626acc61c4af1ac455f5d5b8d9a42e83398c2.png" title="image_release"><img alt="image_release" data-base62-sha1="ruNVJxw6SUSEM6V037JHJQ7cqNI" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c0b626acc61c4af1ac455f5d5b8d9a42e83398c2_2_10x10.png" height="172" src="../../../images/c0b626acc61c4af1ac455f5d5b8d9a42e83398c2_2_345x172.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c0b626acc61c4af1ac455f5d5b8d9a42e83398c2_2_345x172.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c0b626acc61c4af1ac455f5d5b8d9a42e83398c2_2_517x258.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c0b626acc61c4af1ac455f5d5b8d9a42e83398c2_2_690x344.png 2x" width="345"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image_release</span><span class="informations">1920×960 18.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Hello Builders! We just released 17.15 and wanted to highlight a few new features and improvements that will give you more flexibility in the studio. <img alt=":hammer_and_wrench:" class="emoji" height="20" loading="lazy" src="../../../images/hammer_and_wrench.png" title=":hammer_and_wrench:" width="20"/></p>
+<h1>
+<a class="anchor" href="#new-features-1" name="new-features-1"></a><img alt=":tada:" class="emoji" height="20" loading="lazy" src="../../../images/tada.png" title=":tada:" width="20"/>  New Features</h1>
+<ul>
+<li>
+<p>Support for <a href="https://support.airkit.com/docs/saml-authentication">Auth0</a>, Okta, and <a href="https://support.airkit.com/docs/setting-up-google-oauth">Google</a> as Auth providers for apps.</p>
+</li>
+<li>
+<p>Requests to Airdata will now have the option to use a <a href="https://support.airkit.com/reference/airdata-request-data-operation">visual query builder</a> instead of a raw expression editor.</p>
+</li>
+<li>
+<p>As of 17.15 you’ll have the option to configure the time it takes for most theme traits to change.  This allows you to have background shadows fade in, have background colors change gradually, and when using absolute positioning, you can even animate movement between 2 positions!</p>
+</li>
+</ul>
+<h1>
+<a class="anchor" href="#new-and-improved-airscript-operators-2" name="new-and-improved-airscript-operators-2"></a><img alt=":sparkles:" class="emoji" height="20" loading="lazy" src="../../../images/sparkles.png" title=":sparkles:" width="20"/>  New and Improved Airscript Operators</h1>
+<ul>
+<li>
+<p>Currencies can now be summed, added, multiplied, etc. by using the <code>+</code> operators. It is not recommended to use <code>currency.amount</code> for any reason as of this release.</p>
+</li>
+<li>
+<p>The SUM() function will also allow you to sum currencies in addition to numbers. The <code>SUM()</code> function will now throw errors if you attempt to sum an invalid data type (such as <code>NULL</code> or a string).</p>
+</li>
+<li>
+<p>String concatenation using the <code>+</code> operator</p>
+</li>
+</ul>
+<pre><code class="lang-javascript">"hello" + "world" =&gt; "helloworld"
+</code></pre>
+<ul>
+<li>Dates can now be <a href="https://support.airkit.com/reference/comparison-operators">compared</a> using <code>&lt; &gt;</code> etc. It is not recommended to use <code>date.day</code> or any other date object properties for any reason as of this release.</li>
+</ul>
+<p><strong>We’re looking forward to seeing what you keep building in the Airkit studio, and thank you for being part of the Airkit Builder community.</strong></p>
+<p>Happy Building!</p>
+<aside class="onebox allowlistedgeneric" data-onebox-src="https://support.airkit.com/changelog/1715-release-notes-3222">
+<header class="source">
+<img class="site-icon" height="32" src="../../../images/5c879ac1f942ed048b141282b62caaad8846837e.png" width="32"/>
+<a href="https://support.airkit.com/changelog/1715-release-notes-3222" rel="noopener" target="_blank">Airkit</a>
+</header>
+<article class="onebox-body">
+<h3><a href="https://support.airkit.com/changelog/1715-release-notes-3222" rel="noopener" target="_blank">17.15 Release Notes (3/2/22)</a></h3>
+<p>Hello Builders! We just released 17.15 and wanted to highlight a few new features and improvements that will give you more flexibility in the studio. 🛠 🎉 New Features Support for Auth0, Okta, and Google as Auth providers for apps. Requests to Airdata...</p>
+</article>
+<div class="onebox-metadata">
+</div>
+<div style="clear: both"></div>
+</aside>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

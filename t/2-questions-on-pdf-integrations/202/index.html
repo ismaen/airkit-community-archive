@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>2 questions on PDF integrations</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">2 questions on PDF integrations</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/358_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">camerondoane</div>
+          <div class="post_content">
+<ol>
+<li>How do I export completed signature to signature field in PDF?</li>
+<li>When clicking on the PDF itself, the text in each field is sitting behind the PDF page and I have to click on the form to see the text. Is there a way to have the text displayed without having to click on the form?</li>
+</ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@camerondoane</span>, great question. for the first question, you can do so by using the signature control and parsing through the signature control for the downloadUrl of the asset that gets created.</p>
+<p>On the PDF side, you can use adobe acrobat and use prepare form, but the thing that i found that works is that in order to pass the downloadUrl of the signature to a text field, and not an image.</p>
+<p>For the text displayed question, you want to make sure that the field is “Read Only” as that seems to fix the PDF to display correctly:</p>
+<p><img alt="image" data-base62-sha1="oMXPkcDcjU7jS3uRRqlbg3U5cf8" height="438" src="../../../images/adbd233a0d5133d8e890b987211e3fe110914152.png" width="579"/></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

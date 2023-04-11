@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to send sms/email with journey link(s) to multiple people</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to send sms/email with journey link(s) to multiple people</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Good morning!</p>
+<p><strong>Use case:</strong><br/>
+During sign in process, I need to send sms/email to different people for their signature.</p>
+<p>How to send different journey links so that when customer clicks the link, I would need to take them to the different web flow.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hello!</p>
+<p>In order to send individualized <a href="https://support.airkit.com/docs/linking-to-journeys#applications">Journey Links</a>, you need to start a new Journey for each person you want to send a new Journey Link to. From your description, it sounds like you have a primary application, and then, as an end user goes through the flow of that primary application, there’s a point in which you will want to fire of a secondary application, such that it sends out it’s own Journey Links to several other people?</p>
+<p>If that’s the case, you’ll probably want to trigger you secondary application via an <a href="https://support.airkit.com/docs/application-apis">App API</a>, which the primarily application can send <a href="https://support.airkit.com/reference/http-request-data-operation">HTTP requests</a> to in order to trigger the secondary application.</p>
+<p>Does that help? If not, can you go into some more detail on your use case?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thanks Chandra!</p>
+<p>If it’s simple signature, I would agree. But my use case is that, as a Primary applicant, I completed changes and signature and then I to send request to co-owner to complete their signature. When co-owner access the link, they should see all other changes that were done by primary applicant.<br/>
+It’s huge data and how can I send this data to other journey(if it is new application)?<br/>
+Once they completed the signature, how can I update the primary application with co-owner signature ?</p>
+<p>Instead of going with another Airkit application, can we do something in the existing app itself ?</p>
+<p>Thank you again for your response on this one.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>The challenge with doing it in one application is that if the primary applicant clicks on the session link that is sent to the co-owner, the would see the same experience, meaning you can’t seperate the two. That’s why using seperate apps that are triggered via App APIs is probably the better way to go about it. With the app APIs you can pass data to the new journey through the request body of the POST request.</p>
+<p>Then once they complete the journey on the co-owners app, you can then have an app API set up on the original app that does a lookup against the session id and runs an event to continue the journey.</p>
+<p>so in short:</p>
+<ol>
+<li>Primary signature App make a request to: → </li>
+<li>App API on secondary signature app</li>
+<li>On completed send an API request back to primary signature app to an App API endpoint set up on primary signature app</li>
+<li>App API configuration needs to do a lookup against journey using a session identifier</li>
+</ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p><span class="mention">@Narendra</span> Here’s a video on how i would do this:</p>
+<p></p><div class="video-container">
+<video controls="" height="100%" preload="metadata" width="100%">
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/7e35473575c715a1c41aae6fa34781a5a73239af.mp4"/>
+<a href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/7e35473575c715a1c41aae6fa34781a5a73239af.mp4">https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/7e35473575c715a1c41aae6fa34781a5a73239af.mp4</a>
+</video>
+</div><p></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Awesome ! Thanks a lot Ismaen. This is what exactly I am looking for.</p>
+<p>You guys made my day.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

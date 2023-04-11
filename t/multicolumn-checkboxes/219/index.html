@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Multicolumn checkboxes?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Multicolumn checkboxes?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">dongeddis</div>
+          <div class="post_content">
+<p>I have a checkbox picker (multiple options), with a large number of short options.  I’d like to format this as two columns (in order to save space).  Is there any way to do this?</p>
+<p>I tried horizontal instead of vertical (got all on a single line).  I tried “wrap” (back to vertical).  I tried two Checkbox List elements with the same variable name (the container horizontal, each list vertical).  This displayed correctly, but the user could only select multiple elements in one of the columns; selecting an element in the other column cleared all checkboxes in the first column.</p>
+<p>Is there any way to do multicolumn checkboxes, that are “select as many as you want”?</p>
+<p>Like this:<br/>
+<img alt="compass" data-base62-sha1="kBbZ4ACSg68m6y8x5hUAFNsq9qZ" height="204" src="../../../images/905fca4350bc8b7f1342b2ea73144fbde31434bd.png" width="415"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi Don! I’ve attached an export of what this would look like in the studio.</p>
+<p>First i would add a container to my page and put two checkbox lists in the container. The structure of this would look like this:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/7ZOvuVSySMfZwSWAtYfFjdZbOH5.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/380c0725d61f6c6096d36ebc779eb59f475d334f.png" title="image"><img alt="image" data-base62-sha1="7ZOvuVSySMfZwSWAtYfFjdZbOH5" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/380c0725d61f6c6096d36ebc779eb59f475d334f_2_10x10.png" height="267" src="../../../images/380c0725d61f6c6096d36ebc779eb59f475d334f_2_689x267.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/380c0725d61f6c6096d36ebc779eb59f475d334f_2_689x267.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/380c0725d61f6c6096d36ebc779eb59f475d334f_2_1033x400.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/380c0725d61f6c6096d36ebc779eb59f475d334f.png 2x" width="689"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1292×500 57.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>On the container, you need to distribute the children to stack horizontally:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/7gjIq52bSMPoqLzVS7Xc84xl92h.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/32e76ed9d3ea5ec3dc75bce5eb7cfa9456a43899.png" title="image"><img alt="image" data-base62-sha1="7gjIq52bSMPoqLzVS7Xc84xl92h" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/32e76ed9d3ea5ec3dc75bce5eb7cfa9456a43899_2_10x10.png" height="305" src="../../../images/32e76ed9d3ea5ec3dc75bce5eb7cfa9456a43899_2_690x305.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/32e76ed9d3ea5ec3dc75bce5eb7cfa9456a43899_2_690x305.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/32e76ed9d3ea5ec3dc75bce5eb7cfa9456a43899_2_1035x457.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/32e76ed9d3ea5ec3dc75bce5eb7cfa9456a43899.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1289×571 59.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Then i would edit each of the Data Properties of each checkbox list to the proper lists of data. In my first checkbox list i have</p>
+<pre><code class="lang-auto">[ "North", "South", "East", "West" ]
+</code></pre>
+<p>In my second checkboxlist i have:</p>
+<pre><code class="lang-auto">[
+  "Northwest",
+  "Southwest",
+  "Northeast",
+  "Southeast"
+]
+</code></pre>
+<p>Each of these checkbox lists store the selected values into an array. At the end of this, you essentially have two arrays of your selections. You can use this airscript expression to combine the two arrays and remove the <code>NULL</code> values.</p>
+<pre><code class="lang-javascript">FLAT(
+    [
+      checkbox_list,
+      checkbox_list_1
+    ]
+  )[?(@ &lt;&gt; NULL)]
+</code></pre>
+<p>NOTE: checkbox_list and checkbox_list_1 are the variables bound to the two checkbox lists.</p>
+<p>At the end of it, you’ll get something like this:</p>
+<p></p><div class="video-container">
+<video controls="" height="100%" preload="metadata" width="100%">
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b62b3bfbf6efcd447aad0cf0dc091c2b491a1c4e.mp4"/>
+<a href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b62b3bfbf6efcd447aad0cf0dc091c2b491a1c4e.mp4">https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b62b3bfbf6efcd447aad0cf0dc091c2b491a1c4e.mp4</a>
+</video>
+</div><p></p>
+<p>Zip file of the solution:<br/>
+<a class="attachment" href="/uploads/short-url/jvaV6VnA207yDoqe2SJxLQ9fOVX.zip">Multi-Column_Checkboxes-2022-07-25T19_49_10.361Z-full.branch.zip</a> (18.0 KB)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">dongeddis</div>
+          <div class="post_content">
+<p>This worked great.  Thanks so much for the step-by-step instructions.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

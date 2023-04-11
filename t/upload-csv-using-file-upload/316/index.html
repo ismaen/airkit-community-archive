@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Upload CSV using File Upload?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Upload CSV using File Upload?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p>Hi everyone - curious if it’s possible to upload a CSV using the File Upload?</p>
+<p><a href="https://support.airkit.com/reference/file-upload-web-control" rel="noopener nofollow ugc">I saw here</a> that Excel format is supported, but I can’t seem to get it to work if I save my CSV in excel format, nor can I simply capture it as CSV. Any thoughts or examples to share? Thanks so much!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">meredith.johnson</div>
+          <div class="post_content">
+<p>I’m also looking to do this! Were you able to figure it out?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@davidpairkit</span> and <span class="mention">@meredith.johnson</span>, so .CSV currently isn’t a list of supported types for the file upload control but i filed a feature request with the product team to have them add that in.</p>
+<p>As a workaround, you can convert your .csv files to .xslx and upload your files that way. Additionally, if you’d like to work with your .csv data within the context of your app, you can convert your .csv to .txt files and then take the <code>downloadUrl</code> that gets generated and make an HTTP request against the downloadUrl which would pull down the data that came from the .txt file. You can then use some airscript to transform the csv data from the HTTP request to JSON. Check out the post below on how to do that.</p>
+<aside class="quote quote-modified" data-post="1" data-topic="90">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" class="avatar" height="20" loading="lazy" src="../../../images/55_2.png" width="20"/>
+<a href="https://community.airkit.com/t/udfs-csv-to-list-of-json-objects-transformation/90">UDFs - CSV to List of JSON objects transformation</a> <a class="badge-wrapper bar" href="/c/show-and-tell/8"><span class="badge-category-bg" style="background-color: #116DE8;"></span><span class="badge-category clear-badge" data-drop-close="true" style="" title="This category used to share tips, tricks, best practices, and cool projects that you’d like to share with the broader community. Any tips, tricks, projects or learnings are welcome!">Show and tell</span></a>
+</div>
+<blockquote>
+    This sample <a href="https://support.airkit.com/reference/user-defined-functions" rel="noopener nofollow ugc">UDF</a> takes a CSV (string of Text) as input and returns a List of JSON objs. 
+Given the following input (dataType: Text): 
+my,csv,headers
+this,is,one row
+this,is,another row
+and this,here is,yet another row
+
+Let’s build a UDF that takes the CSV above and returns a list of JSON objects. 
+First we need a list of the csv headers, which will be used as the JSON keys. 
+SPLIT(
+  JOIN(
+    FROM row IN SPLIT(csv, "\n") WHERE index = 0 SELECT row
+  ),
+  ","
+)
+
+The output should look like: 
+[
+  …
+  </blockquote>
+</aside>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hey, everyone (<span class="mention">@davidpairkit</span>, <span class="mention">@meredith.johnson</span>, <span class="mention">@ismaen</span>)! We have an an update here! CSV files are now supported in the File Upload Web Control! The mime syntax for it is “text/csv”.</p>
+<p>You can see this updated reflected in the the <a href="https://support.airkit.com/reference/file-upload-web-control#control-properties">File Upload Web Control reference doc</a>.</p>
+<p>Happy building! <img alt=":slight_smile:" class="emoji" height="20" loading="lazy" src="../../../images/slight_smile.png" title=":slight_smile:" width="20"/></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

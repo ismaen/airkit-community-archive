@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Can you use Regular Expressions to validate input?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Can you use Regular Expressions to validate input?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tsnowden</div>
+          <div class="post_content">
+<p>I need to verify text input on blur that the value is alphanumeric and has a min &amp; max length of 10. Been searching through the docs and community but have not had any hits on Regular Expression or RegEx.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi, <span class="mention">@tsnowden</span>!</p>
+<p>RegEx typically refers to a very specific syntax, which Airkit does not parse, but <a href="https://support.airkit.com/docs/airscript-quick-start">Airscript</a> can be used to define a lot of the same functionality.</p>
+<p>For instance, say the text input was called <code>text_input</code>. You could use the function <a href="https://support.airkit.com/reference/length">LENGTH</a> combined with the function <a href="https://support.airkit.com/reference/if">IF</a> to check if it was 10 characters long, like so:</p>
+<pre><code class="lang-auto">IF(LENGTH(text_input) = 10, "This is a valid string", "This is not a valid string.")
+</code></pre>
+<p>The alphanumeric check is a bit tricker: all text input is saved as a <em>string</em>, but we don’t have an out-of-the-box way to confirm that string doesn’t contains (or doesn’t contain) any punctuation or special characters. That said, the <a href="https://support.airkit.com/reference/string_find">STRING_FIND</a> function lets you look for individual characters within a string, and you could make a <a href="https://support.airkit.com/reference/udf">UDF</a> that nests STRING_FIND calls to confirm some <code>base_string</code> doesn’t have any non-alphanumeric characters you really want to search for. For instance, the following function takes some <code>base_string</code> and returns <code>TRUE</code> if the base string doesn’t contain a space, period or exclamation point, <code>FALSE</code> otherwise:</p>
+<pre><code class="lang-auto">IF(
+  STRING_FIND(base_string, " ") != -1,
+  FALSE,
+  IF(
+    STRING_FIND(base_string, ".") != -1,
+    FALSE,
+    IF(
+      STRING_FIND(base_string, "!")
+        != -1,
+      FALSE,
+      TRUE
+    )
+  )
+)
+</code></pre>
+<p>Hope that helps you get started!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tsnowden</div>
+          <div class="post_content">
+<p>Thank you <span class="mention">@Chandra_Bergmann</span>!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>To expand on this, I’m going to take what <span class="mention">@kyung</span> built for this question here:</p>
+<aside class="quote quote-modified" data-post="2" data-topic="315">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" class="avatar" height="20" loading="lazy" src="../../../images/3_2.png" width="20"/>
+<a href="https://community.airkit.com/t/restrict-input-field-to-a-very-specific-format-of-numbers-and-letters/315/2">Restrict input field to a very specific format of numbers and letters</a> <a class="badge-wrapper bar" href="/c/how-to/6"><span class="badge-category-bg" style="background-color: #2DD68F;"></span><span class="badge-category clear-badge" data-drop-close="true" style="" title="Discuss everything related to building in the Airkit Studio!">How To</span></a>
+</div>
+<blockquote>
+    hi <span class="mention">@davidpairkit</span>, I created a UDF that can do this for you, although very specific to the input of “A#A#A#”. I’m sure you can modify it in case your requirements change: 
+ 
+    
+   
+ <a class="lightbox" data-download-href="/uploads/short-url/5bwJfK5kQpBjcO8hF8SqqaxCxUF.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/245877b4d8fe06159c1e7d5511a6108bb86cea5d.png" title="image">[image]</a> 
+Input: string 
+Output: boolean 
+ISEMPTY(
+  FROM
+    stringItem
+  IN
+    FROM item IN SPLIT(string, "") WHERE ISEVEN(index) SELECT item
+  WHERE
+    TYPEOF(stringItem) = "number"
+  SELECT
+    stringItem
+)
+  AND ISEMPTY(
+    FROM
+      numberItem
+    IN
+      FROM itm, idx IN SPLIT(string, "") WHERE ISODD(idx)…
+  </blockquote>
+</aside>
+<p>So there’s two UDFs you can create here:</p>
+<p><strong>Char#IsLetter</strong></p>
+<pre><code class="lang-auto">LENGTH(ch) = 1 AND ((ch &gt;= "A" AND ch &lt;= "Z") OR (ch &gt;= "a" AND ch &lt;= "z"))
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/rnweH5IpVS7QztL8b2I3WT5OGLT.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/bfe353083644258d66d4c2ec454da23bfeea1521.png" title="image"><img alt="image" data-base62-sha1="rnweH5IpVS7QztL8b2I3WT5OGLT" data-dominant-color="FCFCFD" height="295" src="../../../images/bfe353083644258d66d4c2ec454da23bfeea1521_2_690x295.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bfe353083644258d66d4c2ec454da23bfeea1521_2_690x295.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bfe353083644258d66d4c2ec454da23bfeea1521_2_1035x442.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bfe353083644258d66d4c2ec454da23bfeea1521_2_1380x590.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1407×602 47.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><strong>Char#IsNumber</strong></p>
+<pre><code class="lang-auto">LENGTH(ch) = 1 AND (ch &gt;= "0" AND ch &lt;= "9")
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/p0Xyq26nou4UScrmA7TJgFtyBgf.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/af522579e234ba6b5ae7f45448ab9e94e34db3a3.png" title="image"><img alt="image" data-base62-sha1="p0Xyq26nou4UScrmA7TJgFtyBgf" data-dominant-color="FCFCFD" height="281" src="../../../images/af522579e234ba6b5ae7f45448ab9e94e34db3a3_2_690x281.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/af522579e234ba6b5ae7f45448ab9e94e34db3a3_2_690x281.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/af522579e234ba6b5ae7f45448ab9e94e34db3a3_2_1035x421.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/af522579e234ba6b5ae7f45448ab9e94e34db3a3_2_1380x562.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1404×572 45.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>These allow you to detect if the passed string is a number or a letter.</p>
+<p>From here, you can then split the desired string, into an array and check to see if all values are alphanumeric.</p>
+<p>An easy way to do this is to create another UDF where you pass a string and check to see if any special characters show up. If not return <code>TRUE</code> otherwise return <code>FALSE</code></p>
+<p><strong>String#IsAlphaNumeric</strong></p>
+<pre><code class="lang-auto">LET
+  chs = FROM ch IN SPLIT(string, "") WHERE NOT(Char#IsLetter(ch)) AND NOT(Char#IsNumber(ch)) SELECT ch
+IN LENGTH(chs) = 0
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/aBxyNniOuGperdml8lJxfoP7w3w.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/4a541efa15c724f1da3e5170eecdf33067d3ec92.png" title="image"><img alt="image" data-base62-sha1="aBxyNniOuGperdml8lJxfoP7w3w" data-dominant-color="FCFCFD" height="292" src="../../../images/4a541efa15c724f1da3e5170eecdf33067d3ec92_2_690x292.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4a541efa15c724f1da3e5170eecdf33067d3ec92_2_690x292.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4a541efa15c724f1da3e5170eecdf33067d3ec92_2_1035x438.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4a541efa15c724f1da3e5170eecdf33067d3ec92_2_1380x584.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1606×681 56.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>See it in action!</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/4tQV4EJ8olkmeCVY473SRxBPB5T.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1f689b559fc69e33de867a643b73ecce6f4865d9.png" title="image"><img alt="image" data-base62-sha1="4tQV4EJ8olkmeCVY473SRxBPB5T" data-dominant-color="FEFDFE" height="500" src="../../../images/1f689b559fc69e33de867a643b73ecce6f4865d9_2_644x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1f689b559fc69e33de867a643b73ecce6f4865d9_2_644x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1f689b559fc69e33de867a643b73ecce6f4865d9.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1f689b559fc69e33de867a643b73ecce6f4865d9.png 2x" width="644"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">724×562 14.4 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div><br/>
+<a class="attachment" href="/uploads/short-url/45WXn90LiFRpEkDiA4FDjmoccDJ.zip">Untitled_App_71-2023-01-27T18_08_01.465Z-full.branch.zip</a> (35.2 KB)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Oh, this is really good way to do it!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tsnowden</div>
+          <div class="post_content">
+<p>That is perfect! Thank you so much!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

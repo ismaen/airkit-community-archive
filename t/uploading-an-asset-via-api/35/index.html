@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Uploading an asset via API</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Uploading an asset via API</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/17_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ian</div>
+          <div class="post_content">
+<p><img alt=":wave:" class="emoji" src="../../../images/wave.png" title=":wave:"/>, Builders</p>
+<p>I’m working on an image/document capture app that pushes uploads to another service via API.</p>
+<p>Because the external service requires files to be base64 encoded, I tried running the <strong>BASE64_ENCODE()</strong> Airscript function on my asset (see screenshot) but it doesn’t seem to be working.  What should I try next?</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/gcG1mMxmcv35kyMK52woRHFfnxf.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/7191a8190b884ac2af588f0fe0e46deef0ce9061.png" rel="noopener nofollow ugc" title="Screen Shot 2022-01-04 at 2.49.27 PM"><img alt="Screen Shot 2022-01-04 at 2.49.27 PM" data-base62-sha1="gcG1mMxmcv35kyMK52woRHFfnxf" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7191a8190b884ac2af588f0fe0e46deef0ce9061_2_10x10.png" height="391" src="../../../images/7191a8190b884ac2af588f0fe0e46deef0ce9061_2_690x391.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7191a8190b884ac2af588f0fe0e46deef0ce9061_2_690x391.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7191a8190b884ac2af588f0fe0e46deef0ce9061_2_1035x586.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7191a8190b884ac2af588f0fe0e46deef0ce9061_2_1380x782.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-01-04 at 2.49.27 PM</span><span class="informations">2218×1258 117 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey Ian! So in Airkit, we have what we call <a href="https://support.airkit.com/reference/the-asset-data-type">the Asset Data Type</a> which is a referer to your file with some information such as the ID or downloadUrl but doesn’t necessarily include the contents of your file.</p>
+<p>For example if someone were to upload a document to an Airkit App, you’d get an object that looks something like this:</p>
+<pre><code class="lang-auto">{
+  "size": 13598,
+  "thumbnailUrl": "https://assets.airkit.com",
+  "validationErrors": null,
+  "deletedTime": null,
+  "downloadUrl": "https://assets.airkit.com/",
+  "displayName": "image (17).png",
+  "organizationId": "",
+  "assetKey": "",
+  "expiration": 3600000,
+  "state": "ACTIVE",
+  "visibility": "GLOBAL",
+  "scope": "SESSION",
+  "region": "us-west-2",
+  "createdTime": "2022-01-05T23:39:14.180Z",
+  "modifiedTime": "2022-01-05T23:39:16.122Z",
+  "version": 0,
+  "type": "image/png",
+  "id": "",
+  "description": null,
+  "extraInfo": null
+}
+</code></pre>
+<p>I believe from here in your data flow, you can use the <code>ASSET_TO_URI</code> function to change this to an asset primitive. And then use the <a href="https://support.airkit.com/reference/download-encoded-asset-data-operation">Download Encoded Asset data operation</a> to get a BASE64 encoded file.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/17_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ian</div>
+          <div class="post_content">
+<p>Download encoded asset, that was it!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/386_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">chandu.singh</div>
+          <div class="post_content">
+<p>is it possible to  download the asset using a download button when a user clicked on it?<br/>
+what operations need to perform for that?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>If you have a <a href="https://support.airkit.com/reference/the-detailed-asset">Detailed Asset</a>, it comes out of the box with the <strong>downloadUrl</strong> attribute. You can use this to set the destination (Href) for a <a href="https://support.airkit.com/reference/hyperlink-web-control">Hyperlink Web Control</a>. If you want the Hyperlink to look more like a Button, there’s a Variant for that.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

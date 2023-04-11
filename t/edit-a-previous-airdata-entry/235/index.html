@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Edit A Previous AirData Entry</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Edit A Previous AirData Entry</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>Looking for the best way to search AirData for an old entry, and reload the data into the original text input fields.</p>
+<p>I have attached a sample project for reference.</p>
+<ol>
+<li>Would I use the variable names in an AirData Query and then save the result as a variable to send back to the text inputs?</li>
+<li>What function would be used to load the input back into the text inputs?</li>
+<li>What would be the best way to deal with multiple results from a search?<br/>
+<a class="attachment" href="/uploads/short-url/7q4Hq8qTK1uQniIyXCsYCaBvY4h.zip">HTML_to_PDF-2022-08-08T20_39_44.311Z-full.branch.zip</a> (19.5 KB)</li>
+</ol>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@Chris_Phillips</span>,</p>
+<p>So this depends on what your workflow looks like, but a common scenario that i’ve seen for someone to edit their record in airdata looks something like this:</p>
+<ol>
+<li>A web page to search the Airdata table based on a search term</li>
+<li>a container list that displays all the data on that search term</li>
+<li>a button that allows you to edit the record, which will then take you to a page that passes the data selected to inputs</li>
+<li>lastly, a data flow that takes the <code>__id</code> and does an Airdata PUT request on that record.</li>
+</ol>
+<p>I’ve linked a video here on me building out a simple app and you can also find an export of this app here:</p>
+<p><a class="attachment" href="/uploads/short-url/fQPdmiKM3g8vaOl8p5SLMvcEM4L.zip">Edit_Entry_in_Airdata-2022-08-09T02_55_30.530Z-full.branch.zip</a> (19.0 KB)</p>
+<div class="youtube-onebox lazy-video-container" data-provider-name="youtube" data-video-id="SHzJzHx1xfI" data-video-title="How to build an app that searches Airdata and allows you to edit">
+<a href="https://www.youtube.com/watch?v=SHzJzHx1xfI" rel="noopener" target="_blank">
+<img class="youtube-thumbnail" height="388" src="../../../images/c610b3e37ec1ecb535b13b54201e92db11186ede.jpeg" title="How to build an app that searches Airdata and allows you to edit" width="690"/>
+</a>
+</div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Very helpful!</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

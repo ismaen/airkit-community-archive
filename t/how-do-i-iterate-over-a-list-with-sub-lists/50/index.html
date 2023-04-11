@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How do I iterate over a list with sub-lists?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How do I iterate over a list with sub-lists?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/23_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Jake_Hanson</div>
+          <div class="post_content">
+<p>I have the following list of information that has sub-lists. I am looking for a way to transform this data using Airscript to return all of the lists whose sub-lists contain the product ID <code>98765</code>. How would I do this?</p>
+<p><strong>Starting Data:</strong><br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/wnhQonCKRWqKSTxM2oNf4YLm8HG.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e2e77a0ec565fc3a8c64cb1cb5da63fc8b4339f4.png" rel="noopener nofollow ugc" title="Screen Shot 2022-01-07 at 10.44.50 AM"><img alt="Screen Shot 2022-01-07 at 10.44.50 AM" data-base62-sha1="wnhQonCKRWqKSTxM2oNf4YLm8HG" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e2e77a0ec565fc3a8c64cb1cb5da63fc8b4339f4_2_10x10.png" height="500" src="../../../images/e2e77a0ec565fc3a8c64cb1cb5da63fc8b4339f4.png" width="364"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-01-07 at 10.44.50 AM</span><span class="informations">638×874 25.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><strong>Desired Result:</strong><br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/1lDrAP9BDco75tKmzx4OK0WPVBB.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/097449f5ac19aab252cb23b1934f9100c54b1c87.png" rel="noopener nofollow ugc" title="Screen Shot 2022-01-07 at 10.39.06 AM"><img alt="Screen Shot 2022-01-07 at 10.39.06 AM" data-base62-sha1="1lDrAP9BDco75tKmzx4OK0WPVBB" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/097449f5ac19aab252cb23b1934f9100c54b1c87_2_10x10.png" height="500" src="../../../images/097449f5ac19aab252cb23b1934f9100c54b1c87.png" width="476"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-01-07 at 10.39.06 AM</span><span class="informations">638×670 19.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/34_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">AirkitJeremy</div>
+          <div class="post_content">
+<p>Hi, Jake,</p>
+<p>This is pretty easy to do with a transform step in a data flow. You could also use this directly in a Set Variable action.</p>
+<p>Assumptions:</p>
+<ul>
+<li>
+<code>data</code> is the data you want to filter (your first screenshot above)</li>
+<li>
+<code>product_id</code> is the numeric ID of the product you want to find in the lists</li>
+</ul>
+<pre><code class="lang-auto">FROM
+  list
+IN
+  data
+WHERE
+  LENGTH(
+    FROM
+      list2
+    IN
+      list
+    WHERE
+      list2.product_id = product_id
+    SELECT
+      list2
+  )
+    &gt; 0
+SELECT
+  list
+</code></pre>
+<p>This works by checking each inner list to see if any of the products match the one you’re looking for by <code>product_id</code>. If the count is greater than zero, we have a match, so it will return the parent list. Here’s a screenshot of this in action using the sample data you provided:<br/>
+<img alt="image" data-base62-sha1="78XW19c5k4hKJdgqGCJwLmznBdc" height="349" src="../../../images/3212b2ecb0cbd90060230215858ef7ec45dff73e.png" width="471"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/50_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">zacharyc</div>
+          <div class="post_content">
+<p><span class="mention">@AirkitJeremy</span> answer is great. Love it.</p>
+<p>There are a couple of other ways to do this. We had worked on this:</p>
+<pre><code class="lang-auto">FROM 
+  i 
+IN 
+  input 
+WHERE 
+  ISNOTEMPTY(i[?(@.product_id = 98765)]) 
+SELECT 
+  i
+</code></pre>
+<p>This approach uses the JSON Path part of Airscript to solve this.</p>
+<p>Also, instead of using length and compaire, you just use the function <code>ISNOTEMPTY</code> to do the same thing <span class="mention">@AirkitJeremy</span> is showing above:</p>
+<pre><code class="lang-auto">FROM 
+   i 
+IN 
+   input 
+WHERE 
+   ISNOTEMPTY(
+      FROM 
+         item 
+      IN 
+         i 
+      WHERE 
+         item.product_id = 98765
+   )
+SELECT 
+   i
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/73_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">joechrz</div>
+          <div class="post_content">
+<p>Building on Zach’s approach with JSON path, if you want to keep the expression as concise as possible, you can even nest this syntax to create a one-liner:</p>
+<pre><code class="lang-auto">data[?(ISNOTEMPTY(@[?(@.product_id = 98765)]))]
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>hey <span class="mention">@Jake_Hanson</span> !</p>
+<p>Adding to what the guys already shared, you can also build a UDF if you find that you need to perform the same operation time and again in your app.</p>
+<p>Check out the following post: <a href="https://community.airkit.com/t/udfs-recursively-process-a-list-of-json-with-a-nested-list-of-json-and-return-objects-where-one-or-more-objects-in-the-nested-list-match-a-condition/103">UDFs - Recursive list processing</a></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

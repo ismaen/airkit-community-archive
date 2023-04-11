@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Triggering multiple webpages to collect multiple signatures</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Triggering multiple webpages to collect multiple signatures</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/358_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">camerondoane</div>
+          <div class="post_content">
+<p>How do I trigger multiple web pages to collect signatures from spouse, owner, etc when creating a change beneficiary flow?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>There’s a few different ways you can build this out depending on your use case. Let’s say the workflow looks like this:</p>
+<p>Owner goes through the change beneficiary flow and needs to sign themselves and also get a signature from their spouse, and then the owner then gets a notification saying their spouse has signed and can continue the journey.</p>
+<p>The way i would approach this is to actually use separate airkit applications. One for the Owner of the form and one application that is triggered via an App API for the spouse.</p>
+<p>By doing it in multiple applications and using an App API for the signature app, it would add an additional layer of control.</p>
+<p>The app API would be similarly constructed to this post <a href="https://community.airkit.com/t/how-do-you-pass-a-query-parameter-to-an-airkit-web-flow/146/2">here</a> where the application is triggered via an App API, it uses the start journey data operation and has the phone number as the body of the request. The phone number can then be used to send a notification to the spouse (passed from the owner app) where they can have their own seperate journey and sign.</p>
+<p>Then the application would then make another Http request to send to the original owner app to move on through the journey when the spouse has signed.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

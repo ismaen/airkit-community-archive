@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Search with multiple optional fields</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Search with multiple optional fields</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/21_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Mike_Cammon</div>
+          <div class="post_content">
+<p>What is the correct query syntax to use when searching with multiple fields, all of which are optional?</p>
+<p>Example:<br/>
+Search Params: First Name, Last Name, ID, Zip Code (all these fields have corresponding columns in the table im searching in.</p>
+<p>A user will enter one or more of those fields into a search form and I need to query with those different params. I could use First Name only or Last Name and ID, or Zip Code and First Name, etc, etc.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/26_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kyung</div>
+          <div class="post_content">
+<p>You probably want something like this:</p>
+<pre><code class="lang-auto">MERGE_OBJECTS(
+  [
+    IF(ISNOTEMPTY(first_name), { "first_name": { "eq": first_name } }),
+    IF(ISNOTEMPTY(last_name), { "last_name": { "eq": last_name } }),
+    IF(ISNOTEMPTY(zip_code), { "zip_code": { "eq": zip_code } }),
+    IF(ISNOTEMPTY(id), { "id": { "eq": id } })
+  ][?(ISNOTEMPTY(@))]
+)
+</code></pre>
+<p>Add any additional fields you need to the expression.  Then use the output of this expression as a filter.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/21_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Mike_Cammon</div>
+          <div class="post_content">
+<p>Kyung - thanks for the input! I gave that shot. apologies, im using different input values, but the spirit is identical.</p>
+<p>I modified your query a bit, but didn’t get the desired result. Screenshots below:</p>
+<p>this is my search criteria - I’m looking for a loan associated with Mike Cammon as the customer<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/sH3nMOAR14RhNsJLnJkVkgdTwAr.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c91acc020b8be2feacc1da10c843a4fa90ab49eb.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="sH3nMOAR14RhNsJLnJkVkgdTwAr" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c91acc020b8be2feacc1da10c843a4fa90ab49eb_2_10x10.png" height="500" src="../../../images/c91acc020b8be2feacc1da10c843a4fa90ab49eb_2_440x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c91acc020b8be2feacc1da10c843a4fa90ab49eb_2_440x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c91acc020b8be2feacc1da10c843a4fa90ab49eb.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c91acc020b8be2feacc1da10c843a4fa90ab49eb.png 2x" width="440"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">597×678 14.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>i use this query - find loans where first name = mike and last name = cammon<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/v2VEqRsfzRpHgbRzR8yXpZXxEO8.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d9982db6220ed5a4ab3ac7e2f62ece957162158c.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="v2VEqRsfzRpHgbRzR8yXpZXxEO8" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d9982db6220ed5a4ab3ac7e2f62ece957162158c_2_10x10.png" height="137" src="../../../images/d9982db6220ed5a4ab3ac7e2f62ece957162158c_2_690x137.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d9982db6220ed5a4ab3ac7e2f62ece957162158c_2_690x137.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d9982db6220ed5a4ab3ac7e2f62ece957162158c_2_1035x205.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d9982db6220ed5a4ab3ac7e2f62ece957162158c.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1115×222 30.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>my result though is that I get all results that match just on first name, and it doesn’t even evalutate the second condition for last name (i trimmed the majority of the details fyi)<br/>
+{<br/>
+“FirstName”: “mike”,<br/>
+“LastName”: “cammon”,<br/>
+}<br/>
+{<br/>
+“FirstName”: “mike”,<br/>
+“LastName”: “smith”,<br/>
+}</p>
+<p>Another odd note: when I change the OR to AND, I get every record from the table with no filtering</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/26_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kyung</div>
+          <div class="post_content">
+<p>Can you run your expression in a transform and post an image?  You should see something like:</p>
+<pre><code class="lang-auto">{
+  "FirstName": { "eq": "mike" },
+  "LastName": { "eq": "cammon" }
+}
+</code></pre>
+<p>The result of the expression should be used as a filter in the AirData query.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/21_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Mike_Cammon</div>
+          <div class="post_content">
+<p>I copied this expression into a Transform and the result was NULL</p>
+<pre><code class="lang-auto">IF(ISNOTEMPTY(search.first_name), { "FirstName": { "eq": search.first_name } })
+  AND IF(ISNOTEMPTY(search.last_name), { "LastName": { "eq": search.last_name } })
+  AND IF(ISNOTEMPTY(search.loan_id), { "LoanID": { "eq": search.loan_id } })
+  AND IF(ISNOTEMPTY(search.originator), { "Originator": { "eq": search.originator } })
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/21_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Mike_Cammon</div>
+          <div class="post_content">
+<p>When run the first part of the expression</p>
+<pre><code class="lang-auto">IF(
+  ISNOTEMPTY(search.first_name),
+  { "FirstName": { "eq": search.first_name } }
+)
+</code></pre>
+<p>my result is:</p>
+<pre><code class="lang-auto">{
+  "FirstName": {
+    "eq": "mike"
+  }
+}
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/21_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Mike_Cammon</div>
+          <div class="post_content">
+<p>I ended up re-trying the original with small mod and its working as expected:</p>
+<pre><code class="lang-auto">MERGE_OBJECTS(
+  [
+    IF(
+      ISNOTEMPTY(search.first_name),
+      { "FirstName": { "eq": search.first_name } }
+    ),
+    IF(
+      ISNOTEMPTY(search.last_name),
+      { "LastName": { "eq": search.last_name } }
+    ),
+    IF(
+      ISNOTEMPTY(search.loan_id),
+      { "LoanID": { "eq": search.loan_id } }
+    ),
+    IF(
+      ISNOTEMPTY(search.originator),
+      { "Originator": { "eq": search.originator } }
+    )
+  ][?(ISNOTEMPTY(@))]
+)
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

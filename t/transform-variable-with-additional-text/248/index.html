@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Transform Variable With Additional Text</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Transform Variable With Additional Text</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>I am looking to create a link from a variable, but also add “/settings/?tab=admin_roles” after the provided URL.</p>
+<p>Is there a transform expression I could use to add that text after a variable, which would be the beginning of the URL? From there, the output of the transform function would be used on the next web page as a link.</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/60_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Brooks_Naylor</div>
+          <div class="post_content">
+<p>Hey Chris!</p>
+<p>If you’re just trying to combine two potential strings into a new URL, you could use the <a href="https://support.airkit.com/reference/concat">CONCAT</a> function.</p>
+<p>For example, if I have a “beginning” input in a data flow that could take in any standard URL, you could use the CONCAT function to create and return a new URL with the new paths added on.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/80ue4rtoRjUx8F0I3fJEtYlGpFT.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/381f8005752717154369f80a9754ba942baf9e49.png" title="image"><img alt="image" data-base62-sha1="80ue4rtoRjUx8F0I3fJEtYlGpFT" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/381f8005752717154369f80a9754ba942baf9e49_2_10x10.png" height="412" src="../../../images/381f8005752717154369f80a9754ba942baf9e49_2_690x412.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/381f8005752717154369f80a9754ba942baf9e49_2_690x412.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/381f8005752717154369f80a9754ba942baf9e49.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/381f8005752717154369f80a9754ba942baf9e49.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">926×553 19.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p>Fields that expect URLs in Airkit accept strings. So if you have a URL stored in a variable (let’s call it <code>url_value</code> for the sake of example), then the string <code>"{{url_value}}/settings/?tab=admin_roles"</code> would reference a perfectly valid link.</p>
+<p>You can use similar principles to modify any portion of a URL. If there’s a topic you want to link to in Wikipedia, for instance, and the topic is stored in the variable <code>topic</code>, you can generate a link to that topic’s Wikipedia page with <code>"https://en.wikipedia.org/wiki/{{topic}}"</code>, or, perhaps more completely, as</p>
+<pre><code class="lang-auto">"https://en.wikipedia.org/wiki/{{
+  SUBSTITUTE(topic, " ", "_")
+}}"
+</code></pre>
+<p>Which uses the <a href="https://support.airkit.com/reference/substitute">SUBSTITUTE</a> function to replace any spaces with underscores, thus making even multi-word topics more URL-friendly.</p>
+<p>Does that cover your use case?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Oh, I suppose instead of SUBSTITUTE, the function <a href="https://support.airkit.com/reference/url_encode">URL_ENCODE</a> does a more complete job of escaping characters that have special meanings in URLs.</p>
+<p>ie:</p>
+<pre><code class="lang-auto">"https://en.wikipedia.org/wiki/{{
+  URL_ENCODE(topic)
+}}"
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Great, that takes care of the combination.</p>
+<p>How would I pass the output to the link on the next page?</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>That depends on how you’ve been handling data binding up until this point!</p>
+<p>Sounds like you’re working with an Activity Variable, when you want to be working with an Activity Group Variable. Activity Group Variables are available throughout a Web Flow, not just a single Web Page. <a href="https://support.airkit.com/docs/variable-namespaces">This doc on Variable Namespaces</a> can help you get more of a big-picture understanding of how to conceptualize this.</p>
+<p>Can you go into a little more detail of the variables you’re working with in this case?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Thank you, that doc was helpful.</p>
+<p>I have “pagelink” as object “any” at the end of my transform function.<br/>
+For the hyperlink I am using activityGroup.pagelink, but for some reason, it’s not showing up?</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/7MiTEN8DMWQnoHwWA2FvfKqnvV9.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3685137d97282d1def5ae1f96d96da117fee80bb.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="7MiTEN8DMWQnoHwWA2FvfKqnvV9" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3685137d97282d1def5ae1f96d96da117fee80bb_2_10x10.png" height="138" src="../../../images/3685137d97282d1def5ae1f96d96da117fee80bb_2_690x138.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3685137d97282d1def5ae1f96d96da117fee80bb_2_690x138.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3685137d97282d1def5ae1f96d96da117fee80bb.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3685137d97282d1def5ae1f96d96da117fee80bb.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">860×173 11.4 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/8ScbSxLu5fhzAtfitZVoUtRUh0O.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3e31bff278047ebd281fd8a8fa1910d953b07666.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="8ScbSxLu5fhzAtfitZVoUtRUh0O" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3e31bff278047ebd281fd8a8fa1910d953b07666_2_10x10.png" height="176" src="../../../images/3e31bff278047ebd281fd8a8fa1910d953b07666.png" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">742×190 2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><img alt="image" data-base62-sha1="7jQlON9WB2T0RlmKPBlpU3mkiZo" height="156" src="../../../images/334d7af9a044b29746b6ec6f73a682ce08593e06.png" width="261"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Okay, I think I see what’s going on here!</p>
+<p>Everything that goes into creating a Data Flow in the Connections Builder exists in its own little ecosystem. When you run a Data Flow using the <a href="https://support.airkit.com/reference/the-run-data-flow-action">Run Data Flow Action</a>, you have to explicitly bind the output to something, otherwise you won’t be able to access it. (The “Return Value” you provided a screenshot of references the Data Operation output that will be returned by the Data Flow as a whole - you can’t access this as “pagelink” within your broader application.) In your case, you want to bind it to <code>activityGroup.pagelink</code>, and only then will that variable have a value that you can call upon.</p>
+<p>Does that make sense?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Great, just had to add the output binding on that data flow.</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

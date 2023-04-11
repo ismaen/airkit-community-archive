@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>What would be the best way to check for an empty index in a list?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">What would be the best way to check for an empty index in a list?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/33_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ackerman</div>
+          <div class="post_content">
+<p>I basically just want a true or false for if any indexes are empty.</p>
+<p>For example: <code>[{key:value}, {}, {key:value}]</code>, index 1 is empty.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Great question <span class="mention">@ackerman</span>! This came to mind:</p>
+<pre><code class="lang-auto">FROM item, index IN myList WHERE ISEMPTY(item) SELECT index
+</code></pre>
+<p>This would return a list of indexes where the item is empty.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/49_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kristian</div>
+          <div class="post_content">
+<p>THIS!</p>
+<p><span class="mention">@ackerman</span> you can also do this:</p>
+<pre><code class="lang-auto">FROM myList WHERE ISEMPTY(item) SELECT index
+</code></pre>
+<p>As <code>item</code> and <code>index</code> bindings are automatically defined when using a query expression on a list!!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

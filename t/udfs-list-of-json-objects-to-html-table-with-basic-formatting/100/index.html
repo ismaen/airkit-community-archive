@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>UDFs - List of JSON objects to HTML table (with basic formatting!)</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">UDFs - List of JSON objects to HTML table (with basic formatting!)</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>This sample <a href="https://support.airkit.com/reference/user-defined-functions" rel="noopener nofollow ugc">UDF</a> takes a List of JSON as input and returns an HTML table, with some basic formatting applied.</p>
+<p>Given the following input (<em>dataType: List of JSON</em>):</p>
+<pre><code class="lang-auto">[
+  {
+    "my": "this",
+    "csv": "is",
+    "headers": "one row"
+  },
+  {
+    "my": "this",
+    "csv": "is",
+    "headers": "another row"
+  },
+  {
+    "my": "and this",
+    "csv": "here is",
+    "headers": "yet another row"
+  }
+]
+</code></pre>
+<p>Let’s build a UDF that takes the List of JSON and returns an HTML table. To build it out we’ll be concatenating the text strings:</p>
+<ul>
+<li>style tag</li>
+<li>table tag and children:
+<ul>
+<li>theader</li>
+<li>tbody</li>
+</ul>
+</li>
+</ul>
+<p>The Function Body is:</p>
+<pre><code class="lang-auto">"&lt;style&gt;
+  .tb { border-collapse: collapse; }
+  .tb th, .tb td { padding: 5px; }
+  .tb th { background-color: #777; border: solid 1px #f4f4f4; color: white;}
+  .tb td { border: solid 1px #777; }
+&lt;/style&gt;
+  &lt;table class=\"tb\"&gt;
+        {{
+         CONCAT("&lt;thead&gt;&lt;tr&gt;",
+            JOIN(
+                FROM th IN KEYS(json[0]) 
+                SELECT "&lt;th title=\"{{th}}\"&gt;{{th}}&lt;/th&gt;"
+                ),
+            "&lt;/tr&gt;&lt;/thead&gt;"
+               )
+         }} 
+&lt;tbody&gt;{{
+  JOIN(
+    FROM
+      tr
+    IN
+      FROM obj IN json SELECT JOIN(VALUES(obj), ",")
+    SELECT
+      "&lt;tr&gt;
+{{JOIN(FROM td IN SPLIT(tr, ",") SELECT "&lt;td&gt;{{td}}&lt;/td&gt;")}}&lt;/tr&gt;"
+  )
+}}
+  &lt;/tbody&gt;
+  &lt;/table&gt;"
+</code></pre>
+<p>And the Function’s body <em>should</em> be set to Text (<em>datatype: Text</em>),  the Text HTML output will look like:</p>
+<pre><code class="lang-auto">"&lt;style&gt;
+  .tb { border-collapse: collapse; }
+  .tb th, .tb td { padding: 5px; }
+  .tb th { background-color: #777; border: solid 1px #f4f4f4; color: white;}
+  .tb td { border: solid 1px #777; }
+&lt;/style&gt;
+  &lt;table class="tb"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+         &lt;th title="my"&gt;my&lt;/th&gt;
+         &lt;th title="csv"&gt;csv&lt;/th&gt;
+         &lt;th title="headers"&gt;headers&lt;/th&gt;
+       &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+       &lt;tr&gt;
+         &lt;td&gt;this&lt;/td&gt;
+         &lt;td&gt;is&lt;/td&gt;
+         &lt;td&gt;one row&lt;/td&gt;
+       &lt;/tr&gt;
+       &lt;tr&gt;
+         &lt;td&gt;this&lt;/td&gt;
+         &lt;td&gt;is&lt;/td&gt;
+         &lt;td&gt;another row&lt;/td&gt;
+       &lt;/tr&gt;
+       &lt;tr&gt;
+         &lt;td&gt;and this&lt;/td&gt;
+         &lt;td&gt;here is&lt;/td&gt;
+         &lt;td&gt;yet another row&lt;/td&gt;
+       &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;"
+</code></pre>
+<p>The HTML can then be used as the body of an HTML email to display reporting data, etc.</p>
+<p><img alt="Screen Shot 2022-02-11 at 23.34.41" data-base62-sha1="t9AAMtlgZRganEbzVgokzb5KPKF" height="134" src="../../../images/cc5491c9b2c6dd685cd8d7921895de86af90e759.png" width="292"/></p>
+<hr/>
+<p><em><strong>TIP</strong>: Play around with the UDF’s Inputs to allow dynamic formatting (&lt;style&gt;&lt;/style&gt;), or getting the headers and the table rows from different sources.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>This is awesome to display data either in an email or generating a pdf using the <a href="https://support.airkit.com/reference/the-html-to-pdf-data-operation">HTML To PDF</a> data operation</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

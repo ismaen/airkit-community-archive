@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Validate if Date field is not empty</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Validate if Date field is not empty</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">isas88</div>
+          <div class="post_content">
+<p>I have a DOB date field and want to enable submit button for the form only when this field is not empty. If I use ISEMPTY(), it seems to work but get an error in studio as below</p>
+<p><em>Incorrect type: expected one of NULL, datetime, email, list, object, phone, text but got date</em></p>
+<p><em>App / … / Submit / disabled</em></p>
+<p>Is there a different function to validate this, Please help.</p>
+<p>Thank You,<br/>
+Sasi</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>hey <span class="mention">@isas88</span> ! you can always use</p>
+<pre><code class="lang-auto">myDateVar = NULL
+</code></pre>
+<p>Instead of</p>
+<pre><code class="lang-auto">ISEMPTY(myDateVar)
+</code></pre>
+<p>Or</p>
+<pre><code class="lang-auto">myDateVar != NULL
+</code></pre>
+<p>Instead of</p>
+<pre><code class="lang-auto">ISNOTEMPTY(myDateVar)
+</code></pre>
+<p>Hope this helps!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

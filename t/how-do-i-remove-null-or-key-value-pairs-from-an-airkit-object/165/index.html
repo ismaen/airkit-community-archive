@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How do I remove null or &rdquo; &rdquo; key:value pairs from an Airkit object?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How do I remove null or &rdquo; &rdquo; key:value pairs from an Airkit object?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/134_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Adrim</div>
+          <div class="post_content">
+<p>Do we have any Airscript functions that we could use to remove null values from the objects.</p>
+<p>Context: I have a customer’s app where the contents of a form is passed to an object, but further on users have the possibility to edit their personal info, including erasing optional data. If they delete a field that previously was completed it would leave this object with a null property.<br/>
+This is part of a payload that is sent to an external platform where a data validation is performed which can’t accept null values.</p>
+<p>Changing the external validation logic might be a possibility to but I’m trying to find a way to do this from our end.</p>
+<p><img alt="image" data-base62-sha1="hjGPHVdL34StDIFnAgB1v8ZgAY4" height="357" src="../../../images/795ec71122aa45033325d80e7fe60be460aa69ac.png" width="538"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/38_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Drew</div>
+          <div class="post_content">
+<p>Hey Adrian,</p>
+<p>In situations like this, we’ve called a data flow in the journey to filter out <code>null</code> or <code>""</code> values in key value pairs. To do this, I’d add a step in a data flow to remove any key:value pairs if the value is <code>null</code> or <code>""</code>. The Airscript would looks something like this:</p>
+<pre><code class="lang-auto">FROM
+  item,
+  key
+IN
+  test
+WHERE
+  item != "" AND item != NULL
+SELECT
+  "{{key}}": "{{item}}"
+</code></pre>
+<p>Or the following screenshot.<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/bQVDFpo4aPk34ixzYM5ESr3vzsi.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/53139ba01d27552c47da6bdc28f9f9ed58d477be.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="bQVDFpo4aPk34ixzYM5ESr3vzsi" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/53139ba01d27552c47da6bdc28f9f9ed58d477be_2_10x10.png" height="500" src="../../../images/53139ba01d27552c47da6bdc28f9f9ed58d477be_2_555x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/53139ba01d27552c47da6bdc28f9f9ed58d477be_2_555x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/53139ba01d27552c47da6bdc28f9f9ed58d477be_2_832x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/53139ba01d27552c47da6bdc28f9f9ed58d477be_2_1110x1000.png 2x" width="555"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">2922×2628 436 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>There might be other options, but I’ve used this before.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/99_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">eric</div>
+          <div class="post_content">
+<p>Drew - Thanks for this! Do you know how I could adapt that query in the case of more than one object in a variable? For example, I want to remove the key/value pairs as you did, but return all the variables instead of the “[object Object]” showing here:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/7xpbrdxw5lZJ8IUurtLzj5SpaRm.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/34d5efa5f9aff2615f18e2be59ba5242f7f2284c.png" rel="noopener nofollow ugc" title="Screen Shot 2022-06-01 at 1.05.46 PM"><img alt="Screen Shot 2022-06-01 at 1.05.46 PM" data-base62-sha1="7xpbrdxw5lZJ8IUurtLzj5SpaRm" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/34d5efa5f9aff2615f18e2be59ba5242f7f2284c_2_10x10.png" height="500" src="../../../images/34d5efa5f9aff2615f18e2be59ba5242f7f2284c_2_525x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/34d5efa5f9aff2615f18e2be59ba5242f7f2284c_2_525x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/34d5efa5f9aff2615f18e2be59ba5242f7f2284c.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/34d5efa5f9aff2615f18e2be59ba5242f7f2284c.png 2x" width="525"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-06-01 at 1.05.46 PM</span><span class="informations">748×712 35.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/73_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">joechrz</div>
+          <div class="post_content">
+<p><span class="mention">@eric</span> just remove the <code>"{{ }}"</code> from that item field to select the whole object:</p>
+<pre><code class="lang-auto">FROM
+  item,
+  key
+IN
+  test
+WHERE
+  item != "" AND item != NULL
+SELECT
+  "{{key}}": item
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>hey everyone!</p>
+<p>A couple of questions come to mind before solving this…</p>
+<ol>
+<li>Is the <code>"provider"</code> field always a JSON obj (as opposed to List of &lt; JSON &gt;)?</li>
+<li>Do we always know the key name (in this example <code>"provider"</code>)?</li>
+</ol>
+<hr/>
+<p>If the answer to both is YES, then a quick way to recursively get this sorted could be</p>
+<pre><code class="lang-auto">MERGE_OBJECTS(
+  MERGE_OBJECTS(
+      FROM value, key IN myJsonObj 
+          WHERE ISNOTEMPTY(value) 
+          SELECT { "{{key}}": value }),
+          { "provider": FROM value, key IN myJsonObj.provider 
+              WHERE ISNOTEMPTY(value) 
+              SELECT "{{key}}": value }
+)
+</code></pre>
+<p>Let’s break that down:</p>
+<pre><code class="lang-auto"> FROM value, key IN myJsonObj 
+       WHERE ISNOTEMPTY(value) 
+       SELECT { "{{key}}": value })
+</code></pre>
+<p>This bit <em>only</em> checks and returns non nulls/empty values from the main obj.</p>
+<p>The following:</p>
+<pre><code class="lang-auto">SELECT { "{{key}}": value }),
+          { "provider": FROM value, key IN myJsonObj.provider 
+              WHERE ISNOTEMPTY(value) 
+              SELECT "{{key}}": value }
+</code></pre>
+<p>Checks and returns a <code>"provider"</code> object that contains <em>non null/empty</em> values.</p>
+<p>By merging both (in that order) the <code>provider</code> obj of the main <code>myJsonObj</code> is replaced with the second iteration, the <code>provide</code> JSON obj that contains non-null/empty fields.</p>
+<hr/>
+<p>Now, this is not to say that there’s no better way to do this, as my initial questions show, depending on the use case (and even if both answers are YES) there are a few ways to go about this.</p>
+<p><span class="mention">@Adrim</span> Let me know if this helps, or if you have an extensive use case that might require handling of a more complex JSON structure, always happy to look at it.</p>
+<p>cheers!</p>
+<p><em>knowledge is but a universal collection of data, always evolving, always expanding, and every human’s addition to it is valuable and valued</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/73_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">joechrz</div>
+          <div class="post_content">
+<p>Depending on the depth of your object, you can also use a User-Defined Function to recursively crawl and remove the empty values from these objects.</p>
+<p>To do this, make a new user-defined function called <code>#REMOVE_EMPTY</code>.  Have it take 1 input, <code>obj</code> of type “Any”, and return an output of type “Any”</p>
+<p>Define the body of the function as:</p>
+<pre><code class="lang-auto">IF(
+  TYPEOF(obj) = "appobject", 
+  FROM item, key IN obj WHERE ISNOTEMPTY(item) SELECT "{{key}}": #REMOVE_EMPTY(item),
+  obj
+)
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/sCDiTUK2GHDY3UsgiuHZyWRZO53.jpeg?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c89adf1e4eaa2d42dbd05a6ddd74206d20f61229.jpeg" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="sCDiTUK2GHDY3UsgiuHZyWRZO53" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c89adf1e4eaa2d42dbd05a6ddd74206d20f61229_2_10x10.png" height="263" src="../../../images/c89adf1e4eaa2d42dbd05a6ddd74206d20f61229_2_690x263.jpeg" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c89adf1e4eaa2d42dbd05a6ddd74206d20f61229_2_690x263.jpeg, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c89adf1e4eaa2d42dbd05a6ddd74206d20f61229_2_1035x394.jpeg 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c89adf1e4eaa2d42dbd05a6ddd74206d20f61229_2_1380x526.jpeg 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1920×734 51.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Then simply call that function on your object:</p>
+<p>In:</p>
+<pre><code class="lang-auto">#REMOVE_EMPTY({
+  "blah": "foo",
+  "foo": "",
+  "obj": {
+    "blah": "foo",
+    "foo": "",
+    "bar": null,
+    "subobj": {
+      "a": "a",
+      "b": "",
+      "c": null
+    }
+  },
+  "bar": "foo"
+})
+</code></pre>
+<p>Out:</p>
+<pre><code class="lang-auto">{
+  "blah": "foo",
+  "obj": {
+    "blah": "foo",
+    "subobj": {
+      "a": "a"
+    }
+  },
+  "bar": "foo"
+}
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

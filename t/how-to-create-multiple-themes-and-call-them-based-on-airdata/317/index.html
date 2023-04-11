@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How To Create Multiple Themes and Call Them Based on AirData</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How To Create Multiple Themes and Call Them Based on AirData</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">meredith.johnson</div>
+          <div class="post_content">
+<p>Hi there! I’m trying to set up two different themes for two different brands. I am trying to use AirData tables to change the app dynamically and one of the things I would like to change is theme. When I try to import a new theme it overrides the old one. Is this functionality possible?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/33_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ackerman</div>
+          <div class="post_content">
+<p>Hello <span class="mention">@meredith.johnson</span>! This is something that we’ve spent and continue to spend a lot of time working on. And while we don’t have anything to easily support this at this time, I may have a way for you to achieve what I think you’re looking to do, and have attached a sample app at the bottom of this for you to check out. I should also point out that it might be simpler in the case you mentioned - having different themes for different brands - that cloning the first app and having two separate apps would probably be simpler.</p>
+<p>What I did was to create six “different themes” in one app by putting the theme variant name as the prefix for each element of the theme I wanted.  One important thing to note is that each theme in my case has many variants, so each “theme” needs all of the same variants to work properly. You can see in the screen shot below that for each ‘afterDark’ theme element, there is a ‘baroque’ equivalent.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/zNcFFjqUpNHpZBXgzveAumhUMyi.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fadbfad06e9c1d7ed84cfd2ee67960bc9dd2af1e.png" rel="noopener nofollow ugc" title="Screenshot 2022-12-07 at 2.36.35 PM"><img alt="Screenshot 2022-12-07 at 2.36.35 PM" data-base62-sha1="zNcFFjqUpNHpZBXgzveAumhUMyi" data-dominant-color="F6F6F6" height="499" src="../../../images/fadbfad06e9c1d7ed84cfd2ee67960bc9dd2af1e_2_174x499.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fadbfad06e9c1d7ed84cfd2ee67960bc9dd2af1e_2_174x499.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fadbfad06e9c1d7ed84cfd2ee67960bc9dd2af1e_2_261x748.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fadbfad06e9c1d7ed84cfd2ee67960bc9dd2af1e_2_348x998.png 2x" width="174"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screenshot 2022-12-07 at 2.36.35 PM</span><span class="informations">408×1171 26.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>I then created a session variable called <code>themeVar</code>.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/wBqdfBt3VXfNXBgjRx5zeBPAVtF.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e48084d6a9e7c623ca62c3174a1d13cb91749583.png" rel="noopener nofollow ugc" title="Screenshot 2022-12-07 at 2.57.42 PM"><img alt="Screenshot 2022-12-07 at 2.57.42 PM" data-base62-sha1="wBqdfBt3VXfNXBgjRx5zeBPAVtF" data-dominant-color="F8F9FC" height="76" src="../../../images/e48084d6a9e7c623ca62c3174a1d13cb91749583_2_690x76.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e48084d6a9e7c623ca62c3174a1d13cb91749583_2_690x76.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e48084d6a9e7c623ca62c3174a1d13cb91749583_2_1035x114.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e48084d6a9e7c623ca62c3174a1d13cb91749583.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screenshot 2022-12-07 at 2.57.42 PM</span><span class="informations">1161×129 9.14 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Now on each element that you want to assign a theme value to, you can update it in the expression editor. So if you want to update say a background color, you can do an expression like this: <code>theme[     CONCAT(       session.themeVar,       "_backgroundColor"     )   ]</code></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/2Tlg5fQrRlG4G17F4Vnej5A7eer.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1445e06bd8a7a869668cb4c3c50996a522619adf.png" rel="noopener nofollow ugc" title="Screenshot 2022-12-07 at 3.01.14 PM"><img alt="Screenshot 2022-12-07 at 3.01.14 PM" data-base62-sha1="2Tlg5fQrRlG4G17F4Vnej5A7eer" data-dominant-color="A1A1A6" height="399" src="../../../images/1445e06bd8a7a869668cb4c3c50996a522619adf_2_690x399.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1445e06bd8a7a869668cb4c3c50996a522619adf_2_690x399.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1445e06bd8a7a869668cb4c3c50996a522619adf.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1445e06bd8a7a869668cb4c3c50996a522619adf.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screenshot 2022-12-07 at 3.01.14 PM</span><span class="informations">980×567 44.8 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>You can now have an app that responds dynamically to the theme var that you pass in.</p>
+<p>One important thing to know, and something that I came up against when I was trying to do this a while back, is that the theme is cached for performance the first time it runs. So any kind of attempt to dynamically change a theme element once the app renders will not take. That said, if you set the session variable <code>theme</code> at the very beginning on the Session Start event, that will work:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/fAYz3hWeXbY1nzibCflTPREqU04.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/6d4ea81a23214368a937e641ecfe81533b451e34.png" rel="noopener nofollow ugc" title="Screenshot 2022-12-07 at 2.49.18 PM"><img alt="Screenshot 2022-12-07 at 2.49.18 PM" data-base62-sha1="fAYz3hWeXbY1nzibCflTPREqU04" data-dominant-color="FCFBFC" height="153" src="../../../images/6d4ea81a23214368a937e641ecfe81533b451e34_2_690x153.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6d4ea81a23214368a937e641ecfe81533b451e34_2_690x153.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6d4ea81a23214368a937e641ecfe81533b451e34_2_1035x229.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6d4ea81a23214368a937e641ecfe81533b451e34_2_1380x306.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screenshot 2022-12-07 at 2.49.18 PM</span><span class="informations">1978×439 56.4 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Not the most elegant solution, but hopefully can get you where you want until we roll out our updates sometime in the new year.</p>
+<p>Here is the app for you to check out.</p>
+<p><a class="attachment" href="/uploads/short-url/kREN9GNkz4862PJeTSvmHwA87X8.zip">themes.zip</a> (34.2 KB)</p>
+<p>The theme options that you can pass in the session start event to test this out (or by changing the value in the studio variable panel) are ‘afterDark’, ‘baroque’, ‘chophouse’, ‘elegant’, ‘funtime’ and ‘tranquility’.</p>
+<p>Please reply with any questions, and thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">meredith.johnson</div>
+          <div class="post_content">
+<p>Super helpful! Thank you so much!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p><span class="mention">@ackerman</span> this is incredible! great use of the expression editor on style properties! I can see someone creating a “light” and “dark” mode for an app using this method.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

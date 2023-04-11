@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to view custom metrics (count, field, etc.)</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to view custom metrics (count, field, etc.)</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/21_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Mike_Cammon</div>
+          <div class="post_content">
+<p>I’m adding a custom metric (count) to a button click, but after I deploy the app, I am unable to select the new metric when i go to create a report. i’m expecting the new metric to be an option in the dropdown on the reports view when I go to create new “statistic” report - screenshot 1 for reference.</p>
+<p>Also, are you able to reference variables in the metric key field when creating a new metric? Screenshot 2</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/fQnRlgDE1qAkG0PVcUftX7DufJS.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/6f0c898fde754b499e46de87b0d9d3a5a78d3238.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="fQnRlgDE1qAkG0PVcUftX7DufJS" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6f0c898fde754b499e46de87b0d9d3a5a78d3238_2_10x10.png" height="500" src="../../../images/6f0c898fde754b499e46de87b0d9d3a5a78d3238_2_461x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6f0c898fde754b499e46de87b0d9d3a5a78d3238_2_461x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6f0c898fde754b499e46de87b0d9d3a5a78d3238_2_691x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/6f0c898fde754b499e46de87b0d9d3a5a78d3238.png 2x" width="461"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">728×789 65.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/oW5KvGX74khofhDAsojCekWLP9p.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/aec547aa25ac2b70b18c4a977836a81c4adbe03b.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="oW5KvGX74khofhDAsojCekWLP9p" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aec547aa25ac2b70b18c4a977836a81c4adbe03b_2_10x10.png" height="283" src="../../../images/aec547aa25ac2b70b18c4a977836a81c4adbe03b_2_690x283.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aec547aa25ac2b70b18c4a977836a81c4adbe03b_2_690x283.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/aec547aa25ac2b70b18c4a977836a81c4adbe03b.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/aec547aa25ac2b70b18c4a977836a81c4adbe03b.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">951×391 28.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey Mike! The new metric should be an option that appears once you publish your app. I’d expect it to be at the bottom of your list. Also, you can’t reference a variable in the <code>Metric Key</code> field. You can only reference variables where there is an <code>f(x)</code> icon (expression editor).</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/6pNujRNIhu8MHv6eHtV5IoU4OcN.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2cf799930ffa46755301f4a880b1bd91797051c1.png" title="2022-02-24_12-17-13"><img alt="2022-02-24_12-17-13" data-base62-sha1="6pNujRNIhu8MHv6eHtV5IoU4OcN" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2cf799930ffa46755301f4a880b1bd91797051c1_2_10x10.png" height="500" src="../../../images/2cf799930ffa46755301f4a880b1bd91797051c1_2_343x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2cf799930ffa46755301f4a880b1bd91797051c1_2_343x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2cf799930ffa46755301f4a880b1bd91797051c1_2_514x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2cf799930ffa46755301f4a880b1bd91797051c1.png 2x" width="343"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-02-24_12-17-13</span><span class="informations">519×756 48.8 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/21_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Mike_Cammon</div>
+          <div class="post_content">
+<p>That’s where I expected it - is there any chance there is a delay? perhaps it takes X amount of time after a deployment? or do you need to run a session and trigger the metric event first, then it will appear?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Have you tried exporting your report? In the exported CSV do you see the custom metric that you created  ? You can export reports by clicking on the top right of the reporting dashboard where it says “Export”.</p>
+<aside class="onebox allowlistedgeneric" data-onebox-src="https://support.airkit.com/docs/reporting#exporting">
+<header class="source">
+<img class="site-icon" height="32" src="../../../images/5c879ac1f942ed048b141282b62caaad8846837e.png" width="32"/>
+<a href="https://support.airkit.com/docs/reporting#exporting" rel="noopener" target="_blank">Airkit</a>
+</header>
+<article class="onebox-body">
+<h3><a href="https://support.airkit.com/docs/reporting#exporting" rel="noopener" target="_blank">Reporting</a></h3>
+<p>Airkit’s reporting feature allows you to gain insights into how your customers are utilizing your app. You can track every user interaction, from button clicks to the time it takes a user to make different decisions. These key understandings will...</p>
+</article>
+<div class="onebox-metadata">
+</div>
+<div style="clear: both"></div>
+</aside>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

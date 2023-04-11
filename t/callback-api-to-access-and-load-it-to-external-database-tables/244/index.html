@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Callback API to access and load it to external database tables</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Callback API to access and load it to external database tables</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>How to setup a callback api to collect data from the Airkit UI to load it to our Dynamo tables?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>hi <span class="mention">@Shivashankar_Yadav</span>, so are you saying when a user adds information into an Airkit app, then make a call to Dynamo and insert that data to Dynamo?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>That is right, we are trying to find out a way to export data from UI to our dynamo tables.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>So to be honest, I don’t know much about DynamoDB but if DynamoDB has a REST API, you could essentially use the <a href="https://support.airkit.com/reference/http-request-data-operation">HTTP Request Data operation</a> on the “submit” or “button” click of your Airkit App. Thats the easiest way to pass data to other systems from Airkit.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>Awesome, thanks for sharing the information.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>Hello,</p>
+<p>We are trying to send out the data to our Dynamo tables and have a microservice url and trying to add it to the submit button and I’m not able to add “HTTP Request Data operation” option on the submit button. I’m sure i have seen it in the past but now i’m not able to find it.<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/1bYv7RcjWuYai2iGdL0jmwEmnXM.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/085cbbf9d64503e9f4d2917435e572a2e7ac79a6.png" rel="noopener nofollow ugc" title="Screen Shot 2022-09-21 at 12.11.40 AM"><img alt="Screen Shot 2022-09-21 at 12.11.40 AM" data-base62-sha1="1bYv7RcjWuYai2iGdL0jmwEmnXM" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/085cbbf9d64503e9f4d2917435e572a2e7ac79a6_2_10x10.png" height="344" src="../../../images/085cbbf9d64503e9f4d2917435e572a2e7ac79a6_2_690x344.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/085cbbf9d64503e9f4d2917435e572a2e7ac79a6_2_690x344.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/085cbbf9d64503e9f4d2917435e572a2e7ac79a6_2_1035x516.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/085cbbf9d64503e9f4d2917435e572a2e7ac79a6_2_1380x688.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-21 at 12.11.40 AM</span><span class="informations">1767×882 111 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Please find the app branch below if needed.</p>
+<p><a class="attachment" href="/uploads/short-url/fY6mfbg9rTlsUYo5s7NbAxeoAAE.zip">One_Trust_Communication_Preferences-2022-09-21T05_12_28.652Z-full.branch.zip</a> (41.4 KB)</p>
+<p>Thanks</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p><a href="https://support.airkit.com/reference/data-operation-overview">Data Operations</a> are different from Actions. Actions can be inserted into <a href="https://support.airkit.com/docs/action-builder">Action Chains</a> (the things made in the Action Builder), whereas Data Operations are the building blocks of <a href="https://support.airkit.com/docs/data-flows">Data Flows</a>. You can run a Data Flow with the <a href="https://support.airkit.com/reference/the-run-data-flow-action">Run Data Flow Action</a>, but you have to build the Data Flow out in <a href="https://support.airkit.com/docs/connections-builder">Connections Builder</a> first.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@Shivashankar_Yadav</span>, so HTTP Request data operation can only be run in Data flows.</p>
+<p>What that means is that you have to create a data flow inside of Connections Builder and then you can find the HTTP data operation from there.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/grKYNNpAeOZYy6mIvOe7yonnQjT.jpeg?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/73460b9fddc02cfa4cba42e047a0156f51057759.jpeg" title="Screen Shot 2022-09-21 at 8.21.26 AM"><img alt="Screen Shot 2022-09-21 at 8.21.26 AM" data-base62-sha1="grKYNNpAeOZYy6mIvOe7yonnQjT" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/73460b9fddc02cfa4cba42e047a0156f51057759_2_10x10.png" height="323" src="../../../images/73460b9fddc02cfa4cba42e047a0156f51057759_2_690x323.jpeg" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/73460b9fddc02cfa4cba42e047a0156f51057759_2_690x323.jpeg, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/73460b9fddc02cfa4cba42e047a0156f51057759_2_1035x484.jpeg 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/73460b9fddc02cfa4cba42e047a0156f51057759_2_1380x646.jpeg 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-21 at 8.21.26 AM</span><span class="informations">3342×1566 327 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Then on the button, you can run the data flow that calls your http data operation.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/uSam7DGQbhBO523iDafr2oNSkWB.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d860b881ca56d69161d36661381437b1f6448ce1.png" title="Screen Shot 2022-09-21 at 8.25.15 AM"><img alt="Screen Shot 2022-09-21 at 8.25.15 AM" data-base62-sha1="uSam7DGQbhBO523iDafr2oNSkWB" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d860b881ca56d69161d36661381437b1f6448ce1_2_10x10.png" height="460" src="../../../images/d860b881ca56d69161d36661381437b1f6448ce1_2_690x460.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d860b881ca56d69161d36661381437b1f6448ce1_2_690x460.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d860b881ca56d69161d36661381437b1f6448ce1_2_1035x690.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d860b881ca56d69161d36661381437b1f6448ce1_2_1380x920.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-21 at 8.25.15 AM</span><span class="informations">2716×1812 438 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>For more information on data flows, see this doc: <a class="inline-onebox" href="https://support.airkit.com/docs/data-flows">Data Flows</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>Got it. I will try that.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>So, when i test the connection between our dynamo tables and airkit apps from the connections it works fine , connections=&gt;Data flows=&gt;Submit Preference.the data is being updated in our systems.<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/iMvlRAZQ64zDlIquqM7dspR3zjW.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/83a2cd97ad8e24eab5202d747cf4cf1a78af36f8.png" rel="noopener nofollow ugc" title="Screen Shot 2022-09-22 at 5.52.58 PM"><img alt="Screen Shot 2022-09-22 at 5.52.58 PM" data-base62-sha1="iMvlRAZQ64zDlIquqM7dspR3zjW" data-dominant-color="F9F9FA" height="344" src="../../../images/83a2cd97ad8e24eab5202d747cf4cf1a78af36f8_2_690x344.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/83a2cd97ad8e24eab5202d747cf4cf1a78af36f8_2_690x344.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/83a2cd97ad8e24eab5202d747cf4cf1a78af36f8_2_1035x516.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/83a2cd97ad8e24eab5202d747cf4cf1a78af36f8_2_1380x688.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-22 at 5.52.58 PM</span><span class="informations">1767×882 137 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>But when i refer the Data flow connections=&gt;Data flows=&gt;Submit Preference in the submit button on Communication Preferences , it is not working<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/sAVjcfw32P53uh53N1z07yHvcdb.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c869660d63fd2fff6dc4f2d727140a1f3c5c3099.png" rel="noopener nofollow ugc" title="Screen Shot 2022-09-22 at 5.54.54 PM"><img alt="Screen Shot 2022-09-22 at 5.54.54 PM" data-base62-sha1="sAVjcfw32P53uh53N1z07yHvcdb" data-dominant-color="F4F4F6" height="344" src="../../../images/c869660d63fd2fff6dc4f2d727140a1f3c5c3099_2_690x344.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c869660d63fd2fff6dc4f2d727140a1f3c5c3099_2_690x344.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c869660d63fd2fff6dc4f2d727140a1f3c5c3099_2_1035x516.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c869660d63fd2fff6dc4f2d727140a1f3c5c3099_2_1380x688.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-22 at 5.54.54 PM</span><span class="informations">1767×882 154 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Please find the app below and let me know if i’m doing anything wrong.<br/>
+&lt; – removed zip package because it includes an api key → </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>If you dont mind, can you add additional information on this?</p>
+<p>Are you expecting a response? Is the HTTP data operation not firing? I took a quick look, and the body of the HTTP request does not include your inputs. it should look like this:</p>
+<pre><code class="lang-auto">{
+  "first_name": first_name,
+  "last_name": last_name,
+  "phone": phone,
+  "preference": preference
+}
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/vgTQKfJDly8h17hFO3N5QmctSgM.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/db2c794c16c3da2f4f40e277f1e661f39a4ed080.png" title="image"><img alt="image" data-base62-sha1="vgTQKfJDly8h17hFO3N5QmctSgM" data-dominant-color="FAFBFC" height="309" src="../../../images/db2c794c16c3da2f4f40e277f1e661f39a4ed080_2_690x309.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/db2c794c16c3da2f4f40e277f1e661f39a4ed080_2_690x309.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/db2c794c16c3da2f4f40e277f1e661f39a4ed080_2_1035x463.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/db2c794c16c3da2f4f40e277f1e661f39a4ed080_2_1380x618.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1516×680 34.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>I did add the details and it looks like :<br/>
+{<br/>
+“first_name”: “Shiva”,<br/>
+“last_name”: “Demo”,<br/>
+“phone”: “+14025168800”,<br/>
+“preference”: “SMS”<br/>
+}</p>
+<p>but it would still not ire up the data flow operation</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>updated app , but still the same issue<br/>
+<a class="attachment" href="/uploads/short-url/yijRl1EH2sgf2bDEP4BK5w1ctGu.zip">POC_Verification_Scratch-2022-09-22T23_58_44.126Z-full.branch.zip</a> (44.9 KB)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Ah i see, its because at the end of the data flow, you passed the <code>result</code> variable. It should be the <code>rawResult</code> variable. It looks like your api doesn’t return anything in <code>result</code>.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/c7JiKbV6bscxwZHTXp5btAgTbGs.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/54f9cce4f608e65c58b3c20d4186e1c536da37fc.png" title="image"><img alt="image" data-base62-sha1="c7JiKbV6bscxwZHTXp5btAgTbGs" data-dominant-color="FAFAFC" height="499" src="../../../images/54f9cce4f608e65c58b3c20d4186e1c536da37fc_2_472x499.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/54f9cce4f608e65c58b3c20d4186e1c536da37fc_2_472x499.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/54f9cce4f608e65c58b3c20d4186e1c536da37fc_2_708x748.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/54f9cce4f608e65c58b3c20d4186e1c536da37fc_2_944x998.png 2x" width="472"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1686×1784 242 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

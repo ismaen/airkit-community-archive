@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How can I repeat a custom control x number of times, based on previous user input?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How can I repeat a custom control x number of times, based on previous user input?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p>Hey everyone,</p>
+<p>I’m trying to create a dynamic list of a custom control that will have x number of blank entries presented on the page based on a number the journey user gave me on a previous page. Here’s the real world example:</p>
+<p>I’m trying to get someone to RSVP to an event and they’re first going to confirm they’re going, then if they are, they’ll tell me how many guests are coming with them. Then, I have to ask them all what dining menu selections they want for each person. I’ve been following this link on <a href="https://community.airkit.com/t/ccs-dynamic-lists-control-w-per-row-actions/117">CCs/Dynamic Lists</a> but I’m stuck on how I set the initial set of CC objects based on the # of guests the user told me.</p>
+<p>I have my Guest input CC set up:<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/oilxUKsAYmreD2tQlTFRA73qAP8.jpeg?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/aa471f1899a203cf976d0a8b26b7fb57794486f2.jpeg" rel="noopener nofollow ugc" title="GuestMenu"><img alt="GuestMenu" data-base62-sha1="oilxUKsAYmreD2tQlTFRA73qAP8" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aa471f1899a203cf976d0a8b26b7fb57794486f2_2_10x10.png" height="392" src="../../../images/aa471f1899a203cf976d0a8b26b7fb57794486f2_2_690x392.jpeg" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aa471f1899a203cf976d0a8b26b7fb57794486f2_2_690x392.jpeg, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aa471f1899a203cf976d0a8b26b7fb57794486f2_2_1035x588.jpeg 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aa471f1899a203cf976d0a8b26b7fb57794486f2_2_1380x784.jpeg 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">GuestMenu</span><span class="informations">1920×1092 71.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Then I have a list summary CC, but I’m a little confused on how I’m telling the list summary the number of items that are needed in that list, especially if I’m starting with just a number (the number of guests the user told me) and I need to parse that into a list of indexes.</p>
+<p>Any thoughts here?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@davidpairkit</span> !</p>
+<p>Let’s give your (list) use case a closer look. Things we <em>know</em>:</p>
+<ul>
+<li>You have a <em>List of &lt; Guest &gt;</em> custom control</li>
+<li>You are collecting the number of guests on the previous view/web page</li>
+<li>Once the List is loaded it <em>should</em> be pre-populated with ‘x’ number of <em>empty</em> Guest obj (so that users fill in the info for each Guest)</li>
+</ul>
+<hr/>
+<h3>
+<a class="anchor" href="#setting-up-your-fixed-list-1" name="setting-up-your-fixed-list-1"></a>Setting up your (fixed) list</h3>
+<h4>
+<a class="anchor" href="#assumptions-2" name="assumptions-2"></a>Assumptions:</h4>
+<ul>
+<li>I’ll be using <code>guest_list</code> to refer to the  <em>List of &lt; Guest &gt;</em> you are using as the List Custom Control’s input (data binding)</li>
+<li>I’ll be using <code>number_of_guests</code> to refer to the number of guests the user entered in the previous step</li>
+<li>A <em>Guest</em> obj looks like:</li>
+</ul>
+<pre><code class="lang-auto">{
+  "guestName":&lt;String&gt;,
+  "vegan":&lt;bool&gt;,
+  "allergies":&lt;bool&gt;,
+  "firstCourse":&lt;String&gt;,
+  "mainCourse":&lt;String&gt;,
+  "dessert":&lt;String&gt;
+}
+</code></pre>
+<h4>
+<a class="anchor" href="#setting-up-the-list-of-guest-3" name="setting-up-the-list-of-guest-3"></a>Setting up the <em>List of &lt; Guest &gt;</em>
+</h4>
+<p>What you’ll want to do is:</p>
+<ol>
+<li>Have a <strong>Set Variable</strong> action on: your <em>web page updated</em> event / on the web control collecting the number of guests’ <strong>onChange</strong> event</li>
+<li>The <strong>variable</strong> you want to set is <code>guest_list</code>
+</li>
+<li>The <strong>value</strong> you want to set is: one empty <em>Guest</em> per <code>number_of_guests</code>. Here’s what the value will look like:</li>
+</ol>
+<pre><code class="lang-auto">FROM guest IN number_of_guests SELECT {
+  "guestName":NULL,
+  "vegan":NULL,
+  "allergies":NULL,
+  "firstCourse":NULL,
+  "mainCourse":NULL,
+  "dessert":NULL
+}
+</code></pre>
+<p>This Airscript expression will output a list of <em>empty Guest</em> objs, and <code>LENGTH(guest_list) = number_of_guests</code> .</p>
+<p>Let me know if this helps, cheers !</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@juanchax</span> !!!</p>
+<p>I still am a bit confused on the last part - I updated the variable names to match my object, but where I’m setting variable <strong>guest_list</strong> to</p>
+<blockquote>
+<p>FROM<br/>
+guest<br/>
+IN<br/>
+number_of_guests<br/>
+SELECT<br/>
+{<br/>
+“GroupID”: NULL,<br/>
+“Name”: NULL,<br/>
+“RSVP”: NULL,<br/>
+“FirstCourseSelection”: NULL,<br/>
+“EntreeSelection”: NULL,<br/>
+“DessertSelection”: NULL,<br/>
+“Vegan”: NULL,<br/>
+“HaveDietaryNeeds”: NULL,<br/>
+“DietaryNeeds”: NULL,<br/>
+“Email”: NULL,<br/>
+“Mobile”: NULL<br/>
+}</p>
+</blockquote>
+<p>it keeps resolving to null, even when testing in Connection Builder with sample data that I’m plugging in. I’m not quite sure I understand the query here and what it’s doing, especially with “number_of_guests” being of type number. Can you elaborate on the query?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>Oh yeah, I see the bit I missed including in my first reply (my bad!). Adding that here <img alt=":upside_down_face:" class="emoji" height="20" loading="lazy" src="../../../images/upside_down_face.png" title=":upside_down_face:" width="20"/></p>
+<hr/>
+<p>I’ve broken this down into the tiny steps so that it’s easier to follow exactly what I’m doing in each, feel free to scroll to the bottom for the final expression (can be used in a UDF’s body)</p>
+<h4>
+<a class="anchor" href="#transforming-the-number_of_guests-integer-into-a-list-of-things-with-lengthlist-number_of_guests-1" name="transforming-the-number_of_guests-integer-into-a-list-of-things-with-lengthlist-number_of_guests-1"></a>Transforming the <code>number_of_guests</code> integer into a list of things with <code>LENGTH(list) = number_of_guests</code>
+</h4>
+<ol>
+<li>
+<p>First we’ll need to grab that integer and cast it as a string: <code>FORMAT_NUMBER(number_of_guests)</code></p>
+</li>
+<li>
+<p>Take that string and transform it into anything lengthy (this can be done in a number of ways, this is just my quick hack):  <code>MD5(FORMAT_NUMBER(number_of_guests))</code></p>
+</li>
+<li>
+<p>Now that we have a long string, let’s get a substring of <code>length=number_of_guests</code>:  <code>SUBSTRING(MD5(FORMAT_NUMBER(number_of_guests)),0, number_of_guests)</code></p>
+</li>
+<li>
+<p>Great! We are ready to take that substring and turn it into a list we can use for creating your empty guest list: <code>SPLIT(SUBSTRING(MD5(FORMAT_NUMBER(number_of_guests)),0, number_of_guests),"")</code><br/>
+Using <code>number_of_guests=5</code> as an example, the output of this bit will be:</p>
+<pre><code class="lang-auto">[
+  "e",
+  "4",
+  "d",
+  "a",
+  "3"
+]
+</code></pre>
+</li>
+<li>
+<p>Finally, use the expression above inside that <code>SELECT</code> clause :</p>
+<pre><code class="lang-auto">FROM 
+  guest 
+IN 
+  SPLIT(SUBSTRING(MD5(FORMAT_NUMBER(number_of_guests)),0, number_of_guests),"") 
+SELECT 
+  { 
+    "guestName":NULL, 
+    "vegan":NULL,
+    "allergies":NULL, 
+    "firstCourse":NULL, 
+    "mainCourse":NULL, 
+    "dessert":NULL
+   }
+</code></pre>
+</li>
+</ol>
+<p>Now the solution <em>might</em> be complete. Just test it out and lmk if it works as you need <span class="mention">@davidpairkit</span> !</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p>Exactly what was needed here, thanks so much <span class="mention">@juanchax</span> !</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/26_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kyung</div>
+          <div class="post_content">
+<p>Could you use the RANGE function in the IN clause to get the list you need?</p>
+<pre><code class="lang-auto">RANGE(1, number_of_guests)
+</code></pre>
+<p>Results in [1, 2, …] that you iterate over to build your blank objects.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@kyung</span> - that did the trick, too! Thanks for sharing!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

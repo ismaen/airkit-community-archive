@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>UDFs - Recursively process a List of JSON with a nested List of JSON and return objects where one or more objects in the nested list match a condition</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">UDFs - Recursively process a List of JSON with a nested List of JSON and return objects where one or more objects in the nested list match a condition</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>How many times have you been faced with the requirement to process a list of objects which contain a nested list of objects, and return <em>only the objects of the main list  where one or more objects in the nested list match a condition</em></p>
+<hr/>
+<p>Let’s start with a real-world use case</p>
+<blockquote>
+<p>I have a list of Car Dealerships across the country, each       dealership has several available vehicles for sale.<br/>
+I need to return   dealerships whose available cars match a given criteria which can be:</p>
+<ul>
+<li>Make (<em>criteria: Ford, Honda, etc.</em>)</li>
+<li>Category (<em>criteria: SUV, Coupe, Sedan, etc.</em>)</li>
+<li>Year (<em>criteria: 2010, older than 2015, newer than 2005, etc.</em>)</li>
+</ul>
+</blockquote>
+<p>This is what that list looks like (<em>dataType: List of JSON)</em></p>
+<pre><code class="lang-auto">[
+  {
+    "dealershipName": "Pimps &amp; Rides",
+    "dealershipLocation": "California",
+    "availableVehicles": [
+      {
+        "year": "2012",
+        "make": "Hyundai",
+        "model": "Veloster",
+        "category": "Coupe"
+      },
+      {
+        "year": "2019",
+        "make": "Ford",
+        "model": "Explorer",
+        "category": "SUV"
+      },
+      {
+        "year": "2015",
+        "make": "Honda",
+        "model": "HR-V",
+        "category": "SUV"
+      }
+    ]
+  },
+  {
+    "dealershipName": "Los Carlos",
+    "dealershipLocation": "Texas",
+    "availableVehicles": [
+      {
+        "year": "2002",
+        "make": "Audi",
+        "model": "Q3",
+        "category": "SUV"
+      },
+      {
+        "year": "2007",
+        "make": "Hyundai",
+        "model": "Elantra",
+        "category": "Sedan"
+      },
+      {
+        "year": "2006",
+        "make": "Hyundai",
+        "model": "Sonata",
+        "category": "Sedan"
+      },
+      {
+        "year": "2012",
+        "make": "Cadillac",
+        "model": "CT5",
+        "category": "Sedan"
+      }
+    ]
+  },
+  {
+    "dealershipName": "Papi Chulo",
+    "dealershipLocation": "Florida",
+    "availableVehicles": [
+      {
+        "year": "2003",
+        "make": "Honda",
+        "model": "Civic",
+        "category": "Hatchback, Sedan, Coupe"
+      },
+      {
+        "year": "2008",
+        "make": "Genesis",
+        "model": "G70",
+        "category": "Sedan"
+      }
+    ]
+  },
+  {
+    "dealershipName": "High Roller",
+    "dealershipLocation": "New York",
+    "availableVehicles": [
+      {
+        "year": "2001",
+        "make": "BMW",
+        "model": "X3",
+        "category": "SUV"
+      },
+      {
+        "year": "2014",
+        "make": "Chevrolet",
+        "model": "Bolt EV",
+        "category": "Hatchback"
+      },
+      {
+        "year": "2008",
+        "make": "Ford",
+        "model": "Ranger SuperCrew",
+        "category": "Pickup"
+      }
+    ]
+  }
+]
+</code></pre>
+<p><strong>Requirement</strong><br/>
+We need to iterate over the list of dealerships, and for each dealership iterate over the <code>availableVehicles</code> list to look for a <code>key</code> (<em>this will be one of our UDF’s inputs, which will be variable, meaning we do not know which field the user will check</em>), and check if the <code>value</code> matches the criteria provided.<br/>
+If <em>any</em> of the dealership’s available vehicles match the <code>criteria</code>, return the whole <code>dealership</code> object.</p>
+<hr/>
+<p><strong>Building the UDF</strong></p>
+<ol>
+<li>
+<p><strong>Inputs</strong></p>
+<ul>
+<li>
+<code>json</code> (<em>dataType: List of JSON</em>)  - List of dealerships</li>
+<li>
+<code>field</code> (<em>dataType: Text</em>) - The JSON key to check</li>
+<li>
+<code>criteria</code> (<em>dataType: Text</em>) - The criteria to check the value against</li>
+</ul>
+</li>
+<li>
+<p><strong>Output</strong></p>
+<ul>
+<li><em>datatype: List of JSON</em></li>
+</ul>
+</li>
+<li>
+<p><strong>UDF Body</strong></p>
+<pre><code class="lang-auto">FLAT(
+  FROM 
+    dealer 
+  IN 
+    dealerships 
+  SELECT
+      FROM 
+        car 
+      IN
+        dealer.availableVehicles 
+      WHERE 
+        car[field] = citeria 
+      SELECT 
+        dealer
+)
+</code></pre>
+</li>
+</ol>
+<p>Your UDF <em>should</em> look like</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/jDBAp84yjcvLqooEoBJ5SWMlPC5.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/89a3714140cbb505da2b048d08649786b1be471d.png" rel="noopener nofollow ugc" title="UDF Lookup by criteria"><img alt="UDF Lookup by criteria" data-base62-sha1="jDBAp84yjcvLqooEoBJ5SWMlPC5" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/89a3714140cbb505da2b048d08649786b1be471d_2_10x10.png" height="219" src="../../../images/89a3714140cbb505da2b048d08649786b1be471d_2_690x219.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/89a3714140cbb505da2b048d08649786b1be471d_2_690x219.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/89a3714140cbb505da2b048d08649786b1be471d_2_1035x328.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/89a3714140cbb505da2b048d08649786b1be471d_2_1380x438.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">UDF Lookup by criteria</span><span class="informations">2738×872 64.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<hr/>
+<p><strong>Test runs</strong></p>
+<ul>
+<li><code>field = "make"</code></li>
+<li><code>criteria = "BMW"</code></li>
+</ul>
+<p><img alt="UDF Lookup by criteria (test1)" data-base62-sha1="sHtVkwkLL4npVHkbjsWu092c2Mh" height="108" src="../../../images/c9272f51b1bba2107315640fac563d5c9f3f1759.png" width="214"/></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/wN3M5E1t9eQW7LFjSFCnqpg6Soz.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e5d14e3423ee144f04acc85bacb21630fc9d637b.png" rel="noopener nofollow ugc" title="UDF Lookup by criteria (test1 results)"><img alt="UDF Lookup by criteria (test1 results)" data-base62-sha1="wN3M5E1t9eQW7LFjSFCnqpg6Soz" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e5d14e3423ee144f04acc85bacb21630fc9d637b_2_10x10.png" height="371" src="../../../images/e5d14e3423ee144f04acc85bacb21630fc9d637b_2_690x371.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e5d14e3423ee144f04acc85bacb21630fc9d637b_2_690x371.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e5d14e3423ee144f04acc85bacb21630fc9d637b_2_1035x556.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e5d14e3423ee144f04acc85bacb21630fc9d637b_2_1380x742.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">UDF Lookup by criteria (test1 results)</span><span class="informations">1664×895 63.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<hr/>
+<p><em>TIP: Play around with the inputs and logic to accommodate the use case where the “year” value is a Number instead of Text.</em></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

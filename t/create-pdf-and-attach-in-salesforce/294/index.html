@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Create PDF and Attach In Salesforce</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Create PDF and Attach In Salesforce</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>I am trying to attach a pdf to salesforce, that is created using the HTML to PDF data flow.</p>
+<p>Is there a connection that can be created to automatically attach a PDF created in Airkit without the user having to download the PDF?</p>
+<p>I understand how to create the pdf, and make a salesforce connection for an attachment, but not sure how to identify the pdf for the salesforce data flow.</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<aside class="quote no-group" data-post="1" data-topic="294" data-username="Chris_Phillips">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" class="avatar" height="20" loading="lazy" src="../../../images/233_2.png" width="20"/> Chris_Phillips:</div>
+<blockquote>
+<p>how to identify the pdf for the salesforce data flow.</p>
+</blockquote>
+</aside>
+<p>Just to clarify, are you asking is it possible to attach a PDF to a Salesforce record?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>How to attach a pdf that is created using the HTML to PDF data flow. Is there a way to identify the PDF created in Airkit so that it can be used in an additional dataflow to upload to salesforce?</p>
+<p>Please let me know if any other information is needed.</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Got it!</p>
+<p>So if you’re creating a PDF from the HTML to PDF data operation, you’re going to want to then encode that asset before writing it to salesforce using the <a href="https://support.airkit.com/reference/download-encoded-asset-data-operation">Download Encoded Asset Data operation</a></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/cefPvG8Ao3dBcsVS3mUfND5XE6M.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/55b69cd7b8038e1b44e6a62552614942d5f1259c.png" title="image"><img alt="image" data-base62-sha1="cefPvG8Ao3dBcsVS3mUfND5XE6M" data-dominant-color="F2F2F4" height="500" src="../../../images/55b69cd7b8038e1b44e6a62552614942d5f1259c_2_380x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/55b69cd7b8038e1b44e6a62552614942d5f1259c_2_380x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/55b69cd7b8038e1b44e6a62552614942d5f1259c_2_570x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/55b69cd7b8038e1b44e6a62552614942d5f1259c.png 2x" width="380"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">592×777 73.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Then you can use the salesforce data operation and create an attachment and pass the <code>encoded asset</code> into the <code>Body</code> of the request</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/kKiWEU4ulG6QVBUsMtPEXngbwsk.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/91677bd6faaf837772ee36664b7a06af1afad5e4.png" title="image"><img alt="image" data-base62-sha1="kKiWEU4ulG6QVBUsMtPEXngbwsk" data-dominant-color="FDFDFD" height="484" src="../../../images/91677bd6faaf837772ee36664b7a06af1afad5e4_2_690x484.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/91677bd6faaf837772ee36664b7a06af1afad5e4_2_690x484.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/91677bd6faaf837772ee36664b7a06af1afad5e4_2_1035x726.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/91677bd6faaf837772ee36664b7a06af1afad5e4.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1100×773 31.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>That was the missing data flow I wasn’t sure about. Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

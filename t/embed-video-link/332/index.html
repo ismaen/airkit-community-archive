@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Embed video link</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Embed video link</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">mike</div>
+          <div class="post_content">
+<p>Hi All,</p>
+<p>I was wondering if it was possible to embed a video link (say youtube) in an embedded external content container? Or if that’s not possible, if there is any other way to have a playable video from a screen.</p>
+<p>Thanks!<br/>
+Mike</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/53_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Elliot_Fiske</div>
+          <div class="post_content">
+<p>Hi Mike,</p>
+<p>This is possible using the <a href="https://support.airkit.com/reference/embedded-external-content-container" rel="noopener nofollow ugc">Embedded External Content Control</a>.</p>
+<p><strong>However,</strong> most of the standard video providers I tried (YouTube, Vimeo, Twitter) all didn’t work because they want to read/write cookies on the document, which we don’t currently allow for security reasons. (I think they use these cookies to make sure users aren’t abusing the Embed feature or putting it on sites they don’t approve).</p>
+<p>I was able to get it to work by hosting the video myself. I made a simple web page with a video using Github Pages, and set the source like so:<br/>
+<img alt="image" data-base62-sha1="9J2hCyPa3QFqAeTH5b8eo7jokVc" height="351" src="../../../images/442adadbcb0accb4e8b3723c4f018380b589b2ba.png" width="305"/></p>
+<p>You can see my simple setup here: <a class="inline-onebox" href="https://github.com/elliotfiske/elliotfiske.github.io/blob/master/test-embed.html" rel="noopener nofollow ugc">elliotfiske.github.io/test-embed.html at master · elliotfiske/elliotfiske.github.io · GitHub</a></p>
+<p>And the final published app is here: <a class="inline-onebox" href="https://app.airkit.com/eekum-bokum" rel="noopener nofollow ugc">Attempt video embed</a></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

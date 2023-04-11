@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>UDFs - Recursive Processing of pre-selected JSON fields</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">UDFs - Recursive Processing of pre-selected JSON fields</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>Sometimes we might have a list of JSON objects for which we’d like to update the values of certain (<em>known</em>) keys.</p>
+<p>To understand how to build this UDF we’ll be using the following use-case to exemplify:</p>
+<blockquote>
+<p>I have a list of order details for which I need to display all date fields in <code>YYYY-MM-DD hh:MM:ss</code>  (PST) format, but the date fields are:</p>
+<ul>
+<li>text fields</li>
+<li>in UTC</li>
+</ul>
+</blockquote>
+<p>This is what the List of JSON looks like:</p>
+<pre><code class="lang-auto">[
+  {
+    "purchase_date": "2022-02-02T22:13:27.407Z",
+    "order_id": "19553872",
+    "item": "Pizza",
+    "delivery_date":"2022-02-02T23:35:07.407Z"
+  },
+{
+    "purchase_date": "2022-02-08T19:33:21.407Z",
+    "order_id": "93259653",
+    "item": "Soup",
+    "delivery_date":"2022-02-08T21:03:01.407Z"
+  },
+  {
+    "purchase_date": "2022-02-10T19:33:21.407Z",
+    "order_id": "20259384",
+    "item": "Noodles",
+    "delivery_date":"2022-02-10T20:13:12.507Z"
+  }
+]
+</code></pre>
+<p>And we need to display the following fields as MM/DD/YYYY HH:mm  (PST):</p>
+<pre><code class="lang-auto">[
+  "purchase_date",
+  "delivery_date"
+]
+</code></pre>
+<p>This is what the <strong>body</strong> of the UDF will be:</p>
+<pre><code class="lang-auto">FROM
+  i
+IN
+  json
+SELECT
+MERGE_OBJECTS(
+  i,
+  MERGE_OBJECTS(
+    FROM
+      j
+    IN
+      date_fields
+    SELECT
+      FROM
+        value,
+        key
+      IN
+        i
+      WHERE
+        key = j
+      SELECT
+        "{{j}}": FORMAT_DATETIME(
+          DATETIME_FROM_FORMAT(
+            value
+          ),
+          "YYYY-MM-DD hh:MM:ss z",
+          "en-EN",
+          tz
+        )
+  )
+)
+</code></pre>
+<p>Where the inputs are:</p>
+<ul>
+<li>
+<code>json</code> (<em>dataType: List of Any</em>) - the list of JSON objects to transform</li>
+<li>
+<code>date_fields</code> (<em>dataType: List of Text</em>) - the list of <em>known</em> JSON keys whose date strings we’ll be transforming</li>
+<li>
+<code>tz</code> (<em>dataType: Text</em>) - a string representing the Time Zone to offset the date fields to (<em>for example: America/Los_Angeles</em>)</li>
+</ul>
+<p>And the output will be a <em>List of Any</em> (List of JSON objects).</p>
+<p>You UDF <em>should</em> look like:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/5FuUMOIwDvTUd6hyburksM8LTD9.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/27bbc50682019fee8426c964fa3a58b63f80315f.png" rel="noopener nofollow ugc" title="UDF Recursive processing"><img alt="UDF Recursive processing" data-base62-sha1="5FuUMOIwDvTUd6hyburksM8LTD9" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/27bbc50682019fee8426c964fa3a58b63f80315f_2_10x10.png" height="201" src="../../../images/27bbc50682019fee8426c964fa3a58b63f80315f_2_690x201.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/27bbc50682019fee8426c964fa3a58b63f80315f_2_690x201.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/27bbc50682019fee8426c964fa3a58b63f80315f_2_1035x301.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/27bbc50682019fee8426c964fa3a58b63f80315f_2_1380x402.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">UDF Recursive processing</span><span class="informations">2734×800 70.8 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>And the output of the UDF will be</p>
+<pre><code class="lang-auto">[
+  {
+    "purchase_date": "2022-02-02 02:02:27 PST",
+    "order_id": "19553872",
+    "item": "Pizza",
+    "delivery_date": "2022-02-02 03:02:07 PST"
+  },
+  {
+    "purchase_date": "2022-02-08 11:02:21 PST",
+    "order_id": "93259653",
+    "item": "Soup",
+    "delivery_date": "2022-02-08 01:02:01 PST"
+  },
+  {
+    "purchase_date": "2022-02-10 11:02:21 PST",
+    "order_id": "20259384",
+    "item": "Noodles",
+    "delivery_date": "2022-02-10 12:02:12 PST"
+  }
+]
+</code></pre>
+<hr/>
+<p><strong>BUILDING PROCESS</strong></p>
+<p>Let’s break the UDF’s body down to understand how we built it.</p>
+<ol>
+<li>
+<p>The first part of the UDF is iterating over the JSON objects in our list, where <code>i</code> represents a <em>single JSON object</em>:</p>
+<pre><code class="lang-auto">FROM
+  i
+IN
+  json
+SELECT
+</code></pre>
+</li>
+<li>
+<p>The next bit is there to replace the current key:value pairs of each object with the second argument passed to the <a href="https://support.airkit.com/reference/merge_objects" rel="noopener nofollow ugc"><code>MERGE_OBJECTS()</code> function</a>, which will be the offset and transformed <code>date_field</code></p>
+<pre><code class="lang-auto">MERGE_OBJECTS(
+    i,
+</code></pre>
+</li>
+<li>
+<p>The following piece starts with another <a href="https://support.airkit.com/reference/merge_objects" rel="noopener nofollow ugc"><code>MERGE_OBJECTS()</code> function</a> which is used to create a single JSON object with <em>all</em> <code>date_fields</code> <em>transformed</em>. If this was about transforming a <em>single field/ key:value pair</em> we wouldn’t need it.<br/>
+The second part of it is only <em>iterating over our</em> <code>date_fields</code> <em>list</em>.</p>
+<pre><code class="lang-auto">MERGE_OBJECTS(
+      FROM
+        j
+      IN
+        date_fields
+      SELECT
+</code></pre>
+</li>
+<li>
+<p>Now onto the actual transformation, the innermost part of our UDF, where <code>j</code> is the name of the <code>date_field</code> we want to transform (<em>for example:</em> <code>"purchase_date"</code>):</p>
+<pre><code class="lang-auto">FROM
+  value,
+  key
+IN
+  i
+WHERE
+  key = j
+SELECT
+  "{{j}}": FORMAT_DATETIME(
+    DATETIME_FROM_FORMAT(
+      value
+        ),
+        "YYYY-MM-DD hh:MM:ss z",
+        "en-EN",
+        tz
+      )
+</code></pre>
+</li>
+</ol>
+<hr/>
+<p><em>TIP: Play around with the UDF to build a UDF that transforms:</em></p>
+<ul>
+<li><em>Phone string to an international US phone (dataType: Phone)</em></li>
+<li><em>Number string to a decimal number and back to a string (dataType: Text)</em></li>
+</ul>
+<p><em>What other useful transformations have you had to make in the past? Share them with the Community below!</em></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

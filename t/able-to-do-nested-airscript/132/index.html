@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Able to do nested airscript?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Able to do nested airscript?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/167_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Wilson_Wong</div>
+          <div class="post_content">
+<p>Just wondering if it is possible to do a nested airscript? Like something like this</p>
+<pre><code class="lang-auto">CURRENCY(
+  PARSE_NUMBER(
+    string
+  ),
+  "USD",
+  0
+)
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/168_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Adam_Evans</div>
+          <div class="post_content">
+<p><span class="mention">@Wilson_Wong</span>: Yes it is possible to nest functions within Airscript as much as you would like.</p>
+<p>There are some good examples of this available here to check out: <a class="inline-onebox" href="https://support.airkit.com/docs/airscript-examples" rel="noopener nofollow ugc">Airscript Examples</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/167_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Wilson_Wong</div>
+          <div class="post_content">
+<p>Hey Adam,</p>
+<p>I tried this and I keep getting an error, thoughts?</p>
+<pre><code class="lang-auto">CURRENCY(
+  PARSE_NUMBER(
+    "1199.90”
+  ),
+  "USD",
+  0
+)
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/26_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kyung</div>
+          <div class="post_content">
+<p>You could try PARSE_CURRENCY(“1199.90”, “USD”)</p>
+<p>The CURRENCY function expects a whole number as its first parameter.</p>
+<p>Hope this makes sense.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/168_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Adam_Evans</div>
+          <div class="post_content">
+<p><span class="mention">@Wilson_Wong</span> I created a quick example app and here’s a screen shot of it working in a transform step of a data flow (TIP: this is a really useful way to just test arbitrary Airscript expressions).</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/gaDo0ERqSyZd8Q5hAHuwnO0zbKd.jpeg?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/71568cdec6d2139e23937365fc714c7f61e45fc5.jpeg" rel="noopener nofollow ugc" title="2022-03-16_11-52-01"><img alt="2022-03-16_11-52-01" data-base62-sha1="gaDo0ERqSyZd8Q5hAHuwnO0zbKd" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/71568cdec6d2139e23937365fc714c7f61e45fc5_2_10x10.png" height="391" src="../../../images/71568cdec6d2139e23937365fc714c7f61e45fc5_2_690x391.jpeg" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/71568cdec6d2139e23937365fc714c7f61e45fc5_2_690x391.jpeg, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/71568cdec6d2139e23937365fc714c7f61e45fc5_2_1035x586.jpeg 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/71568cdec6d2139e23937365fc714c7f61e45fc5_2_1380x782.jpeg 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-03-16_11-52-01</span><span class="informations">3808×2162 414 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>We’re happy to help you more directly over our public Slack org - you can request access here: <a class="inline-onebox" href="https://app.airkit.com/c/akdevs" rel="noopener nofollow ugc">AK Devs Slack Invites</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/168_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Adam_Evans</div>
+          <div class="post_content">
+<p>Here is the example app attached as well just in case it’s helpful</p>
+<p><a class="attachment" href="/uploads/short-url/zylrj2XmRwKS4ZX5qtlYVBX5kQL.zip">Currency_Example-2022-03-16T18_54_59.864Z-full.branch.zip</a> (12.7 KB)</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

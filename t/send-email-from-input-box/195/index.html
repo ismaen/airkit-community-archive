@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Send Email From Input Box</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Send Email From Input Box</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p>I’m trying to send an email to an email address entered into an input box when the submit button is pressed.</p>
+<p>I am using the “send email” data flow, but don’t seem to be correctly inputting the email variable in the “to” field of the data flow? After opening brackets “{{” I expected the variable to begin to autofil but that doesn’t seem to be the case?</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi Chris! Do you happen to have an export of the app or if you can send some screenshots of your web page and your data flow?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi Ismaen!</p>
+<p>Here is a link to an export of the app<br/>
+<a class="onebox" href="https://gannett-my.sharepoint.com/:u:/p/cphillips1/ETk-NjZiCjpFsM4U3h9VGokBRmQGJX6YpW11bzPg6p0WMg?e=h3NgIm" rel="noopener nofollow ugc" target="_blank">https://gannett-my.sharepoint.com/:u:/p/cphillips1/ETk-NjZiCjpFsM4U3h9VGokBRmQGJX6YpW11bzPg6p0WMg?e=h3NgIm</a></p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Thank you! That is helpful. So I think I found the issue, it looks like you weren’t passing the <code>email_input</code> variable in the data flow.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/nVVdoZ3HmPJyWQ0sXA0fAdkoNly.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a7be3073665979fdf9cf9b127bfbeea534a9255c.png" title="image"><img alt="image" data-base62-sha1="nVVdoZ3HmPJyWQ0sXA0fAdkoNly" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a7be3073665979fdf9cf9b127bfbeea534a9255c_2_10x10.png" height="489" src="../../../images/a7be3073665979fdf9cf9b127bfbeea534a9255c_2_690x489.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a7be3073665979fdf9cf9b127bfbeea534a9255c_2_690x489.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a7be3073665979fdf9cf9b127bfbeea534a9255c_2_1035x733.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a7be3073665979fdf9cf9b127bfbeea534a9255c_2_1380x978.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1539×1091 114 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>So what this should look like is you want to take the <code>email_input</code> from your email input box and pass that into your send email data flow:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/kl0Lcm5LzMBNcZWwsRGZpWuGs8o.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/8e8b89ee08224e115ddf8e99c1a8d7dd9907cd88.png" title="2022-06-27_13-13-36"><img alt="2022-06-27_13-13-36" data-base62-sha1="kl0Lcm5LzMBNcZWwsRGZpWuGs8o" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8e8b89ee08224e115ddf8e99c1a8d7dd9907cd88_2_10x10.png" height="489" src="../../../images/8e8b89ee08224e115ddf8e99c1a8d7dd9907cd88_2_690x489.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8e8b89ee08224e115ddf8e99c1a8d7dd9907cd88_2_690x489.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8e8b89ee08224e115ddf8e99c1a8d7dd9907cd88_2_1035x733.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8e8b89ee08224e115ddf8e99c1a8d7dd9907cd88_2_1380x978.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-06-27_13-13-36</span><span class="informations">1539×1091 125 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div><br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/x78G6KJfdtfgHovquZR9IHneG6G.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e8165c278634b079c7b01110c8d059daba6f8b66.png" title="2022-06-27_13-13-48"><img alt="2022-06-27_13-13-48" data-base62-sha1="x78G6KJfdtfgHovquZR9IHneG6G" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e8165c278634b079c7b01110c8d059daba6f8b66_2_10x10.png" height="489" src="../../../images/e8165c278634b079c7b01110c8d059daba6f8b66_2_690x489.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e8165c278634b079c7b01110c8d059daba6f8b66_2_690x489.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e8165c278634b079c7b01110c8d059daba6f8b66_2_1035x733.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e8165c278634b079c7b01110c8d059daba6f8b66_2_1380x978.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-06-27_13-13-48</span><span class="informations">1539×1091 113 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>You also don’t need to wrap the email in <code>{{}}</code> because the “TO:” field expects a string, which <code>email</code> is already.<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/pRH9yDgBRNUWXBf0cbiHp8pEz5k.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b548387c3c0bba566d0da0e90f76521f23aeeae6.png" title="2022-06-27_13-13-57"><img alt="2022-06-27_13-13-57" data-base62-sha1="pRH9yDgBRNUWXBf0cbiHp8pEz5k" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b548387c3c0bba566d0da0e90f76521f23aeeae6_2_10x10.png" height="489" src="../../../images/b548387c3c0bba566d0da0e90f76521f23aeeae6_2_690x489.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b548387c3c0bba566d0da0e90f76521f23aeeae6_2_690x489.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b548387c3c0bba566d0da0e90f76521f23aeeae6_2_1035x733.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b548387c3c0bba566d0da0e90f76521f23aeeae6_2_1380x978.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-06-27_13-13-57</span><span class="informations">1539×1091 92 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>With this configured, does that solve your issue?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Perfect, that worked. Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

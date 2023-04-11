@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to copy Theme element from one app to another</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to copy Theme element from one app to another</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>I have a theme in one app and I would like to copy only one element (not entire theme) for ex, Radio button element from theme. I am unable to copy and paste this element to my new app. When I try copy and paste, getting an error “Invalidate clipboard data”. I remember, we had this functionality in 17.15 version but it’s no longer working in 18 version. My both apps are in 18+ version.</p>
+<p>Can someone please suggest?</p>
+<p>Thanks,<br/>
+Narendra</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>So i can’t seem to copy and paste a specific variant as i get the same error as you. I’ll flag this to our engineering team!</p>
+<p>The below is a workaround that I wouldn’t recommend as there may be some downstream effects due to the variant having a UUID, but what you can do is download the theme from both apps which will come down as a JSON file. You can then look through that JSON file and look for the schema of the specific variant that you would like to copy over. this would look something like the below snippet. You can then take this and copy it over into the right section of your original theme.json.</p>
+<p>Again, I wouldn’t recommend this and you should probably recreate the variant in the app itself</p>
+<pre><code class="lang-auto">{
+      "$schema": "/element/theme/control/button.json",
+      "name": "default-copy",
+      "states": {
+        "default": {
+          "font": {
+            "size": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "fontSizeMedium"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "color": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "backgroundPrimary"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "family": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "brandPrimaryFont"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "$schema": "/element/theme/trait/font.json"
+          },
+          "border": {
+            "top": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "left": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "color": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "brandPrimary"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "right": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "style": "solid",
+            "width": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "borderSizeSmall"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "bottom": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "$schema": "/element/theme/trait/border.json"
+          },
+          "$schema": "/element/theme/trait-group/standard.json",
+          "padding": {
+            "top": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "spacingMedium"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "left": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "spacingLarge"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "right": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "spacingLarge"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "bottom": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "spacingMedium"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "$schema": "/element/theme/trait/padding.json",
+            "linkValues": "none"
+          },
+          "background": {
+            "color": {
+              "value": "#cb4444",
+              "$schema": "/element/expression/binding/constant-binding.json",
+              "safe": true
+            },
+            "$schema": "/element/theme/trait/background.json"
+          },
+          "dimensions": {
+            "width": {
+              "safe": true,
+              "value": "100%",
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "$schema": "/element/theme/trait/dimensions.json",
+            "linkValues": "none",
+            "linkMaxValues": "none",
+            "linkMinValues": "none"
+          },
+          "borderRadius": {
+            "radius": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "roundedCornerMedium"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "$schema": "/element/theme/trait/border-radius.json",
+            "topLeftRadius": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "topRightRadius": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "bottomLeftRadius": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "bottomRightRadius": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            }
+          }
+        },
+        "pressed": {
+          "border": {
+            "top": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "left": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "color": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "brandPrimaryTint1"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "right": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "style": "solid",
+            "width": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "borderSizeSmall"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "bottom": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "$schema": "/element/theme/trait/border.json"
+          },
+          "$schema": "/element/theme/trait-group/standard.json",
+          "background": {
+            "color": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "brandPrimaryTint1"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "$schema": "/element/theme/trait/background.json"
+          }
+        },
+        "disabled": {
+          "border": {
+            "top": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "left": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "color": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "brandPrimaryTint1"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "right": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "style": "solid",
+            "width": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "borderSizeSmall"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "bottom": {
+              "safe": true,
+              "value": true,
+              "$schema": "/element/expression/binding/constant-binding.json"
+            },
+            "$schema": "/element/theme/trait/border.json"
+          },
+          "$schema": "/element/theme/trait-group/standard.json",
+          "background": {
+            "color": {
+              "next": {
+                "safe": true,
+                "$schema": "/element/expression/binding/name-binding.json",
+                "binding": "brandPrimaryTint1"
+              },
+              "safe": true,
+              "$schema": "/element/expression/binding/variable-binding.json",
+              "binding": "theme"
+            },
+            "$schema": "/element/theme/trait/background.json"
+          }
+        },
+        "focused": { "$schema": "/element/theme/trait-group/standard.json" }
+      },
+      "transitions": { "$schema": "/element/theme/trait/transitions.json" },
+      "id": "c70822ee-2c6f-4bec-9f11-7311b8ea86d7"
+    }
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thanks Ismaen! I hope Engineering team will fix this problem asap.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@Narendra</span>, i did some digging with the team and we were not able to get this feature to work in 17.15. At the moment, the only way to get variants over from one app to the next is to import/export the themes.</p>
+<p>If i get any updates from the team on this feature request, i will update the thread, but at the moment I don’t have a timeline for this one.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

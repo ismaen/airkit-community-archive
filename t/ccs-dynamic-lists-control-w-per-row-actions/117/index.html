@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>CCs - Dynamic Lists control w/ per row actions</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">CCs - Dynamic Lists control w/ per row actions</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p><a href="https://support.airkit.com/docs/custom-controls">Custom Controls</a> are a great way to combine any number of Airkit’s built-in Web Controls into a customized control of your own.</p>
+<p>In this guide we’ll be building a <a href="https://support.airkit.com/docs/custom-controls">Custom Control</a> that displays a list of items to the users using a <a href="https://support.airkit.com/docs/repeating-elements#building-out-a-list">Repeater</a> with a nested <a href="https://support.airkit.com/docs/custom-controls">Custom Control</a> that has a <code>view</code> and an <code>edit</code> status, with the options to edit the item’s information or remove the item altogether. Let’s get started.</p>
+<hr/>
+<h1>
+<a class="anchor" href="#pre-requisites-1" name="pre-requisites-1"></a>Pre-requisites</h1>
+<ol>
+<li>
+<code>LIST#EDIT(list)</code> -  Function to build a list of Booleans (one per each item in the input list) to control the Custom Control’s editable status of all rows</li>
+<li>
+<code>LIST#REMOVE(list, item_index)</code> - Function to remove the item at <code>index</code> from our list</li>
+<li>
+<code>PERSON</code> - App Obj or Custom Type that describes the items to be displayed in the list</li>
+</ol>
+<h2>
+<a class="anchor" href="#list-udfs-2" name="list-udfs-2"></a>List UDFs</h2>
+<h4>
+<a class="anchor" href="#listeditdatatype-list-3" name="listeditdatatype-list-3"></a>LIST#EDIT(&lt;Datatype: list&gt;)</h4>
+<p>Create a new UDF, with a <code>list</code> input of <em>Datatype: List of JSON</em>, and an output of <em>Datatype: List of Boolean</em>. Set the UDF’s Body to:</p>
+<pre><code class="lang-auto">FROM index IN list SELECT FALSE
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/s129Qak47TVlVZcKMk4Cahtm7VO.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c45ad126e1ed4fcb28a6345b5613b79fee4a1f9c.png" title="LIST_EDIT"><img alt="LIST_EDIT" data-base62-sha1="s129Qak47TVlVZcKMk4Cahtm7VO" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c45ad126e1ed4fcb28a6345b5613b79fee4a1f9c_2_10x10.png" height="181" src="../../../images/c45ad126e1ed4fcb28a6345b5613b79fee4a1f9c_2_690x181.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c45ad126e1ed4fcb28a6345b5613b79fee4a1f9c_2_690x181.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c45ad126e1ed4fcb28a6345b5613b79fee4a1f9c_2_1035x271.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c45ad126e1ed4fcb28a6345b5613b79fee4a1f9c_2_1380x362.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">LIST_EDIT</span><span class="informations">2716×716 32.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h4>
+<a class="anchor" href="#listremovedatatype-list-of-any-datatype-number-4" name="listremovedatatype-list-of-any-datatype-number-4"></a>LIST#REMOVE(&lt;Datatype: List of Any&gt;, &lt;Datatype: Number&gt;)</h4>
+<p>Create a new UDF, with a <code>list</code> input of <em>Datatype: List of JSON</em>, a <code>item_index</code> input of <em>Datatype: Number</em>, and an output of <em>Datatype: List of JSON</em>. Set the UDF’s Body to:</p>
+<pre><code class="lang-auto">FROM item IN list WHERE NOT(index = item_index) SELECT item
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/f62sbyTQFGxpiop4aOccjvFXBJi.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/69cf628c9f24fd6d7eff981056ab7efa1f30d724.png" title="LIST_REMOVE"><img alt="LIST_REMOVE" data-base62-sha1="f62sbyTQFGxpiop4aOccjvFXBJi" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69cf628c9f24fd6d7eff981056ab7efa1f30d724_2_10x10.png" height="201" src="../../../images/69cf628c9f24fd6d7eff981056ab7efa1f30d724_2_690x201.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69cf628c9f24fd6d7eff981056ab7efa1f30d724_2_690x201.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69cf628c9f24fd6d7eff981056ab7efa1f30d724_2_1035x301.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69cf628c9f24fd6d7eff981056ab7efa1f30d724_2_1380x402.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">LIST_REMOVE</span><span class="informations">2730×798 101 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h2>
+<a class="anchor" href="#custom-data-types-5" name="custom-data-types-5"></a>Custom Data Types</h2>
+<p>In <a href="https://support.airkit.com/docs/data-builder">Data Builder</a> create a new <a href="https://support.airkit.com/docs/data-builder#custom-data-types-1">Custom Data Type</a> and add three fields to it:</p>
+<ul>
+<li>
+<code>first_name</code> - <em>Datatype: Text</em>
+</li>
+<li>
+<code>last_name</code> - <em>Datatype: Text</em>
+</li>
+<li>
+<code>user_id</code> - <em>Datatype: Text</em>
+</li>
+</ul>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/kqhv5BeyHtJ332ndwCHQlCe0Wj9.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/8f240b2d3879a0dd462edf56098778cc1a7b91eb.png" title="Custom_data_type"><img alt="Custom_data_type" data-base62-sha1="kqhv5BeyHtJ332ndwCHQlCe0Wj9" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8f240b2d3879a0dd462edf56098778cc1a7b91eb_2_10x10.png" height="147" src="../../../images/8f240b2d3879a0dd462edf56098778cc1a7b91eb_2_345x147.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8f240b2d3879a0dd462edf56098778cc1a7b91eb_2_345x147.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8f240b2d3879a0dd462edf56098778cc1a7b91eb_2_517x220.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8f240b2d3879a0dd462edf56098778cc1a7b91eb_2_690x294.png 2x" width="345"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Custom_data_type</span><span class="informations">1100×470 31.8 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<hr/>
+<h1>
+<a class="anchor" href="#custom-control-design-6" name="custom-control-design-6"></a>Custom Control Design</h1>
+<p>For this exercise, we’ll be using the following JSON as the base item to be displayed (we’ll just tweak it a little bit to populate the Summary CC).</p>
+<pre><code class="lang-auto">  {
+    "first_name": "James",
+    "last_name":"Bond",
+    "user_id": 007
+  }
+</code></pre>
+<p>The Row Custom Control will include:</p>
+<ul>
+<li>View status</li>
+<li>Edit status</li>
+</ul>
+<p>Each status will be displaying a different <a href="https://support.airkit.com/reference/container-web-control">Container</a> to the user, making use of the <a href="https://support.airkit.com/reference/container-web-control#is-visible">Container’s <code>isVisible</code></a> property.<br/>
+Both statuses should include the option to <code>remove</code> the item from the main list.</p>
+<p>The Summary Custom Control will include:</p>
+<ul>
+<li>A header</li>
+<li>A Repeater (List) of Row CCs that is populated with a List of JSON objects</li>
+</ul>
+<hr/>
+<h2>
+<a class="anchor" href="#building-the-row-cc-7" name="building-the-row-cc-7"></a>Building the Row CC</h2>
+<h3>
+<a class="anchor" href="#main-structure-8" name="main-structure-8"></a>Main Structure</h3>
+<ol>
+<li>
+<p>Add a new Custom Control to your application, name it ‘row’ (you can change this later)</p>
+</li>
+<li>
+<p>Add a read-only Template Variable of <em>Datatype: Boolean</em> to the control, name it <code>edit</code></p>
+</li>
+<li>
+<p>Add an editable (read-only <em>unchecked</em>) Template Variable of <em>Datatype: PERSON</em> to the control, name it <code>person</code></p>
+</li>
+<li>
+<p>Add three events to the control, name one <code>edit</code>, the second one <code>save</code>, and the last one <code>remove</code>, add a <em>variable</em> to each event of <em>Datatype: PERSON</em> and name it <code>person</code></p>
+</li>
+<li>
+<p>Inside the default <em>Container</em> of the <em>row</em> control, add two new containers, <em>view</em> and <em>edit</em></p>
+</li>
+<li>
+<p>in the <em>Advanced</em> tab for each container, set the <code>isVisible</code> property to: <code>edit = FALSE</code> on the <em>view</em> container, and <code>edit = TRUE</code> on the <em>edit</em> container.<br/>
+<em>Note:</em> <code>NOT(edit)</code> <em>and</em> <code>edit</code> <em>should also work, the former values are provided for ease of understanding.</em></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/inmWJtuinpUie4o2KZoGjDQ4CsT.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/80cb6c3535a2f863b8aa867777f60f98e3c3fd97.png" title="CC - Row Structure"><img alt="CC - Row Structure" data-base62-sha1="inmWJtuinpUie4o2KZoGjDQ4CsT" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/80cb6c3535a2f863b8aa867777f60f98e3c3fd97_2_10x10.png" height="375" src="../../../images/80cb6c3535a2f863b8aa867777f60f98e3c3fd97_2_412x375.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/80cb6c3535a2f863b8aa867777f60f98e3c3fd97_2_412x375.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/80cb6c3535a2f863b8aa867777f60f98e3c3fd97_2_618x562.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/80cb6c3535a2f863b8aa867777f60f98e3c3fd97_2_824x750.png 2x" width="412"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">CC - Row Structure</span><span class="informations">1232×1118 53 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+</ol>
+<p>Now that the basic structure of the <em>row</em> control is set up, let’s dig in to the different statuses</p>
+<h3>
+<a class="anchor" href="#view-status-9" name="view-status-9"></a>View status</h3>
+<ol>
+<li>
+<p>Inside the <em>view</em> container, add three labels (one for each of the fields in the PERSON object), make sure the Container’s Children are distributed <em>Horizontally</em> to display all of them as a row.</p>
+</li>
+<li>
+<p>Bind each one to <code>person.field_name</code> where <code>field_name</code> will be one of: <code>first_name</code>, <code>last_name</code>, <code>user_id</code></p>
+</li>
+<li>
+<p>Add two buttons, one for the <em>Edit</em> action, and another one for the <em>Remove</em> action.</p>
+</li>
+<li>
+<p>Set the buttons’ Clicked Actions to <em>Invoke Event</em>, bind the <em>Edit</em> button to the <code>edit</code> event, and the <code>Remove</code> button to the <code>remove</code> event.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/kHrt3mLL77a1BXPvF0QdIodmUjV.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9114a58fb947214f7e6116c4ec7591f5ff0c2953.png" title="CC - Row View"><img alt="CC - Row View" data-base62-sha1="kHrt3mLL77a1BXPvF0QdIodmUjV" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9114a58fb947214f7e6116c4ec7591f5ff0c2953_2_10x10.png" height="329" src="../../../images/9114a58fb947214f7e6116c4ec7591f5ff0c2953_2_517x329.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9114a58fb947214f7e6116c4ec7591f5ff0c2953_2_517x329.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9114a58fb947214f7e6116c4ec7591f5ff0c2953_2_775x493.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9114a58fb947214f7e6116c4ec7591f5ff0c2953_2_1034x658.png 2x" width="517"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">CC - Row View</span><span class="informations">1417×903 45.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+</ol>
+<h3>
+<a class="anchor" href="#edit-status-10" name="edit-status-10"></a>Edit status</h3>
+<ol>
+<li>
+<p>Inside the <em>edit</em> container, add a form with three Inputs (one for each of the fields in the PERSON object), and a <em>Save</em> button. Make sure the Container’s Children are distributed <em>Horizontally</em> to display all of them as an inline form.</p>
+</li>
+<li>
+<p>Bind each Input control to one of the <code>person</code> fields: <code>person.first_name</code>, <code>person.last_name</code>, and <code>person.user_id</code></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/g61P3ZQAPlCVKkGNSnwLFw6y0EU.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/70d143b05cc184cb13e34f252b66e87ab50beff8.png" title="CC - Row Edit"><img alt="CC - Row Edit" data-base62-sha1="g61P3ZQAPlCVKkGNSnwLFw6y0EU" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/70d143b05cc184cb13e34f252b66e87ab50beff8_2_10x10.png" height="313" src="../../../images/70d143b05cc184cb13e34f252b66e87ab50beff8_2_517x313.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/70d143b05cc184cb13e34f252b66e87ab50beff8_2_517x313.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/70d143b05cc184cb13e34f252b66e87ab50beff8_2_775x469.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/70d143b05cc184cb13e34f252b66e87ab50beff8_2_1034x626.png 2x" width="517"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">CC - Row Edit</span><span class="informations">1417×859 41.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+</ol>
+<hr/>
+<h2>
+<a class="anchor" href="#building-the-summary-cc-11" name="building-the-summary-cc-11"></a>Building the Summary CC</h2>
+<h3>
+<a class="anchor" href="#main-structure-12" name="main-structure-12"></a>Main Structure</h3>
+<ol>
+<li>
+<p>Add a new Custom Control to your application, name it ‘summary’ (you can change this later)</p>
+</li>
+<li>
+<p>Add an editable (read-only <em>unchecked</em>) Template Variable of <em>Datatype: List of PERSON</em> to the control, name it <code>person_list</code></p>
+</li>
+<li>
+<p>Add a read-only Template Variable of <em>Datatype: Boolean</em> to the control, name it <code>edit</code></p>
+</li>
+<li>
+<p>Add three events to the control, name one <code>edit</code>, the second one <code>save</code>, and the last one <code>remove</code>, add the following to each event: a <em>variable</em> of <em>Datatype: PERSON</em> and name it <code>person</code>, and a <em>variable</em> of <em>Datatype: Number</em> and name it <code>index</code></p>
+</li>
+<li>
+<p>Inside the default <em>Container</em> of the <em>summary</em> control, add two new containers, <em>header</em> and <em>list</em></p>
+</li>
+<li>
+<p>The <em>header</em> container will look pretty much like the <em>row’s view</em> container, except it’ll have hard-coded values for the column names: <code>First</code>, <code>Last</code>, <code>ID</code>, and <code>Actions</code> (instead of the action buttons)</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/fp0Pk6Mz15JpDGszSKPriNV18Sa.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/6bf474021d38bff600c70c307e150808c596efa6.png" title="CC - Summary Structure"><img alt="CC - Summary Structure" data-base62-sha1="fp0Pk6Mz15JpDGszSKPriNV18Sa" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6bf474021d38bff600c70c307e150808c596efa6_2_10x10.png" height="375" src="../../../images/6bf474021d38bff600c70c307e150808c596efa6_2_417x375.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6bf474021d38bff600c70c307e150808c596efa6_2_417x375.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6bf474021d38bff600c70c307e150808c596efa6_2_625x562.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6bf474021d38bff600c70c307e150808c596efa6_2_834x750.png 2x" width="417"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">CC - Summary Structure</span><span class="informations">1247×1119 69.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+</ol>
+<p>Now that the basic structure of the <em>summary</em> control is set up, let’s dig in to the summary list</p>
+<h3>
+<a class="anchor" href="#list-control-13" name="list-control-13"></a>List Control</h3>
+<ol>
+<li>
+<p>Add a <a href="https://support.airkit.com/docs/repeating-elements#building-out-a-list">Repeater</a> to the <em>list</em> container, bind the <code>Data</code> to the <code>input.person_list</code> cc input</p>
+</li>
+<li>
+<p>Add a <a href="https://support.airkit.com/reference/simple-cell-web-control">Simple Cell</a> to the List</p>
+</li>
+<li>
+<p>Add a <em>row</em> Custom Control to the the Simple Cell</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/faZZxwXvy1c0FRwC2ES6bCeuXgZ.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/6a5eed6136dc015d3c527057bd3d2879845204f9.png" title="CC - Summary List"><img alt="CC - Summary List" data-base62-sha1="faZZxwXvy1c0FRwC2ES6bCeuXgZ" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6a5eed6136dc015d3c527057bd3d2879845204f9_2_10x10.png" height="165" src="../../../images/6a5eed6136dc015d3c527057bd3d2879845204f9_2_517x165.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6a5eed6136dc015d3c527057bd3d2879845204f9_2_517x165.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6a5eed6136dc015d3c527057bd3d2879845204f9_2_775x247.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6a5eed6136dc015d3c527057bd3d2879845204f9_2_1034x330.png 2x" width="517"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">CC - Summary List</span><span class="informations">1244×398 20.4 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+</ol>
+<h3>
+<a class="anchor" href="#row-cc-setup-14" name="row-cc-setup-14"></a>Row CC setup</h3>
+<ol>
+<li>
+<p>Set the row’s cc <code>person</code> input to the List’s <code>item</code></p>
+</li>
+<li>
+<p>Set the row’s cc <code>edit</code> input to <code>edit[index]</code> (change the <code>edit</code> status for that row alone)</p>
+</li>
+<li>
+<p>Add an <em>Invoke Event</em> action to each of the row’s cc events, and bind each to the corresponding summary cc events (<code>edit</code>, <code>save</code>, <code>remove</code>)</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/bcwMSAwFI7MbrczaU8metmEYnK8.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/4e827a1d2c7b7a1d8daa1c74a56f4a0eecf844a8.png" title="CC - Summary Row setup"><img alt="CC - Summary Row setup" data-base62-sha1="bcwMSAwFI7MbrczaU8metmEYnK8" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4e827a1d2c7b7a1d8daa1c74a56f4a0eecf844a8_2_10x10.png" height="374" src="../../../images/4e827a1d2c7b7a1d8daa1c74a56f4a0eecf844a8_2_244x374.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4e827a1d2c7b7a1d8daa1c74a56f4a0eecf844a8_2_244x374.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4e827a1d2c7b7a1d8daa1c74a56f4a0eecf844a8_2_366x561.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4e827a1d2c7b7a1d8daa1c74a56f4a0eecf844a8_2_488x748.png 2x" width="244"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">CC - Summary Row setup</span><span class="informations">724×1108 28.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+</ol>
+<p>Done! Now we can go to our Web Flows and implement the Custom Control in one of our Web Pages.</p>
+<hr/>
+<h1>
+<a class="anchor" href="#custom-control-implementation-15" name="custom-control-implementation-15"></a>Custom Control Implementation</h1>
+<h3>
+<a class="anchor" href="#pre-requisites-16" name="pre-requisites-16"></a>Pre-requisites</h3>
+<p>The following are not mandatory to run the Custom Control (all values can be hard-coded), but they are part of any Airkit application and as such, it’s always good practice to set it up in the suggested way.</p>
+<ul>
+<li>Add a Web Flow Variable <code>person_list</code> of <em>Datatype: PERSON</em>. This variable will hold the list of JSON objects used to populate our Custom Control. For testing purposes, you can add a Web Flow Updated action to Set a Variable <code>person_list</code> to the list below, but in practice you’ll want to populate this with
+<ul>
+<li>The results of a Data Flow</li>
+<li>The results of an API call</li>
+<li>The information entered in a Portal, etc.<pre><code class="lang-auto">[
+  {
+    "first_name": "James",
+    "last_name": "Bond",
+    "user_id": "007"
+  },
+  {
+    "first_name": "Maxwell",
+    "last_name": "Smart",
+    "user_id": "86"
+  }
+]
+</code></pre>
+</li>
+</ul>
+</li>
+<li>Add a Web Page variable <code>edit</code> of <em>Datatype: List of Boolean</em>. This variable will hold the list of edit status for the different objects in our <code>person_list</code>. Add a Web Page Viewed action and Set a Variable <code>edit</code> to<pre><code class="lang-auto">LIST#EDIT(
+  person_list
+)
+</code></pre>
+This will make all rows to the <em>view</em> status on page load.</li>
+</ul>
+<h3>
+<a class="anchor" href="#add-and-configure-the-custom-control-17" name="add-and-configure-the-custom-control-17"></a>Add and Configure the Custom Control</h3>
+<ol>
+<li>
+<p>In your Web Page you’ll want to add a new Web Control, scroll down to the <em>Custom</em> category and select the <em>summary</em> control.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/1tvhmXqf5Cl7rZl7FBYKTRs0e8E.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/0a57fbfa1ce31cb43a8644c4b4204fa385b16830.png" title="CC - Add to page"><img alt="CC - Add to page" data-base62-sha1="1tvhmXqf5Cl7rZl7FBYKTRs0e8E" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0a57fbfa1ce31cb43a8644c4b4204fa385b16830_2_10x10.png" height="367" src="../../../images/0a57fbfa1ce31cb43a8644c4b4204fa385b16830_2_517x367.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0a57fbfa1ce31cb43a8644c4b4204fa385b16830_2_517x367.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0a57fbfa1ce31cb43a8644c4b4204fa385b16830_2_775x550.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0a57fbfa1ce31cb43a8644c4b4204fa385b16830_2_1034x734.png 2x" width="517"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">CC - Add to page</span><span class="informations">1518×1080 88.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+<li>
+<p>Configure the Custom Control</p>
+<ol>
+<li>Bind the Web Flow’s <code>person_list</code> variable to the CC’s <em>person_list</em> input</li>
+<li>Bind the Web Page’s <code>edit</code> variable to the CC’s  <em>edit</em> input</li>
+<li>Add a Set a Variable action to the <em>edit</em> event of the control and set it up like so<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/op2vM7sQKyILl4JAyerwSDVnE8D.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ab08ce221f9eca320a569a1f9b4c205a45f5962f.png" title="edit"><img alt="edit" data-base62-sha1="op2vM7sQKyILl4JAyerwSDVnE8D" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ab08ce221f9eca320a569a1f9b4c205a45f5962f_2_10x10.png" height="250" src="../../../images/ab08ce221f9eca320a569a1f9b4c205a45f5962f_2_250x250.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ab08ce221f9eca320a569a1f9b4c205a45f5962f_2_250x250.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ab08ce221f9eca320a569a1f9b4c205a45f5962f_2_375x375.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ab08ce221f9eca320a569a1f9b4c205a45f5962f_2_500x500.png 2x" width="250"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">edit</span><span class="informations">708×707 22.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div>
+</li>
+<li>Add a Set a Variable action to the <em>save</em> event of the control and set it up like so<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/tDpRpfXE2vLWUJzrIEKV08QWAvm.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/cfb3b58945356aeda890b89e313080cf9be42c18.png" title="save"><img alt="save" data-base62-sha1="tDpRpfXE2vLWUJzrIEKV08QWAvm" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/cfb3b58945356aeda890b89e313080cf9be42c18_2_10x10.png" height="250" src="../../../images/cfb3b58945356aeda890b89e313080cf9be42c18_2_250x250.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/cfb3b58945356aeda890b89e313080cf9be42c18_2_250x250.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/cfb3b58945356aeda890b89e313080cf9be42c18_2_375x375.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/cfb3b58945356aeda890b89e313080cf9be42c18_2_500x500.png 2x" width="250"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">save</span><span class="informations">708×707 22.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div>
+</li>
+<li>Add a Set a Variable action to the <em>remove</em> event of the control to update the <code>person_list</code> and set the value to<br/>
+<code>     LIST#REMOVE(        person_list,        event.index      )     </code><br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/kNhu0mjME7cTS7IcvShbAJWehOy.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/91bd9dbcabdace26e26e6d0f1e32eef07446db92.png" title="remove"><img alt="remove" data-base62-sha1="kNhu0mjME7cTS7IcvShbAJWehOy" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/91bd9dbcabdace26e26e6d0f1e32eef07446db92_2_10x10.png" height="250" src="../../../images/91bd9dbcabdace26e26e6d0f1e32eef07446db92_2_250x250.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/91bd9dbcabdace26e26e6d0f1e32eef07446db92_2_250x250.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/91bd9dbcabdace26e26e6d0f1e32eef07446db92_2_375x375.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/91bd9dbcabdace26e26e6d0f1e32eef07446db92_2_500x500.png 2x" width="250"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">remove</span><span class="informations">708×707 25.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div>
+</li>
+</ol>
+</li>
+</ol>
+<p>The Custom Control implementation is now complete. Feel free to run your app in Preview or Publish it.</p>
+<hr/>
+<h4>
+<a class="anchor" href="#this-is-what-the-custom-control-looks-like-with-a-little-styling-here-and-there-18" name="this-is-what-the-custom-control-looks-like-with-a-little-styling-here-and-there-18"></a>This is what the Custom Control looks like (with a little styling here and there)</h4>
+<p><img alt="Custom Controls - Dynamic List management" class="animated" data-base62-sha1="6hKrL17ENVUKCrdcb7NDGzYHGIB" height="500" src="../../../images/2c0eac8ecd59ad4d7c8054ef0fafb5eedc7d827d.gif" width="408"/></p>
+<blockquote>
+<p><img alt=":information_source:" class="emoji" height="20" loading="lazy" src="../../../images/information_source.png" title=":information_source:" width="20"/> Click &gt;&gt;<a href="https://app.airkit.com/c/CC-dynamicLists">here</a>&lt;&lt; to play around with a live version of this Custom Control.</p>
+</blockquote>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>This is super helpful <span class="mention">@juanchax</span>. This is really useful in learning how to leverage the new custom types feature, user defined functions, and custom controls all in one exercise. Thank you for the write up!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

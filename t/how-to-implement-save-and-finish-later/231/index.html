@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to implement Save and finish later</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to implement Save and finish later</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Hello,</p>
+<p>We have form that needs to be embed onto the portal. the form contains several pages and the requirement is to have <strong>partial save</strong> functionality. So that customer can come back again and complete the remaining whenever they want to.</p>
+<p>Thanks,<br/>
+Narendra</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@Narendra</span>,</p>
+<p>Have you tried using this option when creating the embed?</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/A2gnjsCuQkskQrls00iJsZqJ9t5.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fc8fc86d33d35ffb409333bec2d0ade0d908a447.png" title="image"><img alt="image" data-base62-sha1="A2gnjsCuQkskQrls00iJsZqJ9t5" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fc8fc86d33d35ffb409333bec2d0ade0d908a447_2_10x10.png" height="500" src="../../../images/fc8fc86d33d35ffb409333bec2d0ade0d908a447_2_289x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fc8fc86d33d35ffb409333bec2d0ade0d908a447_2_289x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fc8fc86d33d35ffb409333bec2d0ade0d908a447.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fc8fc86d33d35ffb409333bec2d0ade0d908a447.png 2x" width="289"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">393×678 9.8 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>If the user comes back to the journey and the journey hasn’t expired yet, their session should remain and they could come back where they left off.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thank you for the reply. I am just curious… how Journey will identify the same session if it is Embed? will that be based on the parameters that we pass to the app ? If so, if any parameter value changes, will it be considered as new journey? What happens if the user is logged out from the application where we embed, and log back in? will this still be continued ?</p>
+<p>Thanks you again for helping on this one.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>So the embed client will store the session id as a cookie and will remember the journey that way. If the user clears their cookies or something of the same nature, then the journey will not be continued.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thanks Ismaen! Just want to make, cookies will be set at user machine level? If I understand correctly, if I clear cookies, my session will no longer be continued. What happens if I access my application from different machine ? Will it still continue as same session ?<br/>
+I am still unclear about the process how the same session continue. Please help me understand.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>The cookie is going to be stored on the user’s browser. If you access the app from another machine/browser, then the journey will not be remembered. I do want to clarify that the session doesn’t end, but the user will effectively hit the embed and it will spin up another session.</p>
+<p>With that said, another way you can build a partial save mechanism that isn’t reliant on the cookie is to take some unique ID from the portal that is associated with the user, and pass that into the start params of the embed. You can see how to do that <a href="https://support.airkit.com/docs/airclient-configurable-properties#sending-start-parameters">here</a>.</p>
+<p>Then, using that unique ID, you can have a button on the app save/store the data that a user inputs into AirData that is tied to that unique ID. So on journey start, you can do a query against the table and see if any records are in the airdata app object that are tied to that unique ID and populate the form accordingly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Due to security concerns data, I am afraid to store data into Airdata table. Is there anyway I can encrypt the data and store into Arikit table and retrieve it(by decrypting) to continue the same session?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>So you actually don’t have to use AirData! It was just a suggestion. If you wanted to do the same thing with another DB or system, you can use the http request and do get/post requests back and forth to achieve the same thing.</p>
+<p>Additionally, yes you can encrypt data in AirData. Take a look at this doc <a href="https://support.airkit.com/docs/encrypting-data">here</a>!</p>
+<p>Essentially you can use the default keys that come with your org, or your can Bring Your Own Key (BYOK). And then in AirData, you would check the encrypt box on the App object attribute.<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/6NHQIhVrEQqvawqVhuoh4opCEEl.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2fab7ca97f98fbc136d5b0ed8446aa2c8ee64a45.png" title="image"><img alt="image" data-base62-sha1="6NHQIhVrEQqvawqVhuoh4opCEEl" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2fab7ca97f98fbc136d5b0ed8446aa2c8ee64a45_2_10x10.png" height="408" src="../../../images/2fab7ca97f98fbc136d5b0ed8446aa2c8ee64a45_2_690x408.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2fab7ca97f98fbc136d5b0ed8446aa2c8ee64a45_2_690x408.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2fab7ca97f98fbc136d5b0ed8446aa2c8ee64a45_2_1035x612.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2fab7ca97f98fbc136d5b0ed8446aa2c8ee64a45.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1239×734 35.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

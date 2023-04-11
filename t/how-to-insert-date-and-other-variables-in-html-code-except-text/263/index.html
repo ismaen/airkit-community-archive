@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to insert date and other variables in HTML code except text</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to insert date and other variables in HTML code except text</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/386_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">chandu.singh</div>
+          <div class="post_content">
+<p>How to insert date and other variables in HTML code except text<br/>
+when i am inserting a date variable its showing <strong>expected text but got date</strong><br/>
+if it is possible then please suggest me some idea like user defined function or others</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/6MCAF1otyhbwpVMhBk5uGQXRydn.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2f8c18165a87c723efcd3c4ab8c555b39ed1b8cd.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="6MCAF1otyhbwpVMhBk5uGQXRydn" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2f8c18165a87c723efcd3c4ab8c555b39ed1b8cd_2_10x10.png" height="404" src="../../../images/2f8c18165a87c723efcd3c4ab8c555b39ed1b8cd.png" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">842×493 22.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>So dates, time, and datetime data types in Airkit are actually objects, which means that html body won’t be able to parse it.</p>
+<p>What you need to do is use an airscript function to change that datetime into a text.</p>
+<p>So you can use something like:</p>
+<pre><code class="lang-auto">
+FORMAT_DATETIME(  
+dateinputvariable,   
+  "MMMM Do, YYYY h:mm A z"
+) 
+
+</code></pre>
+<p>For more information, you can check out the two articles below:</p>
+<p><a class="onebox" href="https://support.airkit.com/reference/format_datetime" rel="noopener" target="_blank">https://support.airkit.com/reference/format_datetime</a></p><aside class="onebox allowlistedgeneric" data-onebox-src="https://support.airkit.com/docs/working-with-dates-and-times">
+<header class="source">
+<img class="site-icon" height="32" src="../../../images/5c879ac1f942ed048b141282b62caaad8846837e.png" width="32"/>
+<a href="https://support.airkit.com/docs/working-with-dates-and-times" rel="noopener" target="_blank">Airkit</a>
+</header>
+<article class="onebox-body">
+<h3><a href="https://support.airkit.com/docs/working-with-dates-and-times" rel="noopener" target="_blank">Working with Dates and Times</a></h3>
+<p>Airkit stores data regarding dates and times in specialized data types: the objects Date, Time, and DateTime. Using these specialized objects in tandem with the Airkit platform allows Airkit to handle the notorious complexities of time-tracking under...</p>
+</article>
+<div class="onebox-metadata">
+</div>
+<div style="clear: both"></div>
+</aside>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

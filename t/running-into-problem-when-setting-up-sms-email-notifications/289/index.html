@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Running into problem when setting up SMS/email notifications</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Running into problem when setting up SMS/email notifications</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/358_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">camerondoane</div>
+          <div class="post_content">
+<p>I am wrapping up my development on an app and I have hit one final wall I believe.  I don’t think I setup the send SMS notifications correctly and it is sending always to the main actor.  Here is the flow I have updated.</p>
+<p>From APP 1</p>
+<ul>
+<li>Call APP2 API to generate a journey via httprequest.  This returns the journey URL</li>
+<li>Depending on the method (email or text)
+<ul>
+<li>Email sends an email via a data flow with the journey URL in it.  This appears to be working.</li>
+<li>SMS – Not sure what to do here.  There isn’t a construct similar to Email.  It looks like I should be using the SMS notifications, but I am not 100% sure how to assign that to a different person (phone number).  Do I need to create a new actor first, if so I don’t see where to assign the actor to an SMS notification.  The only other way I can think of handling it would be to create another API to APP2 and have that send the SMS with the journey link.</li>
+</ul>
+</li>
+</ul>
+<p>Please let me know if there’s any other info you need from me.</p>
+<p>Thank you!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p>It sounds like this at least partially a conceptual misunderstanding: each Journey can only have one Actor, and the Actor is defined (in part) by their phone number.</p>
+<p>As abstractions go, this is primarily important so that context can be maintained during phone and text conversations. When an Airkit Application receives an incoming text, it needs to be able to determine, somewhere under the hood, whether that text is part of an existing Journey or whether it triggers the start of a new Journey. Making that determination is what allows the application to respond appropriately. For deeper dive into the concepts at play here, check out <a href="https://support.airkit.com/docs/journeys">Journeys</a> and <a href="https://support.airkit.com/docs/actors">Actors</a>.</p>
+<p>So, in practice, a single Journey cannot send outgoing texts to multiple people. If the goal is to send texts to multiple people, it is not a matter of resetting the Actor - it is a matter of starting a new Journey with its own Actor.</p>
+<p>The details of how you do that depend on the precise flow of your app, but it sounds like you’re already on your way there - your idea of creating another API to APP2 and have that send the SMS with the Journey Link sound pretty close to best practice to me!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

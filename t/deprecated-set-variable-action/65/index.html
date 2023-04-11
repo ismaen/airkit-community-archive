@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Deprecated Set Variable Action</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Deprecated Set Variable Action</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/20_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">nico</div>
+          <div class="post_content">
+<p>Wanted to share a quick tip with the community! This will only happen for apps pre-dating CXR 17.0 so hopefully that means it’s mostly a rare case. Anyway, before CXR 17 the “Set Variable” action worked a bit differently and the logic has since been updated. For backwards compatibility “Set Variable” actions for App previous to the CXR 17 release, were converted to “Deprecated: Set Variable” actions keeping the old logic in place. Let’s explore the difference:</p>
+<ul>
+<li>Before CXR 17 (“Deprecated: Set Variable”), the logic was to add the values. So:</li>
+</ul>
+<pre><code class="lang-auto">session.foo = {a:A}, then session.foo = {b: B} = session.foo = {a:A, b:B}
+</code></pre>
+<ul>
+<li>After CXR 17 (“Set Variable”), the logic is to overwrite the values. So:</li>
+</ul>
+<pre><code class="lang-auto">session.foo = {a:A}, then session.foo = {b: B} = session.foo = {b:B}
+</code></pre>
+<p>So that’s it, there’s no harm in having “Deprecated: Set Variable” actions in old Apps just keep in mind the difference in behavior. Also newer Apps won’t be able to add new “Deprecated: Set Variable” actions although the same behavior can be achieved by the use of <a href="https://support.airkit.com/reference/merge_objects" rel="noopener nofollow ugc">MERGE_OBJECTS</a>:</p>
+<pre><code class="lang-auto">MERGE_OBJECTS({a:A},{b:B})
+</code></pre>
+<p>That’s it! Hope you find it helpful <img alt=":slight_smile:" class="emoji" src="../../../images/slight_smile.png" title=":slight_smile:"/></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

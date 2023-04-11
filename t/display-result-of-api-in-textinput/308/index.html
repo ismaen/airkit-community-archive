@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Display result of API in textinput</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Display result of API in textinput</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Rheal</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>I have created a data flow with an API request and then transform the result to get only 1 particular value. When I test it I get the output in Transform as array - [value]<br/>
+I have set the session variable to bind the output of the dataflow.<br/>
+How do I access the value of the transform output array?</p>
+<p>Thanks in advance.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>hi <span class="mention">@Rheal</span>! you can index into that array by doing something like</p>
+<pre><code class="lang-auto">variable_name[0]
+</code></pre>
+<p>to get the first value of the array. For more info, take a look at our <a href="https://support.airkit.com/docs/airscript-quick-start">Airscript Quickstart</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Or is this question more about how to define the output of a Data Flow?</p>
+<p>The output of individual Data Operations is local variables that are auto-created with he Data Operation and managed in the Inspector. This is where you can find what these local variables are called (and rename them to something more intuitive, if you so choose).</p>
+<p>To define a Data Flow so that it returns the value stored in a particular local variable, select the desired variable from the dropdown menu in the <strong>End</strong> box at the bottom of the Stage, under <strong>Return Value</strong>. For a deeper dive into this, you can check out the <a href="https://support.airkit.com/docs/connections-builder">Connections Builder</a> doc.</p>
+<p>To actually run this Data Flow and access the returned value within a Journey, you need to use the <a href="https://support.airkit.com/reference/the-run-data-flow-action">Run Data Flow Action</a>. This comes with the option to bind the output to a session variable (or any other Journey-level variable, see <a href="https://support.airkit.com/docs/variable-namespaces">Variable Namespaces</a> for more details) by entering the variable you want to bind the output to under <strong>Output Binding</strong>.</p>
+<p>And once you’ve fired your <strong>Run Data Flow</strong> Action, you’ll have this value saved to your session variable, and you’ll be able to call on it throughout the rest of your Journey!</p>
+<p><span class="mention">@Rheal</span>, does that answer your question?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Rheal</div>
+          <div class="post_content">
+<p>Hi Ismaen,</p>
+<p>I tried that already and it shows blank.</p>
+<p>Regards</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Rheal</div>
+          <div class="post_content">
+<p>Hi Changra_Bergmann,</p>
+<p>No, this is question is not about how to define the output of a Data Flow.<br/>
+In the return value, I bind the value to the Transform variable and can see the result like an array - [23569]. But when I bind it to a textbox I am unable to display it using the format variable_name[0].</p>
+<p>That is part where I am stuck. If I get a full array with key-value pairs, I can display it.</p>
+<p>Regards</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>So if i understand the question correctly, you actually want to bind it to the value of a text input, not a label. That was my misunderstanding! So in order to do that, you have to:</p>
+<ol>
+<li>Parse the data out of the array</li>
+<li>Format integer into a string</li>
+<li>Store that string to a variable</li>
+<li>pass that variable to the text input value</li>
+</ol>
+<p>So if your data flow returns the array [23569] you can simply add an additional transform step after the output of that array to parse that data and format into a string.</p>
+<pre><code class="lang-auto">FORMAT_NUMBER(array[0])
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/9rgga0VAwkxUR6kJD1PUMOU408O.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/42287d396fe46ebc09b3fdb1ee315502bfd78842.png" title="image"><img alt="image" data-base62-sha1="9rgga0VAwkxUR6kJD1PUMOU408O" data-dominant-color="FBF6F6" height="500" src="../../../images/42287d396fe46ebc09b3fdb1ee315502bfd78842_2_428x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/42287d396fe46ebc09b3fdb1ee315502bfd78842_2_428x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/42287d396fe46ebc09b3fdb1ee315502bfd78842_2_642x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/42287d396fe46ebc09b3fdb1ee315502bfd78842_2_856x1000.png 2x" width="428"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">918×1070 32.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Then you would pass this transform step as the output of the data flow<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/AikzRQyLDY9Z1Gs69xl9mu7HcK1.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fe60c1ce3c5dee013f2b741ed7d7dec82188d3ad.png" title="image"><img alt="image" data-base62-sha1="AikzRQyLDY9Z1Gs69xl9mu7HcK1" data-dominant-color="FCFCFD" height="319" src="../../../images/fe60c1ce3c5dee013f2b741ed7d7dec82188d3ad_2_690x319.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fe60c1ce3c5dee013f2b741ed7d7dec82188d3ad_2_690x319.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fe60c1ce3c5dee013f2b741ed7d7dec82188d3ad.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fe60c1ce3c5dee013f2b741ed7d7dec82188d3ad.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">990×458 6.02 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Then when you run the data flow, you would essentially have the output binding to the value of your text input box. In my case the variable is named <code>text_input</code>.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/vNSddFjZsVbhrTRW1bBLKy2c1kj.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/dee6ac4eec08f57e14ec18bb288d2a392d19e26f.png" title="image"><img alt="image" data-base62-sha1="vNSddFjZsVbhrTRW1bBLKy2c1kj" data-dominant-color="F9FAFB" height="407" src="../../../images/dee6ac4eec08f57e14ec18bb288d2a392d19e26f_2_690x407.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/dee6ac4eec08f57e14ec18bb288d2a392d19e26f_2_690x407.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/dee6ac4eec08f57e14ec18bb288d2a392d19e26f.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/dee6ac4eec08f57e14ec18bb288d2a392d19e26f.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">900×532 22.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>From there, the result from the data flow, should populate into the text input box.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Here’s a attached zip of my app that shows how this works.<br/>
+<a class="attachment" href="/uploads/short-url/hkiG6m3Lb3eEmMt4MV0YvvjeXW3.zip">Pass_data_into_text_input-2022-11-29T05_11_37.115Z-full.branch.zip</a> (17.8 KB)</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

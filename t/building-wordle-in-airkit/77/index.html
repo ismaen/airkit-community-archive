@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Building WORDLE in Airkit</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Building WORDLE in Airkit</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<h1>
+<a class="anchor" href="#tldr-1" name="tldr-1"></a>TL;DR</h1>
+<ul>
+<li>I built WORDLE using <a href="https://airkit.com">Airkit</a>
+</li>
+<li>You can play at <a href="https://app.airkit.com/c/wordle">https://app.airkit.com/c/wordle</a>
+</li>
+<li>Also included a leaderboard to add a competition aspect to the app</li>
+<li>This post is merely to show off some of my thoughts and by no means a tutorial</li>
+</ul>
+<p><img alt="2022-01-20_17-05-45.png" data-base62-sha1="xUn9EpvIBTXoLaoEGHHj7LxzSms" height="360" src="../../../images/eda717d12e81d816d61792c82fddb65b42918da0.png" width="216"/></p>
+<p><img alt="2022-01-20_17-06-26.png" data-base62-sha1="h2WBOT95APdt5flki4bCEaUrc3A" height="205" src="../../../images/777a30a8ca0554bc7c10582ba0f41b69825de176.png" width="249"/></p>
+<h1>
+<a class="anchor" href="#intro-2" name="intro-2"></a>Intro</h1>
+<p><a href="https://www.powerlanguage.co.uk/wordle/">WORDLE</a> has been making its way across group chats, sharing how many tries it took for you to guess a 5 letter word. The rules are pretty simple and look like this:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/q0WgmbOAMbD8ApmBerDLZIjTo2U.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b653b7b73a2c79181511b9fa0e7909bd2c60d8cc.png" title="2022-01-20_17-09-24.png"><img alt="2022-01-20_17-09-24.png" data-base62-sha1="q0WgmbOAMbD8ApmBerDLZIjTo2U" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b653b7b73a2c79181511b9fa0e7909bd2c60d8cc_2_10x10.png" height="500" src="../../../images/b653b7b73a2c79181511b9fa0e7909bd2c60d8cc_2_473x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b653b7b73a2c79181511b9fa0e7909bd2c60d8cc_2_473x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b653b7b73a2c79181511b9fa0e7909bd2c60d8cc.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b653b7b73a2c79181511b9fa0e7909bd2c60d8cc.png 2x" width="473"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-01-20_17-09-24.png</span><span class="informations">480×507 30 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#requirements-3" name="requirements-3"></a>Requirements</h1>
+<p>I decided to jump in to the studio and see if I can build the game. As I started thinking about it, a few ideas popped into my head</p>
+<ul>
+<li>I’m going to need to use lists to display the words</li>
+<li>I’m going to need to <a href="https://support.airkit.com/reference/split">SPLIT()</a> the words to output an array to pass to the lists</li>
+<li>I’ll need to check if the current indexed item in the array of the “word of the day” is equal to the letter of the guessed word. From there i can change the background color accordingly</li>
+<li>I’ll also need to check if a word is a real word or is a fake word</li>
+<li>Leaderboards are fun! Let’s add that to an AirData table.</li>
+</ul>
+<p>With this knowledge, I figured I can start tackling this and see where I would end up.</p>
+<p><strong>DISCLAIMER</strong>: There are a ton of different ways you could build this game in the studio. This is one of the ways that came to mind.</p>
+<h1>
+<a class="anchor" href="#building-out-the-ui-4" name="building-out-the-ui-4"></a>Building out the UI</h1>
+<p>The UI is essentially a 5x6 grid that gets populated with the words that a user submits. When I first started building this out, I found it easiest to conceptualize the UI with 6 different lists and each list would be populated with an instance of a word, with each letter split by an array. If the word is empty, then it would be filled with an empty array. Also you want to make the width and height of the container/simple cells that are nested in the lists 50px.</p>
+<p>You could also use a list of lists to achieve the same thing as well.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/3TNxGYrU2HfyVcxXoGUnwTyQJpD.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1b55408836a01c17b326c07b4a2ff02d906dc409.png" title="2022-01-20_17-32-24.png"><img alt="2022-01-20_17-32-24.png" data-base62-sha1="3TNxGYrU2HfyVcxXoGUnwTyQJpD" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1b55408836a01c17b326c07b4a2ff02d906dc409_2_10x10.png" height="330" src="../../../images/1b55408836a01c17b326c07b4a2ff02d906dc409_2_690x330.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1b55408836a01c17b326c07b4a2ff02d906dc409_2_690x330.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1b55408836a01c17b326c07b4a2ff02d906dc409_2_1035x495.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1b55408836a01c17b326c07b4a2ff02d906dc409_2_1380x660.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-01-20_17-32-24.png</span><span class="informations">1512×725 72.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<pre><code class="lang-auto">IF(
+  ISNOTEMPTY(
+    words_array[0]
+  ),
+  SPLIT(
+    words_array[0],
+    ""
+  ),
+  [ "", "", "", "", "" ]
+)
+</code></pre>
+<p>This conditional statement will make sense after reading “Passing Data to my lists”</p>
+<h1>
+<a class="anchor" href="#creating-my-app-objects-5" name="creating-my-app-objects-5"></a>Creating my App Objects</h1>
+<p>Once I got the UI down, I needed to figure out how to create a repository of 5 letter words that would be considered a “word of the day”. Here I created an AirData App Object with two columns, a word column and a date. That way we can query against the current date and only have one word a day. Also we can make the date column unique.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/uFGg1INg64zY6sEuhZCGFn2ms9Q.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d6f769b83008fa3b77e1cb290f05e722e16dc6a2.png" title="2022-01-20_17-42-36.png"><img alt="2022-01-20_17-42-36.png" data-base62-sha1="uFGg1INg64zY6sEuhZCGFn2ms9Q" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d6f769b83008fa3b77e1cb290f05e722e16dc6a2_2_10x10.png" height="265" src="../../../images/d6f769b83008fa3b77e1cb290f05e722e16dc6a2_2_690x265.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d6f769b83008fa3b77e1cb290f05e722e16dc6a2_2_690x265.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d6f769b83008fa3b77e1cb290f05e722e16dc6a2.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d6f769b83008fa3b77e1cb290f05e722e16dc6a2.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-01-20_17-42-36.png</span><span class="informations">795×306 26.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Here I also created the Leaderboard App Object that included the name, score and date.</p>
+<h1>
+<a class="anchor" href="#passing-data-from-app-objects-to-my-web-flow-6" name="passing-data-from-app-objects-to-my-web-flow-6"></a>Passing data from App Objects to my Web Flow</h1>
+<p>From here, I created a Data Flow that queries my “Words” app object and filters it by today’s date and stores it in a variable I called word_of_the_day</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/mIcqkGPcNV0zltdGzZ00YKAhIoF.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9f2ee94919d8d18a9e762b8d145284c88fe1a2a1.png" title="2022-01-20_18-22-35.png"><img alt="2022-01-20_18-22-35.png" data-base62-sha1="mIcqkGPcNV0zltdGzZ00YKAhIoF" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9f2ee94919d8d18a9e762b8d145284c88fe1a2a1_2_10x10.png" height="337" src="../../../images/9f2ee94919d8d18a9e762b8d145284c88fe1a2a1_2_690x337.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9f2ee94919d8d18a9e762b8d145284c88fe1a2a1_2_690x337.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9f2ee94919d8d18a9e762b8d145284c88fe1a2a1_2_1035x505.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9f2ee94919d8d18a9e762b8d145284c88fe1a2a1.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-01-20_18-22-35.png</span><span class="informations">1266×620 54.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>I also did a SPLIT() on this word and used the UPPERCASE() function so we can string match without having to worry about case.</p>
+<pre><code class="lang-auto">SPLIT(
+  UPPERCASE(
+    word_of_the_day
+  ),
+  ""
+)
+</code></pre>
+<p><img alt="2022-01-20_17-51-02.png" data-base62-sha1="vNW6g45knyftl1JV0neTcWdys2a" height="243" src="../../../images/dee87cd746701b5b16da3c94d7c8de4ad359e2f6.png" width="599"/></p>
+<h1>
+<a class="anchor" href="#passing-data-to-my-lists-7" name="passing-data-to-my-lists-7"></a>Passing data to my lists</h1>
+<p>Now for the fun part! With my UI set up and my word_of_the_day getting passed to my web flow, I can now create an action chain that starts populating my lists with words that a user inputs. You can see below, this is what my action chain looks like on the click of the submit button:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/7Y3gOvyZDpSKAxQFv8zDxCVKObK.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/37d90ac02e17fce49aeec3070c139fe26fca24c0.png" title="2022-01-20_17-57-39.png"><img alt="2022-01-20_17-57-39.png" data-base62-sha1="7Y3gOvyZDpSKAxQFv8zDxCVKObK" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/37d90ac02e17fce49aeec3070c139fe26fca24c0_2_10x10.png" height="500" src="../../../images/37d90ac02e17fce49aeec3070c139fe26fca24c0_2_595x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/37d90ac02e17fce49aeec3070c139fe26fca24c0_2_595x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/37d90ac02e17fce49aeec3070c139fe26fca24c0.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/37d90ac02e17fce49aeec3070c139fe26fca24c0.png 2x" width="595"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-01-20_17-57-39.png</span><span class="informations">673×565 34.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<ol>
+<li>I go and check to see if the word inputted is valid. If it’s not valid, I won’t do anything. If it is valid, then that counts as a guess. (Thank you <a href="https://dictionaryapi.com/">https://dictionaryapi.com/</a>)</li>
+<li>I’ll check to see if the word also has a length of 5. In the game, you can only input 5 letter words.</li>
+<li>I will then create an array based on the inputted text that a user guesses.</li>
+</ol>
+<pre><code class="lang-auto">FLAT(
+  [
+    words_array,
+    [ UPPERCASE(text_input) ]
+  ]
+)[?(@ &lt;&gt; NULL)]
+</code></pre>
+<ol start="4">
+<li>If the user guesses correctly, then we’ll open up a “You Win” Modal, if the user uses all 6 guesses, they get the “You Lose” modal.</li>
+</ol>
+<h1>
+<a class="anchor" href="#checking-the-guesses-against-the-word-8" name="checking-the-guesses-against-the-word-8"></a>Checking the guesses against the word</h1>
+<p>In the game of WORDLE, you will get some hints or indicators based on if a letter of the guessed word is in your word or not.</p>
+<p>In order to create that same experience, I decided to take the container/simple cell that is nested in the list and change the background color based on whether the letter was in the word of the day, or if the letter is in the correct spot. to do that, this looks like:</p>
+<pre><code class="lang-auto">IF(
+  item
+    = activityGroup.split_word
+      [index],
+  "#538d4e",
+  IF(
+    CONTAINS(
+      split_word,
+      item
+    ),
+    "#B59F3B"
+  )
+)
+</code></pre>
+<h1>
+<a class="anchor" href="#building-the-leaderboard-9" name="building-the-leaderboard-9"></a>Building the Leaderboard</h1>
+<p>This one was a fun addition because its always fun to add some competition to a game. Here I created a place to add your username and passes your score to the Leaderboard App Object only if you win the game.</p>
+<p><img alt="2022-01-20_18-15-57.png" data-base62-sha1="9DQpAdMmjjNpJTy4eCRsb1TOchz" height="413" src="../../../images/43949f58d40d12612baf796f359a66928fad11f1.png" width="487"/></p>
+<p>On the “Add to Leaderboard” game, I would submit the name, date, and score (from a counter variable) to the App object, and then take the user to the leaderboard for that specific day.</p>
+<p>The leaderboard is populated by an Airdata request and filters by today’s date so only the current leaderboard shows up.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/1Taqw8n13A2rPpZmUIUuFbsqFNZ.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/0d3ea5a269c3edc4c547bb8b5f1bbb428d83688f.png" title="2022-01-20_18-17-51.png"><img alt="2022-01-20_18-17-51.png" data-base62-sha1="1Taqw8n13A2rPpZmUIUuFbsqFNZ" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0d3ea5a269c3edc4c547bb8b5f1bbb428d83688f_2_10x10.png" height="500" src="../../../images/0d3ea5a269c3edc4c547bb8b5f1bbb428d83688f_2_426x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0d3ea5a269c3edc4c547bb8b5f1bbb428d83688f_2_426x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0d3ea5a269c3edc4c547bb8b5f1bbb428d83688f_2_639x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0d3ea5a269c3edc4c547bb8b5f1bbb428d83688f_2_852x1000.png 2x" width="426"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-01-20_18-17-51.png</span><span class="informations">866×1015 29 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#conclusion-10" name="conclusion-10"></a>Conclusion</h1>
+<p>And that’s pretty much it! Obviously there’s a lot more steps in how to build WORDLE that I didn’t cover but I wanted to provide a high level overview of what my thought process was.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

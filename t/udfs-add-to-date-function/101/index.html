@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>UDFs - ADD_TO_DATE() function</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">UDFs - ADD_TO_DATE() function</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>We’ve all used the <a href="https://support.airkit.com/reference/add_to_datetime" rel="noopener nofollow ugc"><code>ADD_TO_DATETIME()</code> Airscript function</a> to add any given number of the supported date/time units and returns a new dateTime obj.</p>
+<p><em>What if we just want to add to a Date obj instead?</em></p>
+<p>Well well well, we can build our very own <a href="https://support.airkit.com/reference/user-defined-functions" rel="noopener nofollow ugc">UDF</a> to take care of that, and then just call our function anywhere in Studio. Let’s get on that.</p>
+<hr/>
+<p><strong>UDF</strong></p>
+<pre><code class="lang-auto">ADD_TO_DATETIME(UPDATE_DATE(NOW(), date), amount, day_month_year).date
+</code></pre>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li>date (<em>dataType: Date</em>)</li>
+<li>amount (<em>dataType: Number</em>)</li>
+<li>day_month_year (<em>dataType: Text</em>)</li>
+</ul>
+<p><strong>Output</strong></p>
+<p>All UDFs have a <em>single output</em>, we can choose the dataType for:</p>
+<ul>
+<li>Output <em>dataType: Date</em>
+</li>
+</ul>
+<p>Your UDF <em>should</em> look like</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/5TarfJdnQBJfJZwjLDPd27LkPh9.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2947593221494f4b836c2a656731d9e65e278663.png" rel="noopener nofollow ugc" title="ADD_TO_DATE"><img alt="ADD_TO_DATE" data-base62-sha1="5TarfJdnQBJfJZwjLDPd27LkPh9" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2947593221494f4b836c2a656731d9e65e278663_2_10x10.png" height="221" src="../../../images/2947593221494f4b836c2a656731d9e65e278663_2_690x221.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2947593221494f4b836c2a656731d9e65e278663_2_690x221.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2947593221494f4b836c2a656731d9e65e278663_2_1035x331.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2947593221494f4b836c2a656731d9e65e278663_2_1380x442.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">ADD_TO_DATE</span><span class="informations">2736×878 114 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<hr/>
+<p><strong>Building process</strong></p>
+<p>Given a <strong>date</strong> obj</p>
+<pre><code class="lang-auto">{
+  "day": 18,
+  "month": 2,
+  "year": 2022
+}
+</code></pre>
+<ol>
+<li>
+<p>We’ll need to do is transform it into a DateTime obj, we’ll use the <a href="https://support.airkit.com/reference/update_date" rel="noopener nofollow ugc"><code>UPDATE_DATE()</code> function</a> for that</p>
+<pre><code class="lang-auto">UPDATE_DATE( NOW(), date)
+</code></pre>
+</li>
+<li>
+<p>Next, we’ll want to add to that DateTime obj, using the aforementioned <a href="https://support.airkit.com/reference/add_to_datetime" rel="noopener nofollow ugc"><code>ADD_TO_DATETIME()</code> Airscript function</a></p>
+<pre><code class="lang-auto">ADD_TO_DATETIME( DateTime, 1, "month")
+</code></pre>
+</li>
+<li>
+<p>Last, we want to obtain just the <em>date</em> bit of the resulting DateTime obj:</p>
+<pre><code class="lang-auto">dateTimeObj.date
+</code></pre>
+</li>
+</ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>This makes it a lot easier to add dates without having to write a complex function each time. Thanks <span class="mention">@juanchax</span>!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

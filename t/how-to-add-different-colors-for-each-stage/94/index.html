@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to add different colors for each stage?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to add different colors for each stage?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>I am trying to add color for each stage for the progress bar.<br/>
+We have different claim statuses as New, Pending etc as stages in the progress bar… I would like to show different color for each status. How can we achieve this ?</p>
+<p>If the claim status is “New”, it’s a first stage and I would like to show Blue color and remaining stages No color.<br/>
+If the status is “Pending” , which is second stage, I would like to show Yellow color and along with first stage as blue color.</p>
+<p>Thanks,<br/>
+Narendra</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Welcome Narendra and great question!</p>
+<p>Progress bars are an out of the box control that have 3 states –</p>
+<ul>
+<li>default - steps that are not considered active or completed</li>
+<li>active - The current value</li>
+<li>completed - Steps prior to the current value</li>
+</ul>
+<p>One way I can think of doing this, is modifying the circle background and border color of the <strong>active</strong> state to be yellow and have all the completed states be <strong>blue</strong>.</p>
+<p>To do this go to <strong>Theme Builder</strong> and look for the <strong>ProgressBar Variant</strong> under the Theme. Then click on <strong>circle</strong>.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/1nkF2nzSLCTcqyiCfpa6BNvRS5s.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/09a56604d122e86dd74de00546532781947b7b92.png" title="2022-02-14_13-30-25"><img alt="2022-02-14_13-30-25" data-base62-sha1="1nkF2nzSLCTcqyiCfpa6BNvRS5s" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/09a56604d122e86dd74de00546532781947b7b92_2_10x10.png" height="500" src="../../../images/09a56604d122e86dd74de00546532781947b7b92_2_513x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/09a56604d122e86dd74de00546532781947b7b92_2_513x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/09a56604d122e86dd74de00546532781947b7b92_2_769x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/09a56604d122e86dd74de00546532781947b7b92_2_1026x1000.png 2x" width="513"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-02-14_13-30-25</span><span class="informations">1076×1048 77.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>From here you can change the background and border of the circles based on the circle state.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/8RyA3HJAmKU6upBgvFLzURUKYJb.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3e1f430fd64af82d0f0d2d8cc80fc9b2d82cced1.png" title="2022-02-14_13-54-41"><img alt="2022-02-14_13-54-41" data-base62-sha1="8RyA3HJAmKU6upBgvFLzURUKYJb" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3e1f430fd64af82d0f0d2d8cc80fc9b2d82cced1_2_10x10.png" height="484" src="../../../images/3e1f430fd64af82d0f0d2d8cc80fc9b2d82cced1_2_690x484.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3e1f430fd64af82d0f0d2d8cc80fc9b2d82cced1_2_690x484.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3e1f430fd64af82d0f0d2d8cc80fc9b2d82cced1.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3e1f430fd64af82d0f0d2d8cc80fc9b2d82cced1.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-02-14_13-54-41</span><span class="informations">1031×724 29 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>You can see here i’ve changed the active state background and border color to yellow:<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/81dBIwmm08U8n6iyCMmf9IH9vJ9.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3834ae83923b3a84167c6e9eaf496bfeea9e6513.png" title="2022-02-14_14-06-51"><img alt="2022-02-14_14-06-51" data-base62-sha1="81dBIwmm08U8n6iyCMmf9IH9vJ9" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3834ae83923b3a84167c6e9eaf496bfeea9e6513_2_10x10.png" height="382" src="../../../images/3834ae83923b3a84167c6e9eaf496bfeea9e6513_2_690x382.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3834ae83923b3a84167c6e9eaf496bfeea9e6513_2_690x382.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3834ae83923b3a84167c6e9eaf496bfeea9e6513_2_1035x573.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3834ae83923b3a84167c6e9eaf496bfeea9e6513_2_1380x764.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-02-14_14-06-51</span><span class="informations">1401×776 65.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Now when I go back to web builder, and making “Pending” my active state, it is orange while “New” is blue.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/SG4WAOSCI000ud0x1ELZmMPAVY.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/062e4ee880d463dbf8d127487e229487c76eec02.png" title="2022-02-14_14-07-17"><img alt="2022-02-14_14-07-17" data-base62-sha1="SG4WAOSCI000ud0x1ELZmMPAVY" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/062e4ee880d463dbf8d127487e229487c76eec02_2_10x10.png" height="341" src="../../../images/062e4ee880d463dbf8d127487e229487c76eec02_2_690x341.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/062e4ee880d463dbf8d127487e229487c76eec02_2_690x341.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/062e4ee880d463dbf8d127487e229487c76eec02_2_1035x511.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/062e4ee880d463dbf8d127487e229487c76eec02_2_1380x682.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-02-14_14-07-17</span><span class="informations">1405×695 54.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Does this answer your question <span class="mention">@Narendra</span>?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thank you Ismaen for quick response! I understand the progress bar out of the box control states.<br/>
+My requirement here is, Let’s say I have 4 status such as New (Blue), Pending (yellow), Review(orange) and Approved (Green).<br/>
+if My claim status is Approved, I want to show different colors for previous status as well. so my progress bar should contain Blue, Yellow, Orange and Green colors part of my progress bar.<br/>
+If My claim status is Review state, then my progress bar should contain Blue, yellow and Orange colors. And so on…</p>
+<p>Basically, I want to show different colors for completed states.<br/>
+Is this something feasible ?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Got it, so showing different colors for each stage of your progress bar doesn’t seem possible, but what I’d recommend is using a repeater and changing the background color or whatever style you’d like based on the data. For example, you can see here, I have a “Where Is My Order” application and for each row, there is a different image. The way I do that is I have a List that takes a list of data:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/sdpoMIX5ZNYs2xxW8odiWboQAb5.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c5c0ec955d6840ff95226ac47af75d2450eaf83f.png" title="2022-02-14_18-20-21"><img alt="2022-02-14_18-20-21" data-base62-sha1="sdpoMIX5ZNYs2xxW8odiWboQAb5" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c5c0ec955d6840ff95226ac47af75d2450eaf83f_2_10x10.png" height="471" src="../../../images/c5c0ec955d6840ff95226ac47af75d2450eaf83f_2_690x471.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c5c0ec955d6840ff95226ac47af75d2450eaf83f_2_690x471.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c5c0ec955d6840ff95226ac47af75d2450eaf83f_2_1035x706.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c5c0ec955d6840ff95226ac47af75d2450eaf83f_2_1380x942.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-02-14_18-20-21</span><span class="informations">1470×1005 135 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>For example, the data can look something like this:</p>
+<pre><code class="lang-auto">[
+  {
+    "name": "Ismaen",
+    "tracking_id": "123456",
+    "status": "New"
+  },
+  {
+    "name": "Ismaen",
+    "tracking_id": "123456",
+    "status": "Pending"
+  },
+  {
+    "name": "ismaen",
+    "tracking_id": "123324",
+    "status": "Approved"
+  }
+]
+</code></pre>
+<p>Then, on any property that I’d like to be dynamic, such as the <strong>Font Color</strong> of the label, I can do a conditional that will essentially check to see if the status is equal to any of the statuses, then have the color reflect it. This would look like:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/9X8nYdxc5aS4a9Ff4rwexdjcaZl.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/45c2d6d938dc502201e409246770a996fafc5773.png" title="2022-02-14_18-29-23"><img alt="2022-02-14_18-29-23" data-base62-sha1="9X8nYdxc5aS4a9Ff4rwexdjcaZl" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/45c2d6d938dc502201e409246770a996fafc5773_2_10x10.png" height="500" src="../../../images/45c2d6d938dc502201e409246770a996fafc5773_2_664x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/45c2d6d938dc502201e409246770a996fafc5773_2_664x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/45c2d6d938dc502201e409246770a996fafc5773_2_996x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/45c2d6d938dc502201e409246770a996fafc5773_2_1328x1000.png 2x" width="664"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-02-14_18-29-23</span><span class="informations">1468×1104 136 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<pre><code class="lang-auto">IF(
+  item.status
+    = "New",
+  "#0000FF",
+  IF(
+    item.status
+      = "Pending",
+    "#FFA701",
+    IF(
+      item.status
+        = "Approved",
+      "#00FF00"
+    )
+  )
+)
+</code></pre>
+<p>I hope this helps!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thank you again Ismaen ! I really appreciate for all your answers! Our business requirement is to show these statuses in Progress bar type but not list.<br/>
+Thanks,<br/>
+Narendra</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/62_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">dinesh</div>
+          <div class="post_content">
+<p>Another approach could be to adjust the width and background color of a component.  For example, you can add a button to represent the progress bar.<br/>
+Then based on the status level, set the properties to 25% width / Blue background, 50% width / Orange background, etc.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

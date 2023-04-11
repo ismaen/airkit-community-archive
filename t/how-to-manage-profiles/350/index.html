@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to manage profiles?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to manage profiles?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/578_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Gray</div>
+          <div class="post_content">
+<p>Hi there</p>
+<p>Has the new build of airkit removed the ability to manage profiles? I’m sure there used to be a delete button in settings to remove a profile, and the documentation mentions a + button in the top right to add a profile but I’m seeing neither in 18.2</p>
+<p>Does anyone know how to add and remove a profile? Thank you in advance! I’ve tried in Firefox and Chrome, and no buttons!</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/vm3FguUXDog2hye5Xd4OBmotAef.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/dbc1bf0e267c228ba7b29cb5e565346bb4ae3b1b.png" rel="noopener nofollow ugc" title="profiles"><img alt="profiles" data-base62-sha1="vm3FguUXDog2hye5Xd4OBmotAef" data-dominant-color="FDFDFD" height="171" src="../../../images/dbc1bf0e267c228ba7b29cb5e565346bb4ae3b1b_2_690x171.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/dbc1bf0e267c228ba7b29cb5e565346bb4ae3b1b_2_690x171.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/dbc1bf0e267c228ba7b29cb5e565346bb4ae3b1b_2_1035x256.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/dbc1bf0e267c228ba7b29cb5e565346bb4ae3b1b_2_1380x342.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">profiles</span><span class="informations">3572×886 168 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@Chris_Gray</span>!</p>
+<p>You’re right: the most recent version of Airkit (and all anticipated future versions) no longer allow profiles to be added or deleted. <img alt=":frowning:" class="emoji" height="20" loading="lazy" src="../../../images/frowning.png" title=":frowning:" width="20"/> This is part of a larger push to tie profiles and deployments together and remove the mental overhead that comes with managing them separately.</p>
+<p>What were you looking to do by adding/removing a profile? It’s probably possible to achieve something similar with the profiles that come out-of-the-box.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/578_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Gray</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@Chandra_Bergmann</span></p>
+<p>thanks for the reply!</p>
+<p>I wanted to deploy a new version of our app with a totally different set of config  - mapped to a different integration, as well as different profile/settings values (primarily a setting with a language code)</p>
+<p>So essentially I would have:</p>
+<p>Deployment 1: “English Production”  Profile: Production (setting: Language: EN + Integration: UK API)</p>
+<p>Deployment 2: “Netherlands Production”  Profile: Production (setting: Language: NL + Integration: Europe API)</p>
+<p>Just a note - when I say Integration, we have a Custom Integration for our api, with 2 connected accounts (Europe and UK) which use different tokens to access the same api schema</p>
+<p>Hope this makes sense</p>
+<p>thanks</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>This does make sense!</p>
+<p>In cases like this, best practice is typically to create two different apps: one for the English Production, one for the Netherlands Production. There’s a lot of small things that changing the Language of an application can do, and even basic Web Controls like <a href="https://support.airkit.com/reference/label-web-control">Labels</a> get complicated quickly if each one of them needs to be able to display two separate versions.</p>
+<p>If you’ve already built out the bulk of the desired flow, you can duplicate what you have by <a href="https://support.airkit.com/docs/duplicating-apps">exporting it and importing the zip file</a>. Any further changes made to the overall flow will need to be applied to both apps, but it should be easier to manage individual Web Controls when you don’t have to worry about displaying them in two different languages.</p>
+<p>Does that fit your use case?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/578_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Gray</div>
+          <div class="post_content">
+<p>Thanks</p>
+<p>I was hoping to avoid this as both countries are identical and this is an extremely complicated aikit implementation (maintaining upgrades across 2 apps is going going to be twice the effort) - We have a way to make the labels multilingual pretty easily using airdata.</p>
+<p>How will profiles be managed going forwards? will all apps just get generatred with Dev/QA/Prod only?</p>
+<p>thanks</p>
+<p>Chris</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>That’s correct: going forward, all apps will come with Dev/QA/Prod profiles, and those will be the only profile available.</p>
+<p>That said, if your Airkit implementation is sufficiently complicated, and you have an easy way to make the labels multilingual, you might be able to keep the English and Netherlands versions in the same app and track when version you’re in via something other than profiles. The first thing that comes to mind is initializing a Global variable at the start of each Journey, and configuring this variable so that it tracks whether the app should behave according to the English or Netherlands version. This Global variable could be used manually set the language in the labels and manually define which API to make calls to – which could either be straightforward or prohibitively cumbersome, depending on how many API calls a Journey requires.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/578_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Gray</div>
+          <div class="post_content">
+<p>Thanks Chandra</p>
+<p>Yeah The app is very complex so this really isn’t going to work with multiple apps - I’ll see if I can make something work with your suggestion thank you</p>
+<p>I’ll have a chat with our account manager as this is a bit of a deal breaker for us in terms of how our apps our setup</p>
+<p>thanks again for your help</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

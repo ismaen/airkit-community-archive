@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Searching within Airkit Studio</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Searching within Airkit Studio</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">dongeddis</div>
+          <div class="post_content">
+<p>Is there a way to do a global search within my app?  For example, I see a variable (profile.faqURL) being used, and I’d like to search for all mentions anywhere in my code where it might be set.  Or perhaps I’d like to find all text strings in the app where the name “Willy Wonka” appears.</p>
+<p>I couldn’t find any search box or menu item in the Studio UI.  I did see a posted question here which mentions Ctrl-K, and that does indeed seem to bring up some kind of text search box (but without any decoration or explanation about what it does).  I can type some text in there, and it does find a few things – but it is clearly missing some matches that I know for sure about, and also includes other “matches” that don’t have my text string, so I can’t really understand what the Ctrl-K search is attempting to do.</p>
+<p>Is there any other menu item or search box available in Studio?  Is there any explanation for how to use Ctrl-K to actually find what I’m looking for?  (Is there a syntax, or meta-characters?  Why does it offer matches that don’t have the text I type?  When I enter a precise variable, why it is missing matches that are clear uses of that variable?)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/299_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeff_groupwork</div>
+          <div class="post_content">
+<p>On Mac you can do Command - K or on PC Control -K  should bring a search window where you can type in a phrase to search for.</p>
+<p>This is the search functionality which we currently use in Studio for items which might be buried throughout the app.  It basically doing a search of the underlying json which makes up the application.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/31_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Tamzin_Atkins</div>
+          <div class="post_content">
+<p>I’ve run into this as well, and the solution I’ve found is to download the session state and search with Ctrl + F in your favorite code viewer. You can locate the session state by:</p>
+<ol>
+<li>Navigating to Console &gt; Activity</li>
+<li>Click into a specific session</li>
+<li>In the Activity Summary &gt; Times &amp; Expirations</li>
+<li>Click “Get Session State”</li>
+</ol>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/nZ4uftfckpEAtAla7jmkKeeAFe3.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a81954e88fec0fcd15bdb7d745fd58a43a5eaa8b.png" rel="noopener nofollow ugc" title="get-session-state"><img alt="get-session-state" data-base62-sha1="nZ4uftfckpEAtAla7jmkKeeAFe3" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a81954e88fec0fcd15bdb7d745fd58a43a5eaa8b_2_10x10.png" height="119" src="../../../images/a81954e88fec0fcd15bdb7d745fd58a43a5eaa8b_2_690x119.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a81954e88fec0fcd15bdb7d745fd58a43a5eaa8b_2_690x119.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a81954e88fec0fcd15bdb7d745fd58a43a5eaa8b_2_1035x178.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a81954e88fec0fcd15bdb7d745fd58a43a5eaa8b_2_1380x238.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">get-session-state</span><span class="informations">2844×492 66.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>I have also experienced the same problem.<br/>
+Unfortunately, the Control - K search didn’t provide all the places that the keyword referenced.<br/>
+For ex, my app is failing in debug due to the variable value I defined it as activity.test= . And this is wrong.<br/>
+When I search with this keyword activity.test in the control + k search, nothing comes up. Then I had to look at the webflow, and dig into each and every advance tab and figure it out the issue.<br/>
+Not sure if there is any easy way to search for any element in the app.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

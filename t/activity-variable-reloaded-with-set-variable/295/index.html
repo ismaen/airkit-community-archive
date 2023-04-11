@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Activity Variable, Reloaded With Set Variable</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Activity Variable, Reloaded With Set Variable</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>Looking at using Set Variable to load a previous response to Activity, and re edit what was previously saved.</p>
+<p>Overview<br/>
+Form is saved to AirData<br/>
+User can query AirData table for response to edit<br/>
+Selected response is moved from “item” to “session.selectedcef” using Set Variable.<br/>
+On page load Set variable is used for update session.selectedcef.__id from Activity.__id.<br/>
+Then, set variable is used to set Activity from session.selectedcef.</p>
+<p>Is there anything else in the Activity namespace that would get replaced that would cause issues with saving the updated response?</p>
+<p>Please let me know if additional information is needed.</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@Chris_Phillips</span> so after speaking with some of my colleagues, it seems as if there are actually some downstream implications of overwriting the <code>Activity</code> variable using the set variable action – specifically it losing some properties and possibly things not working properly in the preview. in the future, i’d recommend not overwriting or setting any of the reserved namespaces such as <code>session</code>, <code>activityGroup</code> or <code>activity</code></p>
+<p>I’d recommend creating a <code>custom data type</code> in Airdata and add that as an activity variable to then use for your data</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/prDcBS6MEsLiJzCrvYsPcbIvQjY.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b255fb297bbb1a6645b7752cd6e86f48f783cc8e.png" title="image"><img alt="image" data-base62-sha1="prDcBS6MEsLiJzCrvYsPcbIvQjY" data-dominant-color="FDFCFD" height="500" src="../../../images/b255fb297bbb1a6645b7752cd6e86f48f783cc8e_2_637x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b255fb297bbb1a6645b7752cd6e86f48f783cc8e_2_637x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b255fb297bbb1a6645b7752cd6e86f48f783cc8e_2_955x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b255fb297bbb1a6645b7752cd6e86f48f783cc8e_2_1274x1000.png 2x" width="637"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1423×1116 64.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

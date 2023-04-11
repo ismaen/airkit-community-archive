@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Create Salesforce Attachment</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Create Salesforce Attachment</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p>Hi everyone,</p>
+<p>How can I go about creating an Attachment record in Salesforce from a provided file using the “File Upload” component? That SF object has an BODY property that wants binary data.</p>
+<p>My first attempt was to:</p>
+<ol>
+<li>Add a File Upload component</li>
+<li>Use the Download Encoded Asset operation to get the binary</li>
+<li>Create the Attachment record via another data operation</li>
+</ol>
+<p>I’m getting “invalid object type” for <span class="hashtag">#2</span> when attempting to pass in the asset. Also I realize the Download Encoded Asset has a limit of 1mb which may be an issue.</p>
+<p>What’s the best way to do this (maybe not using the Download Encoded Asset operation at all)? And is there a way that would get past the 1mb limitation?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@blschaef15</span> what exactly are you passing into the download encoded asset data operation?</p>
+<p>the Download encoded asset can accept either an asset URI:</p>
+<pre><code class="lang-auto">asset://global:{asset-id}
+</code></pre>
+<p>Or an asset object (something that looks like this)</p>
+<pre><code class="lang-auto">{
+  "id": "",
+  "hash": "",
+  "size": 2898,
+  "type": "image/png",
+  "scope": "SESSION",
+  "state": "ACTIVE",
+  "region": "us-west-2",
+  "version": 0,
+  "assetKey": "",
+  "hashType": "SHA256",
+  "extraInfo": null,
+  "expiration": 3600000,
+  "visibility": "GLOBAL",
+  "createdTime": "2022-06-13T18:14:35.005Z",
+  "deletedTime": null,
+  "description": null,
+  "displayName": "0 (3).png",
+  "downloadUrl": "",
+  "modifiedTime": "2022-06-13T18:14:36.638Z",
+  "storageClass": "v1",
+  "thumbnailUrl": "",
+  "organizationId": "",
+  "validationErrors": null
+}
+</code></pre>
+<p>In the screenshot below, i’m passing an asset object to the Download encoded asset data operation and am able to get an encoded asset:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/dy68RipVYRrhGir10UuhiDiY2bh.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/5ef707d719348b72aacd081fcf0888598de1ed23.png" title="image"><img alt="image" data-base62-sha1="dy68RipVYRrhGir10UuhiDiY2bh" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/5ef707d719348b72aacd081fcf0888598de1ed23_2_10x10.png" height="500" src="../../../images/5ef707d719348b72aacd081fcf0888598de1ed23_2_646x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/5ef707d719348b72aacd081fcf0888598de1ed23_2_646x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/5ef707d719348b72aacd081fcf0888598de1ed23_2_969x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/5ef707d719348b72aacd081fcf0888598de1ed23_2_1292x1000.png 2x" width="646"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1513×1170 151 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p></p><div class="video-container">
+<video controls="" height="100%" preload="metadata" width="100%">
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/238f1e919e62c1907f4cca8aa4fee79c65179363.mp4"/>
+<a href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/238f1e919e62c1907f4cca8aa4fee79c65179363.mp4">https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/238f1e919e62c1907f4cca8aa4fee79c65179363.mp4</a>
+</video>
+</div><br/>
+Also, here’s a video of me walking through a simple file upload scenario to Salesforce.<p></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

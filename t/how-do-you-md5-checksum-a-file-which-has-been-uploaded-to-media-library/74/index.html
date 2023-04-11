@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How do you md5 checksum a file which has been uploaded to Media Library?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How do you md5 checksum a file which has been uploaded to Media Library?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/32_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeffchen</div>
+          <div class="post_content">
+<p>I am looking to md5 checksum a file in process for uploading a file via API to another service.</p>
+<p>I see the md5 airscript function but how to do I get the uploaded file into a format which can be manipulated by md5 function?</p>
+<p>I would like the result of this online md5 checksum tool.</p>
+<aside class="onebox allowlistedgeneric" data-onebox-src="http://emn178.github.io/online-tools/md5_checksum.html">
+<header class="source">
+<a href="http://emn178.github.io/online-tools/md5_checksum.html" rel="noopener nofollow ugc" target="_blank">emn178.github.io</a>
+</header>
+<article class="onebox-body">
+<h3><a href="http://emn178.github.io/online-tools/md5_checksum.html" rel="noopener nofollow ugc" target="_blank">MD5 File Checksum Online</a></h3>
+<p>MD5 online hash file checksum function</p>
+</article>
+<div class="onebox-metadata">
+</div>
+<div style="clear: both"></div>
+</aside>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/73_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">joechrz</div>
+          <div class="post_content">
+<p>Hey Jeff!</p>
+<p>Right now our MD5 hash function only accepts string input, so unfortunately your options are pretty limited.</p>
+<p>If you use the “Download Encoded Asset” data operation, this will give you a Base64 representation of the file, which you could then pass to the MD5 function.  This will only work if you can also check the Base64 representation on the other end, though.  The “Download Encoded Asset” operation is also currently limited to files &lt;= 1MB.</p>
+<p>We have some items on the roadmap to make working with Files a bit more straightforward, so be on the lookout for improvements in future releases!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/73_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">joechrz</div>
+          <div class="post_content">
+<p>Just following up here - we’ve now released a feature that will automatically generate a hash when files are uploaded to the Asset store.  When uploading your file, just select the hash method you’d like to use and it’ll automatically become available on the Asset object.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/rklnBNxPr1liTl0JB4Wb3E1yAam.jpeg?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/bf87713f56c6e839b0f76e331f7d1aa2923f1052.jpeg" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="rklnBNxPr1liTl0JB4Wb3E1yAam" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bf87713f56c6e839b0f76e331f7d1aa2923f1052_2_10x10.png" height="500" src="../../../images/bf87713f56c6e839b0f76e331f7d1aa2923f1052_2_351x500.jpeg" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bf87713f56c6e839b0f76e331f7d1aa2923f1052_2_351x500.jpeg, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bf87713f56c6e839b0f76e331f7d1aa2923f1052_2_526x750.jpeg 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bf87713f56c6e839b0f76e331f7d1aa2923f1052_2_702x1000.jpeg 2x" width="351"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">812×1154 56.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

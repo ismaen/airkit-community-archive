@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How do I add query parameters to my launch link for my app?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How do I add query parameters to my launch link for my app?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p>Hi! I’m trying to launch my app with a URL and I want to append parameters onto the URL so I can capture information about the user through the link when they click it. How do I go about adding these parameters and defining them so I can do that? Here’s where I got stuck:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/zM6GkATMAQ6DwkqjyPEUf49HoKT.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fabc3ef8ef738c0e65cf1e99c062304b00910533.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="zM6GkATMAQ6DwkqjyPEUf49HoKT" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fabc3ef8ef738c0e65cf1e99c062304b00910533_2_10x10.png" height="394" src="../../../images/fabc3ef8ef738c0e65cf1e99c062304b00910533_2_690x394.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fabc3ef8ef738c0e65cf1e99c062304b00910533_2_690x394.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fabc3ef8ef738c0e65cf1e99c062304b00910533_2_1035x591.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fabc3ef8ef738c0e65cf1e99c062304b00910533_2_1380x788.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1394×797 40.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Great Question and welcome!</p>
+<p>What you can do is add a ‘?’ after your url and add your key-value pairs separated by an ‘&amp;’. So in your example of the url:</p>
+<p><code>https://mydemo.airkit.com</code></p>
+<p>If you wanted to add a username and an id to as query parameters, it would look like this in the sample url:</p>
+<p><code>https://mydemo.airkit.com?username=ismaen&amp;id=123456</code></p>
+<p>Then if you click on the play button under sample payload, you’ll see your key value pairs get populated under <code>queryParams</code>. From here, you can pass <code>payload.queryParams</code> to either the start parameters or the journey event payload and access your data from your query params from your app.</p>
+<p>Does that answer your question?</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/y8OdfgkiVjCpCB6whWgodHFqpVt.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ef48dbba40425fa4222009ad0b7ca1aebc40caef.png" title="2022-01-06_16-48-30"><img alt="2022-01-06_16-48-30" data-base62-sha1="y8OdfgkiVjCpCB6whWgodHFqpVt" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ef48dbba40425fa4222009ad0b7ca1aebc40caef_2_10x10.png" height="424" src="../../../images/ef48dbba40425fa4222009ad0b7ca1aebc40caef_2_690x424.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ef48dbba40425fa4222009ad0b7ca1aebc40caef_2_690x424.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ef48dbba40425fa4222009ad0b7ca1aebc40caef_2_1035x636.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ef48dbba40425fa4222009ad0b7ca1aebc40caef_2_1380x848.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-01-06_16-48-30</span><span class="informations">1432×880 54.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@ismaen</span> ! That’s exactly what I was looking for.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

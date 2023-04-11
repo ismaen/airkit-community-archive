@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to Update, add new and delete record based on two objects</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to Update, add new and delete record based on two objects</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>I have two objects… one object is main object and second object will have the data that is updating or deleting or adding.</p>
+<p>Object 1:</p>
+<pre><code class="lang-auto">[
+  [
+    {
+      "party": [
+        {
+          "role": "Primary",         
+          "partyId": 12,         
+          "lastName": "Test",
+          "roleType": "Test",
+          "addresses": [
+            {
+              "address1": "test"
+            }
+          ],          
+          "policyNos": "123456"
+        },
+        {
+            "role": "Secondary",         
+            "partyId": 12,         
+            "lastName": "Test 4",
+            "roleType": "Test 5",
+            "addresses": [
+              {
+                "address1": "test"
+              }
+            ],          
+            "policyNos": "123456"
+          }
+      ],
+      "policyNos": "123456"
+    },
+    {
+        "party": [
+          {
+            "role": "Primary",         
+            "partyId": 12,         
+            "lastName": "Test 1",
+            "roleType": "Test 1",
+            "addresses": [
+              {
+                "address1": "test"
+              }
+            ],          
+            "policyNos": "234567"
+          },
+          {
+              "role": "Secondary",         
+              "partyId": 16,         
+              "lastName": "Test 2",
+              "roleType": "Test 2",
+              "addresses": [
+                {
+                  "address1": "test"
+                }
+              ],          
+              "policyNos": "234567"
+            }
+        ],
+        "policyNos": "234567"
+      }
+  ]
+]
+</code></pre>
+<p>Object2:</p>
+<pre><code class="lang-auto">[
+    {
+        "role": "Primary",
+        "partyId": 12,
+        "lastName": "Test",
+        "roleType": "Test",
+        "addresses": [
+            {
+                "address1": "test"
+            }
+        ],
+        "policyNos": "123456"
+    }
+]
+</code></pre>
+<p>Here, PartyId is the Unique value… how can I insert Object 2 into Object 1? can you please help me?</p>
+<p>How to delete party record based on partyId from the object1 ?</p>
+<p>How to add new party(will not have partyId) to the object1 ?</p>
+<p>Can someone please help me with this ?</p>
+<p>Thanks,<br/>
+Narendra</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@Narendra</span>! When you say insert Object 2 into Object 1, what should the expected output be? Are you trying to update everywhere where partyId is equal to 12 or are you trying to append it to the array?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@ismaen</span>,<br/>
+<strong>Update:</strong> Need to update everywhere where partyId is equal to 12.<br/>
+<strong>Add New:</strong> If no partyId, need to append to the corresponding policy from object 1<br/>
+<strong>Delete:</strong> Delete the corresponding PartyID record from the policy in Object 1.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<h1>
+<a class="anchor" href="#update-party-id-1" name="update-party-id-1"></a>Update Party ID</h1>
+<p>One way to do this is by using Data flows. I’ve set up my data flow to run a sub-data flow in order to update Object 1:</p>
+<p>Set up your inputs<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/jyBx6LRlH226AgbSLrQhGbmWmPI.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/8912b9e44278caf17facc5c285af96a524977b0e.png" title="2022-09-19_13-42-45"><img alt="2022-09-19_13-42-45" data-base62-sha1="jyBx6LRlH226AgbSLrQhGbmWmPI" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8912b9e44278caf17facc5c285af96a524977b0e_2_10x10.png" height="284" src="../../../images/8912b9e44278caf17facc5c285af96a524977b0e_2_690x284.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8912b9e44278caf17facc5c285af96a524977b0e_2_690x284.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8912b9e44278caf17facc5c285af96a524977b0e_2_1035x426.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8912b9e44278caf17facc5c285af96a524977b0e_2_1380x568.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-09-19_13-42-45</span><span class="informations">1422×586 59.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Loop to create an array that does not include objects where partyid=12<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/f4BpIM5bo4vleyl4OwbpfFhGfZP.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/69a5d371fe7105abb5f130b21538851cbebc6f15.png" title="2022-09-19_13-42-51"><img alt="2022-09-19_13-42-51" data-base62-sha1="f4BpIM5bo4vleyl4OwbpfFhGfZP" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69a5d371fe7105abb5f130b21538851cbebc6f15_2_10x10.png" height="500" src="../../../images/69a5d371fe7105abb5f130b21538851cbebc6f15_2_381x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69a5d371fe7105abb5f130b21538851cbebc6f15_2_381x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69a5d371fe7105abb5f130b21538851cbebc6f15_2_571x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/69a5d371fe7105abb5f130b21538851cbebc6f15.png 2x" width="381"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-09-19_13-42-51</span><span class="informations">724×948 33.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Append the object that you want to update to the array. You can find this UDF <a href="https://community.airkit.com/t/some-useful-user-defined-functions/78">here</a>.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/AaRsn2jqr0buZmV3vaC7TozDeOx.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fd8898d0b24f06e78eba83f3774660860786c9ad.png" title="2022-09-19_13-42-56"><img alt="2022-09-19_13-42-56" data-base62-sha1="AaRsn2jqr0buZmV3vaC7TozDeOx" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fd8898d0b24f06e78eba83f3774660860786c9ad_2_10x10.png" height="500" src="../../../images/fd8898d0b24f06e78eba83f3774660860786c9ad_2_390x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fd8898d0b24f06e78eba83f3774660860786c9ad_2_390x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fd8898d0b24f06e78eba83f3774660860786c9ad_2_585x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fd8898d0b24f06e78eba83f3774660860786c9ad.png 2x" width="390"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-09-19_13-42-56</span><span class="informations">736×943 42 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>pass the output at the end of the data flow<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/uyNCpuTXznOWsPVzmfEELqjICaV.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d63047da0d0ffa33820087ddd35ffe946db70f8d.png" title="2022-09-19_13-43-02"><img alt="2022-09-19_13-43-02" data-base62-sha1="uyNCpuTXznOWsPVzmfEELqjICaV" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d63047da0d0ffa33820087ddd35ffe946db70f8d_2_10x10.png" height="211" src="../../../images/d63047da0d0ffa33820087ddd35ffe946db70f8d.png" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-09-19_13-43-02</span><span class="informations">755×231 3.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Run this data flow as a sub data flow using the “Run data flow data operation”<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/3jKpgFZKkhmrMmPU48S3kitmHn4.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1742028e7b2bdd5942713055fba2380b298185a2.png" title="image"><img alt="image" data-base62-sha1="3jKpgFZKkhmrMmPU48S3kitmHn4" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1742028e7b2bdd5942713055fba2380b298185a2_2_10x10.png" height="500" src="../../../images/1742028e7b2bdd5942713055fba2380b298185a2_2_464x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1742028e7b2bdd5942713055fba2380b298185a2_2_464x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1742028e7b2bdd5942713055fba2380b298185a2_2_696x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1742028e7b2bdd5942713055fba2380b298185a2_2_928x1000.png 2x" width="464"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">969×1044 31.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#delete-object-by-party-id-2" name="delete-object-by-party-id-2"></a>Delete Object by Party ID</h1>
+<p>Set up your inputs<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/xIEeAuPlOlGoRwOSinieXxK2GWM.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ec53ce2fb954f9bc2106d310de439c0da317a154.png" title="2022-09-19_13-47-46"><img alt="2022-09-19_13-47-46" data-base62-sha1="xIEeAuPlOlGoRwOSinieXxK2GWM" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ec53ce2fb954f9bc2106d310de439c0da317a154_2_10x10.png" height="331" src="../../../images/ec53ce2fb954f9bc2106d310de439c0da317a154_2_690x331.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ec53ce2fb954f9bc2106d310de439c0da317a154_2_690x331.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ec53ce2fb954f9bc2106d310de439c0da317a154_2_1035x496.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ec53ce2fb954f9bc2106d310de439c0da317a154.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-09-19_13-47-46</span><span class="informations">1307×627 47.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>filter array to see where party id is not equal to the key</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/5FVMlyiUzfSfTDLfBzV09u4ErCu.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/27c84ee9ad0b4519747ce20caddc99a24a98bb3e.png" title="2022-09-19_13-47-52"><img alt="2022-09-19_13-47-52" data-base62-sha1="5FVMlyiUzfSfTDLfBzV09u4ErCu" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/27c84ee9ad0b4519747ce20caddc99a24a98bb3e_2_10x10.png" height="499" src="../../../images/27c84ee9ad0b4519747ce20caddc99a24a98bb3e_2_427x499.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/27c84ee9ad0b4519747ce20caddc99a24a98bb3e_2_427x499.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/27c84ee9ad0b4519747ce20caddc99a24a98bb3e_2_640x748.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/27c84ee9ad0b4519747ce20caddc99a24a98bb3e.png 2x" width="427"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-09-19_13-47-52</span><span class="informations">741×866 30.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div><br/>
+output at the end of the data flow<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/2y53s03CEDcM5sRFdUNWlFlI6YS.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/11de9c08cb0fd3c8f76583c861df003d0e3e88e6.png" title="2022-09-19_13-47-56"><img alt="2022-09-19_13-47-56" data-base62-sha1="2y53s03CEDcM5sRFdUNWlFlI6YS" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/11de9c08cb0fd3c8f76583c861df003d0e3e88e6_2_10x10.png" height="220" src="../../../images/11de9c08cb0fd3c8f76583c861df003d0e3e88e6.png" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-09-19_13-47-56</span><span class="informations">770×246 3.08 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Run this data flow as a sub data flow using the “Run data flow data operation”<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/5HT5NEjkU8XEXkHN8NbA2tgr9vS.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2800ee589f207c5cfabe43cc85f5783431833fe4.png" title="2022-09-19_13-48-07"><img alt="2022-09-19_13-48-07" data-base62-sha1="5HT5NEjkU8XEXkHN8NbA2tgr9vS" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2800ee589f207c5cfabe43cc85f5783431833fe4_2_10x10.png" height="500" src="../../../images/2800ee589f207c5cfabe43cc85f5783431833fe4_2_359x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2800ee589f207c5cfabe43cc85f5783431833fe4_2_359x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2800ee589f207c5cfabe43cc85f5783431833fe4_2_538x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2800ee589f207c5cfabe43cc85f5783431833fe4.png 2x" width="359"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-09-19_13-48-07</span><span class="informations">685×954 23.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#add-new-3" name="add-new-3"></a>Add New</h1>
+<p>Based on my understanding, you could probably use the append UDF from the Update Data flow in order to append an object to the original object. You’d have to add some conditionals though.</p>
+<p>Heres the zip file with the data flows and UDFs to play around with!</p>
+<p><a class="attachment" href="/uploads/short-url/dCCFgpUw8bdqP10J73gioqfiRgp.zip">Update_Party-2022-09-19T20_50_48.198Z-full.branch.zip</a> (20.5 KB)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p><span class="mention">@ismaen</span>, thank you again ! I looked at the solution and this is what exactly I am looking for. it is very helpful.<br/>
+But the output seems not correct. “Party” tag is missing from the output. How can I add the “party” tag so that the output structure should be the same as object 1 structure.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>ah gotcha. You can re-add it as a transform step after you append the object2:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/AFiJ3dmudKi1MO0X7ENlLIOMdT.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/04250e577404d9e5b076f833ab75499baa06842d.png" title="image"><img alt="image" data-base62-sha1="AFiJ3dmudKi1MO0X7ENlLIOMdT" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/04250e577404d9e5b076f833ab75499baa06842d_2_10x10.png" height="500" src="../../../images/04250e577404d9e5b076f833ab75499baa06842d_2_473x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/04250e577404d9e5b076f833ab75499baa06842d_2_473x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/04250e577404d9e5b076f833ab75499baa06842d_2_709x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/04250e577404d9e5b076f833ab75499baa06842d_2_946x1000.png 2x" width="473"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1360×1436 58.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>But after looking at the JSON structure, are there supposed to be two keys that are <code>policyNos</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@ismaen</span> for helping to fix this problem.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

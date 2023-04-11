@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How do I use a dropdown list inside of a Container List to capture data</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How do I use a dropdown list inside of a Container List to capture data</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">darren55</div>
+          <div class="post_content">
+<p>Hello! How do I create have a dropdown list that is inside of a container list? For example, I have the following data:</p>
+<pre><code class="lang-auto">[
+    {
+      "name": "Tom Cruise",
+      "age": 56,
+      "Born At": "Syracuse, NY",
+      "Birthdate": "July 3, 1962",
+      "photo": "https://jsonformatter.org/img/tom-cruise.jpg",
+      "list": ["Mission Impossible", "Iron Man"]
+    },
+    {
+      "name": "Robert Downey Jr.",
+      "age": 53,
+      "Born At": "New York City, NY",
+      "Birthdate": "April 4, 1965",
+      "photo": "https://jsonformatter.org/img/Robert-Downey-Jr.jpg",
+      "list": ["Mission Impossible", "Iron Man"]
+    }
+  ]
+</code></pre>
+<p>I store this data into a variable <code>session.data</code> and pass this as the data property in my container list:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/vLCGxAa61lkg4m58zaZE4tqOf2R.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/dea58c9e36c47a6b956cd3214a706bc28e625a5d.png" rel="noopener nofollow ugc" title="2022-03-29_16-27-03"><img alt="2022-03-29_16-27-03" data-base62-sha1="vLCGxAa61lkg4m58zaZE4tqOf2R" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/dea58c9e36c47a6b956cd3214a706bc28e625a5d_2_10x10.png" height="283" src="../../../images/dea58c9e36c47a6b956cd3214a706bc28e625a5d_2_690x283.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/dea58c9e36c47a6b956cd3214a706bc28e625a5d_2_690x283.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/dea58c9e36c47a6b956cd3214a706bc28e625a5d.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/dea58c9e36c47a6b956cd3214a706bc28e625a5d.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-03-29_16-27-03</span><span class="informations">1022×420 19.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>I then want to add a dropdown list into my container list and have it populate the dropdown list with the data from <code>session.data[index].list</code>.</p>
+<p>I can’t seem to get this working properly. Has anyone done this before?</p>
+<p>Below is the configuration of my dropdown list:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/shvJoviOzrBm33oXpwkX6PWxokD.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c637a2089ade5efcff21daa02f07ef729a346c97.png" rel="noopener nofollow ugc" title="2022-03-29_16-27-59"><img alt="2022-03-29_16-27-59" data-base62-sha1="shvJoviOzrBm33oXpwkX6PWxokD" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c637a2089ade5efcff21daa02f07ef729a346c97_2_10x10.png" height="436" src="../../../images/c637a2089ade5efcff21daa02f07ef729a346c97_2_690x436.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c637a2089ade5efcff21daa02f07ef729a346c97_2_690x436.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c637a2089ade5efcff21daa02f07ef729a346c97.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c637a2089ade5efcff21daa02f07ef729a346c97.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-03-29_16-27-59</span><span class="informations">963×609 24.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/4kWYyvvr1vCyJ0DkEoN6YPiI4bQ.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1e66fd25a509993180826b56b711a17d4c50c54e.png" rel="noopener nofollow ugc" title="2022-03-29_16-23-55"><img alt="2022-03-29_16-23-55" data-base62-sha1="4kWYyvvr1vCyJ0DkEoN6YPiI4bQ" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1e66fd25a509993180826b56b711a17d4c50c54e_2_10x10.png" height="268" src="../../../images/1e66fd25a509993180826b56b711a17d4c50c54e_2_690x268.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1e66fd25a509993180826b56b711a17d4c50c54e_2_690x268.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1e66fd25a509993180826b56b711a17d4c50c54e_2_1035x402.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1e66fd25a509993180826b56b711a17d4c50c54e.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-03-29_16-23-55</span><span class="informations">1091×425 16.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@darren55</span>, welcome to the Airkit Community!</p>
+<p>Let’s look at how to implement a “fully functional” use-case based on the info you provided:</p>
+<ul>
+<li>List of items (actor information) to populate a Container List</li>
+<li>Each of the Container Items contains a List (in your sample data, that’d be the movies <code>list</code>) – populate a Dropdown List with it</li>
+<li>A <code>session.dropdown</code> variable to store the selected movie  I’ll use the following format to store the collected data <code>[&lt;movieName1&gt;,&lt;movieName2&gt;]</code>.</li>
+</ul>
+<blockquote>
+<p><img alt=":information_source:" class="emoji" height="20" loading="lazy" src="../../../images/information_source.png" title=":information_source:" width="20"/> Feel free to reply with your compleye use case if you’d like to see the info collected stored in a different way, e.g.:</p>
+<ul>
+<li><code>[{"&lt;actorName&gt;":"&lt;movieName&gt;"}]</code></li>
+<li><code>[{"name":&lt;actorName&gt;, "movie":&lt;movieName&gt;}]</code></li>
+</ul>
+</blockquote>
+<p>Alright, now let’s have a look at how to go about the implementation.</p>
+<hr/>
+<h3>
+<a class="anchor" href="#sample-data-1" name="sample-data-1"></a>Sample Data</h3>
+<p>Using your sample data stored to the <code>session.data</code> variable:</p>
+<aside class="quote no-group" data-post="1" data-topic="137" data-username="darren55">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" class="avatar" height="20" loading="lazy" src="../../../images/missing_image.png" width="20"/> darren55:</div>
+<blockquote>
+<pre><code class="lang-auto">[
+    {
+      "name": "Tom Cruise",
+      "age": 56,
+      "Born At": "Syracuse, NY",
+      "Birthdate": "July 3, 1962",
+      "photo": "https://jsonformatter.org/img/tom-cruise.jpg",
+      "list": ["Mission Impossible", "Iron Man"]
+    },
+    {
+      "name": "Robert Downey Jr.",
+      "age": 53,
+      "Born At": "New York City, NY",
+      "Birthdate": "April 4, 1965",
+      "photo": "https://jsonformatter.org/img/Robert-Downey-Jr.jpg",
+      "list": ["Mission Impossible", "Iron Man"]
+    }
+  ]
+</code></pre>
+</blockquote>
+</aside>
+<h3>
+<a class="anchor" href="#container-list-config-2" name="container-list-config-2"></a>Container List config</h3>
+<p>Since both the Container List <em>and</em> the Dropdown List are lists, change the <code>Collection Name</code>, <code>Item Name</code>, and <code>Index Name</code> of the Container List (in the List’s Advanced options) to make it easier to tell them apart from the Dropdown List properties as follows:</p>
+<ul>
+<li>
+<p>Collection Name: <code>containerItems</code></p>
+</li>
+<li>
+<p>Item Name: <code>containerItem</code></p>
+</li>
+<li>
+<p>Index Name: <code>containerIndex</code></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/A0Y1HvtoJaWrPhRzeVK2RzKMDNc.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fc6a47ce06883177e8a9d9018c264c6d2238b6c6.png" title="Container List Advanced"><img alt="Container List Advanced" data-base62-sha1="A0Y1HvtoJaWrPhRzeVK2RzKMDNc" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fc6a47ce06883177e8a9d9018c264c6d2238b6c6_2_10x10.png" height="143" src="../../../images/fc6a47ce06883177e8a9d9018c264c6d2238b6c6_2_690x143.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fc6a47ce06883177e8a9d9018c264c6d2238b6c6_2_690x143.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fc6a47ce06883177e8a9d9018c264c6d2238b6c6_2_1035x214.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fc6a47ce06883177e8a9d9018c264c6d2238b6c6_2_1380x286.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Container List Advanced</span><span class="informations">3284×682 148 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+</ul>
+<p>Inside the Container List, add the following (as shown in the screenshot above):</p>
+<ul>
+<li>A <code>Simple Cell</code> to contain each <code>containerItem</code>
+</li>
+<li>Inside the Simple Cell add:
+<ul>
+<li>
+<p>A <code>Label</code> to display the <code>name</code> of each actor (<code>containerItem.name</code>)<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/hRtcAJUERsQArX6smbB9qBEmsnP.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/7d3051396b9f4dec74bcb48e3dc2e34145646665.png" title="containerItem.name"><img alt="containerItem.name" data-base62-sha1="hRtcAJUERsQArX6smbB9qBEmsnP" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7d3051396b9f4dec74bcb48e3dc2e34145646665_2_10x10.png" height="250" src="../../../images/7d3051396b9f4dec74bcb48e3dc2e34145646665_2_344x250.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7d3051396b9f4dec74bcb48e3dc2e34145646665_2_344x250.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7d3051396b9f4dec74bcb48e3dc2e34145646665_2_516x375.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7d3051396b9f4dec74bcb48e3dc2e34145646665_2_688x500.png 2x" width="344"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">containerItem.name</span><span class="informations">720×522 26.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+<li>
+<p>A <code>Dropdown List</code> to be populated with the <code>list</code> contained in each actor object (<code>containerItem.list</code>)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a class="anchor" href="#dropdown-list-config-3" name="dropdown-list-config-3"></a>Dropdown List config</h3>
+<ul>
+<li>
+<p><a href="https://support.airkit.com/reference/dropdown-list-web-control#placeholder-text">Control Properties</a>:</p>
+<ul>
+<li>
+<a href="https://support.airkit.com/reference/dropdown-list-web-control#value">Value</a>: to store the selected movie(s) in the <code>session.dropdown</code> variable at the same <code>index</code> as the <code>containerIndex</code>, use the following expression (<em>plenty of alternatives here, as mentioned above</em>):<br/>
+<code> session.dropdown[containerIndex]</code>
+</li>
+<li>
+<a href="https://support.airkit.com/reference/dropdown-list-web-control#placeholder-text">Placeholder Text</a>: You can set this property to any Text you like (e.g. '<em>Please Select</em>) or you can leave it blank</li>
+</ul>
+</li>
+<li>
+<p><a href="https://support.airkit.com/reference/dropdown-list-web-control#data-binding">Data Binding</a>:</p>
+<ul>
+<li>
+<a href="https://support.airkit.com/reference/dropdown-list-web-control#custom-expression">Type of List</a>: select <code>Custom Expression</code> and use <code>containerItem.list</code> list to populate the Dropdown List</li>
+<li>
+<a href="https://support.airkit.com/reference/dropdown-list-web-control#custom-expression">Display Text</a>: set this property to <code>ìtem</code>
+</li>
+<li>
+<a href="https://support.airkit.com/reference/dropdown-list-web-control#selected">Selected</a>: to display the user selection set this property to evaluate the Value property like so:  <code>item =  session.dropdown[containerIndex]</code>
+</li>
+</ul>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/s1L3Y5EPgAOfIvNBbCgvFOsD1Dd.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c46fc6c18254bd116eb4330e4973f6be9704c28b.png" title="dropdownConfig"><img alt="dropdownConfig" data-base62-sha1="s1L3Y5EPgAOfIvNBbCgvFOsD1Dd" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c46fc6c18254bd116eb4330e4973f6be9704c28b_2_10x10.png" height="225" src="../../../images/c46fc6c18254bd116eb4330e4973f6be9704c28b_2_690x225.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c46fc6c18254bd116eb4330e4973f6be9704c28b_2_690x225.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c46fc6c18254bd116eb4330e4973f6be9704c28b_2_1035x337.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c46fc6c18254bd116eb4330e4973f6be9704c28b_2_1380x450.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">dropdownConfig</span><span class="informations">3285×1075 197 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+</ul>
+<p>All done! This is what the Container List w/Dropdown should look like</p>
+<p><img alt="AK DEMO - Container List w-Dropdown" class="animated" data-base62-sha1="2guJb6CieA7BH4Sudgmi1DiMpJv" height="310" src="../../../images/0fe1b3fdac8aa18705a1a7c6ff739c54ad358a69.gif" width="344"/></p>
+<hr/>
+<h3>
+<a class="anchor" href="#airkit-demo-application-4" name="airkit-demo-application-4"></a>Airkit Demo Application</h3>
+<p>You can download a demo app of this use case below.</p>
+<p><a class="attachment" href="/uploads/short-url/l2npVTgOebQegzlZjM32quaJCJ0.zip">AK_DEMO_v17-15_-_Container_List_w_nested_Dropdown_List.zip</a> (154.3 KB)</p>
+<p><img alt=":warning:" class="emoji" height="20" loading="lazy" src="../../../images/warning.png" title=":warning:" width="20"/> <em>This application was built on Airkit CXR v17.15, just reply to this thread if you need a copy for Airkit CXR v18.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">darren55</div>
+          <div class="post_content">
+<p>This is exactly what I was looking for, thank you <span class="mention">@juanchax</span> for the detailed walkthrough! I realized i can also add another property <code>.selected</code> and overwrite <code>session.data</code> in case i wanted to update the object as well. I also removed all actions from the dropdown list as I realized it wasn’t needed</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/l4qvL3V7TuzZqS2cW1vLAI5I6Tv.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/93adc7effb1e64d00e51bce69925d1a174ad3379.png" rel="noopener nofollow ugc" title="2022-03-30_13-39-25"><img alt="2022-03-30_13-39-25" data-base62-sha1="l4qvL3V7TuzZqS2cW1vLAI5I6Tv" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/93adc7effb1e64d00e51bce69925d1a174ad3379_2_10x10.png" height="472" src="../../../images/93adc7effb1e64d00e51bce69925d1a174ad3379_2_690x472.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/93adc7effb1e64d00e51bce69925d1a174ad3379_2_690x472.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/93adc7effb1e64d00e51bce69925d1a174ad3379.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/93adc7effb1e64d00e51bce69925d1a174ad3379.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-03-30_13-39-25</span><span class="informations">934×640 31.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

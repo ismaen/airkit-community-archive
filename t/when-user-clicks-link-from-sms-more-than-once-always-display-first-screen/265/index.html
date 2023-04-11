@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>When user clicks link from SMS more than once, always display first screen</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">When user clicks link from SMS more than once, always display first screen</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>When user click the link more than once, how to display first screen always?</p>
+<p>For ex., one of the feedback we got from the customer is that “once I accessed the status from the link and completed the survey, when I go back in I cannot see the status anymore. It brings me to the Thank you screen for completing the survey…”</p>
+<p>Initially, user accessed the link from SMS, then it displayed with Claim status information screen. they clicked the next button and completed the survey. Next day, when they try to access the same link to see the status again, they just see Thank you page. Is there any way, I can display first screen always until the session is expired ?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/73_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">joechrz</div>
+          <div class="post_content">
+<p>One option is to utilize the “Web Page Viewed” event – this event will fire each time the page loads:<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/k9LskT5E73Z7UUHCR3Ap7TxDcuH.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/8d46130c00b62e440b14b25b43a5cc17546595d7.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="k9LskT5E73Z7UUHCR3Ap7TxDcuH" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8d46130c00b62e440b14b25b43a5cc17546595d7_2_10x10.png" height="368" src="../../../images/8d46130c00b62e440b14b25b43a5cc17546595d7_2_690x368.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8d46130c00b62e440b14b25b43a5cc17546595d7_2_690x368.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/8d46130c00b62e440b14b25b43a5cc17546595d7.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/8d46130c00b62e440b14b25b43a5cc17546595d7.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">970×518 38.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>One thing to be aware of is that refreshing the page also fires this event, so depending on your use case you may want additional logic to only “go back to the beginning” in certain cases.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thanks Joe! It worked.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Restrict input field to a very specific format of numbers and letters</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Restrict input field to a very specific format of numbers and letters</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p>Hi everyone - I was wondering if anyone had a working example or even a User-Defined Function for restricting an input field to a very specific format so that what the user inputs has to be in this exact format:</p>
+<p>“A#A <span class="hashtag">#A</span>#”</p>
+<p>where “A” means the input has to be a letter and the “#” has to be a number. Does anyone know the best way to accomplish that? Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>hi <span class="mention">@davidpairkit</span>, I created a UDF that can do this for you, although very specific to the input of “A#A#A#”. I’m sure you can modify it in case your requirements change:</p>
+<p></p><div class="video-container">
+<video controls="" height="100%" preload="metadata" width="100%">
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/311f3e43843bd39c2073da8e3e1bbee7891252a0.mp4"/>
+<a href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/311f3e43843bd39c2073da8e3e1bbee7891252a0.mp4">https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/311f3e43843bd39c2073da8e3e1bbee7891252a0.mp4</a>
+</video>
+</div><p></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/5bwJfK5kQpBjcO8hF8SqqaxCxUF.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/245877b4d8fe06159c1e7d5511a6108bb86cea5d.png" title="image"><img alt="image" data-base62-sha1="5bwJfK5kQpBjcO8hF8SqqaxCxUF" data-dominant-color="FBFAFB" height="254" src="../../../images/245877b4d8fe06159c1e7d5511a6108bb86cea5d_2_690x254.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/245877b4d8fe06159c1e7d5511a6108bb86cea5d_2_690x254.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/245877b4d8fe06159c1e7d5511a6108bb86cea5d_2_1035x381.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/245877b4d8fe06159c1e7d5511a6108bb86cea5d_2_1380x508.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1422×524 65.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Input: <code>string</code><br/>
+Output: boolean</p>
+<pre><code class="lang-auto">ISEMPTY(
+  FROM
+    stringItem
+  IN
+    FROM item IN SPLIT(string, "") WHERE ISEVEN(index) SELECT item
+  WHERE
+    TYPEOF(stringItem) = "number"
+  SELECT
+    stringItem
+)
+  AND ISEMPTY(
+    FROM
+      numberItem
+    IN
+      FROM itm, idx IN SPLIT(string, "") WHERE ISODD(idx) SELECT PARSE_NUMBER(itm)
+    WHERE
+      numberItem = 0
+    SELECT
+      numberItem
+  )
+</code></pre>
+<h2>
+<a class="anchor" href="#edit-1" name="edit-1"></a>Edit:</h2>
+<p>not sure if there is supposed to be a “space” in between the first three digits, but i just caught that. Here’s the updated UDF in case that was intenional</p>
+<pre><code class="lang-auto">SPLIT(string, "")[3] = " "
+  AND ISEMPTY(
+    FROM
+      stringItem
+    IN
+      FROM
+        item
+      IN
+        FROM item2 IN SPLIT(string, "") WHERE item2 != " " SELECT item2
+      WHERE
+        ISEVEN(index)
+      SELECT
+        item
+    WHERE
+      TYPEOF(stringItem) = "number"
+    SELECT
+      stringItem
+  )
+  AND ISEMPTY(
+    FROM
+      numberItem
+    IN
+      FROM
+        itm,
+        idx
+      IN
+        FROM item3 IN SPLIT(string, "") WHERE item3 != " " SELECT item3
+      WHERE
+        ISODD(idx)
+      SELECT
+        PARSE_NUMBER(itm)
+    WHERE
+      numberItem = 0
+    SELECT
+      numberItem
+  )
+
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p>Thanks so much for the help, <span class="mention">@ismaen</span>!</p>
+<p>It looks like the first section is working:</p>
+<blockquote>
+<p>SPLIT(string, “”)[3] = " "<br/>
+AND ISEMPTY(<br/>
+FROM<br/>
+stringItem<br/>
+IN<br/>
+FROM<br/>
+item<br/>
+IN<br/>
+FROM item2 IN SPLIT(string, “”) WHERE item2 != " " SELECT item2<br/>
+WHERE<br/>
+ISEVEN(index)<br/>
+SELECT<br/>
+item<br/>
+WHERE<br/>
+TYPEOF(stringItem) = “number”<br/>
+SELECT<br/>
+stringItem<br/>
+)</p>
+</blockquote>
+<p>But I’m having trouble with this piece:</p>
+<blockquote>
+<p>AND ISEMPTY(<br/>
+FROM<br/>
+numberItem<br/>
+IN<br/>
+FROM<br/>
+itm,<br/>
+idx<br/>
+IN<br/>
+FROM item3 IN SPLIT(string, “”) WHERE item3 != " " SELECT item3<br/>
+WHERE<br/>
+ISODD(idx)<br/>
+SELECT<br/>
+PARSE_NUMBER(itm)<br/>
+WHERE<br/>
+numberItem = 0<br/>
+SELECT<br/>
+numberItem<br/>
+)</p>
+</blockquote>
+<p>It doesn’t seem to resolve to true because I’m ending with an array [0,0,0] from the internal FROM statement, so I’m wondering if there’s a better WHERE than “numberItem = 0” that would satisfy the logic of it needing to be a number? Any thoughts?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/26_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kyung</div>
+          <div class="post_content">
+<aside class="quote no-group" data-post="1" data-topic="315" data-username="davidpairkit">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" class="avatar" height="20" loading="lazy" src="../../../images/14_2.png" width="20"/> davidpairkit:</div>
+<blockquote>
+<p>A#A <span class="hashtag">#A</span>#</p>
+</blockquote>
+</aside>
+<p><span class="mention">@davidpairkit</span> - I used a somewhat brute force method.  You can change the UDFs as needed.</p>
+<p>See attached app:<br/>
+<a class="attachment" href="/uploads/short-url/sJXpSvLgVr6iJfK3NsZGlEUe8y7.zip">Untitled_App-2023-01-11T16_17_02.743Z-full.branch.zip</a> (33.0 KB) (DON’T USE, HAS A BUG)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p><span class="mention">@kyung</span> This works, thanks so much!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/26_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kyung</div>
+          <div class="post_content">
+<p><span class="mention">@davidpairkit</span> - i think there is a bug.  Use this one:</p>
+<p><a class="attachment" href="/uploads/short-url/rSdjwFavyMOH2TDuevtwn55D6Dh.zip">Untitled_App-2023-01-11T17_05_18.523Z-full.branch.zip</a> (34.0 KB)</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

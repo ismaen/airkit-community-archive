@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How To Alphabetize List In Dropdown From Airdata</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How To Alphabetize List In Dropdown From Airdata</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>Looking to pull in a list for a dropdown from Airdata, but need the list to be in alphabetical order.</p>
+<p>I have a “list of any” that creates the dropdown correctly. The field that needs to be ordered is “Accountname”.</p>
+<p>Under “FROM”, does this variable need to be defined in the webflow?<br/>
+<img alt="image" data-base62-sha1="fdS2VVL8zvCRHywZTCnGvx7iCHs" height="261" src="../../../images/6ab208a11d6addd1cf67394c4c1de6676788549e.png" width="402"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey Chris! what does <code>accountlist</code> look like?</p>
+<p>You can order objects in an array by using something similar to what you have and using <code>ASCENDING</code> or <code>DESCENDING</code></p>
+<p>So if i have <code>airData.results</code> that looks like this:</p>
+<pre><code class="lang-auto">[
+    {
+      "__id": "",
+      "Name": "test"
+    },
+    {
+      "__id": "",
+      "Name": "hey"
+    },
+    {
+      "__id": "",
+      "Name": "life"
+    }
+  ]
+
+</code></pre>
+<p>Then i would do something like this to get them to alphabetized.</p>
+<pre><code class="lang-auto">FROM
+  item
+IN
+  airData.results
+ORDER BY
+  item.Name
+ASCENDING
+SELECT
+  item
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Here is my list. I run a query to get the account names and then transform to only have the account names.</p>
+<p><img alt="image" data-base62-sha1="12qaUYG8756tSJ7l3g2baHQ49ni" height="376" src="../../../images/074844a62bdca59f68c97640ed6a3afff099d588.png" width="593"/></p>
+<p><img alt="image" data-base62-sha1="tLofMzKkr25Mm8Ppeie9PdShnmj" height="280" src="../../../images/d09a77284dcc4af661b322377dec8c2caca7793b.png" width="333"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>If <code>accountlist</code> is just the array of companies, then you can just do something like:</p>
+<pre><code class="lang-auto">FROM
+  item
+IN
+  accountlist
+ORDER BY
+  item
+ASCENDING
+SELECT
+  item
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Works great, thanks!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

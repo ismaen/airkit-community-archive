@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Set Stripe Default Payment Method</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Set Stripe Default Payment Method</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p>Hi, I’d like to add a new payment method in stripe to an existing customer and set that payment method as the default. Is there a way to do that with the out-of-box credit card component? I can get it to add the new card (and not charge where currency = 0) but that new card is not set as the “default”.</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/20_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">nico</div>
+          <div class="post_content">
+<p>Hi there @<a href="https://community.airkit.com/u/blschaef15">blschaef15</a>,</p>
+<p>Unfortunately this is not possible via the Card component. Seems doable using the <a href="https://stripe.com/docs/api/payment_methods" rel="noopener nofollow ugc">Stripe API endpoints for Payment Methods</a>. I’d recommend looking into the API docs and see if the endpoints allow for the functionality you are trying to achieve.</p>
+<p>Best,<br/>
+Nico</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p>Thanks Nico. Is there a way to access the Stripe response after clicking “submit/update” via the card control? If I could get the returned payment method / card ID then I could make another request to set as default.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@blschaef15</span> so I played around with this a bit, let me know if this is what you are looking for. So with the credit card control, you have the ability to return the payment token on the control on submit, you want to make sure the Return Payment Token toggle is checked.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/wnVoPSNrj0jQRI4hUDVmuOtGekV.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e2f9f06f9aa64de57478c80546364791502f0f09.png" title="2022-05-26_14-39-27"><img alt="2022-05-26_14-39-27" data-base62-sha1="wnVoPSNrj0jQRI4hUDVmuOtGekV" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e2f9f06f9aa64de57478c80546364791502f0f09_2_10x10.png" height="500" src="../../../images/e2f9f06f9aa64de57478c80546364791502f0f09_2_599x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e2f9f06f9aa64de57478c80546364791502f0f09_2_599x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e2f9f06f9aa64de57478c80546364791502f0f09_2_898x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e2f9f06f9aa64de57478c80546364791502f0f09.png 2x" width="599"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-05-26_14-39-27</span><span class="informations">977×815 71 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>This token is surfaced through the event namespace on the submit successful event on the credit card control. You can see here, i’m setting a variable to <code>event.value</code>.</p>
+<p><img alt="2022-05-26_14-42-10" data-base62-sha1="2NDh5AH1eAW2xhDMp8jyBAUPiXk" height="400" src="../../../images/13a0a7ea05ed91ff4c91dab2e83bc50feb81024e.png" width="401"/></p>
+<p>What this looks like in the debugger, is there are two properties that get surfaced, which is <code>success</code> and <code>tokenId</code>.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/glLE2coIdHKJFpU35UnTR33VyyV.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/7298b9dfec6156f253eca218d58f670cf70cc8c5.png" title="2022-05-26_14-43-54"><img alt="2022-05-26_14-43-54" data-base62-sha1="glLE2coIdHKJFpU35UnTR33VyyV" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7298b9dfec6156f253eca218d58f670cf70cc8c5_2_10x10.png" height="464" src="../../../images/7298b9dfec6156f253eca218d58f670cf70cc8c5_2_690x464.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7298b9dfec6156f253eca218d58f670cf70cc8c5_2_690x464.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7298b9dfec6156f253eca218d58f670cf70cc8c5_2_1035x696.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7298b9dfec6156f253eca218d58f670cf70cc8c5_2_1380x928.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-05-26_14-43-54</span><span class="informations">1628×1097 116 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>It looks like with this <code>tokenId</code>, you can possibly get the <code>cardID</code> using the <a href="https://stripe.com/docs/api/tokens/retrieve">Retrieve Token API</a>. Meaning you can pass the tokenID to a data flow and use the HTTP data operation to get the Card ID.</p>
+<p>One thing to be mindful of is checking to see if the card ID from Stripe is sensitive information, as you wouldn’t want to pass/store/touch credit card information more than necessary.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

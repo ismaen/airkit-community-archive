@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Set Variable From SF Trigger</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Set Variable From SF Trigger</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>I need to:</p>
+<ol>
+<li>Set two variables from a SF trigger, custom subscription.</li>
+<li>Run 1 of 2 data flows based on which variable has a value. For example, if Message_c contains a URL, I run data flow 1, if Message_c is empty, I run data flow 2.</li>
+</ol>
+<p>Please let me know if you need any additional information. Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/60_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Brooks_Naylor</div>
+          <div class="post_content">
+<p>Hey Chris! Good question.</p>
+<p>Both of these can be accomplished in the End Point Actions you can see on the right hand side of the studio when working with a Salesforce subscription.</p>
+<p>First you’ll want to set the Session Mapping for this subscription, so as an example, mine looked something like this:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/ykVKioKltDkGbulyzu2D8IWy5g9.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f0a7a2425eea0eabad2de4036ccfc1a20c3f228d.png" title="image"><img alt="image" data-base62-sha1="ykVKioKltDkGbulyzu2D8IWy5g9" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f0a7a2425eea0eabad2de4036ccfc1a20c3f228d_2_10x10.png" height="500" src="../../../images/f0a7a2425eea0eabad2de4036ccfc1a20c3f228d_2_603x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f0a7a2425eea0eabad2de4036ccfc1a20c3f228d_2_603x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f0a7a2425eea0eabad2de4036ccfc1a20c3f228d_2_904x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f0a7a2425eea0eabad2de4036ccfc1a20c3f228d.png 2x" width="603"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1028×852 48.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>With the Salesforce response, you’ll want to use the keyword “event” to access the returned data. In the screenshot below I’m capturing the Id and the MobilePhone values but those are dependent on your salesforce object you’re working with.</p>
+<p><img alt="image" data-base62-sha1="yWSJw6ITt5EdQCs398maFpe1vRF" height="409" src="../../../images/f4f1e1faec60a4fa962c22e4f23737a262a44a73.png" width="362"/></p>
+<p>Everything else if just through conditions on the endpoint actions. I put a dummy version of what that could look like in the screen shot.</p>
+<p>Personally I would test this out using a request catcher to make sure you’re accessing the data you need before using them in the studio, like this one <a href="https://requestcatcher.com/">https://requestcatcher.com/</a>. That way you can get the namespaces of what you need from Salesforce and ensure you’re receiving them in the API</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Thanks!</p>
+<p>Would I then be able to use the naming from “Variable” under “Set Variable” to call that data in my data flow?</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/8SrBsJar8t6h4xbh7BJidD5vuhV.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3e38f18f2565db4ee41b0e165e96c648f9111387.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="8SrBsJar8t6h4xbh7BJidD5vuhV" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3e38f18f2565db4ee41b0e165e96c648f9111387_2_10x10.png" height="295" src="../../../images/3e38f18f2565db4ee41b0e165e96c648f9111387_2_690x295.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3e38f18f2565db4ee41b0e165e96c648f9111387_2_690x295.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3e38f18f2565db4ee41b0e165e96c648f9111387.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3e38f18f2565db4ee41b0e165e96c648f9111387.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">771×330 26.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/aPHHFY7P5eWsTdnEHsd2IDFt4rK.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/4bedfdcb2b45e04ff7586c80c1f8dcdcfa067590.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="aPHHFY7P5eWsTdnEHsd2IDFt4rK" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4bedfdcb2b45e04ff7586c80c1f8dcdcfa067590_2_10x10.png" height="213" src="../../../images/4bedfdcb2b45e04ff7586c80c1f8dcdcfa067590.png" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">731×226 4.02 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/60_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Brooks_Naylor</div>
+          <div class="post_content">
+<p>You would need to pass those session variables as Inputs at the top of the Data Flow.</p>
+<p>So for example, you would create an “email” input at the top of your “Send Email” Data Flow, and then back in your End Point Actions, you would pass session.Contact_Email__C into the email input.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/2OwZGXY2D54CVxVSlNwZnS3at1n.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/13baa9aa5f8f590304dfbf94d91b894089c04429.png" title="image"><img alt="image" data-base62-sha1="2OwZGXY2D54CVxVSlNwZnS3at1n" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/13baa9aa5f8f590304dfbf94d91b894089c04429_2_10x10.png" height="441" src="../../../images/13baa9aa5f8f590304dfbf94d91b894089c04429_2_689x441.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/13baa9aa5f8f590304dfbf94d91b894089c04429_2_689x441.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/13baa9aa5f8f590304dfbf94d91b894089c04429_2_1033x661.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/13baa9aa5f8f590304dfbf94d91b894089c04429.png 2x" width="689"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1283×821 23.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Thanks!</p>
+<p>Is there any documentation that explains when to use “session”, “actor”, or “event” when working with variables? They all seem very similar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>If you’re looking for a crash course in variable scopes, you can find that <a href="https://support.airkit.com/docs/variable-namespaces">here</a>!</p>
+<p>The TL;DR is that they are similar conceptually: “session”, “actor”, and “event” all reference different variable scopes, which define where the variable is accessible. The “session” namespace is used for global variables, which are accessible all throughout a Journey. The “actor” namespace is used specifically for Actor properties, which needed to be defined in a specific way so that they can properly configure outgoing and incoming messages. (Variables in the Actor namespace are also global, but distinct from session variables in how they are used to initialize the Actor. <a href="https://support.airkit.com/docs/actors">Actors</a> discusses that concept more in depth, if you want to take a look!). Variables in the “event” namespace, meanwhile, can only be accessed during the <a href="https://support.airkit.com/docs/events">Event</a> that they’re a part of. It is often important to access this namespace when referencing information that is generated as part of an Event.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Thank you for those resources!</p>
+<p>In this project, would I need to use “result.sobject.Message__C” for my value rather than event.result.Message__C? Image below for reference.</p>
+<p><img alt="image" data-base62-sha1="ti2CbSX8OE3hyzYXOCvWnXNrnnh" height="335" src="../../../images/cd4927c32581c90f4b65d24649bf7b71533dba97.png" width="465"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<pre><code class="lang-auto">result.sobject.Message__c
+</code></pre>
+<p>is the more general reference, yes. If you’re working directly in a Data Flow or an App API, you don’t need to reference a namespace within it.</p>
+<p>If you’ve bound this object to, say, a Session variable, call it <code>variable_name</code>, then you would need to refer to it as</p>
+<pre><code class="lang-auto">session.variable_name.result.sobject.Message__c
+</code></pre>
+<p>Does that make sense?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>Still having an issue pulling a variable from this webhook.</p>
+<p>Webhook result<br/>
+<img alt="image" data-base62-sha1="1yFbwjtcZnL4QHNqTiEABhadh6C" height="379" src="../../../images/0aed4c963ad10ce13cf22a795c3cbc1298445136.png" width="684"/></p>
+<p>Naming the variable and value<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/iVAqBZiZXwsRe2ZfIrBJtNzRj2c.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/84a99dffb17176cc396a43627a48b0799280bafc.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="iVAqBZiZXwsRe2ZfIrBJtNzRj2c" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/84a99dffb17176cc396a43627a48b0799280bafc_2_10x10.png" height="253" src="../../../images/84a99dffb17176cc396a43627a48b0799280bafc_2_690x253.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/84a99dffb17176cc396a43627a48b0799280bafc_2_690x253.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/84a99dffb17176cc396a43627a48b0799280bafc.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/84a99dffb17176cc396a43627a48b0799280bafc.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">767×282 24.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Adding the name to the data flow<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/lEbZ97e1gAIWW1tuTpchkgCyj4o.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/97b8c78bd6e4ef1b0d763b53400d0af1f589b62c.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="lEbZ97e1gAIWW1tuTpchkgCyj4o" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/97b8c78bd6e4ef1b0d763b53400d0af1f589b62c_2_10x10.png" height="397" src="../../../images/97b8c78bd6e4ef1b0d763b53400d0af1f589b62c_2_690x397.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/97b8c78bd6e4ef1b0d763b53400d0af1f589b62c_2_690x397.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/97b8c78bd6e4ef1b0d763b53400d0af1f589b62c.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/97b8c78bd6e4ef1b0d763b53400d0af1f589b62c.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">712×410 33.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Variable added to dataflow<br/>
+<img alt="image" data-base62-sha1="yh6ETbcYakv8v7cz2kPGI5Hsa3L" height="221" src="../../../images/f038f96394d9ddb33bbe3cf45dffbbade765a941.png" width="405"/></p>
+<p>Trying to print result in email, no result returned.<br/>
+<img alt="image" data-base62-sha1="eXDVyLAh3f9UaD8FaYMWkiqoFNl" height="139" src="../../../images/68dc6e5d275887b11ae68bc91db423bfc3c89237.png" width="491"/></p>
+<p>I think it is a problem with the variable value?</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>hi <span class="mention">@Chris_Phillips</span>, yeah this looks like something with the data that you’re passing into the data flows. What does your Mapping step look like? If the Journey event payload is <code>payload.result</code>, then for the variables you would do something like event.sobject.Account_c.</p>
+<p>Also for the variables, i’d recommend using the namespaces to be more precise. so instead of the variable <code>name</code>, it would be <code>session.name</code> etc…</p>
+<p>I cover how to pass data from a sf subscription in this video. Let me know if its helpful!</p>
+<p></p><div class="video-container">
+<video controls="" height="100%" preload="metadata" width="100%">
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b5d1786917b01c2e17ecaea1637be14b263e79d8.mp4"/>
+<a href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b5d1786917b01c2e17ecaea1637be14b263e79d8.mp4">https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b5d1786917b01c2e17ecaea1637be14b263e79d8.mp4</a>
+</video>
+</div><p></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Thanks, it’s working now! I just needed to use event.sobject.** in my data flow end point action.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

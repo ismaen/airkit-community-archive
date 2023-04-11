@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Getting a valid phone number using IsPhone() And Format_phone()</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Getting a valid phone number using IsPhone() And Format_phone()</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p><img alt="Mike" height="24" src="../../../images/f5691cd3808846d3a7b5dbe0948f7f7c7f80d366.png" width="24"/> <strong><span class="mention">@Mike</span>:</strong><br/>
+Does FORMAT_PHONE() also share similar functionality as ISPHONE()? we are testing this and started using this dummy <code>"Failed to add identifiers to state [object Object], caused by "Invalid phone number"</code> in checking the logs at session start I see that the FORMAT_PHONE() is looks to be working correctly, but on Initialize Actor it throws the error above.</p>
+<p>i tested using <code>ISPHONE(14011234567)</code>  and it returns false, and when i try <code>FORMAT_PHONE( "4011234567",  "E164",  "US")</code> it throws an error saying its invalid in <a href="https://studio.airkit.com/play/">https://studio.airkit.com/play/</a></p>
+<p><img alt="sean" height="24" src="../../../images/c8f59496d18c5453106f43eb795317a9feb29e22.png" width="24"/> <strong><span class="mention">@sean</span>:</strong> They are the same, but in order to be a phone number it needs to be a string, and it needs to include the country code.</p>
+<pre><code class="lang-auto">ISPHONE("+14011234567")
+</code></pre>
+<pre><code class="lang-auto">FORMAT_PHONE( "+14011234567",  "E164",  "US")
+</code></pre>
+<p>We have to be pretty particular about this because we have to ensure that we will be able to dial the number.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

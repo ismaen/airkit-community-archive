@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Masking Phone number</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Masking Phone number</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tanmay.sardar</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@ismaen</span></p>
+<p>we need some information on phone number partial masking<br/>
+for example phone number 6 digit should be masked and rest of the 4 digit should be normal.</p>
+<p>Thanks,<br/>
+Tanmay</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>This gets tricker if you’re trying to implement partial masking in a <a href="https://support.airkit.com/reference/phone-input-web-control">Phone Input</a> Web Control, but if you’re just looking to display some partially masked phone numbers in a <a href="https://support.airkit.com/reference/label-web-control">Label</a>, you can handle all of this with some Airscript!</p>
+<p>If you know for a fact that you’re only going to be dealing with US-based numbers, you can use something like the following expression, where <code>example_phone</code> is a phone number with 10 expected digits outside of the country code:</p>
+<pre><code class="lang-auto">"******{{SUBSTRING(
+  FORMAT_PHONE(
+   example_phone,
+    "NATIONAL"
+  ),
+  10
+)}}"
+</code></pre>
+<p>This uses the <a href="https://support.airkit.com/reference/format_phone">FORMAT_PHONE</a> function to turn the phone number into a string: the phone number without the country code. Then it uses <a href="https://support.airkit.com/reference/substring">SUBSTRING</a> to pull only the last 4 characters of the returned string and appends “******” to the beginning, to simulate masking.</p>
+<p>For masking that works more generally, regardless of the digit conventions of a phone number’s local, you can do clever things using Airscript functions like <a href="https://support.airkit.com/reference/length">LENGTH</a>, but the general principle here should be sound.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/386_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">chandu.singh</div>
+          <div class="post_content">
+<p>is that working for you? not working for me<br/>
+its only showing me first 3 numbers<br/>
+<img alt="image" data-base62-sha1="oSZbsBqBGQ48mKqfPNPQBdQmkqG" height="241" src="../../../images/ae6b66963a498dff254dd4edc7f22ff585f31df6.png" width="575"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>It works for me if I’m displaying phone numbers in a Label! As I said, it’s trickier inside of an input box.</p>
+<p>Actually, I’m not sure there’s a good way to do this out-of-the-box. The <a href="https://support.airkit.com/reference/secure-text-input-web-control">Secure String Input</a> Web Control can optionally obscure passwords as they’re being written (and store the given data more securely), but it can’t obscure only part of the secure string.</p>
+<p>Can you go into a little more detail as to the use case here? Why do you want this displayed in an input box? What part of it is meant to be editable, if you don’t want to show the whole phone number?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tanmay.sardar</div>
+          <div class="post_content">
+<p><span class="mention">@Chandra_Bergmann</span> we want to display in phone input box but if we are trying with an label its working fine but our requirement doesn’t meet that we need to display on phone input box as user will edit the phone input</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@tanmay.sardar</span>!</p>
+<p>I was able to build out something similar to what you are looking for. Check out this clip!<br/>
+</p><div class="video-container">
+<video controls="" height="100%" preload="metadata" width="100%">
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e9f2dc9d4b553bd3ac9ad8e5e6b6619c823518b1.mp4"/>
+<a href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e9f2dc9d4b553bd3ac9ad8e5e6b6619c823518b1.mp4">https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e9f2dc9d4b553bd3ac9ad8e5e6b6619c823518b1.mp4</a>
+</video>
+</div><br/>
+Here is the attached zip of the app that you can take a look at.<br/>
+<a class="attachment" href="/uploads/short-url/eMMX8O7x5C3LaUtQyXR7T9V9CKX.zip">Mask_Phone_Number-2022-11-30T17_45_16.404Z-full.branch.zip</a> (18.0 KB)<p></p>
+<p>So the way this works is by working with the <code>Is Visible</code> property on both the phone input and the contianer that holds the label/edit button. You also want to initialize a boolean variable to control the state of the visibility properties of both the container and the inputs.</p>
+<h2>
+<a class="anchor" href="#phone-input-1" name="phone-input-1"></a>Phone input</h2>
+<p>looks like this. <code>edit_phone</code> is a boolean variable that i created.</p>
+<p><img alt="image" data-base62-sha1="r2gnGHZ2EXGrN2ImSev9ZUJycP8" height="345" src="../../../images/bd7c38532c56df8377a869967ddc117adc4e4f12.png" width="406"/><br/>
+<img alt="image" data-base62-sha1="od7H9Gu32V825Jj50ZnLjvQzO1j" height="418" src="../../../images/a9aff7130ef4982af80be3a78e92b1ad63b474a1.png" width="420"/><br/>
+<img alt="image" data-base62-sha1="6jMWrAJorXq7YJcQocHNaXxUPaE" height="408" src="../../../images/2c49b713828eaf8973f7fb0fd9e716701379a250.png" width="393"/></p>
+<h2>
+<a class="anchor" href="#container-2" name="container-2"></a>Container</h2>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/xffGw8IYpRzdzLkq9wKaLW0aOzg.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e90122f8938d543d48bd27799d73595cb0e34e82.png" title="image"><img alt="image" data-base62-sha1="xffGw8IYpRzdzLkq9wKaLW0aOzg" data-dominant-color="F9F9FB" height="185" src="../../../images/e90122f8938d543d48bd27799d73595cb0e34e82_2_690x185.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e90122f8938d543d48bd27799d73595cb0e34e82_2_690x185.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e90122f8938d543d48bd27799d73595cb0e34e82_2_1035x277.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e90122f8938d543d48bd27799d73595cb0e34e82_2_1380x370.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1489×400 49.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>This is the expression that i added to the label (taking the airscript <span class="mention">@Chandra_Bergmann</span> wrote):</p>
+<pre><code class="lang-auto">IF(ISNOTEMPTY(phone_input), "******{{SUBSTRING(FORMAT_PHONE(phone_input, "NATIONAL"), 10)}}", NULL)
+</code></pre>
+<h2>
+<a class="anchor" href="#edit-button-3" name="edit-button-3"></a>Edit button</h2>
+<p>And then lastly, the edit button<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/lGc75o0v77YiWIlReYYKUjpTQtL.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/97f2b7409dcec2b5b1bebcf8047d7d68976d857d.png" title="image"><img alt="image" data-base62-sha1="lGc75o0v77YiWIlReYYKUjpTQtL" data-dominant-color="FBFBFB" height="209" src="../../../images/97f2b7409dcec2b5b1bebcf8047d7d68976d857d_2_690x209.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/97f2b7409dcec2b5b1bebcf8047d7d68976d857d_2_690x209.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/97f2b7409dcec2b5b1bebcf8047d7d68976d857d_2_1035x313.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/97f2b7409dcec2b5b1bebcf8047d7d68976d857d.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1089×331 22 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Hope this helps!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/386_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">chandu.singh</div>
+          <div class="post_content">
+<p>thanks for reply <span class="mention">@ismaen</span><br/>
+but we need masked phone number into a phone_input and edit option should be on the same phone input so that we can  and it should be formatted also</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How can I assign the same Phone number resource to all the apps</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How can I assign the same Phone number resource to all the apps</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Hello all,</p>
+<p>Is there anyway I can assign same phone number to the all Airkit apps.<br/>
+one phone number for QA<br/>
+second phone number for PROD.</p>
+<p>currently, for each app, I must need to create two phone numbers and assign it to the app. for ex, If I have 3 apps utilizing the sms module, I must need to have 6 unique phone numbers(if 2 environments) and would be lot of maintenance required.<br/>
+Also, we would like to send all the communications to the customer from one phone number rather different phone number per app. How can I do that? If it’s product limitation, can we have this as enhancement request ?</p>
+<p>Also, can Airkit supports short code to send sms ?</p>
+<p>Thanks,<br/>
+Narendra</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@Narendra</span>, at the moment there is a 1:1 relationship per deployment and phone number, which means you will have to have a seperate phone number for DEV/QA/PROD. You can unassociate a phone number from a deployment by unpublishing that deployment if you’d like to reuse that phone number though.</p>
+<p>Also at the moment for sending communications through one phone number for multiple apps isn’t possible, although notifications are moving in that direction on our roadmap as they are for outbound SMS. One alternative as a workaround possibly is to set up some sort of “notification Hub app” that is triggered by an App API, and you can have your apps call that “notification hub app” and pass the <code>actor.phone</code>, <code>journey id</code>, and maybe the <code>session link</code>. Just thinking out loud here.</p>
+<p>And yes, Airkit does support short codes.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

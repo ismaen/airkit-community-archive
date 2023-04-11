@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Repeating checkbox list with date input</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Repeating checkbox list with date input</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/21_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Mike_Cammon</div>
+          <div class="post_content">
+<p>I’m trying to build a checkbox list that displays a series of selections, that when an option is picked, it displays a date input field. The user needs the ability to select multiple options from the checkbox list, and each display a date field. I then need to use that data downstream to generate a PDF and make an API call to an external system (standard http request).</p>
+<p>I’m struggling with two things: 1) data model, 2) conditional logic to hide/display the date based on selection</p>
+<p>For my data model, I’ve tried using a Checkbox list expression with all the values. I’ve also tried building an app object to store all the tests in then using a data flow to return those values to the front end and bind it to the checkbox list. Any help would be much appreciated!</p>
+<p>I want it to appear like this on the app<br/>
+<img alt="image" data-base62-sha1="4pujPBPBGNl2c5jEspN9CjPyzNw" height="168" src="../../../images/1eea4e08c3aa84d009208b5c1989e775104bf74a.png" width="438"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/62_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">dinesh</div>
+          <div class="post_content">
+<p>Hey Mike,</p>
+<p>One approach is to create an array of items like the following:</p>
+<pre><code class="lang-auto">[
+{
+  "id": "chest_xray", 
+  "name": "Chest X-ray", 
+  "test_date": "06/05/2021",
+  "enabled": true
+}
+]
+
+</code></pre>
+<p>You can then use:</p>
+<ul>
+<li>item.name for the checkbox label</li>
+<li>item.test_date for the date binding</li>
+<li>item.enabled on whether the date container visibility</li>
+</ul>
+<p>Clicking the checkbox would set the enabled attribute in the array via an action.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Finding similar items from a list of Text(identical to a LIKE condition)</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Finding similar items from a list of Text(identical to a LIKE condition)</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/9_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Ankit_Chaudhari</div>
+          <div class="post_content">
+<p>I am trying to write a query to solve the below question.</p>
+<p>Names = [“Ankit”, “Ismaen”, “Drew”, “Ankit Chaudhari”, “John”]<br/>
+I want to return all names that have “Ank” in them.<br/>
+So my result would be like: [“Ankit”, “Ankit Chaudhari”]</p>
+<p>I know there is STRING_FIND that looks for a particular substring within a string, can’t seem to find anything similar when checking for list of text.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Great question!</p>
+<p>Essentially you loop through and check to see if any of the items in the array exist in the string using <code>STRING_FIND()</code> by checking if its not equal to -1. You also want to make sure you either make the items uniform by passing it through a <code>LOWERCASE()</code> function.</p>
+<p>Hope this helps!</p>
+<pre><code class="lang-auto">FROM
+  name
+IN
+  names
+WHERE
+  STRING_FIND(LOWERCASE(name), "ank") &lt;&gt; -1
+SELECT
+  name
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/7RExaDONR478VQx6V38yVVmZSFV.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/371fdde1f2d5592959c8afa31fad6921c7fd3b97.png" title="2022-02-16_14-27-03"><img alt="2022-02-16_14-27-03" data-base62-sha1="7RExaDONR478VQx6V38yVVmZSFV" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/371fdde1f2d5592959c8afa31fad6921c7fd3b97_2_10x10.png" height="500" src="../../../images/371fdde1f2d5592959c8afa31fad6921c7fd3b97_2_548x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/371fdde1f2d5592959c8afa31fad6921c7fd3b97_2_548x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/371fdde1f2d5592959c8afa31fad6921c7fd3b97_2_822x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/371fdde1f2d5592959c8afa31fad6921c7fd3b97_2_1096x1000.png 2x" width="548"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-02-16_14-27-03</span><span class="informations">1246×1136 52.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to put hyperlinks inline with other text</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to put hyperlinks inline with other text</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/358_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">camerondoane</div>
+          <div class="post_content">
+<p>Hi there, I was wondering how you put hyperlinks inline with other text?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Do you mean that you want to embed links into a Label (the Airkit equivalent of what I’m doing <a href="https://support.airkit.com/docs/welcome">when I do this</a>)? I don’t believe this is a function Labels currently allow, and I’m under the impression that this is by design: Airkit apps are meant to be mobile-first, and if you have a big wall of text peppered with hyperlinks, it’s easy to accidentally press the wrong one with your big ol’ finger. Clicking on a hyperlink transfers users away from their Journey, too, so best practice is to use hyperlinks sparingly and frame them as obvious calls to action by making them <a href="https://support.airkit.com/reference/hyperlink-web-control">their own separate Web Control</a>.</p>
+<p>That isn’t to say that you can’t change the placement of hyperlinks in relation to other text by changing the <a href="https://support.airkit.com/reference/common-style-properties-of-web-controls#layout">layout</a> of a <a href="https://support.airkit.com/reference/container-web-control">Container</a> that holds both a Label and a Hyperlink! If your main concern is mostly a matter of aesthetics, tinkering around with the styling can go a long way.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Scheduling + Payments</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Scheduling + Payments</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/476_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Ben_Knaus</div>
+          <div class="post_content">
+<p>2 questions:</p>
+<p>First: Is there a way to set up the calendar to NOT allow booking for the same day and the next day (i.e. need to give a mover some notice so want to block their calendar for “today” and “tomorrow”: is there a way to do this?)</p>
+<p>Second thing: Want to mock up a payment part on an app: looks like can only do so if there’s a payment source like stripe set up? Can I put in placeholder design (for the purposes of showing in a prototype? ).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/131_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">grakozy</div>
+          <div class="post_content">
+<p>Hey Ben,<br/>
+For your first question. If you’re using a <a href="https://support.airkit.com/reference/date-picker-web-control" rel="noopener nofollow ugc">date picker control</a>, under the settings you can set the Minimum Days Out to be the number of days from today you want the starting date to be. 1 = today, 2 = tomorrow, etc.</p>
+<p>For your second question, you can use <a href="https://support.airkit.com/reference/secure-text-input-web-control" rel="noopener nofollow ugc">Secure String Inputs</a> and mock up the form to look like a Credit Card form using Card Number, CVV, Exp Date as input fields.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Additionally, if you are using the scheduler control and schedules builder, there are some ways write to your scheduler airdata table an additional record when you select a date/time</p>
+<p>My time slots for this calendar are from 7am-6pm as you can see here and there are no split slots:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/mtaoBLNHIiqcUbxVbwXDb0mm0St.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9d7be3f472abe136ff56c6d5176e917c9b905e21.png" title="image"><img alt="image" data-base62-sha1="mtaoBLNHIiqcUbxVbwXDb0mm0St" data-dominant-color="D4E3F7" height="500" src="../../../images/9d7be3f472abe136ff56c6d5176e917c9b905e21_2_687x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9d7be3f472abe136ff56c6d5176e917c9b905e21_2_687x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9d7be3f472abe136ff56c6d5176e917c9b905e21_2_1030x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9d7be3f472abe136ff56c6d5176e917c9b905e21_2_1374x1000.png 2x" width="687"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1568×1140 159 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Then on the value changed event, i run a data flow that will add <code>1</code> to the date for the start time and end time, and also add <code>1</code> to the <code>recurrence</code> value.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/uzNloU4Qd0e0MQtPUAuxN8VtO9d.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d64d1745dc50bb7e9e9b4e9c36c34a13cebf6b6b.png" title="image"><img alt="image" data-base62-sha1="uzNloU4Qd0e0MQtPUAuxN8VtO9d" data-dominant-color="FBFBFC" height="500" src="../../../images/d64d1745dc50bb7e9e9b4e9c36c34a13cebf6b6b_2_687x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d64d1745dc50bb7e9e9b4e9c36c34a13cebf6b6b_2_687x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d64d1745dc50bb7e9e9b4e9c36c34a13cebf6b6b_2_1030x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d64d1745dc50bb7e9e9b4e9c36c34a13cebf6b6b_2_1374x1000.png 2x" width="687"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1568×1140 118 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p></p><div class="video-container">
+<video controls="" height="100%" preload="metadata" width="100%">
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/cdf86b6c5e1f9207d8f8d2f8aa1f042dade92a28.mp4"/>
+<a href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/cdf86b6c5e1f9207d8f8d2f8aa1f042dade92a28.mp4">https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/cdf86b6c5e1f9207d8f8d2f8aa1f042dade92a28.mp4</a>
+</video>
+</div><p></p>
+<p>Here’s an export of the app!<br/>
+<a class="attachment" href="/uploads/short-url/u95CqS1lXWVrCbJdu8gciinU3Yz.zip">Untitled_App_14-2022-10-24T16_45_12.719Z-full.branch.zip</a> (21.1 KB)</p>
+<p>regarding the stripe/credit card control – you can just add a string to the datasource and it’ll appear in the stage. Nothing will happen but at least you’ll see the control:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/6Gl2rmOmfpVCPxTDvwX1avdkr75.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2ed645a4ad22fa780b9282877df9e85884f5b473.png" title="image"><img alt="image" data-base62-sha1="6Gl2rmOmfpVCPxTDvwX1avdkr75" data-dominant-color="F9FAFC" height="476" src="../../../images/2ed645a4ad22fa780b9282877df9e85884f5b473_2_690x476.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2ed645a4ad22fa780b9282877df9e85884f5b473_2_690x476.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2ed645a4ad22fa780b9282877df9e85884f5b473_2_1035x714.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2ed645a4ad22fa780b9282877df9e85884f5b473_2_1380x952.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1568×1083 97.8 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Checkbox list with json input data</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Checkbox list with json input data</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Hello Team,</p>
+<p>I am experiencing problems with Checkbox list component. If I just have the list items as [ “Item 1”, “Item 2”, “Item 3” ], the checkbox clicking functionality is working as expected.</p>
+<p>But if I have the checkbox list data input as "[{ “lob”: “Item 1”, “policy”: “1232134” }, { “lob”: “Item 2”,“policy”: “1232134” },{ “lob”: “Item 3”, “policy”: “1232134” }], then checkbox clicking functionality is not working as expected. On clicking on checkbox, nothing is selected but if I click on the label, it’s working fine.</p>
+<p>Not sure why it’s not working when clicking on Checkbox if the data is in JSON format. Attached my app here. Could you please help me to fix this problem.</p>
+<p><a class="attachment" href="/uploads/short-url/lzjk9HLUy18egEqN1DLuXis467Z.zip">Untitled_App-2022-08-15T16_23_06.395Z-full.branch.zip</a> (17.7 KB)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@Narendra</span>, interesting this seems like an issue with the checkbox list control. Let me take a look and also raise it with our engineering team.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@ismaen</span>! Any luck with this ?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>We found the issue, which is essentially that the events are not bubbling up to the parent container when you have a child container.</p>
+<p>A workaround for this at the moment is to essentially take the logic on the selectable container of the checkbox list</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/yPVYuCLAuHo28cK0oBIP2cXlSVJ.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f428d3e3666653279746d8f41621667dff7cea5b.png" title="image"><img alt="image" data-base62-sha1="yPVYuCLAuHo28cK0oBIP2cXlSVJ" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f428d3e3666653279746d8f41621667dff7cea5b_2_10x10.png" height="179" src="../../../images/f428d3e3666653279746d8f41621667dff7cea5b_2_690x179.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f428d3e3666653279746d8f41621667dff7cea5b_2_690x179.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f428d3e3666653279746d8f41621667dff7cea5b_2_1035x268.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f428d3e3666653279746d8f41621667dff7cea5b.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1251×326 33.4 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>And add it to the individual checkbox.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/sNKcbuPWNYQSCOFBYgtmckboA4u.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c9dc68cef945fe7073f5bc1c10ee183b32e30816.png" title="image"><img alt="image" data-base62-sha1="sNKcbuPWNYQSCOFBYgtmckboA4u" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c9dc68cef945fe7073f5bc1c10ee183b32e30816_2_10x10.png" height="177" src="../../../images/c9dc68cef945fe7073f5bc1c10ee183b32e30816_2_690x177.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c9dc68cef945fe7073f5bc1c10ee183b32e30816_2_690x177.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c9dc68cef945fe7073f5bc1c10ee183b32e30816_2_1035x265.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c9dc68cef945fe7073f5bc1c10ee183b32e30816.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1229×317 33.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>With that said, this is being looked at by engineering and I will keep you updated on this!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@ismaen</span> for the work around. I will give it a try and let you know the outcome.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

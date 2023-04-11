@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How can I implement three separate buttons for Type, Draw and Upload Signature</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How can I implement three separate buttons for Type, Draw and Upload Signature</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>I have a requirement that need to have three buttons in the Signature.</p>
+<ol>
+<li>Type button to prepopulate the signature from input field. Prepopulating signature from input filed is already done.</li>
+<li>Draw button to allow user to draw their own signature.</li>
+<li>Upload button to upload signature. - How can I have this button in the Signature control ?</li>
+</ol>
+<p>How can I achieve this requirement? With current signature control, I can have only Draw button or Type button but not both by default. How do I separate these buttons so that as an end user I could clearly see what options I have.</p>
+<p>Thanks,<br/>
+Narendra</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p>Sounds like you’re looking to configure <a href="https://support.airkit.com/reference/signature-control">Signature Controls</a> to accept multiple forms of input. I don’t believe this works neatly out-of-the-box: a Signature Control can either be in Init Mode <strong>Draw</strong> or <strong>Type</strong>. <strong>Draw</strong> allows users to draw their own signature, while <strong>Type</strong> generates a signature <a href="https://support.airkit.com/reference/the-asset-data-type">Asset</a> based on a given Text value.</p>
+<p>You can insert two Signature Controls onto a single Web Page, one in Init Mode <strong>Draw</strong> and the other in <strong>Type</strong>,  and then use the <strong>Is Visible</strong> Property to change which Signature Control is visible based on Buttons previously selected – Buttons that you’ll have to insert and configure manually.</p>
+<p>Uploading the signature can be tied to the Action Chain associated with the <strong>Save</strong> Button within the Signature Control being clicked.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Thanks Chandra! I did implement this fashion but facing some challenges.</p>
+<ol>
+<li>Signature is not coming up as expected and seeing errors in the debug.<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/axIjRwLxpLCbLFtGPFBleO3wmF9.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/49e563bf5a92247727391576f8cc268104c3053f.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="axIjRwLxpLCbLFtGPFBleO3wmF9" data-dominant-color="F8F8F8" height="216" src="../../../images/49e563bf5a92247727391576f8cc268104c3053f_2_690x216.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/49e563bf5a92247727391576f8cc268104c3053f_2_690x216.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/49e563bf5a92247727391576f8cc268104c3053f_2_1035x324.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/49e563bf5a92247727391576f8cc268104c3053f_2_1380x432.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1791×561 59.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div>
+</li>
+<li>If I don’t save Typed signature and switching between draw and type signatures, and I am losing the prepopulated typed signature and typed control allowing me to draw signature.<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/cIgAMonSPHY4tRlHp3yvTjE5CWK.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/591b1e01c8037c05f8634e7eca35389867b5ca0a.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="cIgAMonSPHY4tRlHp3yvTjE5CWK" data-dominant-color="F9FAFA" height="430" src="../../../images/591b1e01c8037c05f8634e7eca35389867b5ca0a_2_690x430.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/591b1e01c8037c05f8634e7eca35389867b5ca0a_2_690x430.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/591b1e01c8037c05f8634e7eca35389867b5ca0a.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/591b1e01c8037c05f8634e7eca35389867b5ca0a.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">753×470 14.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div>
+</li>
+</ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@Narendra</span>! can you show what is configured on the “Save Button” that is throwing those errors?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>I have created short video with the issues I have on the Typed Signature.<br/>
+<strong>First Video:</strong> Created new app and I see that Typed signature is displaying as expected. But if I switch between Type and Draw signature without saving signature, I am losing the Typed signature. You can see that in the attached diagram.<br/>
+<video controls="" controlslist="nodownload" preload="metadata"></video></p>
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/aed6d45e4c79be3e93e72db8fb0137cea006fed6.mp4" type="video/mp4"/>
+<p><strong>Second Video:</strong> Having the same problem but also, the typed signature is not coming up as expected. Had the same style as I have in the other app.<br/>
+<video controls="" controlslist="nodownload" preload="metadata"></video></p>
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3dc64088b6ed353ab17eb8e38cd414084162c465.mp4" type="video/mp4"/>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey Narendra, can you attach the sample app here? It’ll be easier to debug and see what is going on for me.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Narendra</div>
+          <div class="post_content">
+<p>Here is the one. I am trying to implement three signature controls efficiently. Not sure how to achieve this. facing some challenges as I mentioned above.</p>
+<p><a class="attachment" href="/uploads/short-url/1nophEH01d1XJ9b2rKpVAcPY7gf.zip">Untitled_App_2-2022-12-29T14_08_26.905Z-full.branch.zip</a> (32.9 KB)</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

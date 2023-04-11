@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to dynamically pull data into PDF</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to dynamically pull data into PDF</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/358_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">camerondoane</div>
+          <div class="post_content">
+<p>Is there anything that can help explain how to pass object data across forms and then pull it into the PDF at the end?  The documentation does good about showing the pieces, but I am having a hard time putting it all together in a flow.  If there is anything, even an example I can import could be helpful so I can just walk through it and replicate.  I still think something isn’t clicking when it comes to data and pull it into the PDF “data to fill” piece.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey Cam, great question! So there are a few parts to connecting it all of the pieces together.</p>
+<ol>
+<li>
+<p>Making sure the PDF form is <a href="https://www.adobe.com/acrobat/resources/how-to-create-fillable-pdf.html">prepared properly</a> so that the data operation can fill it. I use Adobe Acrobat and use the “Prepare Form” in the toolbar to do this. This helps with figuring out what form fields are available to fill. Otherwise, you can use the <a href="https://support.airkit.com/reference/the-html-to-pdf-data-operation">HTML to PDF data operation</a> as well.</p>
+</li>
+<li>
+<p>The variables bindings on your input boxes that are set on your web flow must be passed to your data flow.</p>
+</li>
+<li>
+<p>Your data flow has to include the proper input variables and the fill pdf data operation has to be setup to fill your pdf.</p>
+</li>
+</ol>
+<p>Here’s a video of myself walking through a simple fill PDF build.</p>
+<p></p><div class="video-container">
+<video controls="" height="100%" preload="metadata" width="100%">
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e57c3b1ff2162d041df9b0c70762310d9fa05021.mp4"/>
+<a href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e57c3b1ff2162d041df9b0c70762310d9fa05021.mp4">https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e57c3b1ff2162d041df9b0c70762310d9fa05021.mp4</a>
+</video>
+</div><p></p>
+<p>I’ve also exported a simple example that i hope is useful below:</p>
+<p><strong>Exported App:</strong><br/>
+<a class="attachment" href="/uploads/short-url/aRqID1mTYtHnF7QkhjL18aDaSUj.zip">PDF_Upload-2022-06-23T15_24_22.833Z-full.branch.zip</a> (49.9 KB)<br/>
+<strong>Example prepared PDF:</strong><br/>
+<a class="attachment" href="/uploads/short-url/kSTXX4eXOZeqGcT5IwCazkdkO8F.pdf">PDF Fill - example.pdf</a> (34.9 KB)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/17_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ian</div>
+          <div class="post_content">
+<p>Just in case you’re having trouble getting data all the way through to the PDF fill step, here are some suggestions:</p>
+<p>I’m guessing you’re using variables that are scoped per web page / flow - is that right?</p>
+<p>What I would recommend is creating an object that will contain all the data  at the session level. That will allow you to append responses from each page along the journey.</p>
+<p><strong>Something like this</strong><br/>
+{“submission”:<br/>
+{“contact_info”: {“name”: “bob", “phone”:“2125550100”},<br/>
+{“page_2”: {“item_1”: “test”} <strong>and so on</strong><br/>
+}</p>
+<p>I’d recommend setting up an object in AirData that corresponds to this structure. That way when the session starts, you can just create an empty Submission and update it along the way.</p>
+<p><span class="mention">@ismaen</span> anything you’d add?  That’s how I usually handle multi-page forms, but I’m always looking for a better way!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p><span class="mention">@ian</span> yeah essentially updating that session level variable is one way. Or you can alternatively change the variable bindings on the inputs to a session level variable of your object type as well.</p>
+<p></p><div class="video-container">
+<video controls="" height="100%" preload="metadata" width="100%">
+<source src="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/bebb1d5c9972fd77a77c66427128e341f573d4b3.mp4"/>
+<a href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/bebb1d5c9972fd77a77c66427128e341f573d4b3.mp4">https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/bebb1d5c9972fd77a77c66427128e341f573d4b3.mp4</a>
+</video>
+</div><p></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

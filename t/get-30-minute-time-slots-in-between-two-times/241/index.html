@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Get 30 minute time slots in between two times</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Get 30 minute time slots in between two times</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>So i want to get 30 minute time slots between two times. I have a <code>start_time</code> that looks like this:</p>
+<pre><code class="lang-auto">{
+  "date": {
+    "day": 22,
+    "month": 8,
+    "year": 2022
+  },
+  "time": {
+    "hour": 9,
+    "minute": 0,
+    "second": 0,
+    "millisecond": 0
+  },
+  "timeZone": "America/Los_Angeles"
+}
+</code></pre>
+<p>and an <code>end_time</code> like this:</p>
+<pre><code class="lang-auto">{
+  "date": {
+    "day": 22,
+    "month": 8,
+    "year": 2022
+  },
+  "time": {
+    "hour": 10,
+    "minute": 30,
+    "second": 0,
+    "millisecond": 0
+  },
+  "timeZone": "UTC"
+}
+</code></pre>
+<p>How do i create 30 minute time slots in between of those formatted as dateTime objects? Essentialy i’d like my output to be something like:</p>
+<pre><code class="lang-auto">[
+{
+  "date": {...},
+  "time": {
+    "hour": 9,
+    "minute": 0,
+    "second": 0,
+    "millisecond": 0
+  },
+  "timeZone": "America/Los_Angeles"
+},{
+  "date": {...},
+  "time": {
+    "hour": 9,
+    "minute": 30,
+    "second": 0,
+    "millisecond": 0
+  },
+  "timeZone": "America/Los_Angeles"
+}
+,{
+  "date": {...},
+  "time": {
+    "hour": 10,
+    "minute": 0,
+    "second": 0,
+    "millisecond": 0
+  },
+  "timeZone": "America/Los_Angeles"
+}
+]
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Nevermind, figured this one out!</p>
+<pre><code class="lang-auto">FROM
+  offset
+IN
+  RANGE(
+    0,
+    DATETIME_DELTA(start_time, end_time).time.minute,
+    30
+  )
+SELECT
+  ADD_TO_DATETIME(start_time, offset, "minutes")
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/299_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeff_groupwork</div>
+          <div class="post_content">
+<p><span class="mention">@ismaen</span> I’m curious if this can be adapted to take now() to get a list of time at 15 minute interval.</p>
+<p>Like if I have check time of 905am.  I want to see time slot of 830, 845, 900, 915am.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p><span class="mention">@jeff_groupwork</span> oh interesting. something like this?</p>
+<pre><code class="lang-auto">FROM
+  offset
+IN
+  RANGE(
+    0,
+    DATETIME_DELTA(
+      NOW(),
+      ADD_TO_DATETIME(NOW(), 60, "minutes")
+    ).time.minute,
+    15
+  )
+SELECT
+  ADD_TO_DATETIME(
+    SUBTRACT_FROM_DATETIME(NOW(), 30, "minutes"),
+    offset,
+    "minutes"
+  )
+</code></pre>
+<p>This essentially outputs increments of 15 minutes with the current time in between:</p>
+<p>(formatted for readability, but the output would be <code>datetimes</code>)</p>
+<pre><code class="lang-auto">[
+  "2022-08-16T23:54:28Z",
+  "2022-08-17T00:09:28Z",
+  "2022-08-17T00:24:28Z",
+  "2022-08-17T00:39:28Z",
+  "2022-08-17T00:54:28Z"
+]
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

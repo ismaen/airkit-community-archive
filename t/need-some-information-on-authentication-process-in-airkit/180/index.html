@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Need some information on Authentication process in Airkit</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Need some information on Authentication process in Airkit</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tanmay.sardar</div>
+          <div class="post_content">
+<p>Hi Community,<br/>
+i was wondering can we used microsoft credential for authentication purpose in airkit?<br/>
+Like some of them like auth 2.0, azure,googleAuth</p>
+<p>is there any possiblw way to authenticate with microsoft credential</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@tanmay.sardar</span>! What are you trying to authenticate?</p>
+<p>You can authenticate a journey using a few different methods:</p>
+<ul>
+<li><a href="https://support.airkit.com/docs/oauth-20-auth0">OAuth 2.0 - Auth0</a></li>
+<li><a href="https://support.airkit.com/docs/setting-up-google-oauth">OAuth 2.0 - Google</a></li>
+<li><a href="https://support.airkit.com/docs/oauth-20-okta">OAuth 2.0 - Okta</a></li>
+</ul>
+<p>and what you might be looking for <a href="https://support.airkit.com/docs/azure-ad-b2c">Authenticating using Azure AD B2C</a>.</p>
+<p>The way that this works is that you can use Azure AD B2C as the OAuth vendor and then leverage any SAML provider that you’d like to authenticate, with Microsoft being one of them.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/l395WPcFHah6cSg1uOqiVqVA88D.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9388b6b64cb3adc46b4b143926ab4980d75640a7.png" title="4243864-2022-05-25_17-14-08"><img alt="4243864-2022-05-25_17-14-08" data-base62-sha1="l395WPcFHah6cSg1uOqiVqVA88D" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9388b6b64cb3adc46b4b143926ab4980d75640a7_2_10x10.png" height="156" src="../../../images/9388b6b64cb3adc46b4b143926ab4980d75640a7_2_690x156.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9388b6b64cb3adc46b4b143926ab4980d75640a7_2_690x156.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9388b6b64cb3adc46b4b143926ab4980d75640a7.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9388b6b64cb3adc46b4b143926ab4980d75640a7.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">4243864-2022-05-25_17-14-08</span><span class="informations">775×176 35.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

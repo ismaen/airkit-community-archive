@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to schedule SMS reminders utilizing TCPA Window + existing reminder timing</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to schedule SMS reminders utilizing TCPA Window + existing reminder timing</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/32_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeffchen</div>
+          <div class="post_content">
+<p>Hello I have a use case where I am sending out SMS reminders 48hr and 72 hrs after the original message.  With this use case if the original SMS message is send out on Wednesday or Thursday of the week the reminder SMS will fall on the weekend which will wait til the TCPA window opens on Monday at 8am.  I am seeing both messages 48hr and 72hr messages sending at the same time on Monday morning.  I am wondering if there is a way to maintain that 24hr delay in message.  Basically looking to take TCPA Availability + 24hr for the second reminder message.</p>
+<p>See Second SMS Reminder - profile variables set for execution time to be 48hr after initial message.<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/xMnVVff7lg0uffyOjvxHBVncAp1.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ecbff33aa078b5d05d6e6021a2eedaa15d372f4f.png" rel="noopener nofollow ugc" title="Screen Shot 2022-06-06 at 8.44.43 AM"><img alt="Screen Shot 2022-06-06 at 8.44.43 AM" data-base62-sha1="xMnVVff7lg0uffyOjvxHBVncAp1" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ecbff33aa078b5d05d6e6021a2eedaa15d372f4f_2_10x10.png" height="500" src="../../../images/ecbff33aa078b5d05d6e6021a2eedaa15d372f4f_2_236x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ecbff33aa078b5d05d6e6021a2eedaa15d372f4f_2_236x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ecbff33aa078b5d05d6e6021a2eedaa15d372f4f_2_354x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ecbff33aa078b5d05d6e6021a2eedaa15d372f4f.png 2x" width="236"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-06-06 at 8.44.43 AM</span><span class="informations">357×756 74 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>I’m wondering if there is some custom express which could be used for the IF time is not available.  Right now it’s got “NEXT” as the custom expression.  Is there any documentation for that field?</p>
+<p><img alt="Screen Shot 2022-06-06 at 8.48.00 AM" data-base62-sha1="yID30TiI9FdyL0QeIR5WMsujtU6" height="402" src="../../../images/f3556cede28cd430874afde040665c90d5b281d2.png" width="357"/></p>
+<p>Thanks</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@jeffchen</span> !!</p>
+<p>Can you share a bit more info about the use case?</p>
+<p>Here’s what I’d like to understand before offering a possible solution:</p>
+<ol>
+<li>Would you need to fire those notifications as if the only existing days were weekdays?<br/>
+Meaning: If your 24hr notification was to fall on a Saturday, you’d like it to be sent on Monday of the following week? (same idea for the 72hr notification)</li>
+<li>Do the notifications observe a Time of Day (as well as the day of the week) or is 9am on a weekday ok?</li>
+<li>Does your TCPA calendar include Holidays?</li>
+<li>If yes, would you be treating holidays as (per my first question) weekend days – as in, <em>do not send anything on weekends and holidays!</em> ?</li>
+</ol>
+<p>cheers!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/50_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">zacharyc</div>
+          <div class="post_content">
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/oxOHehIHxxAPK7PVPKDi4SzW73K.jpeg?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ac06cd35409ae2518cc383f639586163e675a8a4.jpeg" rel="noopener nofollow ugc" title="Screen Shot 2022-06-06 at 4.58.16 PM"><img alt="Screen Shot 2022-06-06 at 4.58.16 PM" data-base62-sha1="oxOHehIHxxAPK7PVPKDi4SzW73K" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ac06cd35409ae2518cc383f639586163e675a8a4_2_10x10.png" height="500" src="../../../images/ac06cd35409ae2518cc383f639586163e675a8a4_2_644x500.jpeg" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ac06cd35409ae2518cc383f639586163e675a8a4_2_644x500.jpeg, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ac06cd35409ae2518cc383f639586163e675a8a4_2_966x750.jpeg 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ac06cd35409ae2518cc383f639586163e675a8a4_2_1288x1000.jpeg 2x" width="644"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-06-06 at 4.58.16 PM</span><span class="informations">3934×3054 523 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div><br/>
+I have done something like this in the past with Schedule reminders. You use the calendar and the skip or next (not sure I remember which but we can find it on the docs) to find the next open window and then send the text message in that window.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/32_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeffchen</div>
+          <div class="post_content">
+<p><span class="mention">@juanchax</span><br/>
+Thanks for looking into this issue.<br/>
+Note: Reminder messages are sent 48hrs and 72 hrs after initial triggered message.</p>
+<p>During the “TCPA Work Week” Monday thru Friday, SMS reminders could be run in my use case on initially triggered 8am thru 8pm Monday thru Wednesday where I could receive, the first reminder message (48hr) before the end of Friday window.  The 72hr reminder message would land outside of TCPA working days on a Saturday then be triggered at the first available window of 8am Monday morning the next week.</p>
+<p>However if initial message is triggered on Thursday, the reminder messages 48hr and 72hr will fall on the weekend Saturday and Sunday.  Both the 48hr and 72hr reminder message shows up on Monday morning at 8am which I feel is weird.</p>
+<p>Three issues:</p>
+<ol>
+<li>These messages no longer are 48hrs or 72hr after initial message eg I triggered the initial message at 503PM.  I expect to see again around that time period 5pm in the future.</li>
+<li>Third reminder sends a message at 8am at the same time as the second reminder not 24 hours after the second message.</li>
+<li>I understand that due to TCPA, any messages will be sent at the first open window but two at the same time is really weird.</li>
+</ol>
+<p>TCPA does include holidays and they would be treated like weekends.</p>
+<p>Hopefully this makes sense.</p>
+<p>Here’s an example.</p>
+<ul>
+<li>Initial Message sent Thursday 430pm → SMS received by customer no response</li>
+<li>48hr later Saturday 430pm, Second Reminder triggered with cron job, TCPA Rules do not allow message to be sent until Monday morning at 8am → SMS not received Saturday at 430pm but following Monday morning at 8am</li>
+<li>72hr later Sunday 430pm, Third Reminder triggered with cron job, TCPA Rules do not allow message to be sent until Monday morning at 8am → SMS not received Sunday at 430pm but following Monday morning at 8am (expected to receive Tuesday 8am due to TCPA rules 24hr delay).  I think this would be acceptable.</li>
+</ul>
+<p>What might be cool to have is since initial trigger was 430pm that the reminders trigger again 430pm Monday and Tuesday afternoons.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/32_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeffchen</div>
+          <div class="post_content">
+<p><span class="mention">@zacharyc</span> I’m using the next window function but I wanted to see if we could Next + 24hrs or something like that.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>Ok, I see a couple of items to consider and work with now that I have a better understanding of your use case</p>
+<ul>
+<li>Initial SMS sent <code>NOW()</code>,</li>
+</ul>
+<ol>
+<li>What <code>DAY</code> is the next available window per TCPA settings? → Data Flow using Calendar Search</li>
+<li>If 1) is after the weekend or a holiday, prevent the 72hr notification from firing at the same time</li>
+<li>Use the time of day of the initial notification message to send the subsequent notifications</li>
+</ol>
+<p>Alright, let’s get to it.</p>
+<hr/>
+<h3>
+<a class="anchor" href="#calendar-search-1" name="calendar-search-1"></a>Calendar Search</h3>
+<p>You can find the next available Firing DateTime by performing a <a href="https://support.airkit.com/reference/the-calendar-search-data-operation">Calendar Search data operation</a>.<br/>
+Let’s look for the next firing date 48hr from <code>NOW()</code>:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/fS9Fc96uT24rjeG5TUU2BNn9DLr.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/6f3fc9bc88024e73e266b4f395f7db84942b3b61.png" title="Calendar Search settings"><img alt="Calendar Search settings" data-base62-sha1="fS9Fc96uT24rjeG5TUU2BNn9DLr" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6f3fc9bc88024e73e266b4f395f7db84942b3b61_2_10x10.png" height="324" src="../../../images/6f3fc9bc88024e73e266b4f395f7db84942b3b61_2_403x324.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6f3fc9bc88024e73e266b4f395f7db84942b3b61_2_403x324.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6f3fc9bc88024e73e266b4f395f7db84942b3b61_2_604x486.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6f3fc9bc88024e73e266b4f395f7db84942b3b61_2_806x648.png 2x" width="403"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Calendar Search settings</span><span class="informations">827×666 29.8 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>This data operation, ran on a Friday, observing TCPA will return (<em>Monday 8am, PST</em>):</p>
+<pre><code class="lang-auto">{
+  "start": {
+    "date": {
+      "year": 2022,
+      "month": 6,
+      "day": 13
+    },
+    "time": {
+      "hour": 15,
+      "minute": 0,
+      "second": 0,
+      "millisecond": 0
+    },
+    "timeZone": "UTC"
+  },
+  "end": {
+    "date": {
+      "year": 2022,
+      "month": 6,
+      "day": 13
+    },
+    "time": {
+      "hour": 15,
+      "minute": 0,
+      "second": 0,
+      "millisecond": 0
+    },
+    "timeZone": "UTC"
+  },
+  "bookingInfo": null
+}
+</code></pre>
+<h2>
+<a class="anchor" href="#building-our-data-processing-2" name="building-our-data-processing-2"></a>Building our Data Processing</h2>
+<p>Now we understand how the Calendar Search works, and what data is made available so as to set up a <em>Variable</em> that holds the data, which can then be used to set up the <em>Timers</em> to fire the 48hr and the 72hr notification.</p>
+<p>Because we need to use the <a href="https://support.airkit.com/reference/the-calendar-search-data-operation">Calendar Search data operation</a> the processing will need to be done in a Data Flow (as opposed to a UDF, or directly in the Set Variable’s <em>Value</em> property).</p>
+<p>Here’s what we need to do:</p>
+<ol>
+<li>Calculate the 48hr notification firing dateTime, using <code>NOW() + 2 days</code>
+</li>
+<li>Calculate the 72hr notification firing dateTime, using the  <code>48hr notification firing dateTime + 1 day</code>
+</li>
+</ol>
+<h3>
+<a class="anchor" href="#calculate-the-48hr-and-72hr-notification-firing-datetime-3" name="calculate-the-48hr-and-72hr-notification-firing-datetime-3"></a>Calculate the 48hr and 72hr notification firing dateTime</h3>
+<ol>
+<li>Create a Data Flow with a <code>dateTime</code> input, we’ll be passing <code>NOW()</code> in when calling the Data Flow from your Web Flows. I’ll be calling this input <em>dateTime</em>
+</li>
+<li>Add a Calendar Search data operation
+<ul>
+<li>Select the TCPA calendar</li>
+<li>Select the Restriction <em>Run in next window</em>
+</li>
+<li>Set the Time expression to <code>UPDATE_DAY(dateTime, dateTime.date.day + 2)</code>
+</li>
+<li>Set the output name to <code>calendar48</code>
+</li>
+</ul>
+</li>
+<li>Add a Transform step
+<ul>
+<li>set the Transform Expression to<br/>
+<code>MERGE_OBJECTS(calendar48.start, { "time": dateTime.time })</code><br/>
+This will take the updated <em>Firing Day</em> from the Calendar Search, and update the <em>Firing Time</em> with the time of the initial SMS notification. (you can use <code>calendar48.start</code> if you don’t mind the notification going out at 8am)</li>
+<li>Set the output variable name to <code>notification48</code>
+</li>
+</ul>
+</li>
+<li>Add a second Calendar Search data operation
+<ul>
+<li>Select the TCPA calendar</li>
+<li>Select the Restriction <em>Run in next window</em>
+</li>
+<li>Set the Time expression to <code>UPDATE_DAY(notification48, notification48.date.day + 1)</code>
+</li>
+<li>Set the output name to <code>calendar72</code>
+</li>
+</ul>
+</li>
+<li>Add another Transform step (this one we’ll use as the return value of the data flow)
+<ul>
+<li>set the Transform Expression to</li>
+</ul>
+<pre><code class="lang-auto">{ 
+   "reminder_48hr": notification48, 
+   "reminder_72hr": MERGE_OBJECTS(calendar72.start, { "time": dateTime.time }) 
+}
+</code></pre>
+The output shoud look something like:<pre><code class="lang-auto">{
+  "reminder_48hr": {
+                    "date": {
+                      "year": 2022,
+                      "month": 6,
+                      "day": 13
+                    },
+                    "time": {
+                      "hour": 18,
+                      "minute": 39,
+                      "second": 24,
+                      "millisecond": 872
+                    },
+                    "timeZone": "UTC"
+                  },
+  "reminder_72hr": {
+                    "date": {
+                      "year": 2022,
+                      "month": 6,
+                      "day": 14
+                    },
+                    "time": {
+                      "hour": 18,
+                      "minute": 39,
+                      "second": 24,
+                      "millisecond": 872
+                    },
+                    "timeZone": "UTC"
+                  }
+}
+</code></pre>
+</li>
+<li>Set the Data Flow’s return value to the output of the last Transform (step 5)</li>
+</ol>
+<h2>
+<a class="anchor" href="#running-the-data-flow-and-setting-up-the-timers-for-the-reminder-notifications-4" name="running-the-data-flow-and-setting-up-the-timers-for-the-reminder-notifications-4"></a>Running the Data Flow and Setting up the Timers for the Reminder Notifications</h2>
+<ol>
+<li>
+<p>Add a Run Data Flow to your initial Journey actions (right after the first SMS Notification is sent)</p>
+</li>
+<li>
+<p>Run the Data Flow</p>
+<ul>
+<li>Set the dateTime input to <code>NOW()</code>
+</li>
+<li>Set the Output Binding to a variable of your choice, name it something like <code>notifications</code> (Global or Web Flow depending on your use case)<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/gC7F5LDQUkIVtyJAg3BWhlMDVUi.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/747203dd66aae527325830eef6ba9a1cc6fbc3ee.png" title="Run Data Flow"><img alt="Run Data Flow" data-base62-sha1="gC7F5LDQUkIVtyJAg3BWhlMDVUi" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/747203dd66aae527325830eef6ba9a1cc6fbc3ee_2_10x10.png" height="325" src="../../../images/747203dd66aae527325830eef6ba9a1cc6fbc3ee_2_320x325.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/747203dd66aae527325830eef6ba9a1cc6fbc3ee_2_320x325.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/747203dd66aae527325830eef6ba9a1cc6fbc3ee_2_480x487.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/747203dd66aae527325830eef6ba9a1cc6fbc3ee.png 2x" width="320"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Run Data Flow</span><span class="informations">590×598 22.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Add a Timer to trigger and fire the 48hr notification message</p>
+<ul>
+<li>Set the Execution Time as the following Custom Expression:</li>
+</ul>
+<pre><code class="lang-auto">notifcations.reminder_48hr
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/zFCpqCoZfbcRDVqjb5KzumF9ewS.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fa007c91e707b8e34fc624586432e1451a9de2b6.png" title="48hr Timer Settings"><img alt="48hr Timer Settings" data-base62-sha1="zFCpqCoZfbcRDVqjb5KzumF9ewS" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fa007c91e707b8e34fc624586432e1451a9de2b6_2_10x10.png" height="375" src="../../../images/fa007c91e707b8e34fc624586432e1451a9de2b6_2_227x375.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fa007c91e707b8e34fc624586432e1451a9de2b6_2_227x375.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fa007c91e707b8e34fc624586432e1451a9de2b6_2_340x562.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fa007c91e707b8e34fc624586432e1451a9de2b6_2_454x750.png 2x" width="227"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">48hr Timer Settings</span><span class="informations">582×960 33.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+<li>
+<p>Add a Timer to trigger and fire the 48hr notification message</p>
+<ul>
+<li>Set the Execution Time as the following Custom Expression:</li>
+</ul>
+<pre><code class="lang-auto">notifcations.reminder_72hr
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/puH7ScfS3yNcN60U3IvZEhfNdUf.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b2aea096aaac0bb5a0a6e0421b0377bc4ac00b9b.png" title="72hr Timer Settings"><img alt="72hr Timer Settings" data-base62-sha1="puH7ScfS3yNcN60U3IvZEhfNdUf" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b2aea096aaac0bb5a0a6e0421b0377bc4ac00b9b_2_10x10.png" height="375" src="../../../images/b2aea096aaac0bb5a0a6e0421b0377bc4ac00b9b_2_227x375.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b2aea096aaac0bb5a0a6e0421b0377bc4ac00b9b_2_227x375.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b2aea096aaac0bb5a0a6e0421b0377bc4ac00b9b_2_340x562.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b2aea096aaac0bb5a0a6e0421b0377bc4ac00b9b_2_454x750.png 2x" width="227"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">72hr Timer Settings</span><span class="informations">582×960 17.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+<li>
+<p>Add the desired actions to each timer, and you should be good to go!</p>
+</li>
+</ol>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

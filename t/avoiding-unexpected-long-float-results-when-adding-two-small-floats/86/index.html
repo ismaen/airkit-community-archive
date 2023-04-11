@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Avoiding unexpected long float results when adding two small floats</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Avoiding unexpected long float results when adding two small floats</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/33_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ackerman</div>
+          <div class="post_content">
+<p>I was adding two currency amounts to display a total amount in a web flow. This is the expression I was using:</p>
+<pre><code class="lang-auto">"Total: ${{
+  payload.amount + order_info.shipping.amount / 100
+}}"
+</code></pre>
+<p>But it would sometimes return long floats instead of the expected results, as in this screen shot:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/mEPVgiNYKOkFF8LKdYmALVZkRRz.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9ecd9815058cea5a969ea707431dcd698c0ce89d.png" rel="noopener nofollow ugc" title="Screen Shot 2022-02-08 at 12.54.23 PM"><img alt="Screen Shot 2022-02-08 at 12.54.23 PM" data-base62-sha1="mEPVgiNYKOkFF8LKdYmALVZkRRz" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9ecd9815058cea5a969ea707431dcd698c0ce89d_2_10x10.png" height="500" src="../../../images/9ecd9815058cea5a969ea707431dcd698c0ce89d_2_387x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9ecd9815058cea5a969ea707431dcd698c0ce89d_2_387x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9ecd9815058cea5a969ea707431dcd698c0ce89d_2_580x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9ecd9815058cea5a969ea707431dcd698c0ce89d.png 2x" width="387"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-02-08 at 12.54.23 PM</span><span class="informations">748×966 204 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>It turns out that because Math and floats, this is a valid output. Smarter people that me, please feel free to chime in on the reasons here…</p>
+<p>All that said, the solve was to use the <code>FOMAT_NUMBER</code> function with the second parameter of <code>"$.2f"</code> to save the day. The $ represents to append a $ to it, the .2 stops it at two spaces, and the f is for ‘fill’, which completes the number to 2 decimal places instead of leaving it at a single decimal place or no decimals for whole numbers.</p>
+<pre><code class="lang-auto">"Subtotal: {{
+  FORMAT_NUMBER(
+    payload.amount + order_info.shipping.amount / 100, "$.2f"
+  )
+}}"
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

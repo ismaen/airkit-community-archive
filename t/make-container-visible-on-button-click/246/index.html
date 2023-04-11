@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Make Container Visible On Button Click</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Make Container Visible On Button Click</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>Is it possible to hide a container until a button is clicked? I’ve used the “is visible” feature with dropdowns but am wondering if I could have a “reveal” button without having to select an option from a dropdown.</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p>You don’t need to have a dropdown in order to use the “is visible” feature - you just need to define an appropriate Boolean variable.</p>
+<p>So in the simplest case for something like this, you could define a Boolean variable called something like <code>is_revealed</code>, and use that to define “is visible” feature of your Container. To reveal a Container upon the click of a Button, associate the Button with the <a href="https://support.airkit.com/reference/the-set-variable-action">Set Variable Action</a>, and use it to set <code>is_revealed</code> to <code>TRUE</code>. This will reveal the contents of the Container after the Button is pressed (and a similar methodology could even be used to re-hide the Container).</p>
+<p>Does that answer your question?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Would this be correct? I think I am missing a small detail.</p>
+<p><img alt="image" data-base62-sha1="1gaL0JZpk5RvQ2NA9Dzk6nwzkNE" height="222" src="../../../images/08d6353e95e58546fdf3ad367f3bc644e5cdcbde.png" width="596"/><br/>
+<img alt="image" data-base62-sha1="ed8iX0Vl2eoRV0zynwrz3v1eR1g" height="214" src="../../../images/639a828de6cf970a328eacc7707f52ed1225ac22.png" width="277"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>The “Is Visible” feature expects a Boolean and makes the associated Web Control visible if the Boolean resolves to <code>TRUE</code>. So instead of:</p>
+<p><code>IF(affinityadd) = "TRUE"</code></p>
+<p>the “Is Visible” field should simply read:</p>
+<p><code>affinityadd</code></p>
+<p>and then the Container will be visible when <code>affinityadd</code> is <code>TRUE</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Now it works, thanks!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

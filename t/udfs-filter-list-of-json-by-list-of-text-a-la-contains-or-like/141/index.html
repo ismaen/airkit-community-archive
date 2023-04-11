@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>UDFs - Filter List of JSON by List of Text (à la CONTAINS() or &ldquo;like&rdquo;)</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">UDFs - Filter List of JSON by List of Text (à la CONTAINS() or &ldquo;like&rdquo;)</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>Alright! There’s <a href="https://community.airkit.com/t/udfs-list-functions/116">tons of ways we might need to process a list of items in</a>, today we’ll have a <code>ton + 1</code></p>
+<hr/>
+<h2>
+<a class="anchor" href="#use-case-1" name="use-case-1"></a>Use Case</h2>
+<p>We have the following data (this is an input)</p>
+<pre><code class="lang-auto">[
+  {
+    "name": "HIIT Burner",
+    "length": 30,
+    "equipment": [
+      "Kettlebell",
+      "TRX",
+      "Dumbbell",
+      "Rope"
+    ],
+    "phone": "+17145555555",
+    "email": "ron@ripped.com",
+    "smsAllowed": true
+  },
+  {
+    "name": "TRX Killer",
+    "length": 90,
+    "equipment": [
+      "TRX",
+      "Rope",
+      "Yoga Block"
+    ],
+    "phone": "+12123347089",
+    "email": "mary@globogym.com",
+    "smsAllowed": false
+  },
+  {
+    "name": "Kettlebell Master",
+    "length": 45,
+    "equipment": [
+      "Free Weights",
+      "Resistance Band"
+    ],
+    "phone": "+13043173027",
+    "email": "stacy@xfitworld.com",
+    "smsAllowed": true
+  },
+  {
+    "name": "Sweaty Animal",
+    "length": 20,
+    "equipment": [
+      "Body Weight",
+      "Rope"
+    ],
+    "phone": "+14159999999",
+    "email": "chad@gymbros.com",
+    "smsAllowed": false
+  },
+  {
+    "name": "Hardcore Yoga",
+    "length": 20,
+    "equipment": [
+      "Kettlebell",
+      "Medicine Ball"
+    ],
+    "phone": "+17148888888",
+    "email": "lily@multigym.com",
+    "smsAllowed": false
+  }
+]
+</code></pre>
+<p>We need to return <em>only</em> the objects whose one or more values match (partially or completely) one (or more) of a given list of values.</p>
+<p>For this use case, the list of values to               check for <em>also needs to be an input</em>, here’s a sample list:</p>
+<pre><code class="lang-auto">[
+  true,
+  "TRX"
+]
+</code></pre>
+<h2>
+<a class="anchor" href="#expected-output-2" name="expected-output-2"></a>Expected output</h2>
+<p>Given the Sample Data and List of Values above, the expected output is:</p>
+<pre><code class="lang-auto">[
+  {
+    "name": "HIIT Burner",
+    "length": 30,
+    "equipment": [
+      "Kettlebell",
+      "TRX",
+      "Dumbbell",
+      "Rope"
+    ],
+    "phone": "+17145555555",
+    "email": "ron@ripped.com",
+    "smsAllowed": true
+  },
+  {
+    "name": "Kettlebell Master",
+    "length": 45,
+    "equipment": [
+      "Free Weights",
+      "Resistance Band"
+    ],
+    "phone": "+13043173027",
+    "email": "stacy@xfitworld.com",
+    "smsAllowed": true
+  },
+  {
+    "name": "TRX Killer",
+    "length": 90,
+    "equipment": [
+      "TRX",
+      "Rope",
+      "Yoga Block"
+    ],
+    "phone": "+12123347089",
+    "email": "mary@globogym.com",
+    "smsAllowed": false
+  }
+]
+</code></pre>
+<hr/>
+<h1>
+<a class="anchor" href="#udf-3" name="udf-3"></a>UDF</h1>
+<p>Let’s dig into this (somewhat complex) logic.</p>
+<h2>
+<a class="anchor" href="#udf-setup-4" name="udf-setup-4"></a>UDF Setup</h2>
+<h3>
+<a class="anchor" href="#inputs-5" name="inputs-5"></a>Inputs</h3>
+<ul>
+<li>
+<code>list</code> <em>Datatype: List of JSON</em>  - Input data to process</li>
+<li>
+<code>filters</code> <em>Datatype: List of Text</em> - List of values to filter our <code>list</code>
+</li>
+</ul>
+<h3>
+<a class="anchor" href="#output-6" name="output-6"></a>Output</h3>
+<ul>
+<li><em>Datatype: List of JSON</em></li>
+</ul>
+<h2>
+<a class="anchor" href="#udf-body-7" name="udf-body-7"></a>UDF Body</h2>
+<p>For each object in our <code>list</code> of data, check if <em>any</em> of its values contains the <code>filter</code> value, and return the object (without duplicates) or, in pseudo-code:</p>
+<pre><code class="lang-auto">forEach filter in filters:
+ forEach object in list:
+  forEach value in object:
+   if value like "filter"
+return unique object
+</code></pre>
+<p>Now let’s translate the above to <a href="https://support.airkit.com/docs/airscript-quick-start">Airscript</a>:</p>
+<pre><code class="lang-auto">FROM
+  workout
+IN
+  FLAT(
+    FROM
+      filter
+    IN
+      filters
+    SELECT DISTINCT
+      IF(
+        TYPEOF(filter) = "boolean",
+        FLAT(FROM item IN list SELECT DISTINCT FROM value, key IN item WHERE value = filter SELECT DISTINCT item),
+        FLAT(
+          FROM
+            item
+          IN
+            list
+          SELECT DISTINCT
+            FROM
+              value,
+              key
+            IN
+              item
+            WHERE
+              IF(
+                TYPEOF(value) = "string" OR TYPEOF(value) = "email",
+                LENGTH(value) != LENGTH(SUBSTITUTE(LOWERCASE(value), LOWERCASE(filter), "")),
+                TYPEOF(value) = "list",
+                LENGTH(JOIN(value, ",")) != LENGTH(SUBSTITUTE(LOWERCASE(JOIN(value, ",")), LOWERCASE(filter), "")),
+                TYPEOF(value) = "phone",
+                LENGTH(value) != LENGTH(SUBSTITUTE(value, filter, ""))
+              )
+            SELECT DISTINCT
+              item
+        )
+      )
+  )
+SELECT DISTINCT
+  workout
+</code></pre>
+<p>All done! Feel free to leave a thumbs up or a comment if you got any questions.</p>
+<hr/>
+<p><img alt=":information_source:" class="emoji" height="20" loading="lazy" src="../../../images/information_source.png" title=":information_source:" width="20"/> This is just one of <em>many</em> ways this same use case can be implemented. Play around with other <a href="https://support.airkit.com/docs/airscript-quick-start">Airscript</a> functions, or enhance the above to filter by workout length!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/33_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ackerman</div>
+          <div class="post_content">
+<p>OMG, I was just looking for this exact scenario - thank you so much!!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

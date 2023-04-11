@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>XML to JSON Control - Why does it leave random XML remnants</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">XML to JSON Control - Why does it leave random XML remnants</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/299_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeff_groupwork</div>
+          <div class="post_content">
+<p>I used the XML to JSON control to convert a XML file to JSON format.</p>
+<p>I’m expecting the following:</p>
+<p>Sample XML snippet</p>
+<pre><code class="lang-auto">      &lt;policyImageResponse&gt;
+         &lt;return&gt;
+            &lt;response&gt;
+               &lt;RqUID&gt;74d2da6f-6328-45d0-9472-2af93bdec3e5&lt;/RqUID&gt;
+               &lt;TransactionResponseDt&gt;2018-08-21-04:00&lt;/TransactionResponseDt&gt;
+            &lt;/response&gt;
+            &lt;status&gt;
+               &lt;statusCd&gt;0&lt;/statusCd&gt;
+               &lt;statusDesc&gt;Success&lt;/statusDesc&gt;
+            &lt;/status&gt;
+
+         &lt;/return&gt;
+      &lt;/policyImageResponse&gt;
+</code></pre>
+<p>Expected JSON of XML snippet</p>
+<pre><code class="lang-auto">{
+	"policyImageResponse": {
+		"return": {
+			"response": {
+				"RqUID": "74d2da6f-6328-45d0-9472-2af93bdec3e5",
+				"TransactionResponseDt": "2018-08-21-04:00"
+			},
+			"status": {
+				"statusCd": "0",
+				"statusDesc": "Success"
+			}
+		}
+	}
+}
+</code></pre>
+<p>After running the XML to JSON control, I get the following:</p>
+<pre><code class="lang-auto">{
+  "policyImageResponse": [
+    {
+      "return": [
+        {
+          "response": [
+            {
+              "RqUID": [
+                {
+                  "$xml_": "74d2da6f-6328-45d0-9472-2af93bdec3e5"
+                }
+              ],
+              "TransactionResponseDt": [
+                {
+                  "$xml_": "2018-08-21-04:00"
+                }
+              ]
+            }
+          ],
+          "status": [
+            {
+              "statusCd": [
+                {
+                  "$xml_": "0"
+                }
+              ],
+              "statusDesc": [
+                {
+                  "$xml_": "Success"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>As builders, are we expected to write AirScript to remove the extra objects and “xml?” variables?</p>
+<p>Or what is the way to solve the issue of an incorrect conversion XML to JSON conversion.</p>
+<p>Thanks</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/73_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">joechrz</div>
+          <div class="post_content">
+<p>This actually looks expected.  While this specific situation would allow for the object you described, XML is a very flexible format and you could (in theory) have 2 <code>&lt;return&gt;</code> tags or 2 <code>&lt;status&gt;</code> tags, in which case the JSON representation would have to be an array.</p>
+<p>The current implementation is a “lowest common denominator” format that should work for any XML file, so for cases like this it ends up a bit more verbose.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey Jeff,</p>
+<p>My teammate <span class="mention">@kyung</span> wrote a handful of XML related User Defined Functions (UDFs) to make working with XML a little easier. For the XML snippet you provided, you  can use this one and it should output a cleaner JSON Object:</p>
+<h1>
+<a class="anchor" href="#xmloptoobject-1" name="xmloptoobject-1"></a>XMLOp#ToObject</h1>
+<pre><code class="lang-auto">FROM
+  value,
+  key
+IN
+  source
+SELECT
+  "{{key}}": IF(
+    TYPEOF(value) = "list",
+    IF(LENGTH(value) = 1, IF(LENGTH(KEYS(value[0])[?(@ = "$xml_")]) = 1, value[0]["$xml_"], XMLOp#ToObject(value[0])), XMLOp#ToList(value)),
+    value
+  )
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/t9myrFX4xDy42ETC7xQ5gpHQdKN.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/cc4e0477984011ed493f643f0a11aa7ca9e043f9.png" title="image"><img alt="image" data-base62-sha1="t9myrFX4xDy42ETC7xQ5gpHQdKN" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/cc4e0477984011ed493f643f0a11aa7ca9e043f9_2_10x10.png" height="378" src="../../../images/cc4e0477984011ed493f643f0a11aa7ca9e043f9_2_690x378.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/cc4e0477984011ed493f643f0a11aa7ca9e043f9_2_690x378.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/cc4e0477984011ed493f643f0a11aa7ca9e043f9.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/cc4e0477984011ed493f643f0a11aa7ca9e043f9.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">758×416 29.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Additionally, there are a few more that I’d like to share in case you or anyone in the community needs them!</p>
+<h1>
+<a class="anchor" href="#xmloptolist-2" name="xmloptolist-2"></a>XMLOp#ToList</h1>
+<pre><code class="lang-auto">FROM
+  el
+IN
+  source
+SELECT
+  XMLOp#ToObject(el)
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/yjTh7eE2GQ49wQXAKY0Ztcp9aM3.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f0898ad8bf68cfb5f6f3c3f4e0bb44b9d129fd53.png" title="image"><img alt="image" data-base62-sha1="yjTh7eE2GQ49wQXAKY0Ztcp9aM3" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f0898ad8bf68cfb5f6f3c3f4e0bb44b9d129fd53_2_10x10.png" height="371" src="../../../images/f0898ad8bf68cfb5f6f3c3f4e0bb44b9d129fd53_2_690x371.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f0898ad8bf68cfb5f6f3c3f4e0bb44b9d129fd53_2_690x371.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f0898ad8bf68cfb5f6f3c3f4e0bb44b9d129fd53.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f0898ad8bf68cfb5f6f3c3f4e0bb44b9d129fd53.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">761×410 18.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#xmlattributes-3" name="xmlattributes-3"></a>XML#Attributes</h1>
+<pre><code class="lang-auto">IF(
+  attributes = NULL
+    OR LENGTH(attributes) = 0,
+  "",
+  CONCAT(
+    " ",
+    JOIN(
+      FROM
+        attrib
+      IN
+        attributes
+      SELECT
+        "{{
+          attrib.key
+        }}=\"{{
+          XML#Escape(attrib.value)
+        }}\"",
+      " "
+    )
+  )
+)
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/203Bsv4GVldh780oTzqTmFieoug.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/0e0607b9eaa4ce93ea1dc41edd35e1f82465c344.png" title="image"><img alt="image" data-base62-sha1="203Bsv4GVldh780oTzqTmFieoug" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0e0607b9eaa4ce93ea1dc41edd35e1f82465c344_2_10x10.png" height="419" src="../../../images/0e0607b9eaa4ce93ea1dc41edd35e1f82465c344_2_690x419.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0e0607b9eaa4ce93ea1dc41edd35e1f82465c344_2_690x419.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/0e0607b9eaa4ce93ea1dc41edd35e1f82465c344.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/0e0607b9eaa4ce93ea1dc41edd35e1f82465c344.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">758×461 25.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#xmlbuild-4" name="xmlbuild-4"></a>XML#Build</h1>
+<pre><code class="lang-auto">FIRST(FROM value, key IN source SELECT XML#Node(key, value))
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/kktvPcobCHFeEX3SO8vRO3Qqo3I.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/8e7c0539fa4551d4f563485cb7cd176edc244e56.png" title="Screen Shot 2022-09-19 at 9.38.56 AM"><img alt="Screen Shot 2022-09-19 at 9.38.56 AM" data-base62-sha1="kktvPcobCHFeEX3SO8vRO3Qqo3I" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8e7c0539fa4551d4f563485cb7cd176edc244e56_2_10x10.png" height="255" src="../../../images/8e7c0539fa4551d4f563485cb7cd176edc244e56_2_690x255.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/8e7c0539fa4551d4f563485cb7cd176edc244e56_2_690x255.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/8e7c0539fa4551d4f563485cb7cd176edc244e56.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/8e7c0539fa4551d4f563485cb7cd176edc244e56.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-19 at 9.38.56 AM</span><span class="informations">1017×377 16.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#xmlelement-5" name="xmlelement-5"></a>XML#Element</h1>
+<pre><code class="lang-auto">CONCAT(
+  "&lt;{{element_name}}",
+  XML#Attributes(
+    FROM
+      value,
+      key
+    IN
+      properties
+    WHERE
+      TYPEOF(value) &lt;&gt; "list" AND key &lt;&gt; "$xml_"
+    SELECT
+      { "key": key, "value": value }
+  ),
+  "&gt;",
+  XML#Text(
+    FIRST(FROM value, key IN properties WHERE key = "$xml_" SELECT value)
+  ),
+  JOIN(
+    FROM
+      value,
+      key
+    IN
+      properties
+    WHERE
+      TYPEOF(value) = "list"
+    SELECT
+      XML#Node(key, value),
+    ""
+  ),
+  "&lt;/{{element_name}}&gt;"
+)
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/aEQTJsAb2sfu1xi8HN9ldwR5EZa.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/4ab3f63051bbe949ffc6eace10173ec8450c3958.png" title="Screen Shot 2022-09-19 at 9.35.46 AM"><img alt="Screen Shot 2022-09-19 at 9.35.46 AM" data-base62-sha1="aEQTJsAb2sfu1xi8HN9ldwR5EZa" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4ab3f63051bbe949ffc6eace10173ec8450c3958_2_10x10.png" height="419" src="../../../images/4ab3f63051bbe949ffc6eace10173ec8450c3958_2_690x419.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4ab3f63051bbe949ffc6eace10173ec8450c3958_2_690x419.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/4ab3f63051bbe949ffc6eace10173ec8450c3958.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/4ab3f63051bbe949ffc6eace10173ec8450c3958.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-19 at 9.35.46 AM</span><span class="informations">1024×622 44.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#xmlescape-6" name="xmlescape-6"></a>XML#Escape</h1>
+<pre><code class="lang-auto">IF(
+  ISSTRING(str),
+  SUBSTITUTE(
+    SUBSTITUTE(
+      SUBSTITUTE(
+        SUBSTITUTE(SUBSTITUTE(str, "&amp;", "&amp;amp;"), "'", "&amp;apos;"),
+        "\"",
+        "&amp;quot;"
+      ),
+      "&lt;",
+      "&amp;lt;"
+    ),
+    "&gt;",
+    "&amp;gt;"
+  ),
+  str
+)
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/sEJV3VfTaH3JfKclrOlRczLvyEl.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c8d7d5fd9f8ec700423de0dacae7da320bca9465.png" title="Screen Shot 2022-09-19 at 9.36.13 AM"><img alt="Screen Shot 2022-09-19 at 9.36.13 AM" data-base62-sha1="sEJV3VfTaH3JfKclrOlRczLvyEl" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c8d7d5fd9f8ec700423de0dacae7da320bca9465_2_10x10.png" height="267" src="../../../images/c8d7d5fd9f8ec700423de0dacae7da320bca9465_2_690x267.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c8d7d5fd9f8ec700423de0dacae7da320bca9465_2_690x267.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c8d7d5fd9f8ec700423de0dacae7da320bca9465.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c8d7d5fd9f8ec700423de0dacae7da320bca9465.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-19 at 9.36.13 AM</span><span class="informations">1017×394 26.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#xmlfromappobject-7" name="xmlfromappobject-7"></a>XML#FromAppObject</h1>
+<pre><code class="lang-auto">XML#Build(XML#Transform(source))
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/wuCfsgYBNmoP6YjMaZruCarL4nB.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e3bb91845a216aaa5e32d609e035a6c19a31d13f.png" title="Screen Shot 2022-09-19 at 9.36.27 AM"><img alt="Screen Shot 2022-09-19 at 9.36.27 AM" data-base62-sha1="wuCfsgYBNmoP6YjMaZruCarL4nB" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e3bb91845a216aaa5e32d609e035a6c19a31d13f_2_10x10.png" height="270" src="../../../images/e3bb91845a216aaa5e32d609e035a6c19a31d13f_2_690x270.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e3bb91845a216aaa5e32d609e035a6c19a31d13f_2_690x270.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e3bb91845a216aaa5e32d609e035a6c19a31d13f.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e3bb91845a216aaa5e32d609e035a6c19a31d13f.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-19 at 9.36.27 AM</span><span class="informations">1017×399 15.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#xmlinnertransform-8" name="xmlinnertransform-8"></a>XML#InnerTransform</h1>
+<pre><code class="lang-auto">IF(
+  TYPEOF(source) = "appobject",
+  [
+    FROM
+      value,
+      key
+    IN
+      source
+    SELECT
+      "{{
+        IF(
+          STRING_FIND(key, "@") = 0,
+          SUBSTRING(key, 1),
+          key = "#text",
+          "$xml_",
+          key
+        )
+      }}": IF(
+        STRING_FIND(key, "@") = 0 OR key = "#text",
+        value,
+        XML#InnerTransform(value)
+      )
+  ],
+  TYPEOF(source) = "list",
+  FLAT(FROM el IN source SELECT XML#InnerTransform(el)),
+  [ { "$xml_": source } ]
+)
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/jpvj3ys8TEtLy0uyYThqijQx9qB.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/880b601172f50094c180895f4f0a96f468d986ed.png" title="Screen Shot 2022-09-19 at 9.37.01 AM"><img alt="Screen Shot 2022-09-19 at 9.37.01 AM" data-base62-sha1="jpvj3ys8TEtLy0uyYThqijQx9qB" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/880b601172f50094c180895f4f0a96f468d986ed_2_10x10.png" height="371" src="../../../images/880b601172f50094c180895f4f0a96f468d986ed_2_690x371.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/880b601172f50094c180895f4f0a96f468d986ed_2_690x371.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/880b601172f50094c180895f4f0a96f468d986ed.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/880b601172f50094c180895f4f0a96f468d986ed.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-19 at 9.37.01 AM</span><span class="informations">1016×547 40.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#xmlnode-9" name="xmlnode-9"></a>XML#Node</h1>
+<pre><code class="lang-auto">JOIN(FROM node IN source SELECT XML#Element(name, node), "")
+
+
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/3XrdDA69GZGS02SeeYLXDkqAPGP.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1bbe95f968d0aa5d235f7d72d300a34b2f22bd6b.png" title="Screen Shot 2022-09-19 at 9.37.21 AM"><img alt="Screen Shot 2022-09-19 at 9.37.21 AM" data-base62-sha1="3XrdDA69GZGS02SeeYLXDkqAPGP" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1bbe95f968d0aa5d235f7d72d300a34b2f22bd6b_2_10x10.png" height="284" src="../../../images/1bbe95f968d0aa5d235f7d72d300a34b2f22bd6b_2_690x284.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1bbe95f968d0aa5d235f7d72d300a34b2f22bd6b_2_690x284.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1bbe95f968d0aa5d235f7d72d300a34b2f22bd6b.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1bbe95f968d0aa5d235f7d72d300a34b2f22bd6b.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-19 at 9.37.21 AM</span><span class="informations">1014×418 17.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#xmltext-10" name="xmltext-10"></a>XML#Text</h1>
+<pre><code class="lang-auto">IF(ISSTRING(text), XML#Escape(text), IF(text = NULL), "", text)
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/seD75oWZLm3JPkzyxVVAj6ImQRI.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c5e4437f0abce6d109c3e7fda9fc4e671717c2e2.png" title="Screen Shot 2022-09-19 at 9.37.52 AM"><img alt="Screen Shot 2022-09-19 at 9.37.52 AM" data-base62-sha1="seD75oWZLm3JPkzyxVVAj6ImQRI" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c5e4437f0abce6d109c3e7fda9fc4e671717c2e2_2_10x10.png" height="254" src="../../../images/c5e4437f0abce6d109c3e7fda9fc4e671717c2e2_2_690x254.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c5e4437f0abce6d109c3e7fda9fc4e671717c2e2_2_690x254.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c5e4437f0abce6d109c3e7fda9fc4e671717c2e2.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c5e4437f0abce6d109c3e7fda9fc4e671717c2e2.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-19 at 9.37.52 AM</span><span class="informations">1021×376 15.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h1>
+<a class="anchor" href="#xmltransform-11" name="xmltransform-11"></a>XML#Transform</h1>
+<pre><code class="lang-auto">FIRST(XML#InnerTransform(source))
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/qvt4JN9mGDyDGqCmNAMv8RyGJba.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b9c72e76ca66da087bf2c10722dd4428439e9118.png" title="Screen Shot 2022-09-19 at 9.38.10 AM"><img alt="Screen Shot 2022-09-19 at 9.38.10 AM" data-base62-sha1="qvt4JN9mGDyDGqCmNAMv8RyGJba" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b9c72e76ca66da087bf2c10722dd4428439e9118_2_10x10.png" height="255" src="../../../images/b9c72e76ca66da087bf2c10722dd4428439e9118_2_690x255.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b9c72e76ca66da087bf2c10722dd4428439e9118_2_690x255.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b9c72e76ca66da087bf2c10722dd4428439e9118.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b9c72e76ca66da087bf2c10722dd4428439e9118.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-19 at 9.38.10 AM</span><span class="informations">1021×378 15.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/38_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Drew</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@ismaen</span> I was testing this out and wanted to confirm that you need to run the <a href="https://support.airkit.com/reference/the-xml-to-json-data-operation" rel="noopener nofollow ugc">XML to Json</a> Data operation first then one of the above UDFs second. Is that correct?</p>
+<p>xml &gt; xml to json data op &gt; udf on the output of the xml to json data op</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p><span class="mention">@Drew</span> yup, these are designed to work with the XML to JSON data op</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/299_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeff_groupwork</div>
+          <div class="post_content">
+<aside class="quote no-group" data-post="3" data-topic="274" data-username="ismaen">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" class="avatar" height="20" loading="lazy" src="../../../images/3_2.png" width="20"/> ismaen:</div>
+<blockquote>
+<pre><code class="lang-auto">FROM
+  value,
+  key
+IN
+  source
+SELECT
+  "{{key}}": IF(
+    TYPEOF(value) = "list",
+    IF(LENGTH(value) = 1, IF(LENGTH(KEYS(value[0])[?(@ = "$xml_")]) = 1, value[0]["$xml_"], XMLOp#ToObject(value[0])), XMLOp#ToList(value)),
+    value
+  )
+</code></pre>
+</blockquote>
+</aside>
+<p>I was able to run the Custom Function and seems to work.</p>
+<video controls="" height="390" poster="https://cdn.loom.com/sessions/thumbnails/cd1a87a667ba47208707d6e88403f410-00001.gif" style="max-width:100%" title="Test App - Airkit - 26 September 2022" width="695">
+<source src="https://cdn.loom.com/sessions/transcoded/cd1a87a667ba47208707d6e88403f410.mp4?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vc2Vzc2lvbnMvdHJhbnNjb2RlZC9jZDFhODdhNjY3YmE0NzIwODcwN2Q2ZTg4NDAzZjQxMC5tcDQiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE5Nzk4MzA2NTJ9fX1dfQ__&amp;Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&amp;Signature=o7s44D8czqGZIK2vRsYc0XZHeVp6xnKmoDX34wSXjZ8G28oS6nWYEbBbYVntrpznzvgMVMV1EKrHBpfKFIhnD0ZTkAyIbkPhOvvk20Yz8drYqnFvs15SXj7TQQLI35yUzX0tPOuR2d%7EPQOil1Ss4GfHI52t5HR8-EbgcgkJh-Y4URUqhPV6iuCf07oHYL3iMUBiEeQNcZxBoCqOQH5e8OwVpEwKf8uW6oeYaPUKwbON1pMyAmk2IcoWBlI%7EYQJTjYTOYm8uEsTNgwwHFeegmI1XyqdktRe8iYUmrA95vvILPQcENBa1AK8kwys%7EM9e9zOx6lvIMG8u8lFROHa3KuqA__"/>
+</video>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

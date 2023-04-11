@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>FORMAT_NUMBER is removing leading zeros</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">FORMAT_NUMBER is removing leading zeros</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/38_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Drew</div>
+          <div class="post_content">
+<p>I am using FORMAT_NUMBER to convert a number to a string, but the leading zeros are being trimmed off. Is there a format option inherit to FORMAT_NUMBER that allows for leading zeros?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/73_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">joechrz</div>
+          <div class="post_content">
+<p>There sure is!  You can use a format like <code>05</code> to pad a number out to 5 digits, so for example, <code>FORMAT_NUMBER(12, "05")</code> would become <code>00012</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/38_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Drew</div>
+          <div class="post_content">
+<p>Perfect, thanks Joe!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

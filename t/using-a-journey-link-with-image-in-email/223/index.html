@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Using a Journey Link With Image In Email</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Using a Journey Link With Image In Email</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>Is it possible to use a journey link with an image in an email sent from Airkit, so clicking on the image uses the journey link?</p>
+<p>Or</p>
+<p>Is it possible to use a journey link with an HTML button in an email sent from Airkit?</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@Chris_Phillips</span>!</p>
+<p>So I’d start with a button or whatever action/event that runs a data flow so I can pass the journey link through my web flow. This example I use a button.</p>
+<p>So first my data flow would look something like this and have an input that is a text type.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/4FR2FsoZdk9xCxn9mYsHZYkZXqR.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/20c3ec652ca1e1283a35ceba6c886406f102b905.png" title="image"><img alt="image" data-base62-sha1="4FR2FsoZdk9xCxn9mYsHZYkZXqR" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/20c3ec652ca1e1283a35ceba6c886406f102b905_2_10x10.png" height="366" src="../../../images/20c3ec652ca1e1283a35ceba6c886406f102b905_2_690x366.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/20c3ec652ca1e1283a35ceba6c886406f102b905_2_690x366.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/20c3ec652ca1e1283a35ceba6c886406f102b905_2_1035x549.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/20c3ec652ca1e1283a35ceba6c886406f102b905_2_1380x732.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">3106×1652 283 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>So from the action that runs the data flow, it would looks something like this:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/dmXJFmmX8OAvIVtlXQg348psdls.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/5db4c92aef409560746bf86499c0308342819f96.png" title="image"><img alt="image" data-base62-sha1="dmXJFmmX8OAvIVtlXQg348psdls" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/5db4c92aef409560746bf86499c0308342819f96_2_10x10.png" height="444" src="../../../images/5db4c92aef409560746bf86499c0308342819f96_2_690x444.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/5db4c92aef409560746bf86499c0308342819f96_2_690x444.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/5db4c92aef409560746bf86499c0308342819f96_2_1035x666.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/5db4c92aef409560746bf86499c0308342819f96_2_1380x888.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1682×1084 64 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Here, I pass <code>channels.web.canvasLink</code>, which is the unique URL of that journey. You can find more information about the channels namespace <a href="https://support.airkit.com/docs/standard-journey-data#channels-namespace">here</a>.</p>
+<p>So now that i have that set up, i can go back to my data flow and configure the email. Here is where you can write HTML to customize your email however you like. So whether its a button or an image link, you can do that with HTML and then for the URL to pass, you would pass the <code>journey_link</code> variable that is the input of the data flow, and also make sure you pass it as an interpolated string since it’ll be in the Body HTML which is expecting a text type. To do string interpolation in airscript, you want to wrap the variable with double curly braces like this: <code>{{journey_link}}</code></p>
+<p>So the data operation looks like this:<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/wBn2iVC4Ndj99WvD1RRzkOeCwtt.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e47f0947f9d4735a350d48a54b68dde38f825593.png" title="image"><img alt="image" data-base62-sha1="wBn2iVC4Ndj99WvD1RRzkOeCwtt" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e47f0947f9d4735a350d48a54b68dde38f825593_2_10x10.png" height="366" src="../../../images/e47f0947f9d4735a350d48a54b68dde38f825593_2_690x366.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e47f0947f9d4735a350d48a54b68dde38f825593_2_690x366.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e47f0947f9d4735a350d48a54b68dde38f825593_2_1035x549.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e47f0947f9d4735a350d48a54b68dde38f825593_2_1380x732.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">3106×1652 328 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<pre><code class="lang-auto">"
+    
+    &lt;a href='{{journey_link}}'&gt;
+         &lt;img alt='alt-text' src='https://www.insert-image.here'
+         width=150' height='70'&gt;
+      &lt;/a&gt;
+"
+
+</code></pre>
+<p>Hope this is helpful!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

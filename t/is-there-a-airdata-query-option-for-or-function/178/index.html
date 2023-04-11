@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Is there a AirData Query option for OR function?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Is there a AirData Query option for OR function?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/32_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeffchen</div>
+          <div class="post_content">
+<p>Hello,<br/>
+Is there an AirData query function to have multiple queries to two distinct keys.</p>
+<p>I’m looking to query both email address or phone number.  I would like the query to find either or.</p>
+<p>{ “email”: { “anyOf”: email } , {“anyOf”: phoneNumber}} ← performs an AND function<br/>
+Based upon the documentation<br/>
+{ “email”: { “anyOf”: email } OR {“anyOf”: phoneNumber}} ← can we do something like this?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@jeffchen</span>!</p>
+<p>is this what you are looking for?</p>
+<pre><code class="lang-auto">{
+  "email": {
+    "anyOf": "ismaen@airkit.com"
+  }
+}
+  OR {
+    "phoneNumber": {
+      "anyOf": "+17148756341"
+    }
+  }
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/32_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeffchen</div>
+          <div class="post_content">
+<p>Let me give that a try</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/32_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeffchen</div>
+          <div class="post_content">
+<p>The Query seems to only take the first expression.</p>
+<p>Here’s the test case:<br/>
+{ “phoneNumber”: { “anyOf”: mobilePhone } } OR { “email”: { “anyOf”: email } }<br/>
+Inputs mobileNumber only → Received result<br/>
+Input mobileNumber and email → Received result<br/>
+Input email → No result received</p>
+<p>I’m expecting in either case I should receive a result.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Got it! One way I can think of doing it by making two AirData Requests where one filters on the emails, and then the next one filters on the phone numbers.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/4hhtISrv9ifalyaSQCB7PopzDVY.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1dfcce25962774189ba44f3f06bb26f62ab9d85e.png" title="2022-06-02_15-37-45"><img alt="2022-06-02_15-37-45" data-base62-sha1="4hhtISrv9ifalyaSQCB7PopzDVY" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1dfcce25962774189ba44f3f06bb26f62ab9d85e_2_10x10.png" height="338" src="../../../images/1dfcce25962774189ba44f3f06bb26f62ab9d85e_2_690x338.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/1dfcce25962774189ba44f3f06bb26f62ab9d85e_2_690x338.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1dfcce25962774189ba44f3f06bb26f62ab9d85e.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/1dfcce25962774189ba44f3f06bb26f62ab9d85e.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-06-02_15-37-45</span><span class="informations">742×364 10.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div><br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/n5eNrTjEXxIwpsVl3uzZm0BEFDR.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a1c99975c2b1b6acda58493473be42aa0a24d45b.png" title="2022-06-02_15-37-49"><img alt="2022-06-02_15-37-49" data-base62-sha1="n5eNrTjEXxIwpsVl3uzZm0BEFDR" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a1c99975c2b1b6acda58493473be42aa0a24d45b_2_10x10.png" height="381" src="../../../images/a1c99975c2b1b6acda58493473be42aa0a24d45b_2_690x381.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a1c99975c2b1b6acda58493473be42aa0a24d45b_2_690x381.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a1c99975c2b1b6acda58493473be42aa0a24d45b.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a1c99975c2b1b6acda58493473be42aa0a24d45b.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-06-02_15-37-49</span><span class="informations">782×432 12.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Then add a transform step that creates an object of the two results using:</p>
+<pre><code class="lang-auto">FLAT([ airData.results, airData1.results ])
+</code></pre>
+<p>This would get all the results of emails and phone numbers from AirData.</p>
+<p>Not sure if you would have duplicates from this, but then you could add another transform data operation and get all the distinct items:</p>
+<pre><code class="lang-auto">FROM item IN transform SELECT DISTINCT item
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>hey <span class="mention">@jeffchen</span>!</p>
+<p>What you’ll want to do here to return all items that match</p>
+<pre><code class="lang-auto">  { "email": { "anyOf": email }}
+</code></pre>
+<p>And also all items that match</p>
+<pre><code class="lang-auto">{"phoneNumber": {"anyOf": phoneNumber}}
+</code></pre>
+<p>Is the following:</p>
+<pre><code class="lang-auto">{
+  "email": {
+    "anyOf": [ email, NULL ] 
+  },
+    "phoneNumber": {
+      "anyOf": [ phoneNumber, NULL ]
+    }
+  }
+</code></pre>
+<p>The expression above will return all rows where the <code>email</code> matches the input <code>email</code>, or where the email is <code>EMPTY</code> and all rows where the <code>phoneNumber</code> matches the input <code>phoneNumber</code>, or where the email is <code>EMPTY</code>.</p>
+<p>Hope this helps!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Search object for any match of a string on any column</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Search object for any match of a string on any column</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">darren55</div>
+          <div class="post_content">
+<p>Is there any way to search a data object for any match of a string on any column? Ex: if i have a table with a first name and last name fields and have one entry of james davidson and another that david smith, i’d like to build an airscript query where searching for ‘dav’ would return both results.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>hey <span class="mention">@darren55</span>! I feel the <a href="https://community.airkit.com/t/udfs-filter-list-of-json-by-list-of-text/141">Filter List of JSON by List of Text</a> UDF might be just what you’re after.</p>
+<p>Check if out and let me know if:</p>
+<ul>
+<li>You have a different use case</li>
+<li>Need and enhanced version of the filter_by UDF</li>
+</ul>
+<p>cheers!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">darren55</div>
+          <div class="post_content">
+<p>Hey Juana, this is helpful. Would this work for my use case of something like the below? For example, I’m only interested in getting the phone numbers with <code>+1714</code> but these are not lists of texts. Does your UDF support simple filters?</p>
+<pre><code class="lang-auto">[
+  {
+    "name": "Darren",
+    "phone": "+17145555555"
+  },
+  {
+    "name": "john",
+    "phone": "+17148888888"
+  },
+  {
+    "name": "scott",
+    "phone": "+14159999999"
+  }
+]
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>hey <span class="mention">@darren55</span> , thanks for your comment.</p>
+<aside class="quote no-group" data-post="3" data-topic="140" data-username="darren55">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" class="avatar" height="20" loading="lazy" src="../../../images/missing_image.png" width="20"/> darren55:</div>
+<blockquote>
+<p>I’m only interested in getting the phone numbers with <code>+1714</code></p>
+</blockquote>
+</aside>
+<p>yeah, this bit right here should take care of analyzing phone values</p>
+<pre><code class="lang-auto">TYPEOF(value) = "phone",
+              LENGTH(value) != LENGTH(SUBSTITUTE(value, filter, ""))
+</code></pre>
+<p>And for the second part of your comment:</p>
+<aside class="quote no-group" data-post="3" data-topic="140" data-username="darren55">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" class="avatar" height="20" loading="lazy" src="../../../images/missing_image.png" width="20"/> darren55:</div>
+<blockquote>
+<p>these are not lists of texts. Does your UDF support simple filters?</p>
+</blockquote>
+</aside>
+<p>This is an advanced UDF, if you’d like to be able to use the proposed UDF with only one filter as an input, you can always set the filter <code>list</code> to:</p>
+<pre><code class="lang-auto">["value"]
+</code></pre>
+<hr/>
+<p>That being said, if you are only interested in having a simpler UDF that filters by only one <code>filter</code>, you can use a simplified version where <code>filter = "+1714</code></p>
+<pre><code class="lang-auto">FLAT(
+  FROM
+    item
+  IN
+    list
+  SELECT DISTINCT
+    FROM
+      value,
+      key
+    IN
+      item
+    WHERE
+      LENGTH(value) != LENGTH(SUBSTITUTE(value, filter, ""))
+    SELECT
+      item
+)
+</code></pre>
+<p>Hope this helps!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

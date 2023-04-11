@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>User Defined Function that allows to validate if a date is a past date</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">User Defined Function that allows to validate if a date is a past date</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/39_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Etu</div>
+          <div class="post_content">
+<p>Hi community,</p>
+<p>I was wondering how I can define a <em>User Defined Function</em> that allows to validate if a date is a Past date.</p>
+<p>Thanks in advance!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Welcome Etu!</p>
+<p>To check to see if a date is a past date, you can compare two date objects using the comparison operators <code>&lt;,&gt;,&lt;=,&gt;=,=</code>. What you can do is compare the current date using <code>DATE_FROM_DATETIME(NOW())</code> to the date object you are wanting to compare against.</p>
+<p>Below is how I structured this <a href="https://support.airkit.com/reference/user-defined-functions">User Defined Function</a> so that it takes two parameters. A <strong>date parameter</strong> and a <strong>timezone parameter.</strong></p>
+<pre><code class="lang-auto">IF(
+  date &lt; DATE_FROM_DATETIME(NOW(time_zone)),
+  TRUE,
+  FALSE
+)
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/8fvjmdt4mOG1ZWELaIBuMA0ZBX1.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/39d214badb969f17cec5eeda65dc966f6dd67477.png" title="2022-01-14_15-04-52"><img alt="2022-01-14_15-04-52" data-base62-sha1="8fvjmdt4mOG1ZWELaIBuMA0ZBX1" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/39d214badb969f17cec5eeda65dc966f6dd67477_2_10x10.png" height="244" src="../../../images/39d214badb969f17cec5eeda65dc966f6dd67477_2_690x244.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/39d214badb969f17cec5eeda65dc966f6dd67477_2_690x244.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/39d214badb969f17cec5eeda65dc966f6dd67477_2_1035x366.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/39d214badb969f17cec5eeda65dc966f6dd67477_2_1380x488.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-01-14_15-04-52</span><span class="informations">1742×617 47.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>You can then reference the <code>IS_PAST_DATE#USER_FUNCTION</code> in the studio once you create the User Defined function. Does this help answer your question?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/39_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Etu</div>
+          <div class="post_content">
+<p>Yes, it definitely answers my question. Thanks Ismaen!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

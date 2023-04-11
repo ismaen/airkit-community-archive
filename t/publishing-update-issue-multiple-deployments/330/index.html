@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Publishing Update Issue: Multiple deployments</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Publishing Update Issue: Multiple deployments</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kadan9</div>
+          <div class="post_content">
+<blockquote>
+<p>I’m trying to make a minor edit to our carrier claim flow in Airkit and running into an issue. When trying to publish, it states I cannot publish for apps with multiple deployments. I found an HC article, but it’s not making sense to me… <a class="inline-onebox" href="https://support.airkit.com/docs/profiles-and-deployment-settings" rel="noopener nofollow ugc">Profiles and Deployment Settings</a> When I try to map our 3 deployments to the branch it’s pushing me in a loop so I must be doing something wrong. How would I resolve this? Thanks!</p>
+</blockquote>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@kadan9</span>! Great question and also appreciate the feedback on the doc. We’ll look to include cases such as yours in case other developers run into the same issue.</p>
+<p>For your scenario, it looks like you have multiple deployments for your app so in order to manage your deployments, you’ll need to publish and manage your branches from the console.</p>
+<p>Lets say for example, you wanted to make a change to a DEV deployment.</p>
+<p>First i would go to <a href="https://console.airkit.com">https://console.airkit.com</a> and locate your app and click the ellipses next to the app name</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/v5cw85e8pVNdWyhtfBNCm6jZWVV.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d9d9ed654cf27bfca28d0fd39a4c3534ff9767f7.png" title="image"><img alt="image" data-base62-sha1="v5cw85e8pVNdWyhtfBNCm6jZWVV" data-dominant-color="F9F8F9" height="459" src="../../../images/d9d9ed654cf27bfca28d0fd39a4c3534ff9767f7_2_690x459.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d9d9ed654cf27bfca28d0fd39a4c3534ff9767f7_2_690x459.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d9d9ed654cf27bfca28d0fd39a4c3534ff9767f7_2_1035x688.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d9d9ed654cf27bfca28d0fd39a4c3534ff9767f7_2_1380x918.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">2826×1880 420 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Here you’l find two options: Manage Branches and Deployments.</p>
+<p>If you 've made all your changes that you needed and want to deploy, you can select the branch you want to deploy, and duplicate it. It is good practice to name the branch something meaningful to keep track.</p>
+<p>To do this: Manage Branches &gt; Select Branch &gt; Duplicate Branch</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/8MNydt6k3A9X5KWyF7hW7iYKZ5o.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/3d958ece94ab6e18ffa1a8f5df7c24d3e3455312.png" title="image"><img alt="image" data-base62-sha1="8MNydt6k3A9X5KWyF7hW7iYKZ5o" data-dominant-color="FAFAFB" height="459" src="../../../images/3d958ece94ab6e18ffa1a8f5df7c24d3e3455312_2_690x459.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3d958ece94ab6e18ffa1a8f5df7c24d3e3455312_2_690x459.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3d958ece94ab6e18ffa1a8f5df7c24d3e3455312_2_1035x688.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/3d958ece94ab6e18ffa1a8f5df7c24d3e3455312_2_1380x918.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">2826×1880 319 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div><br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/nalHICYCq8hfP1s0po2v6sjdFIg.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a25d83d67e42bc4ddb4ebfaeb41dd459596f46a4.png" title="image"><img alt="image" data-base62-sha1="nalHICYCq8hfP1s0po2v6sjdFIg" data-dominant-color="F9F9FA" height="371" src="../../../images/a25d83d67e42bc4ddb4ebfaeb41dd459596f46a4_2_690x371.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a25d83d67e42bc4ddb4ebfaeb41dd459596f46a4_2_690x371.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a25d83d67e42bc4ddb4ebfaeb41dd459596f46a4_2_1035x556.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a25d83d67e42bc4ddb4ebfaeb41dd459596f46a4_2_1380x742.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">3490×1880 410 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Make sure the branch is locked.</p>
+<p>After you’ve duplicated the branch, you need to update your deployment to use the branch.</p>
+<p>Go back to <strong>Console</strong> &gt; <strong>Ellipses</strong> &gt; <strong>Deployments</strong> and select the deployment you’d like to update</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/icYqCslOwCtGCJyPKObkQjEfWNy.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/7f9e989b15bc6e973ddc56c0cd3fad3299ef8590.png" title="image"><img alt="image" data-base62-sha1="icYqCslOwCtGCJyPKObkQjEfWNy" data-dominant-color="FBFBFC" height="371" src="../../../images/7f9e989b15bc6e973ddc56c0cd3fad3299ef8590_2_690x371.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7f9e989b15bc6e973ddc56c0cd3fad3299ef8590_2_690x371.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7f9e989b15bc6e973ddc56c0cd3fad3299ef8590_2_1035x556.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7f9e989b15bc6e973ddc56c0cd3fad3299ef8590_2_1380x742.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">3490×1880 360 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>You’ll see the locked branch you created and you can then deploy.</p>
+<p>I hope that helps!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kadan9</div>
+          <div class="post_content">
+<p>Hi Ismaen,</p>
+<p>Thank you for getting back to me so quickly. I created my three branches, but I keep running into various issues.</p>
+<ol>
+<li>When I try to map my branches to the deployments, it states I’m in an outdated version and to use the CXR 17.14 Console.</li>
+<li>When I follow the steps to go to the update, one deployment doesn’t show any branches, while the other two branches shoot back an error that something is already in use. I’m pretty certain the three branches I created aren’t being used by anything else.</li>
+<li>After a while, I get stuck in a loop of being asked to toggle to the CXR 17.14 Console.<br/>
+Do you know what I’m doing wrong? I have attached a GIF of me following the steps and the issues I ran into.</li>
+</ol>
+<p>Thanks!</p>
+<p><img alt="airkit.gif" class="animated" data-base62-sha1="wfHfNaKPTYfVRQh1sTpDLMmnjhd" height="405" src="../../../images/e20bd491c3e316fe1d19478590b513079f9c2c5f.gif" width="690"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/345_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">John</div>
+          <div class="post_content">
+<p><span class="mention">@kadan9</span> Kaitlyn, is this for the Merchant Claim Form application?  It looks like you were able to successfully upgrade to version 18.0  Can you confirm (please email <a href="mailto:jkepp@airkit.com">jkepp@airkit.com</a>)?  Thank you.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@kadan9</span>! I found the issue why this is happening. So essentially you currently have a 17.14 branch that is deployed and the branch that is being deployed is v18.0. So one of the buttons is actually redirecting you to the wrong version of studio (only the latest) and is also providing a warning message to go back to v17.14 when we can actually dismiss it and continue on with the deployment.</p>
+<p>Check out this loom video as i walk through the steps here. let me know if this helps!</p>
+<video controls="" height="434" poster="https://cdn.loom.com/sessions/thumbnails/f0a4d49dd098483e8179b7d238b874c9-00001.gif" style="max-width:100%" title="Loom Message - 27 December 2022" width="695">
+<source src="https://cdn.loom.com/sessions/transcoded/f0a4d49dd098483e8179b7d238b874c9.mp4?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4ubG9vbS5jb20vc2Vzc2lvbnMvdHJhbnNjb2RlZC9mMGE0ZDQ5ZGQwOTg0ODNlODE3OWI3ZDIzOGI4NzRjOS5tcDQiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE5ODc3ODc4NzF9fX1dfQ__&amp;Key-Pair-Id=APKAJQIC5BGSW7XXK7FQ&amp;Signature=VQaYUiiuGPQdKOkq7PHw7YaWRegojuDttvLNToHml3YbtX5YnQWUx64%7EfdL-qSVd%7EB-z1U20NXzexwVvVfvP9Q4anhitptTHofuDWiz5WnddPv0Tb5J66Bx-13yB69j946dPIAwIMT-EU9AwmyShBRihEGtlttGpIpFlQx3UxFSwGQow0fs0A2oHzbpyMD9LWzj0ORj8SG7XcYE8KKKzIDSpZOiotM2tJkgiF2buAIEyao0bjdHgWX8ZaH3Nx8S1273imwg9YlZL5kFw9-wiKsrkpsawFy877bI5kgkQhHemqjwmrC-plp2BLpBFoS%7EefNmZ5S5lLjVKdI0fGwchNQ__"/>
+</video>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kadan9</div>
+          <div class="post_content">
+<p>Thanks for the loom video! The workaround was successful for one deployment, but the other 2 deployments are showing the error that it’s already in use <a class="inline-onebox" href="https://www.loom.com/share/fe626d17d91e4d9da7108a6dd85f6774" rel="noopener nofollow ugc">Loom | Free Screen &amp; Video Recording Software | Loom</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>at 1:43 in your video, you publish the QA deployment but leave the profile as “Development” which is why you get the “Resource is in use” error. can you try to change that to QA?</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/wzVJlHWcW7OXLFJtJPlbUs7pt3b.jpeg?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e4555a6550da3944b66026d27f1f250a16a096e1.jpeg" title="image"><img alt="image" data-base62-sha1="wzVJlHWcW7OXLFJtJPlbUs7pt3b" data-dominant-color="E8E7E9" height="301" src="../../../images/e4555a6550da3944b66026d27f1f250a16a096e1_2_689x301.jpeg" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e4555a6550da3944b66026d27f1f250a16a096e1_2_689x301.jpeg, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e4555a6550da3944b66026d27f1f250a16a096e1_2_1033x451.jpeg 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e4555a6550da3944b66026d27f1f250a16a096e1_2_1378x602.jpeg 2x" width="689"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">2388×1042 157 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Also can you do the same with your PROD deployment as well. Let me know if that resolves the issue!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kadan9</div>
+          <div class="post_content">
+<p>Thank you, Ismane,</p>
+<p>That worked! Unfortunately, I do not see my edits published <img alt=":sweat_smile:" class="emoji" height="20" loading="lazy" src="../../../images/sweat_smile.png" title=":sweat_smile:" width="20"/> Do you have a help center article that you could point me to?</p>
+<p>When I look at my branches, it shows me the new card I want to add, but when I navigate to our live link for the form, I do not see the card. Another thing I noticed is that when I open the branches and click preview, I do not see this card there either. I attached a loom <a href="https://www.loom.com/share/982bc21ea1c343988e94bf0e58edc161" rel="noopener nofollow ugc">here</a>.</p>
+<p>I look forward to hearing back from you!</p>
+<p>All the best,<br/>
+Kait</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Ah this seems like a configuration on the web flow itself. There’s a setting called “initial web page” that you need to set to correspond with the web page you’d like for the first page to navigate to.</p>
+<p>You can see this at <strong>Web Flows builder</strong> &gt; click on the <strong>Collect Merchant Data Web Flow</strong> &gt; look at the bottom right hand corner and see <strong>Initial Web Page</strong></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/lVutrrMvCdUC548kGDOlL5aNe3x.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/99ad5c235a84c0693b83638c03e19afd593465cb.png" title="image"><img alt="image" data-base62-sha1="lVutrrMvCdUC548kGDOlL5aNe3x" data-dominant-color="FCFCFC" height="361" src="../../../images/99ad5c235a84c0693b83638c03e19afd593465cb_2_690x361.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/99ad5c235a84c0693b83638c03e19afd593465cb_2_690x361.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/99ad5c235a84c0693b83638c03e19afd593465cb_2_1035x541.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/99ad5c235a84c0693b83638c03e19afd593465cb_2_1380x722.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">3584×1880 321 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Because this is a change to the app, you’ll have to modify an unlocked branch, then save, then duplicate it and lock the branch and redeploy, essentially re-doing the steps you did to deploy.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kadan9</div>
+          <div class="post_content">
+<p>Thank you so much Ismaen. Everything is live and working now!</p>
+<p>Happy New Year,<br/>
+Kait</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

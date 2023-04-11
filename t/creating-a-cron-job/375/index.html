@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Creating a Cron Job</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Creating a Cron Job</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/299_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">jeff_groupwork</div>
+          <div class="post_content">
+<p>Is there a functionality to schedule data flows to run on a reoccurring basis?  Basically looking to create a cron job.  I’m looking to see if we can run a data flow to consolidate data every 30-60 minutes during the business day and then send it out via SFTP after all new inputted data as been consolidated.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p>I’m curious if anyone has a better solution than the extremely hacky solution I’ve used in the past, but I’ll share how I’ve done it during a literal Hackday.</p>
+<p>To run a data flow (or fire any other Action Chain) periodically, I’ve set up two <a href="https://support.airkit.com/reference/the-reporting-metric-start-timer-action">Timers</a> and cycled back and forth between them. The idea is that Timer 1 can set Timer 2 at the end of the Action Chain it fires, and then Timer 2 can set Timer 1 at the end of the Action Chain <em>it</em> fires, and then they can pass the time keeping back and forth between them. It’s also possible to build checks into the Action Chains both timers take (using the <a href="https://support.airkit.com/reference/the-reporting-metric-start-timer-action">Conditional</a> Action) to <em>not</em> set the other timer under certain conditions - which seems like a feasible way send out data after it’s been consolidated.</p>
+<p>Does that make sense? I’m aware that this seems like extremely bad practice (though it does get the job done!) and I’d love to hear if anyone’s done something like this more neatly than I have.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

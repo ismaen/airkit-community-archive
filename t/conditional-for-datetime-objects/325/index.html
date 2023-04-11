@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Conditional for DateTime objects</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Conditional for DateTime objects</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tanmay.sardar</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@ismaen</span></p>
+<p>Thanks in advance</p>
+<p>i have stuck with an outage scenario for app where i’m using airdata for setting date , start time and end  time based on that in web page i need to apply condition if that airdata match with current date and time then we need to show outage web page and if it doesn’t satisfy with airdata then normal web page should show.</p>
+<p>if only date is set and time doesn’t set in airdata can we apply date and time range directly in webflow?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p>This sounds like the sort of thing that’s absolutely possible! You don’t need to pull information from AirData to assign a value to a variable. You can use the <a href="https://support.airkit.com/reference/the-set-variable-action">Set Variable Action</a> anywhere in a <a href="https://support.airkit.com/reference/web-flow">Web Flow</a>.</p>
+<p>If you’ve only pulled a Date from Airdata, rather than a full DateTime, you can use the <a href="https://support.airkit.com/reference/datetime">DATETIME</a> function to create a DateTime value from the Date value you already have. How you define the Time and timezone components depends on the details of your use case. And you can do this directly the Web Flow!</p>
+<p>Does that help?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Additionally, you can run a conditional to navigate to a specific web page/web flow based on a date_time so you can display this dynamically. See screenshot below:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/2NB6kT2Yjy4JWUBKeTjJDdBZH4.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/005106c715e3e17ff83ee867b4918f7ecaf4d8ea.png" title="image"><img alt="image" data-base62-sha1="2NB6kT2Yjy4JWUBKeTjJDdBZH4" data-dominant-color="FCFCFD" height="254" src="../../../images/005106c715e3e17ff83ee867b4918f7ecaf4d8ea_2_690x254.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/005106c715e3e17ff83ee867b4918f7ecaf4d8ea_2_690x254.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/005106c715e3e17ff83ee867b4918f7ecaf4d8ea_2_1035x381.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/005106c715e3e17ff83ee867b4918f7ecaf4d8ea.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1366×504 30.7 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tanmay.sardar</div>
+          <div class="post_content">
+<p>Hi ismaen,</p>
+<p>we need time range (startend ,enddate) how to configure that using current time and date(now()) with some default time and date(AIRdata)<br/>
+we are using airdata so that user can add multiple date and time based on that if its matching with current date and time with some range then outage webflow should be shown</p>
+<p>For Example i’m comparing with current date NOW() =session.datetime() but need to declared session.datetime for 4 hour how to add that hour range in condition so that it satisfy with current date and except that hour range also</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>So what i would do is have a conditional on whatever actino you want to run it on.</p>
+<p>You can compare <code>date</code> and <code>dateTime</code> objects using the comparison operators. Take a look at this doc here: <a class="inline-onebox" href="https://support.airkit.com/reference/ordering">Ordering (&lt;, &lt;=, &gt; , &gt;=)</a></p>
+<p>So what you can do is something like</p>
+<pre><code class="lang-auto">IF(
+NOW() &lt; ADD_TO_DATETIME(date1, 4, "hour") AND NOW() &gt; date1,
+ "Do something", 
+"Do something else"
+)
+</code></pre>
+<p>See <a href="https://support.airkit.com/reference/add_to_datetime">ADD_TO_DATETIME</a> docs</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tanmay.sardar</div>
+          <div class="post_content">
+<p>thank you for your input</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

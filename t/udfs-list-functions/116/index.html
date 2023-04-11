@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>UDFs - List functions</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">UDFs - List functions</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<h3>
+<a class="anchor" href="#hear-ye-hear-ye-new-udfs-for-list-management-are-here-1" name="hear-ye-hear-ye-new-udfs-for-list-management-are-here-1"></a>Hear ye! Hear ye! New UDFs for List management are here!</h3>
+<ul>
+<li><a href="https://community.airkit.com/t/udfs-list-functions/116#listpush-1"><code>LIST#PUSH(list, new_item)</code></a></li>
+<li><a href="https://community.airkit.com/t/udfs-list-functions/116#listremove-5"><code>LIST#REMOVE(list, item_index)</code></a></li>
+<li><a href="https://community.airkit.com/t/udfs-list-functions/116#listsort_by-5"><code>LIST#SORT_BY(list, sort_by)</code></a></li>
+</ul>
+<p>If you need more advanced processing, check out the advanced <strong>List Processing UDFs</strong>:</p>
+<ul>
+<li><a href="https://community.airkit.com/t/udfs-list-of-json-objects-to-html-table-with-basic-formatting/100/2">List of JSON to HTML</a></li>
+<li><a href="https://community.airkit.com/t/udfs-recursively-process-a-list-of-json-with-a-nested-list-of-json-and-return-objects-where-one-or-more-objects-in-the-nested-list-match-a-condition/103">Recursive processing of nested Lists of JSON</a></li>
+<li><a href="https://community.airkit.com/t/udfs-recursive-processing-of-pre-selected-json-fields/102">Recursive processing of data contained in a List of JSON</a></li>
+<li><a href="https://community.airkit.com/t/udfs-csv-to-list-of-json-objects-transformation/90">CSV data to List of JSON</a></li>
+<li><a href="https://community.airkit.com/t/udfs-csv-to-html-table-with-basic-formatting/91">List of CSV rows to HTML table</a></li>
+<li><a href="https://community.airkit.com/t/udfs-list-of-json-objects-to-csv-string-transformation/89">List of JSON to CSV</a></li>
+<li><a href="https://community.airkit.com/t/udfs-filter-list-of-json-by-list-of-text/141">Filter List of JSON by List of Text</a></li>
+</ul>
+<hr/>
+<h1>
+<a class="anchor" href="#listpush-2" name="listpush-2"></a>LIST#PUSH()</h1>
+<p>As explained in the <a href="https://support.airkit.com/reference/the-list-data-type#other-notes">List Data Type docs</a>, there’s no direct Airscript equivalent to the <code>.push()</code> or <code>.append()</code> methods.</p>
+<p>Here’s a neat little UDF Body that will push a new item into a list:</p>
+<pre><code class="lang-auto">FROM item IN FLAT([ list, new_item ]) WHERE ISNOTEMPTY(item) SELECT DISTINCT item
+</code></pre>
+<h3>
+<a class="anchor" href="#udf-breakdown-3" name="udf-breakdown-3"></a>UDF Breakdown</h3>
+<p>The first (well-known) bit of this UDF is</p>
+<pre><code class="lang-auto">FLAT([ list, new_item ])
+</code></pre>
+<p>Which takes</p>
+<ul>
+<li>a List of items  - <code>list = [ item_1, item_2 ]</code>
+</li>
+<li>adds a new item - <code>[ list, new_item ] = [[ item_1, item_2 ], new_item]</code>
+</li>
+<li>flattens the resulting list - <code>[ item_1, item_2, new_item ]</code>
+</li>
+</ul>
+<h3>
+<a class="anchor" href="#considerations-4" name="considerations-4"></a>Considerations</h3>
+<ol>
+<li>
+<p>What happens if the <code>list</code> is empty? Meaning what if our starting list is: <code>list = [ ]</code></p>
+<p>This is where the following comes into play, selecting items that are not empty:</p>
+<pre><code class="lang-auto">WHERE ISNOTEMPTY(item)
+</code></pre>
+</li>
+<li>
+<p>What happens if I’m using this method to append items to a list, but I want to make sure that the same item is not added more than once?</p>
+<p>To make sure the same item is not added more than once to our list, we use</p>
+<pre><code class="lang-auto">SELECT DISTINCT
+</code></pre>
+</li>
+</ol>
+<hr/>
+<p><em>TIP: Play around with this simple UDF to handle Marketplace-like lists, where the requirement might be to display</em> <code>SELECT DISTINCT</code> <em>only the items can be added more than once, incrementing the number of a certain item in our shopping cart.</em></p>
+<hr/>
+<h1>
+<a class="anchor" href="#listremove-5" name="listremove-5"></a>LIST#REMOVE()</h1>
+<p>Just as often as we need to push/append new items into existing lists we might need to remove an item at [<code>index</code>] from the list.</p>
+<p>Like the <code>LIST#PUSH()</code> UDF, the <code>LIST#REMOVE()</code> UDF is a simple, but useful one.</p>
+<p>The UDF has two inputs:</p>
+<ul>
+<li>
+<code>list</code> - <em>Datatype: List of JSON</em>
+</li>
+<li>
+<code>item_index</code> - <em>Datatype: Number</em>, the index at which the item to be removed resides</li>
+</ul>
+<p>The UDF’s Body is</p>
+<pre><code class="lang-auto">FROM item IN list WHERE NOT(index = item_index) SELECT item
+</code></pre>
+<p>And the output is <em>Datatype: List of JSON</em>.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/f62sbyTQFGxpiop4aOccjvFXBJi.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/69cf628c9f24fd6d7eff981056ab7efa1f30d724.png" title="LIST_REMOVE"><img alt="LIST_REMOVE" data-base62-sha1="f62sbyTQFGxpiop4aOccjvFXBJi" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69cf628c9f24fd6d7eff981056ab7efa1f30d724_2_10x10.png" height="201" src="../../../images/69cf628c9f24fd6d7eff981056ab7efa1f30d724_2_690x201.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69cf628c9f24fd6d7eff981056ab7efa1f30d724_2_690x201.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69cf628c9f24fd6d7eff981056ab7efa1f30d724_2_1035x301.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/69cf628c9f24fd6d7eff981056ab7efa1f30d724_2_1380x402.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">LIST_REMOVE</span><span class="informations">2730×798 101 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<hr/>
+<h1>
+<a class="anchor" href="#listsort_by-6" name="listsort_by-6"></a>LIST#SORT_BY()</h1>
+<p>So, you have a list of JSON objects that populates a grid (Repeater) in your UI; how can you enable your users to sort by different object fields either <em>Ascending</em> or <em>Descending</em>?</p>
+<p>Let’s work on some <a href="https://support.airkit.com/reference/user-defined-functions">UDF</a> magic to get that <em>sorted</em> out (pun intended <img alt=":laughing:" class="emoji" height="20" loading="lazy" src="../../../images/laughing.png" title=":laughing:" width="20"/>)</p>
+<blockquote>
+<p><img alt=":information_source:" class="emoji" height="20" loading="lazy" src="../../../images/information_source.png" title=":information_source:" width="20"/> Using UDFs to sort your lists means all data processing stays on the <em>client-side</em> which is faster and relatively seamless (better UX) as opposed to using Data Flows to do the same.<br/>
+Data Flows run on Airkit servers, meaning the information needs to be sent to the server to be processed, then sent back to the client to be displayed to the users; and are better suited to run backend processes (Data Ops).</p>
+</blockquote>
+<hr/>
+<h2>
+<a class="anchor" href="#use-case-7" name="use-case-7"></a>Use Case</h2>
+<p>As an example, let’s say the grid is populated with a <em>List of JSON</em> where each object has the following structure:</p>
+<pre><code class="lang-auto">[
+  {
+    "name": "Super Awesome Hoodie",
+    "sales": 1734,
+    "added_timestamp": {
+      "date": {
+        "year": 2022,
+        "month": 3,
+        "day": 5
+      },
+      "time": {
+        "hour": 2,
+        "minute": 29,
+        "second": 46,
+        "millisecond": 127
+      },
+      "timeZone": "UTC"
+    },
+    "views": 7543
+  },
+  {
+    "name": "Magic Carpet",
+    "sales": 3853,
+    "added_timestamp": {
+      "date": {
+        "year": 2022,
+        "month": 3,
+        "day": 5
+      },
+      "time": {
+        "hour": 1,
+        "minute": 30,
+        "second": 2,
+        "millisecond": 848
+      },
+      "timeZone": "UTC"
+    },
+    "views": 9124
+  }
+]
+</code></pre>
+<p>And we want to have one of those good old <em>Sort by</em> dropdown lists in our Web Page</p>
+<p><img alt="Sort by" data-base62-sha1="hPytbpDNESMzBnSwnpj6nY91xyf" height="186" src="../../../images/7cf8e63b1cb57d7aeaeab4623a997c96cfb88b97.png" width="189"/></p>
+<p>We’ll set the following <em>List of JSON</em> as the Dropdown control’s data binding</p>
+<pre><code class="lang-auto">[
+  {
+    "display": "Name (A-Z)",
+    "value": "name ascending"
+  },
+  {
+    "display": "Name (Z-A)",
+    "value": "name descending"
+  },
+  {
+    "display": "New to old",
+    "value": "added_timestamp descending"
+  },
+  {
+    "display": "Old to new",
+    "value": "added_timestamp ascending"
+  }
+]
+</code></pre>
+<p>Where <code>display</code> contains the value displayed to the user in the UI, and <code>value</code> contains both the field name to sort by and the order to user for sorting (either <em>ascending</em> or <em>descending</em>).</p>
+<hr/>
+<h2>
+<a class="anchor" href="#building-the-udf-8" name="building-the-udf-8"></a>Building the UDF</h2>
+<h3>
+<a class="anchor" href="#basic-sorting-9" name="basic-sorting-9"></a>Basic sorting</h3>
+<p>Let’s look at the basics of sorting a list of objects by a given field. We’ll call the List of JSON objects <code>list</code>, and we’ll sort by <code>name</code> <code>Ascending</code>. Using <a href="https://support.airkit.com/docs/airdata-querying-capabilities">AirData Querying Capabilities</a> we can do:</p>
+<pre><code class="lang-auto">FROM item IN list ORDER BY item.name ASCENDING SELECT item
+</code></pre>
+<p>Which will return the same List of JSON but ordered by the <code>name</code> field.</p>
+<h3>
+<a class="anchor" href="#parameterizing-the-field-to-sort-by-and-the-order-10" name="parameterizing-the-field-to-sort-by-and-the-order-10"></a>Parameterizing the field to sort by and the order</h3>
+<p>Now that we have the basic sorting expression, we can use a <a href="https://support.airkit.com/reference/if">conditional</a> to set the sorting order and the <code>["{{field_name}}"]</code> syntax to parameterize the field name to sort by.</p>
+<h4>
+<a class="anchor" href="#udf-definition-11" name="udf-definition-11"></a>UDF Definition</h4>
+<ol>
+<li>
+<p>The UDF needs to have two inputs:</p>
+<ul>
+<li>
+<code>list</code> (<em>Datatype: List of JSON</em>) - List of JSON objects used to populate the UI grid</li>
+<li>
+<code>sort_by</code> (<em>Datatype: Text</em>) - String representing the selected sorting option’s <code>value</code>
+</li>
+</ul>
+</li>
+<li>
+<p>The <em>Output</em> of the UDF will be of <em>Datatype: List of JSON</em></p>
+</li>
+<li>
+<p>The UDF’s Function Body will look like</p>
+<pre><code class="lang-auto">IF(
+  SPLIT(sort_by, " ")[1] = "ascending",
+  FROM item IN list ORDER BY item["{{SPLIT(sort_by, " ")[0]}}"] ASCENDING SELECT item,
+  SPLIT(sort_by, " ")[1] = "descending",
+  FROM item IN list ORDER BY item["{{SPLIT(sort_by, " ")[0]}}"] DESCENDING SELECT item
+)
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/jsxJGdNhQ60HGr0ou9kX9U9CMj2.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/886352f55bfe2661ec24863ad8c47d46eb13367c.png" title="UDF - Sort by"><img alt="UDF - Sort by" data-base62-sha1="jsxJGdNhQ60HGr0ou9kX9U9CMj2" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/886352f55bfe2661ec24863ad8c47d46eb13367c_2_10x10.png" height="175" src="../../../images/886352f55bfe2661ec24863ad8c47d46eb13367c_2_690x175.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/886352f55bfe2661ec24863ad8c47d46eb13367c_2_690x175.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/886352f55bfe2661ec24863ad8c47d46eb13367c_2_1035x262.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/886352f55bfe2661ec24863ad8c47d46eb13367c_2_1380x350.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">UDF - Sort by</span><span class="informations">2798×710 64 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h4>
+<a class="anchor" href="#udf-sorting-breakdown-12" name="udf-sorting-breakdown-12"></a>UDF sorting breakdown</h4>
+<p>The UDF’s body contains an <a href="https://support.airkit.com/reference/if">IF() statement</a> to control whether the <code>list</code> contents should be ordered <em>Ascending</em> or <em>Descending</em>.<br/>
+Let’s dig into the next bit.<br/>
+Remember we’re only getting the <code>value</code> from the Sort By drop down. Using the <a href="https://support.airkit.com/reference/split">SPLIT() Airscript function</a> we can get the order to use for sorting.</p>
+<pre><code class="lang-auto">SPLIT(sort_by, " ")[1]
+</code></pre>
+<p>If the user selected <em>Old to new</em>, the <code>value</code> will be <code>"added_timestamp ascending"</code>, and the output of the above expression will be <code>ascending</code>. We’ll use this value to select which of the <em>cases</em> of the IF() will be executed.<br/>
+The same <a href="https://support.airkit.com/reference/split">SPLIT() Airscript function</a> can be used to get the field name to sort the list by</p>
+<pre><code class="lang-auto">SPLIT(sort_by, " ")[0]
+</code></pre>
+<p>Whose output will be <code>added_timestamp</code></p>
+<p>Last but certainly not least, we’re using that expression to fetch the object field’s name to sort by</p>
+<pre><code class="lang-auto">FROM item IN list ORDER BY item["{{SPLIT(sort_by, " ")[0]}}"] ASCENDING SELECT item
+</code></pre>
+</li>
+</ol>
+<hr/>
+<p><em>TIP: play around with the</em> <code>object["{{variable_name}}"]</code> <em>syntax to dynamically access/set fields of a JSON object.</em></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

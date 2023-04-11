@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How do we make an app compliant when sending text messages internationally?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How do we make an app compliant when sending text messages internationally?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/9_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Ankit_Chaudhari</div>
+          <div class="post_content">
+<p><strong>Question:</strong> As part of implementing a compliant application, we reference to US-based calendars/schedules in Airkit before triggering a text message to the end-user. Similar to TCPA in the US, how do we make an application compliant to SMS protocols in other regions/continents?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>This is an interesting question! Right now, the out-of-the-box <a href="https://support.airkit.com/docs/using-availability-schedules">Availability Schedules</a> Airkit provides only cover US-based TCPA regulations. Configuring compliance based on different a country’s (or region’s) regulations would need to be done manually.</p>
+<p>To do this, you’d want to mimic the way out-of-the-box TCPA-compliance Availability Schedules work in Airkit. That is, use the <a href="https://support.airkit.com/docs/schedules-builder">Scheduler’s Builder</a> to define an Availability Schedule that references all windows of time in which messages are allowed to be sent, and then use that Availability Schedule to enforce regulation compliance, the same way you would with any of the out-of-the-box TCPA-compliance Availability Schedules. You can find a deeper dive into how that works <a href="https://support.airkit.com/docs/tcpa#voice-bots-chat-bots-and-notifications-sent-as-actions">here</a>.</p>
+<p>Manually making an Availability Schedule that enforces your regulation needs can be time-consuming, but the good news is that once you make it, it will be automatically available for all applications in your Org.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

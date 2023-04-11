@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Assistance with checking information in string</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Assistance with checking information in string</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/488_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Joe_Wilcox_INSHUR</div>
+          <div class="post_content">
+<p>Hey, wonder if someone would be able to point me in the right direction - on one of our apps we are building we are trying to capture some characters which we would use to send that user to a different flow. For example if the user’s policy number contains “ABC” to then show the user different information. I tried using CONTAIN without any success. If someone can help that would be great.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p>The function <a href="https://support.airkit.com/reference/contains">CONTAINS</a> searches through Lists, but it sounds like you need to search through a string. For that, I’d use <a href="https://support.airkit.com/reference/string_find">STRING_FIND</a> nested inside an <a href="https://support.airkit.com/reference/if">IF</a> function.</p>
+<p>For instance, say you have some string, call it <code>sample_string</code>. You want to see if it contains “ABC”, so you run <code>STRING_FIND(sample_string, "ABC")</code>. This will return -1 if “ABC” cannot be found within <code>sample_string</code>. To turn this into a <code>Boolean</code>, perhaps for use within the <a href="https://support.airkit.com/reference/the-condition-action">Condition Action</a>, you can nest it within the <code>IF</code> function like so:</p>
+<pre><code class="lang-auto">IF(STRING_FIND(sample_string, "ABC") = -1,  FALSE, TRUE)
+</code></pre>
+<p>This will return FALSE if <code>sample_string</code> does not have “ABC” as a substring, and TRUE otherwise.</p>
+<p>Does that help?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/488_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Joe_Wilcox_INSHUR</div>
+          <div class="post_content">
+<p>Hi Chandra,</p>
+<p>Thank you for your response, I’ll give it a go.</p>
+<p>Am I able to use sessions inside of the sample_string so if the session variable contained “ABC” then it would pick it up.</p>
+<p>For example if session.quoteNumber = “ABC” this would return true.</p>
+<p>Thanks</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>You are able to use variables within Airkit expressions, and global variables (indicated by that session namespace) are available everywhere! So if you have a global variable designated <code>quoteNumber</code>, you should be good to go with something like:</p>
+<pre><code class="lang-auto">IF(STRING_FIND(session.quoteNumber, "ABC") = -1,  FALSE, TRUE)
+</code></pre>
+<p>(And yes, if <code>session.quoteNumber</code> = “ABC” this would return TRUE.)</p>
+<p>The string “ABC” can also be substituted with a variable. Say you had a global variable designated <code>search</code> that was equal to “ABC", then you could get the same results with this:</p>
+<pre><code class="lang-auto">IF(STRING_FIND(session.quoteNumber, session.search) = -1,  FALSE, TRUE)
+</code></pre>
+<p>The devil’s in the details, though, and variables need to be stored locally in order to be accessible. The doc <a href="https://support.airkit.com/docs/variable-scopes">Variable Scopes</a> might if be a good place to start if you’re running into issues regarding what variables you have access to in a particular Airscript expression.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Flatten or Disable Editing PDF</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Flatten or Disable Editing PDF</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p>Hi all, we have an app that is using the FillPDF operation to populate a template based on entered data. Producing the PDF is working but the outputted file is editable (shows the blue boxes). Once the file is produced, does anyone know of a way to “flatten” the output so as to not allow editing?</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>hi <span class="mention">@blschaef15</span>, when you prepare your form in Adobe, are the fields “read-only”?</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/vK6Wqplccm0pj0odu2MTrSMGV1M.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/de79cb70a2373cb0d2aa0f54eb3eba15f2363082.png" title="image"><img alt="image" data-base62-sha1="vK6Wqplccm0pj0odu2MTrSMGV1M" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/de79cb70a2373cb0d2aa0f54eb3eba15f2363082_2_10x10.png" height="500" src="../../../images/de79cb70a2373cb0d2aa0f54eb3eba15f2363082_2_541x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/de79cb70a2373cb0d2aa0f54eb3eba15f2363082_2_541x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/de79cb70a2373cb0d2aa0f54eb3eba15f2363082.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/de79cb70a2373cb0d2aa0f54eb3eba15f2363082.png 2x" width="541"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">799×738 47.8 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@ismaen</span> , yes - can confirm adobe shows the text field property as Read Only but I can still edit the generated PDF out of AirKit.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p><span class="mention">@ismaen</span> any other ideas? Have you tested making a field property “read only” in Adobe and having that not be editable in the outputted PDF? I could be missing something.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>hi <span class="mention">@blschaef15</span>, my apologies, seems like i’m able to replicate what you’re getting and the outputted PDF is editable. I’m going to flag this to our engineering team to see why this might be happening.</p>
+<p>On another note, There is another data operation that you can use to create non-editable PDFs though. You can use the <a href="https://support.airkit.com/reference/the-html-to-pdf-data-operation">HTML to PDF data operation</a> and dynamically pass in your info in the HTML which will generate a PDF.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@ismaen</span> ! I’m trying out the HTML to PDF now. I’m dealing with a fairly complicated Acord 25 form and having issues with AirKit accepting the HTML.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p><span class="mention">@ismaen</span> does the HTML input not want double quotes around things? Can you give best practices around how to format the html/css?</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/mgBRvpJF5XsBJUWvj3r3w0Tidtr.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9c10832ba594ade8370f0e602b5ba16e35f8eab5.png" rel="noopener nofollow ugc" title="Screen Shot 2022-09-13 at 2.51.49 PM"><img alt="Screen Shot 2022-09-13 at 2.51.49 PM" data-base62-sha1="mgBRvpJF5XsBJUWvj3r3w0Tidtr" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9c10832ba594ade8370f0e602b5ba16e35f8eab5_2_10x10.png" height="426" src="../../../images/9c10832ba594ade8370f0e602b5ba16e35f8eab5_2_690x426.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/9c10832ba594ade8370f0e602b5ba16e35f8eab5_2_690x426.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9c10832ba594ade8370f0e602b5ba16e35f8eab5.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/9c10832ba594ade8370f0e602b5ba16e35f8eab5.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-13 at 2.51.49 PM</span><span class="informations">713×441 118 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>You will need to escape the quotes using a backslash \ character before each double quote.</p>
+<pre><code class="lang-auto">"&lt;div style= \"left:519px; top:721px;\" &gt;"
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@ismaen</span> . I ran the HTML through word and replaced each " with a " but no luck.</p>
+<p>Original HTML</p>
+<pre><code class="lang-auto">&lt;div id="page-wrap-main" data-bg=""&gt;
+  &lt;style&gt;
+    div.pdf {
+      position: relative;
+      width: 950px;
+      height: 1241px;
+      overflow: hidden;
+    }
+
+    div.pdf * {
+      display: inline;
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      color: #000000;
+      font-family: Arial, sans-serif;
+      white-space: nowrap;
+    }
+
+    div.pdf div.ocr {
+      filter: alpha(opacity=20) -moz-opacity: 0.2;
+      -khtml-opacity: 0.2;
+      opacity: 0.2;
+    }
+  &lt;/style&gt;
+  &lt;div class="pdf" style="transform: scale(0.889474);"&gt;
+    &lt;div style="left:822px;top:24px;font-size:8px;"&gt;DATE (MM/DD/YYYY)&lt;/div&gt;
+    &lt;div style="left:197px;top:28px;font-size:24px;"&gt;CERTIFICATE OF LIABILITY INSURANCE&lt;/div&gt;
+    &lt;div style="left:25px;top:63px;font-size:12px;"&gt;THIS CERTIFICATE IS ISSUED AS A MATTER OF INFORMATION ONLY AND CONFERS NO RIGHTS UPON THE CERTIFICATE HOLDER. THIS&lt;/div&gt;
+    &lt;div style="left:25px;top:78px;font-size:12px;"&gt;CERTIFICATE DOES NOT AFFIRMATIVELY OR NEGATIVELY AMEND, EXTEND OR ALTER THE COVERAGE AFFORDED BY THE POLICIES&lt;/div&gt;
+    &lt;div style="left:25px;top:94px;font-size:12px;"&gt;BELOW. THIS CERTIFICATE OF INSURANCE DOES NOT CONSTITUTE A CONTRACT BETWEEN THE ISSUING INSURER(S), AUTHORIZED&lt;/div&gt;
+    &lt;div style="left:25px;top:109px;font-size:12px;"&gt;REPRESENTATIVE OR PRODUCER, AND THE CERTIFICATE HOLDER.&lt;/div&gt;
+    &lt;div style="left:25px;top:129px;font-size:12px;"&gt;IMPORTANT: If the certificate holder is an ADDITIONAL INSURED, the policy(ies) must be endorsed. If SUBROGATION IS WAIVED, subject to&lt;/div&gt;
+    &lt;div style="left:25px;top:144px;font-size:12px;"&gt;the terms and conditions of the policy, certain policies may require an endorsement. A statement on this certificate does not confer rights to the&lt;/div&gt;
+    &lt;div style="left:25px;top:160px;font-size:12px;"&gt;certificate holder in lieu of such endorsement(s).&lt;/div&gt;
+    &lt;div style="left:479px;top:175px;font-size:8px;"&gt;CONTACT&lt;/div&gt;
+    &lt;div style="left:14px;top:179px;font-size:8px;"&gt;PRODUCER&lt;/div&gt;
+    &lt;div style="left:479px;top:184px;font-size:8px;"&gt;NAME:&lt;/div&gt;
+    &lt;div style="left:479px;top:194px;font-size:8px;"&gt;PHONE&lt;/div&gt;
+    &lt;div style="left:765px;top:194px;font-size:8px;"&gt;FAX (A/C,&lt;/div&gt;
+    &lt;div style="left:14px;top:198px;font-size:12px;color:#0000FF;"&gt;Producer Name&lt;/div&gt;
+    &lt;div style="left:479px;top:203px;font-size:8px;"&gt;(A/C, No, Ext):&lt;/div&gt;
+    &lt;div style="left:765px;top:203px;font-size:8px;"&gt;No):&lt;/div&gt;
+    &lt;div style="left:479px;top:214px;font-size:8px;"&gt;E-MAIL&lt;/div&gt;
+    &lt;div style="left:14px;top:217px;font-size:12px;color:#0000FF;"&gt;Producer Address&lt;/div&gt;
+    &lt;div style="left:479px;top:222px;font-size:8px;"&gt;ADDRESS:&lt;/div&gt;
+    &lt;div style="left:575px;top:241px;font-size:8px;"&gt;INSURER(S) AFFORDING COVERAGE&lt;/div&gt;
+    &lt;div style="left:880px;top:241px;font-size:8px;"&gt;NAIC #&lt;/div&gt;
+    &lt;div style="left:14px;top:256px;font-size:12px;color:#0000FF;"&gt;Producer Phone Number&lt;/div&gt;
+    &lt;div style="left:549px;top:257px;font-size:11px;color:#0000FF;"&gt;Carrier A&lt;/div&gt;
+    &lt;div style="left:878px;top:257px;font-size:12px;color:#0000FF;"&gt;12345&lt;/div&gt;
+    &lt;div style="left:479px;top:260px;font-size:8px;"&gt;INSURER A :&lt;/div&gt;
+    &lt;div style="left:14px;top:276px;font-size:8px;"&gt;INSURED&lt;/div&gt;
+    &lt;div style="left:549px;top:277px;font-size:11px;color:#0000FF;"&gt;Carrier B&lt;/div&gt;
+    &lt;div style="left:878px;top:277px;font-size:12px;color:#0000FF;"&gt;12345&lt;/div&gt;
+    &lt;div style="left:479px;top:280px;font-size:8px;"&gt;INSURER B :&lt;/div&gt;
+    &lt;div style="left:14px;top:294px;font-size:12px;color:#0000FF;"&gt;Contractor Name&lt;/div&gt;
+    &lt;div style="left:549px;top:296px;font-size:12px;color:#0000FF;"&gt;Carrier C&lt;/div&gt;
+    &lt;div style="left:878px;top:296px;font-size:12px;color:#0000FF;"&gt;12345&lt;/div&gt;
+    &lt;div style="left:479px;top:299px;font-size:8px;"&gt;INSURER C :&lt;/div&gt;
+    &lt;div style="left:14px;top:313px;font-size:12px;color:#0000FF;"&gt;Contractor Address&lt;/div&gt;
+    &lt;div style="left:479px;top:319px;font-size:8px;"&gt;INSURER D :&lt;/div&gt;
+    &lt;div style="left:479px;top:338px;font-size:8px;"&gt;INSURER E :&lt;/div&gt;
+    &lt;div style="left:479px;top:357px;font-size:8px;"&gt;INSURER F :&lt;/div&gt;
+    &lt;div style="left:14px;top:374px;font-size:12px;"&gt;COVERAGES&lt;/div&gt;
+    &lt;div style="left:236px;top:374px;font-size:12px;"&gt;CERTIFICATE NUMBER:&lt;/div&gt;
+    &lt;div style="left:667px;top:374px;font-size:12px;"&gt;REVISION NUMBER:&lt;/div&gt;
+    &lt;div style="left:25px;top:391px;font-size:10px;"&gt;THIS IS TO CERTIFY THAT THE POLICIES OF INSURANCE LISTED BELOW HAVE BEEN ISSUED TO THE INSURED NAMED ABOVE FOR THE POLICY PERIOD&lt;/div&gt;
+    &lt;div style="left:25px;top:405px;font-size:10px;"&gt;INDICATED. NOTWITHSTANDING ANY REQUIREMENT, TERM OR CONDITION OF ANY CONTRACT OR OTHER DOCUMENT WITH RESPECT TO WHICH THIS&lt;/div&gt;
+    &lt;div style="left:25px;top:418px;font-size:10px;"&gt;CERTIFICATE MAY BE ISSUED OR MAY PERTAIN, THE INSURANCE AFFORDED BY THE POLICIES DESCRIBED HEREIN IS SUBJECT TO ALL THE TERMS,&lt;/div&gt;
+    &lt;div style="left:25px;top:432px;font-size:10px;"&gt;EXCLUSIONS AND CONDITIONS OF SUCH POLICIES. LIMITS SHOWN MAY HAVE BEEN REDUCED BY PAID CLAIMS.&lt;/div&gt;
+    &lt;div style="left:10px;top:446px;font-size:8px;"&gt;INSR&lt;/div&gt;
+    &lt;div style="left:265px;top:446px;font-size:8px;"&gt;ADDL&lt;/div&gt;
+    &lt;div style="left:293px;top:446px;font-size:8px;"&gt;SUBR&lt;/div&gt;
+    &lt;div style="left:523px;top:446px;font-size:8px;"&gt;POLICY EFF&lt;/div&gt;
+    &lt;div style="left:598px;top:446px;font-size:8px;"&gt;POLICY EXP&lt;/div&gt;
+    &lt;div style="left:99px;top:452px;font-size:8px;"&gt;TYPE OF INSURANCE&lt;/div&gt;
+    &lt;div style="left:786px;top:452px;font-size:8px;"&gt;LIMITS&lt;/div&gt;
+    &lt;div style="left:377px;top:454px;font-size:8px;"&gt;POLICY NUMBER&lt;/div&gt;
+    &lt;div style="left:12px;top:455px;font-size:8px;"&gt;LTR&lt;/div&gt;
+    &lt;div style="left:267px;top:455px;font-size:8px;"&gt;INSR&lt;/div&gt;
+    &lt;div style="left:296px;top:455px;font-size:8px;"&gt;WVD&lt;/div&gt;
+    &lt;div style="left:518px;top:455px;font-size:8px;"&gt;(MM/DD/YYYY)&lt;/div&gt;
+    &lt;div style="left:594px;top:455px;font-size:8px;"&gt;(MM/DD/YYYY)&lt;/div&gt;
+    &lt;div style="left:17px;top:469px;font-size:12px;color:#0000FF;"&gt;A&lt;/div&gt;
+    &lt;div style="left:42px;top:470px;font-size:8px;"&gt;GENERAL LIABILITY&lt;/div&gt;
+    &lt;div style="left:828px;top:471px;font-size:12px;color:#0000FF;"&gt;1,000,000&lt;/div&gt;
+    &lt;div style="left:671px;top:473px;font-size:8px;"&gt;EACH OCCURRENCE&lt;/div&gt;
+    &lt;div style="left:816px;top:473px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:671px;top:484px;font-size:8px;"&gt;DAMAGE TO RENTED&lt;/div&gt;
+    &lt;div style="left:65px;top:492px;font-size:8px;"&gt;COMMERCIAL GENERAL LIABILITY&lt;/div&gt;
+    &lt;div style="left:816px;top:492px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:671px;top:493px;font-size:8px;"&gt;PREMISES (Ea occurrence)&lt;/div&gt;
+    &lt;div style="left:671px;top:511px;font-size:8px;"&gt;MED EXP (Any one person)&lt;/div&gt;
+    &lt;div style="left:816px;top:511px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:89px;top:512px;font-size:8px;"&gt;CLAIMS-MADE&lt;/div&gt;
+    &lt;div style="left:193px;top:512px;font-size:8px;"&gt;OCCUR&lt;/div&gt;
+    &lt;div style="left:375px;top:527px;font-size:12px;color:#0000FF;"&gt;Policy Number&lt;/div&gt;
+    &lt;div style="left:519px;top:527px;font-size:12px;color:#0000FF;"&gt;04/01/2011 04/01/2012&lt;/div&gt;
+    &lt;div style="left:671px;top:531px;font-size:8px;"&gt;PERSONAL &amp;amp; ADV INJURY&lt;/div&gt;
+    &lt;div style="left:816px;top:531px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:828px;top:548px;font-size:12px;color:#0000FF;"&gt;2,000,000&lt;/div&gt;
+    &lt;div style="left:671px;top:550px;font-size:8px;"&gt;GENERAL AGGREGATE&lt;/div&gt;
+    &lt;div style="left:816px;top:550px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:42px;top:570px;font-size:8px;"&gt;GEN'L AGGREGATE LIMIT APPLIES PER:&lt;/div&gt;
+    &lt;div style="left:671px;top:570px;font-size:8px;"&gt;PRODUCTS - COMP/OP AGG&lt;/div&gt;
+    &lt;div style="left:816px;top:570px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:135px;top:583px;font-size:8px;"&gt;PRO-&lt;/div&gt;
+    &lt;div style="left:65px;top:589px;font-size:8px;"&gt;POLICY&lt;/div&gt;
+    &lt;div style="left:205px;top:589px;font-size:8px;"&gt;LOC&lt;/div&gt;
+    &lt;div style="left:816px;top:590px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:135px;top:592px;font-size:8px;"&gt;JECT&lt;/div&gt;
+    &lt;div style="left:671px;top:601px;font-size:8px;"&gt;COMBINED SINGLE LIMIT&lt;/div&gt;
+    &lt;div style="left:17px;top:605px;font-size:12px;color:#0000FF;"&gt;B&lt;/div&gt;
+    &lt;div style="left:42px;top:606px;font-size:8px;"&gt;AUTOMOBILE LIABILITY&lt;/div&gt;
+    &lt;div style="left:828px;top:606px;font-size:12px;color:#0000FF;"&gt;1,000,000&lt;/div&gt;
+    &lt;div style="left:671px;top:610px;font-size:8px;"&gt;(Ea accident)&lt;/div&gt;
+    &lt;div style="left:816px;top:610px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:671px;top:625px;font-size:8px;"&gt;BODILY INJURY (Per person)&lt;/div&gt;
+    &lt;div style="left:65px;top:628px;font-size:8px;"&gt;ANY AUTO&lt;/div&gt;
+    &lt;div style="left:816px;top:629px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:65px;top:640px;font-size:8px;"&gt;ALL OWNED&lt;/div&gt;
+    &lt;div style="left:176px;top:640px;font-size:8px;"&gt;SCHEDULE&lt;/div&gt;
+    &lt;div style="left:375px;top:643px;font-size:12px;color:#0000FF;"&gt;Policy Number&lt;/div&gt;
+    &lt;div style="left:519px;top:643px;font-size:12px;color:#0000FF;"&gt;04/01/2011 04/01/2012&lt;/div&gt;
+    &lt;div style="left:671px;top:644px;font-size:9px;"&gt;BODILY INJURY (Per accident) $&lt;/div&gt;
+    &lt;div style="left:65px;top:650px;font-size:8px;"&gt;AUTOS&lt;/div&gt;
+    &lt;div style="left:176px;top:650px;font-size:8px;"&gt;D AUTOS&lt;/div&gt;
+    &lt;div style="left:671px;top:659px;font-size:8px;"&gt;PROPERTY DAMAGE&lt;/div&gt;
+    &lt;div style="left:176px;top:660px;font-size:8px;"&gt;NON-OWNED&lt;/div&gt;
+    &lt;div style="left:816px;top:667px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:65px;top:668px;font-size:8px;"&gt;HIRED AUTOS&lt;/div&gt;
+    &lt;div style="left:671px;top:668px;font-size:8px;"&gt;(Per accident)&lt;/div&gt;
+    &lt;div style="left:176px;top:670px;font-size:8px;"&gt;AUTOS&lt;/div&gt;
+    &lt;div style="left:816px;top:687px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:17px;top:702px;font-size:12px;color:#0000FF;"&gt;C&lt;/div&gt;
+    &lt;div style="left:65px;top:703px;font-size:8px;"&gt;UMBRELLA LIAB&lt;/div&gt;
+    &lt;div style="left:828px;top:704px;font-size:12px;color:#0000FF;"&gt;1,000,000&lt;/div&gt;
+    &lt;div style="left:671px;top:706px;font-size:8px;"&gt;EACH OCCURRENCE&lt;/div&gt;
+    &lt;div style="left:816px;top:706px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:193px;top:707px;font-size:8px;"&gt;OCCUR&lt;/div&gt;
+    &lt;div style="left:375px;top:721px;font-size:12px;color:#0000FF;"&gt;Policy Number&lt;/div&gt;
+    &lt;div style="left:519px;top:721px;font-size:12px;color:#0000FF;"&gt;04/01/2011 04/01/2012&lt;/div&gt;
+    &lt;div style="left:65px;top:722px;font-size:8px;"&gt;EXCESS LIAB&lt;/div&gt;
+    &lt;div style="left:828px;top:723px;font-size:12px;color:#0000FF;"&gt;1,000,000&lt;/div&gt;
+    &lt;div style="left:671px;top:725px;font-size:8px;"&gt;AGGREGATE&lt;/div&gt;
+    &lt;div style="left:816px;top:725px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:193px;top:726px;font-size:8px;"&gt;CLAIMS-MADE&lt;/div&gt;
+    &lt;div style="left:816px;top:744px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:65px;top:745px;font-size:8px;"&gt;DED&lt;/div&gt;
+    &lt;div style="left:124px;top:745px;font-size:8px;"&gt;RETENTION $&lt;/div&gt;
+    &lt;div style="left:696px;top:758px;font-size:8px;"&gt;WC STATU-&lt;/div&gt;
+    &lt;div style="left:784px;top:758px;font-size:8px;"&gt;OTH-&lt;/div&gt;
+    &lt;div style="left:39px;top:759px;font-size:8px;"&gt;WORKERS COMPENSATION&lt;/div&gt;
+    &lt;div style="left:693px;top:767px;font-size:8px;"&gt;TORY LIMITS&lt;/div&gt;
+    &lt;div style="left:789px;top:767px;font-size:8px;"&gt;ER&lt;/div&gt;
+    &lt;div style="left:39px;top:771px;font-size:8px;"&gt;AND EMPLOYERS' LIABILITY&lt;/div&gt;
+    &lt;div style="left:237px;top:774px;font-size:7px;"&gt;Y / N&lt;/div&gt;
+    &lt;div style="left:39px;top:783px;font-size:8px;"&gt;ANY&lt;/div&gt;
+    &lt;div style="left:69px;top:783px;font-size:8px;"&gt;PROPRIETOR/PARTNER/EXECUTIVE&lt;/div&gt;
+    &lt;div style="left:671px;top:783px;font-size:8px;"&gt;E.L. EACH ACCIDENT&lt;/div&gt;
+    &lt;div style="left:816px;top:783px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:267px;top:790px;font-size:7px;"&gt;N / A&lt;/div&gt;
+    &lt;div style="left:39px;top:793px;font-size:8px;"&gt;OFFICER/MEMBER EXCLUDED?&lt;/div&gt;
+    &lt;div style="left:39px;top:802px;font-size:8px;"&gt;(Mandatory in NH)&lt;/div&gt;
+    &lt;div style="left:671px;top:803px;font-size:8px;"&gt;E.L. DISEASE - EA EMPLOYEE $&lt;/div&gt;
+    &lt;div style="left:39px;top:812px;font-size:8px;"&gt;If yes, describe under&lt;/div&gt;
+    &lt;div style="left:671px;top:822px;font-size:8px;"&gt;E.L. DISEASE - POLICY LIMIT&lt;/div&gt;
+    &lt;div style="left:816px;top:822px;font-size:8px;"&gt;$&lt;/div&gt;
+    &lt;div style="left:39px;top:823px;font-size:8px;"&gt;DESCRIPTION OF OPERATIONS below&lt;/div&gt;
+    &lt;div style="left:13px;top:897px;font-size:8px;"&gt;DESCRIPTION OF OPERATIONS / LOCATIONS / VEHICLES (Attach ACORD 101, Additional Remarks Schedule, if more space is required)&lt;/div&gt;
+    &lt;div style="left:13px;top:925px;font-size:11px;color:#0000FF;"&gt;NYS OGS Contract Number &amp;amp; Project Location&lt;/div&gt;
+    &lt;div style="left:13px;top:954px;font-size:11px;color:#0000FF;"&gt;The People of the State of New York, Its Officers, Agents, and Employees are named as additional insureds.&lt;/div&gt;
+    &lt;div style="left:13px;top:983px;font-size:12px;color:#0000FF;"&gt;30-Day Notice of Cancellation&lt;/div&gt;
+    &lt;div style="left:14px;top:1034px;font-size:12px;"&gt;CERTIFICATE HOLDER&lt;/div&gt;
+    &lt;div style="left:480px;top:1034px;font-size:12px;"&gt;CANCELLATION&lt;/div&gt;
+    &lt;div style="left:492px;top:1068px;font-size:10px;"&gt;SHOULD ANY OF THE ABOVE DESCRIBED POLICIES BE CANCELLED BEFORE&lt;/div&gt;
+    &lt;div style="left:96px;top:1080px;font-size:11px;color:#0000FF;"&gt;New York State Office of General Services&lt;/div&gt;
+    &lt;div style="left:492px;top:1081px;font-size:10px;"&gt;THE EXPIRATION DATE THEREOF, NOTICE WILL BE DELIVERED IN&lt;/div&gt;
+    &lt;div style="left:96px;top:1095px;font-size:12px;color:#0000FF;"&gt;Design &amp;amp; Construction Group&lt;/div&gt;
+    &lt;div style="left:492px;top:1095px;font-size:10px;"&gt;ACCORDANCE WITH THE POLICY PROVISIONS.&lt;/div&gt;
+    &lt;div style="left:96px;top:1110px;font-size:11px;color:#0000FF;"&gt;Bureau of Risk &amp;amp; Insurance Management&lt;/div&gt;
+    &lt;div style="left:96px;top:1125px;font-size:12px;color:#0000FF;"&gt;32nd Floor, Corning Tower, GNARESP&lt;/div&gt;
+    &lt;div style="left:480px;top:1130px;font-size:8px;"&gt;AUTHORIZED REPRESENTATIVE&lt;/div&gt;
+    &lt;div style="left:96px;top:1140px;font-size:12px;color:#0000FF;"&gt;Albany, NY 12242&lt;/div&gt;
+    &lt;div style="left:562px;top:1188px;font-size:12px;"&gt;© 1988-2010 ACORD CORPORATION. All rights reserved.&lt;/div&gt;
+    &lt;div style="left:14px;top:1208px;font-size:12px;"&gt;ACORD 25 (2018/09)&lt;/div&gt;
+    &lt;div style="left:282px;top:1208px;font-size:12px;"&gt;The ACORD name and logo are registered marks of ACORD&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/2ctJ1UthDORcT3X58CKCMl9jHA5.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/0f6d7b68beb179898257392231a71824f98383c1.png" rel="noopener nofollow ugc" title="Screen Shot 2022-09-13 at 3.29.04 PM"><img alt="Screen Shot 2022-09-13 at 3.29.04 PM" data-base62-sha1="2ctJ1UthDORcT3X58CKCMl9jHA5" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0f6d7b68beb179898257392231a71824f98383c1_2_10x10.png" height="500" src="../../../images/0f6d7b68beb179898257392231a71824f98383c1_2_398x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0f6d7b68beb179898257392231a71824f98383c1_2_398x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0f6d7b68beb179898257392231a71824f98383c1_2_597x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/0f6d7b68beb179898257392231a71824f98383c1.png 2x" width="398"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-13 at 3.29.04 PM</span><span class="informations">695×872 108 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Processed (what was added to AirKit)</p>
+<pre><code class="lang-auto">"
+&lt;div id=\”page-wrap-main\” data-bg=\”\”&gt;
+  &lt;style&gt;
+    div.pdf {
+      position: relative;
+      width: 950px;
+      height: 1241px;
+      overflow: hidden;
+    }
+
+    div.pdf * {
+      display: inline;
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      color: #000000;
+      font-family: Arial, sans-serif;
+      white-space: nowrap;
+    }
+
+    div.pdf div.ocr {
+      filter: alpha(opacity=20) -moz-opacity: 0.2;
+      -khtml-opacity: 0.2;
+      opacity: 0.2;
+    }
+  &lt;/style&gt;
+  &lt;div class=\”pdf\” style=\”transform: scale(0.889474); background: url(&amp;quot;https://data.templateroller.com/pdf_docs_html/2159/21591/2159175/page_1_bg.png&amp;quot;);\”&gt;
+    &lt;div style=\”left:822px;top:24px;font-size:8px;\”&gt;DATE (MM/DD/YYYY)&lt;/div&gt;
+    &lt;div style=\”left:197px;top:28px;font-size:24px;\”&gt;CERTIFICATE OF LIABILITY INSURANCE&lt;/div&gt;
+    &lt;div style=\”left:25px;top:63px;font-size:12px;\”&gt;THIS CERTIFICATE IS ISSUED AS A MATTER OF INFORMATION ONLY AND CONFERS NO RIGHTS UPON THE CERTIFICATE HOLDER. THIS&lt;/div&gt;
+    &lt;div style=\”left:25px;top:78px;font-size:12px;\”&gt;CERTIFICATE DOES NOT AFFIRMATIVELY OR NEGATIVELY AMEND, EXTEND OR ALTER THE COVERAGE AFFORDED BY THE POLICIES&lt;/div&gt;
+    &lt;div style=\”left:25px;top:94px;font-size:12px;\”&gt;BELOW. THIS CERTIFICATE OF INSURANCE DOES NOT CONSTITUTE A CONTRACT BETWEEN THE ISSUING INSURER(S), AUTHORIZED&lt;/div&gt;
+    &lt;div style=\”left:25px;top:109px;font-size:12px;\”&gt;REPRESENTATIVE OR PRODUCER, AND THE CERTIFICATE HOLDER.&lt;/div&gt;
+    &lt;div style=\”left:25px;top:129px;font-size:12px;\”&gt;IMPORTANT: If the certificate holder is an ADDITIONAL INSURED, the policy(ies) must be endorsed. If SUBROGATION IS WAIVED, subject to&lt;/div&gt;
+    &lt;div style=\”left:25px;top:144px;font-size:12px;\”&gt;the terms and conditions of the policy, certain policies may require an endorsement. A statement on this certificate does not confer rights to the&lt;/div&gt;
+    &lt;div style=\”left:25px;top:160px;font-size:12px;\”&gt;certificate holder in lieu of such endorsement(s).&lt;/div&gt;
+    &lt;div style=\”left:479px;top:175px;font-size:8px;\”&gt;CONTACT&lt;/div&gt;
+    &lt;div style=\”left:14px;top:179px;font-size:8px;\”&gt;PRODUCER&lt;/div&gt;
+    &lt;div style=\”left:479px;top:184px;font-size:8px;\”&gt;NAME:&lt;/div&gt;
+    &lt;div style=\”left:479px;top:194px;font-size:8px;\”&gt;PHONE&lt;/div&gt;
+    &lt;div style=\”left:765px;top:194px;font-size:8px;\”&gt;FAX (A/C,&lt;/div&gt;
+    &lt;div style=\”left:14px;top:198px;font-size:12px;color:#0000FF;\”&gt;Producer Name&lt;/div&gt;
+    &lt;div style=\”left:479px;top:203px;font-size:8px;\”&gt;(A/C, No, Ext):&lt;/div&gt;
+    &lt;div style=\”left:765px;top:203px;font-size:8px;\”&gt;No):&lt;/div&gt;
+    &lt;div style=\”left:479px;top:214px;font-size:8px;\”&gt;E-MAIL&lt;/div&gt;
+    &lt;div style=\”left:14px;top:217px;font-size:12px;color:#0000FF;\”&gt;Producer Address&lt;/div&gt;
+    &lt;div style=\”left:479px;top:222px;font-size:8px;\”&gt;ADDRESS:&lt;/div&gt;
+    &lt;div style=\”left:575px;top:241px;font-size:8px;\”&gt;INSURER(S) AFFORDING COVERAGE&lt;/div&gt;
+    &lt;div style=\”left:880px;top:241px;font-size:8px;\”&gt;NAIC #&lt;/div&gt;
+    &lt;div style=\”left:14px;top:256px;font-size:12px;color:#0000FF;\”&gt;Producer Phone Number&lt;/div&gt;
+    &lt;div style=\”left:549px;top:257px;font-size:11px;color:#0000FF;\”&gt;Carrier A&lt;/div&gt;
+    &lt;div style=\”left:878px;top:257px;font-size:12px;color:#0000FF;\”&gt;12345&lt;/div&gt;
+    &lt;div style=\”left:479px;top:260px;font-size:8px;\”&gt;INSURER A :&lt;/div&gt;
+    &lt;div style=\”left:14px;top:276px;font-size:8px;\”&gt;INSURED&lt;/div&gt;
+    &lt;div style=\”left:549px;top:277px;font-size:11px;color:#0000FF;\”&gt;Carrier B&lt;/div&gt;
+    &lt;div style=\”left:878px;top:277px;font-size:12px;color:#0000FF;\”&gt;12345&lt;/div&gt;
+    &lt;div style=\”left:479px;top:280px;font-size:8px;\”&gt;INSURER B :&lt;/div&gt;
+    &lt;div style=\”left:14px;top:294px;font-size:12px;color:#0000FF;\”&gt;Contractor Name&lt;/div&gt;
+    &lt;div style=\”left:549px;top:296px;font-size:12px;color:#0000FF;\”&gt;Carrier C&lt;/div&gt;
+    &lt;div style=\”left:878px;top:296px;font-size:12px;color:#0000FF;\”&gt;12345&lt;/div&gt;
+    &lt;div style=\”left:479px;top:299px;font-size:8px;\”&gt;INSURER C :&lt;/div&gt;
+    &lt;div style=\”left:14px;top:313px;font-size:12px;color:#0000FF;\”&gt;Contractor Address&lt;/div&gt;
+    &lt;div style=\”left:479px;top:319px;font-size:8px;\”&gt;INSURER D :&lt;/div&gt;
+    &lt;div style=\”left:479px;top:338px;font-size:8px;\”&gt;INSURER E :&lt;/div&gt;
+    &lt;div style=\”left:479px;top:357px;font-size:8px;\”&gt;INSURER F :&lt;/div&gt;
+    &lt;div style=\”left:14px;top:374px;font-size:12px;\”&gt;COVERAGES&lt;/div&gt;
+    &lt;div style=\”left:236px;top:374px;font-size:12px;\”&gt;CERTIFICATE NUMBER:&lt;/div&gt;
+    &lt;div style=\”left:667px;top:374px;font-size:12px;\”&gt;REVISION NUMBER:&lt;/div&gt;
+    &lt;div style=\”left:25px;top:391px;font-size:10px;\”&gt;THIS IS TO CERTIFY THAT THE POLICIES OF INSURANCE LISTED BELOW HAVE BEEN ISSUED TO THE INSURED NAMED ABOVE FOR THE POLICY PERIOD&lt;/div&gt;
+    &lt;div style=\”left:25px;top:405px;font-size:10px;\”&gt;INDICATED. NOTWITHSTANDING ANY REQUIREMENT, TERM OR CONDITION OF ANY CONTRACT OR OTHER DOCUMENT WITH RESPECT TO WHICH THIS&lt;/div&gt;
+    &lt;div style=\”left:25px;top:418px;font-size:10px;\”&gt;CERTIFICATE MAY BE ISSUED OR MAY PERTAIN, THE INSURANCE AFFORDED BY THE POLICIES DESCRIBED HEREIN IS SUBJECT TO ALL THE TERMS,&lt;/div&gt;
+    &lt;div style=\”left:25px;top:432px;font-size:10px;\”&gt;EXCLUSIONS AND CONDITIONS OF SUCH POLICIES. LIMITS SHOWN MAY HAVE BEEN REDUCED BY PAID CLAIMS.&lt;/div&gt;
+    &lt;div style=\”left:10px;top:446px;font-size:8px;\”&gt;INSR&lt;/div&gt;
+    &lt;div style=\”left:265px;top:446px;font-size:8px;\”&gt;ADDL&lt;/div&gt;
+    &lt;div style=\”left:293px;top:446px;font-size:8px;\”&gt;SUBR&lt;/div&gt;
+    &lt;div style=\”left:523px;top:446px;font-size:8px;\”&gt;POLICY EFF&lt;/div&gt;
+    &lt;div style=\”left:598px;top:446px;font-size:8px;\”&gt;POLICY EXP&lt;/div&gt;
+    &lt;div style=\”left:99px;top:452px;font-size:8px;\”&gt;TYPE OF INSURANCE&lt;/div&gt;
+    &lt;div style=\”left:786px;top:452px;font-size:8px;\”&gt;LIMITS&lt;/div&gt;
+    &lt;div style=\”left:377px;top:454px;font-size:8px;\”&gt;POLICY NUMBER&lt;/div&gt;
+    &lt;div style=\”left:12px;top:455px;font-size:8px;\”&gt;LTR&lt;/div&gt;
+    &lt;div style=\”left:267px;top:455px;font-size:8px;\”&gt;INSR&lt;/div&gt;
+    &lt;div style=\”left:296px;top:455px;font-size:8px;\”&gt;WVD&lt;/div&gt;
+    &lt;div style=\”left:518px;top:455px;font-size:8px;\”&gt;(MM/DD/YYYY)&lt;/div&gt;
+    &lt;div style=\”left:594px;top:455px;font-size:8px;\”&gt;(MM/DD/YYYY)&lt;/div&gt;
+    &lt;div style=\”left:17px;top:469px;font-size:12px;color:#0000FF;\”&gt;A&lt;/div&gt;
+    &lt;div style=\”left:42px;top:470px;font-size:8px;\”&gt;GENERAL LIABILITY&lt;/div&gt;
+    &lt;div style=\”left:828px;top:471px;font-size:12px;color:#0000FF;\”&gt;1,000,000&lt;/div&gt;
+    &lt;div style=\”left:671px;top:473px;font-size:8px;\”&gt;EACH OCCURRENCE&lt;/div&gt;
+    &lt;div style=\”left:816px;top:473px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:671px;top:484px;font-size:8px;\”&gt;DAMAGE TO RENTED&lt;/div&gt;
+    &lt;div style=\”left:65px;top:492px;font-size:8px;\”&gt;COMMERCIAL GENERAL LIABILITY&lt;/div&gt;
+    &lt;div style=\”left:816px;top:492px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:671px;top:493px;font-size:8px;\”&gt;PREMISES (Ea occurrence)&lt;/div&gt;
+    &lt;div style=\”left:671px;top:511px;font-size:8px;\”&gt;MED EXP (Any one person)&lt;/div&gt;
+    &lt;div style=\”left:816px;top:511px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:89px;top:512px;font-size:8px;\”&gt;CLAIMS-MADE&lt;/div&gt;
+    &lt;div style=\”left:193px;top:512px;font-size:8px;\”&gt;OCCUR&lt;/div&gt;
+    &lt;div style=\”left:375px;top:527px;font-size:12px;color:#0000FF;\”&gt;Policy Number&lt;/div&gt;
+    &lt;div style=\”left:519px;top:527px;font-size:12px;color:#0000FF;\”&gt;04/01/2011 04/01/2012&lt;/div&gt;
+    &lt;div style=\”left:671px;top:531px;font-size:8px;\”&gt;PERSONAL &amp;amp; ADV INJURY&lt;/div&gt;
+    &lt;div style=\”left:816px;top:531px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:828px;top:548px;font-size:12px;color:#0000FF;\”&gt;2,000,000&lt;/div&gt;
+    &lt;div style=\”left:671px;top:550px;font-size:8px;\”&gt;GENERAL AGGREGATE&lt;/div&gt;
+    &lt;div style=\”left:816px;top:550px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:42px;top:570px;font-size:8px;\”&gt;GEN'L AGGREGATE LIMIT APPLIES PER:&lt;/div&gt;
+    &lt;div style=\”left:671px;top:570px;font-size:8px;\”&gt;PRODUCTS - COMP/OP AGG&lt;/div&gt;
+    &lt;div style=\”left:816px;top:570px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:135px;top:583px;font-size:8px;\”&gt;PRO-&lt;/div&gt;
+    &lt;div style=\”left:65px;top:589px;font-size:8px;\”&gt;POLICY&lt;/div&gt;
+    &lt;div style=\”left:205px;top:589px;font-size:8px;\”&gt;LOC&lt;/div&gt;
+    &lt;div style=\”left:816px;top:590px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:135px;top:592px;font-size:8px;\”&gt;JECT&lt;/div&gt;
+    &lt;div style=\”left:671px;top:601px;font-size:8px;\”&gt;COMBINED SINGLE LIMIT&lt;/div&gt;
+    &lt;div style=\”left:17px;top:605px;font-size:12px;color:#0000FF;\”&gt;B&lt;/div&gt;
+    &lt;div style=\”left:42px;top:606px;font-size:8px;\”&gt;AUTOMOBILE LIABILITY&lt;/div&gt;
+    &lt;div style=\”left:828px;top:606px;font-size:12px;color:#0000FF;\”&gt;1,000,000&lt;/div&gt;
+    &lt;div style=\”left:671px;top:610px;font-size:8px;\”&gt;(Ea accident)&lt;/div&gt;
+    &lt;div style=\”left:816px;top:610px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:671px;top:625px;font-size:8px;\”&gt;BODILY INJURY (Per person)&lt;/div&gt;
+    &lt;div style=\”left:65px;top:628px;font-size:8px;\”&gt;ANY AUTO&lt;/div&gt;
+    &lt;div style=\”left:816px;top:629px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:65px;top:640px;font-size:8px;\”&gt;ALL OWNED&lt;/div&gt;
+    &lt;div style=\”left:176px;top:640px;font-size:8px;\”&gt;SCHEDULE&lt;/div&gt;
+    &lt;div style=\”left:375px;top:643px;font-size:12px;color:#0000FF;\”&gt;Policy Number&lt;/div&gt;
+    &lt;div style=\”left:519px;top:643px;font-size:12px;color:#0000FF;\”&gt;04/01/2011 04/01/2012&lt;/div&gt;
+    &lt;div style=\”left:671px;top:644px;font-size:9px;\”&gt;BODILY INJURY (Per accident) $&lt;/div&gt;
+    &lt;div style=\”left:65px;top:650px;font-size:8px;\”&gt;AUTOS&lt;/div&gt;
+    &lt;div style=\”left:176px;top:650px;font-size:8px;\”&gt;D AUTOS&lt;/div&gt;
+    &lt;div style=\”left:671px;top:659px;font-size:8px;\”&gt;PROPERTY DAMAGE&lt;/div&gt;
+    &lt;div style=\”left:176px;top:660px;font-size:8px;\”&gt;NON-OWNED&lt;/div&gt;
+    &lt;div style=\”left:816px;top:667px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:65px;top:668px;font-size:8px;\”&gt;HIRED AUTOS&lt;/div&gt;
+    &lt;div style=\”left:671px;top:668px;font-size:8px;\”&gt;(Per accident)&lt;/div&gt;
+    &lt;div style=\”left:176px;top:670px;font-size:8px;\”&gt;AUTOS&lt;/div&gt;
+    &lt;div style=\”left:816px;top:687px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:17px;top:702px;font-size:12px;color:#0000FF;\”&gt;C&lt;/div&gt;
+    &lt;div style=\”left:65px;top:703px;font-size:8px;\”&gt;UMBRELLA LIAB&lt;/div&gt;
+    &lt;div style=\”left:828px;top:704px;font-size:12px;color:#0000FF;\”&gt;1,000,000&lt;/div&gt;
+    &lt;div style=\”left:671px;top:706px;font-size:8px;\”&gt;EACH OCCURRENCE&lt;/div&gt;
+    &lt;div style=\”left:816px;top:706px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:193px;top:707px;font-size:8px;\”&gt;OCCUR&lt;/div&gt;
+    &lt;div style=\”left:375px;top:721px;font-size:12px;color:#0000FF;\”&gt;Policy Number&lt;/div&gt;
+    &lt;div style=\”left:519px;top:721px;font-size:12px;color:#0000FF;\”&gt;04/01/2011 04/01/2012&lt;/div&gt;
+    &lt;div style=\”left:65px;top:722px;font-size:8px;\”&gt;EXCESS LIAB&lt;/div&gt;
+    &lt;div style=\”left:828px;top:723px;font-size:12px;color:#0000FF;\”&gt;1,000,000&lt;/div&gt;
+    &lt;div style=\”left:671px;top:725px;font-size:8px;\”&gt;AGGREGATE&lt;/div&gt;
+    &lt;div style=\”left:816px;top:725px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:193px;top:726px;font-size:8px;\”&gt;CLAIMS-MADE&lt;/div&gt;
+    &lt;div style=\”left:816px;top:744px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:65px;top:745px;font-size:8px;\”&gt;DED&lt;/div&gt;
+    &lt;div style=\”left:124px;top:745px;font-size:8px;\”&gt;RETENTION $&lt;/div&gt;
+    &lt;div style=\”left:696px;top:758px;font-size:8px;\”&gt;WC STATU-&lt;/div&gt;
+    &lt;div style=\”left:784px;top:758px;font-size:8px;\”&gt;OTH-&lt;/div&gt;
+    &lt;div style=\”left:39px;top:759px;font-size:8px;\”&gt;WORKERS COMPENSATION&lt;/div&gt;
+    &lt;div style=\”left:693px;top:767px;font-size:8px;\”&gt;TORY LIMITS&lt;/div&gt;
+    &lt;div style=\”left:789px;top:767px;font-size:8px;\”&gt;ER&lt;/div&gt;
+    &lt;div style=\”left:39px;top:771px;font-size:8px;\”&gt;AND EMPLOYERS' LIABILITY&lt;/div&gt;
+    &lt;div style=\”left:237px;top:774px;font-size:7px;\”&gt;Y / N&lt;/div&gt;
+    &lt;div style=\”left:39px;top:783px;font-size:8px;\”&gt;ANY&lt;/div&gt;
+    &lt;div style=\”left:69px;top:783px;font-size:8px;\”&gt;PROPRIETOR/PARTNER/EXECUTIVE&lt;/div&gt;
+    &lt;div style=\”left:671px;top:783px;font-size:8px;\”&gt;E.L. EACH ACCIDENT&lt;/div&gt;
+    &lt;div style=\”left:816px;top:783px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:267px;top:790px;font-size:7px;\”&gt;N / A&lt;/div&gt;
+    &lt;div style=\”left:39px;top:793px;font-size:8px;\”&gt;OFFICER/MEMBER EXCLUDED?&lt;/div&gt;
+    &lt;div style=\”left:39px;top:802px;font-size:8px;\”&gt;(Mandatory in NH)&lt;/div&gt;
+    &lt;div style=\”left:671px;top:803px;font-size:8px;\”&gt;E.L. DISEASE - EA EMPLOYEE $&lt;/div&gt;
+    &lt;div style=\”left:39px;top:812px;font-size:8px;\”&gt;If yes, describe under&lt;/div&gt;
+    &lt;div style=\”left:671px;top:822px;font-size:8px;\”&gt;E.L. DISEASE - POLICY LIMIT&lt;/div&gt;
+    &lt;div style=\”left:816px;top:822px;font-size:8px;\”&gt;$&lt;/div&gt;
+    &lt;div style=\”left:39px;top:823px;font-size:8px;\”&gt;DESCRIPTION OF OPERATIONS below&lt;/div&gt;
+    &lt;div style=\”left:13px;top:897px;font-size:8px;\”&gt;DESCRIPTION OF OPERATIONS / LOCATIONS / VEHICLES (Attach ACORD 101, Additional Remarks Schedule, if more space is required)&lt;/div&gt;
+    &lt;div style=\”left:13px;top:925px;font-size:11px;color:#0000FF;\”&gt;NYS OGS Contract Number &amp;amp; Project Location&lt;/div&gt;
+    &lt;div style=\”left:13px;top:954px;font-size:11px;color:#0000FF;\”&gt;The People of the State of New York, Its Officers, Agents, and Employees are named as additional insureds.&lt;/div&gt;
+    &lt;div style=\”left:13px;top:983px;font-size:12px;color:#0000FF;\”&gt;30-Day Notice of Cancellation&lt;/div&gt;
+    &lt;div style=\”left:14px;top:1034px;font-size:12px;\”&gt;CERTIFICATE HOLDER&lt;/div&gt;
+    &lt;div style=\”left:480px;top:1034px;font-size:12px;\”&gt;CANCELLATION&lt;/div&gt;
+    &lt;div style=\”left:492px;top:1068px;font-size:10px;\”&gt;SHOULD ANY OF THE ABOVE DESCRIBED POLICIES BE CANCELLED BEFORE&lt;/div&gt;
+    &lt;div style=\”left:96px;top:1080px;font-size:11px;color:#0000FF;\”&gt;New York State Office of General Services&lt;/div&gt;
+    &lt;div style=\”left:492px;top:1081px;font-size:10px;\”&gt;THE EXPIRATION DATE THEREOF, NOTICE WILL BE DELIVERED IN&lt;/div&gt;
+    &lt;div style=\”left:96px;top:1095px;font-size:12px;color:#0000FF;\”&gt;Design &amp;amp; Construction Group&lt;/div&gt;
+    &lt;div style=\”left:492px;top:1095px;font-size:10px;\”&gt;ACCORDANCE WITH THE POLICY PROVISIONS.&lt;/div&gt;
+    &lt;div style=\”left:96px;top:1110px;font-size:11px;color:#0000FF;\”&gt;Bureau of Risk &amp;amp; Insurance Management&lt;/div&gt;
+    &lt;div style=\”left:96px;top:1125px;font-size:12px;color:#0000FF;\”&gt;32nd Floor, Corning Tower, GNARESP&lt;/div&gt;
+    &lt;div style=\”left:480px;top:1130px;font-size:8px;\”&gt;AUTHORIZED REPRESENTATIVE&lt;/div&gt;
+    &lt;div style=\”left:96px;top:1140px;font-size:12px;color:#0000FF;\”&gt;Albany, NY 12242&lt;/div&gt;
+    &lt;div style=\”left:562px;top:1188px;font-size:12px;\”&gt;© 1988-2010 ACORD CORPORATION. All rights reserved.&lt;/div&gt;
+    &lt;div style=\”left:14px;top:1208px;font-size:12px;\”&gt;ACORD 25 (2018/09)&lt;/div&gt;
+    &lt;div style=\”left:282px;top:1208px;font-size:12px;\”&gt;The ACORD name and logo are registered marks of ACORD&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=\”clear\”&gt;&lt;/div&gt;
+&lt;/div&gt;
+"
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/9hmMzYBXIbQ282yihrwFPctsQ2K.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/410a269a5f5bbea0e756ee0c1ceda72389e1ff2a.png" rel="noopener nofollow ugc" title="Screen Shot 2022-09-13 at 3.29.37 PM"><img alt="Screen Shot 2022-09-13 at 3.29.37 PM" data-base62-sha1="9hmMzYBXIbQ282yihrwFPctsQ2K" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/410a269a5f5bbea0e756ee0c1ceda72389e1ff2a_2_10x10.png" height="500" src="../../../images/410a269a5f5bbea0e756ee0c1ceda72389e1ff2a_2_543x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/410a269a5f5bbea0e756ee0c1ceda72389e1ff2a_2_543x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/410a269a5f5bbea0e756ee0c1ceda72389e1ff2a_2_814x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/410a269a5f5bbea0e756ee0c1ceda72389e1ff2a_2_1086x1000.png 2x" width="543"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-09-13 at 3.29.37 PM</span><span class="informations">1218×1121 91.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Try this one. It looks like your HTML uses this double quote <code>”</code> where airkit requires you to use this double quote <code>"</code>. I forget what kind of quote the first one is called but i know some programs will use one over the other. I typically use VSCode to format my html which is how i replaced your quotes.</p>
+<pre><code class="lang-auto">" &lt;div id=\"page-wrap-main\" data-bg=\"\"&gt;
+    &lt;style&gt;
+      div.pdf {
+        position: relative;
+        width: 950px;
+        height: 1241px;
+        overflow: hidden;
+      }
+  
+      div.pdf * {
+        display: inline;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        color: #000000;
+        font-family: Arial, sans-serif;
+        white-space: nowrap;
+      }
+  
+      div.pdf div.ocr {
+        filter: alpha(opacity=20) -moz-opacity: 0.2;
+        -khtml-opacity: 0.2;
+        opacity: 0.2;
+      }
+    &lt;/style&gt;
+    &lt;div class=\"pdf\" style=\"transform: scale(0.889474); background: url(&amp;quot;https://data.templateroller.com/pdf_docs_html/2159/21591/2159175/page_1_bg.png&amp;quot;);\"&gt;
+      &lt;div style=\"left:822px;top:24px;font-size:8px;\"&gt;DATE (MM/DD/YYYY)&lt;/div&gt;
+      &lt;div style=\"left:197px;top:28px;font-size:24px;\"&gt;CERTIFICATE OF LIABILITY INSURANCE&lt;/div&gt;
+      &lt;div style=\"left:25px;top:63px;font-size:12px;\"&gt;THIS CERTIFICATE IS ISSUED AS A MATTER OF INFORMATION ONLY AND CONFERS NO RIGHTS UPON THE CERTIFICATE HOLDER. THIS&lt;/div&gt;
+      &lt;div style=\"left:25px;top:78px;font-size:12px;\"&gt;CERTIFICATE DOES NOT AFFIRMATIVELY OR NEGATIVELY AMEND, EXTEND OR ALTER THE COVERAGE AFFORDED BY THE POLICIES&lt;/div&gt;
+      &lt;div style=\"left:25px;top:94px;font-size:12px;\"&gt;BELOW. THIS CERTIFICATE OF INSURANCE DOES NOT CONSTITUTE A CONTRACT BETWEEN THE ISSUING INSURER(S), AUTHORIZED&lt;/div&gt;
+      &lt;div style=\"left:25px;top:109px;font-size:12px;\"&gt;REPRESENTATIVE OR PRODUCER, AND THE CERTIFICATE HOLDER.&lt;/div&gt;
+      &lt;div style=\"left:25px;top:129px;font-size:12px;\"&gt;IMPORTANT: If the certificate holder is an ADDITIONAL INSURED, the policy(ies) must be endorsed. If SUBROGATION IS WAIVED, subject to&lt;/div&gt;
+      &lt;div style=\"left:25px;top:144px;font-size:12px;\"&gt;the terms and conditions of the policy, certain policies may require an endorsement. A statement on this certificate does not confer rights to the&lt;/div&gt;
+      &lt;div style=\"left:25px;top:160px;font-size:12px;\"&gt;certificate holder in lieu of such endorsement(s).&lt;/div&gt;
+      &lt;div style=\"left:479px;top:175px;font-size:8px;\"&gt;CONTACT&lt;/div&gt;
+      &lt;div style=\"left:14px;top:179px;font-size:8px;\"&gt;PRODUCER&lt;/div&gt;
+      &lt;div style=\"left:479px;top:184px;font-size:8px;\"&gt;NAME:&lt;/div&gt;
+      &lt;div style=\"left:479px;top:194px;font-size:8px;\"&gt;PHONE&lt;/div&gt;
+      &lt;div style=\"left:765px;top:194px;font-size:8px;\"&gt;FAX (A/C,&lt;/div&gt;
+      &lt;div style=\"left:14px;top:198px;font-size:12px;color:#0000FF;\"&gt;Producer Name&lt;/div&gt;
+      &lt;div style=\"left:479px;top:203px;font-size:8px;\"&gt;(A/C, No, Ext):&lt;/div&gt;
+      &lt;div style=\"left:765px;top:203px;font-size:8px;\"&gt;No):&lt;/div&gt;
+      &lt;div style=\"left:479px;top:214px;font-size:8px;\"&gt;E-MAIL&lt;/div&gt;
+      &lt;div style=\"left:14px;top:217px;font-size:12px;color:#0000FF;\"&gt;Producer Address&lt;/div&gt;
+      &lt;div style=\"left:479px;top:222px;font-size:8px;\"&gt;ADDRESS:&lt;/div&gt;
+      &lt;div style=\"left:575px;top:241px;font-size:8px;\"&gt;INSURER(S) AFFORDING COVERAGE&lt;/div&gt;
+      &lt;div style=\"left:880px;top:241px;font-size:8px;\"&gt;NAIC #&lt;/div&gt;
+      &lt;div style=\"left:14px;top:256px;font-size:12px;color:#0000FF;\"&gt;Producer Phone Number&lt;/div&gt;
+      &lt;div style=\"left:549px;top:257px;font-size:11px;color:#0000FF;\"&gt;Carrier A&lt;/div&gt;
+      &lt;div style=\"left:878px;top:257px;font-size:12px;color:#0000FF;\"&gt;12345&lt;/div&gt;
+      &lt;div style=\"left:479px;top:260px;font-size:8px;\"&gt;INSURER A :&lt;/div&gt;
+      &lt;div style=\"left:14px;top:276px;font-size:8px;\"&gt;INSURED&lt;/div&gt;
+      &lt;div style=\"left:549px;top:277px;font-size:11px;color:#0000FF;\"&gt;Carrier B&lt;/div&gt;
+      &lt;div style=\"left:878px;top:277px;font-size:12px;color:#0000FF;\"&gt;12345&lt;/div&gt;
+      &lt;div style=\"left:479px;top:280px;font-size:8px;\"&gt;INSURER B :&lt;/div&gt;
+      &lt;div style=\"left:14px;top:294px;font-size:12px;color:#0000FF;\"&gt;Contractor Name&lt;/div&gt;
+      &lt;div style=\"left:549px;top:296px;font-size:12px;color:#0000FF;\"&gt;Carrier C&lt;/div&gt;
+      &lt;div style=\"left:878px;top:296px;font-size:12px;color:#0000FF;\"&gt;12345&lt;/div&gt;
+      &lt;div style=\"left:479px;top:299px;font-size:8px;\"&gt;INSURER C :&lt;/div&gt;
+      &lt;div style=\"left:14px;top:313px;font-size:12px;color:#0000FF;\"&gt;Contractor Address&lt;/div&gt;
+      &lt;div style=\"left:479px;top:319px;font-size:8px;\"&gt;INSURER D :&lt;/div&gt;
+      &lt;div style=\"left:479px;top:338px;font-size:8px;\"&gt;INSURER E :&lt;/div&gt;
+      &lt;div style=\"left:479px;top:357px;font-size:8px;\"&gt;INSURER F :&lt;/div&gt;
+      &lt;div style=\"left:14px;top:374px;font-size:12px;\"&gt;COVERAGES&lt;/div&gt;
+      &lt;div style=\"left:236px;top:374px;font-size:12px;\"&gt;CERTIFICATE NUMBER:&lt;/div&gt;
+      &lt;div style=\"left:667px;top:374px;font-size:12px;\"&gt;REVISION NUMBER:&lt;/div&gt;
+      &lt;div style=\"left:25px;top:391px;font-size:10px;\"&gt;THIS IS TO CERTIFY THAT THE POLICIES OF INSURANCE LISTED BELOW HAVE BEEN ISSUED TO THE INSURED NAMED ABOVE FOR THE POLICY PERIOD&lt;/div&gt;
+      &lt;div style=\"left:25px;top:405px;font-size:10px;\"&gt;INDICATED. NOTWITHSTANDING ANY REQUIREMENT, TERM OR CONDITION OF ANY CONTRACT OR OTHER DOCUMENT WITH RESPECT TO WHICH THIS&lt;/div&gt;
+      &lt;div style=\"left:25px;top:418px;font-size:10px;\"&gt;CERTIFICATE MAY BE ISSUED OR MAY PERTAIN, THE INSURANCE AFFORDED BY THE POLICIES DESCRIBED HEREIN IS SUBJECT TO ALL THE TERMS,&lt;/div&gt;
+      &lt;div style=\"left:25px;top:432px;font-size:10px;\"&gt;EXCLUSIONS AND CONDITIONS OF SUCH POLICIES. LIMITS SHOWN MAY HAVE BEEN REDUCED BY PAID CLAIMS.&lt;/div&gt;
+      &lt;div style=\"left:10px;top:446px;font-size:8px;\"&gt;INSR&lt;/div&gt;
+      &lt;div style=\"left:265px;top:446px;font-size:8px;\"&gt;ADDL&lt;/div&gt;
+      &lt;div style=\"left:293px;top:446px;font-size:8px;\"&gt;SUBR&lt;/div&gt;
+      &lt;div style=\"left:523px;top:446px;font-size:8px;\"&gt;POLICY EFF&lt;/div&gt;
+      &lt;div style=\"left:598px;top:446px;font-size:8px;\"&gt;POLICY EXP&lt;/div&gt;
+      &lt;div style=\"left:99px;top:452px;font-size:8px;\"&gt;TYPE OF INSURANCE&lt;/div&gt;
+      &lt;div style=\"left:786px;top:452px;font-size:8px;\"&gt;LIMITS&lt;/div&gt;
+      &lt;div style=\"left:377px;top:454px;font-size:8px;\"&gt;POLICY NUMBER&lt;/div&gt;
+      &lt;div style=\"left:12px;top:455px;font-size:8px;\"&gt;LTR&lt;/div&gt;
+      &lt;div style=\"left:267px;top:455px;font-size:8px;\"&gt;INSR&lt;/div&gt;
+      &lt;div style=\"left:296px;top:455px;font-size:8px;\"&gt;WVD&lt;/div&gt;
+      &lt;div style=\"left:518px;top:455px;font-size:8px;\"&gt;(MM/DD/YYYY)&lt;/div&gt;
+      &lt;div style=\"left:594px;top:455px;font-size:8px;\"&gt;(MM/DD/YYYY)&lt;/div&gt;
+      &lt;div style=\"left:17px;top:469px;font-size:12px;color:#0000FF;\"&gt;A&lt;/div&gt;
+      &lt;div style=\"left:42px;top:470px;font-size:8px;\"&gt;GENERAL LIABILITY&lt;/div&gt;
+      &lt;div style=\"left:828px;top:471px;font-size:12px;color:#0000FF;\"&gt;1,000,000&lt;/div&gt;
+      &lt;div style=\"left:671px;top:473px;font-size:8px;\"&gt;EACH OCCURRENCE&lt;/div&gt;
+      &lt;div style=\"left:816px;top:473px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:671px;top:484px;font-size:8px;\"&gt;DAMAGE TO RENTED&lt;/div&gt;
+      &lt;div style=\"left:65px;top:492px;font-size:8px;\"&gt;COMMERCIAL GENERAL LIABILITY&lt;/div&gt;
+      &lt;div style=\"left:816px;top:492px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:671px;top:493px;font-size:8px;\"&gt;PREMISES (Ea occurrence)&lt;/div&gt;
+      &lt;div style=\"left:671px;top:511px;font-size:8px;\"&gt;MED EXP (Any one person)&lt;/div&gt;
+      &lt;div style=\"left:816px;top:511px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:89px;top:512px;font-size:8px;\"&gt;CLAIMS-MADE&lt;/div&gt;
+      &lt;div style=\"left:193px;top:512px;font-size:8px;\"&gt;OCCUR&lt;/div&gt;
+      &lt;div style=\"left:375px;top:527px;font-size:12px;color:#0000FF;\"&gt;Policy Number&lt;/div&gt;
+      &lt;div style=\"left:519px;top:527px;font-size:12px;color:#0000FF;\"&gt;04/01/2011 04/01/2012&lt;/div&gt;
+      &lt;div style=\"left:671px;top:531px;font-size:8px;\"&gt;PERSONAL &amp;amp; ADV INJURY&lt;/div&gt;
+      &lt;div style=\"left:816px;top:531px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:828px;top:548px;font-size:12px;color:#0000FF;\"&gt;2,000,000&lt;/div&gt;
+      &lt;div style=\"left:671px;top:550px;font-size:8px;\"&gt;GENERAL AGGREGATE&lt;/div&gt;
+      &lt;div style=\"left:816px;top:550px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:42px;top:570px;font-size:8px;\"&gt;GEN'L AGGREGATE LIMIT APPLIES PER:&lt;/div&gt;
+      &lt;div style=\"left:671px;top:570px;font-size:8px;\"&gt;PRODUCTS - COMP/OP AGG&lt;/div&gt;
+      &lt;div style=\"left:816px;top:570px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:135px;top:583px;font-size:8px;\"&gt;PRO-&lt;/div&gt;
+      &lt;div style=\"left:65px;top:589px;font-size:8px;\"&gt;POLICY&lt;/div&gt;
+      &lt;div style=\"left:205px;top:589px;font-size:8px;\"&gt;LOC&lt;/div&gt;
+      &lt;div style=\"left:816px;top:590px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:135px;top:592px;font-size:8px;\"&gt;JECT&lt;/div&gt;
+      &lt;div style=\"left:671px;top:601px;font-size:8px;\"&gt;COMBINED SINGLE LIMIT&lt;/div&gt;
+      &lt;div style=\"left:17px;top:605px;font-size:12px;color:#0000FF;\"&gt;B&lt;/div&gt;
+      &lt;div style=\"left:42px;top:606px;font-size:8px;\"&gt;AUTOMOBILE LIABILITY&lt;/div&gt;
+      &lt;div style=\"left:828px;top:606px;font-size:12px;color:#0000FF;\"&gt;1,000,000&lt;/div&gt;
+      &lt;div style=\"left:671px;top:610px;font-size:8px;\"&gt;(Ea accident)&lt;/div&gt;
+      &lt;div style=\"left:816px;top:610px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:671px;top:625px;font-size:8px;\"&gt;BODILY INJURY (Per person)&lt;/div&gt;
+      &lt;div style=\"left:65px;top:628px;font-size:8px;\"&gt;ANY AUTO&lt;/div&gt;
+      &lt;div style=\"left:816px;top:629px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:65px;top:640px;font-size:8px;\"&gt;ALL OWNED&lt;/div&gt;
+      &lt;div style=\"left:176px;top:640px;font-size:8px;\"&gt;SCHEDULE&lt;/div&gt;
+      &lt;div style=\"left:375px;top:643px;font-size:12px;color:#0000FF;\"&gt;Policy Number&lt;/div&gt;
+      &lt;div style=\"left:519px;top:643px;font-size:12px;color:#0000FF;\"&gt;04/01/2011 04/01/2012&lt;/div&gt;
+      &lt;div style=\"left:671px;top:644px;font-size:9px;\"&gt;BODILY INJURY (Per accident) $&lt;/div&gt;
+      &lt;div style=\"left:65px;top:650px;font-size:8px;\"&gt;AUTOS&lt;/div&gt;
+      &lt;div style=\"left:176px;top:650px;font-size:8px;\"&gt;D AUTOS&lt;/div&gt;
+      &lt;div style=\"left:671px;top:659px;font-size:8px;\"&gt;PROPERTY DAMAGE&lt;/div&gt;
+      &lt;div style=\"left:176px;top:660px;font-size:8px;\"&gt;NON-OWNED&lt;/div&gt;
+      &lt;div style=\"left:816px;top:667px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:65px;top:668px;font-size:8px;\"&gt;HIRED AUTOS&lt;/div&gt;
+      &lt;div style=\"left:671px;top:668px;font-size:8px;\"&gt;(Per accident)&lt;/div&gt;
+      &lt;div style=\"left:176px;top:670px;font-size:8px;\"&gt;AUTOS&lt;/div&gt;
+      &lt;div style=\"left:816px;top:687px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:17px;top:702px;font-size:12px;color:#0000FF;\"&gt;C&lt;/div&gt;
+      &lt;div style=\"left:65px;top:703px;font-size:8px;\"&gt;UMBRELLA LIAB&lt;/div&gt;
+      &lt;div style=\"left:828px;top:704px;font-size:12px;color:#0000FF;\"&gt;1,000,000&lt;/div&gt;
+      &lt;div style=\"left:671px;top:706px;font-size:8px;\"&gt;EACH OCCURRENCE&lt;/div&gt;
+      &lt;div style=\"left:816px;top:706px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:193px;top:707px;font-size:8px;\"&gt;OCCUR&lt;/div&gt;
+      &lt;div style=\"left:375px;top:721px;font-size:12px;color:#0000FF;\"&gt;Policy Number&lt;/div&gt;
+      &lt;div style=\"left:519px;top:721px;font-size:12px;color:#0000FF;\"&gt;04/01/2011 04/01/2012&lt;/div&gt;
+      &lt;div style=\"left:65px;top:722px;font-size:8px;\"&gt;EXCESS LIAB&lt;/div&gt;
+      &lt;div style=\"left:828px;top:723px;font-size:12px;color:#0000FF;\"&gt;1,000,000&lt;/div&gt;
+      &lt;div style=\"left:671px;top:725px;font-size:8px;\"&gt;AGGREGATE&lt;/div&gt;
+      &lt;div style=\"left:816px;top:725px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:193px;top:726px;font-size:8px;\"&gt;CLAIMS-MADE&lt;/div&gt;
+      &lt;div style=\"left:816px;top:744px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:65px;top:745px;font-size:8px;\"&gt;DED&lt;/div&gt;
+      &lt;div style=\"left:124px;top:745px;font-size:8px;\"&gt;RETENTION $&lt;/div&gt;
+      &lt;div style=\"left:696px;top:758px;font-size:8px;\"&gt;WC STATU-&lt;/div&gt;
+      &lt;div style=\"left:784px;top:758px;font-size:8px;\"&gt;OTH-&lt;/div&gt;
+      &lt;div style=\"left:39px;top:759px;font-size:8px;\"&gt;WORKERS COMPENSATION&lt;/div&gt;
+      &lt;div style=\"left:693px;top:767px;font-size:8px;\"&gt;TORY LIMITS&lt;/div&gt;
+      &lt;div style=\"left:789px;top:767px;font-size:8px;\"&gt;ER&lt;/div&gt;
+      &lt;div style=\"left:39px;top:771px;font-size:8px;\"&gt;AND EMPLOYERS' LIABILITY&lt;/div&gt;
+      &lt;div style=\"left:237px;top:774px;font-size:7px;\"&gt;Y / N&lt;/div&gt;
+      &lt;div style=\"left:39px;top:783px;font-size:8px;\"&gt;ANY&lt;/div&gt;
+      &lt;div style=\"left:69px;top:783px;font-size:8px;\"&gt;PROPRIETOR/PARTNER/EXECUTIVE&lt;/div&gt;
+      &lt;div style=\"left:671px;top:783px;font-size:8px;\"&gt;E.L. EACH ACCIDENT&lt;/div&gt;
+      &lt;div style=\"left:816px;top:783px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:267px;top:790px;font-size:7px;\"&gt;N / A&lt;/div&gt;
+      &lt;div style=\"left:39px;top:793px;font-size:8px;\"&gt;OFFICER/MEMBER EXCLUDED?&lt;/div&gt;
+      &lt;div style=\"left:39px;top:802px;font-size:8px;\"&gt;(Mandatory in NH)&lt;/div&gt;
+      &lt;div style=\"left:671px;top:803px;font-size:8px;\"&gt;E.L. DISEASE - EA EMPLOYEE $&lt;/div&gt;
+      &lt;div style=\"left:39px;top:812px;font-size:8px;\"&gt;If yes, describe under&lt;/div&gt;
+      &lt;div style=\"left:671px;top:822px;font-size:8px;\"&gt;E.L. DISEASE - POLICY LIMIT&lt;/div&gt;
+      &lt;div style=\"left:816px;top:822px;font-size:8px;\"&gt;$&lt;/div&gt;
+      &lt;div style=\"left:39px;top:823px;font-size:8px;\"&gt;DESCRIPTION OF OPERATIONS below&lt;/div&gt;
+      &lt;div style=\"left:13px;top:897px;font-size:8px;\"&gt;DESCRIPTION OF OPERATIONS / LOCATIONS / VEHICLES (Attach ACORD 101, Additional Remarks Schedule, if more space is required)&lt;/div&gt;
+      &lt;div style=\"left:13px;top:925px;font-size:11px;color:#0000FF;\"&gt;NYS OGS Contract Number &amp;amp; Project Location&lt;/div&gt;
+      &lt;div style=\"left:13px;top:954px;font-size:11px;color:#0000FF;\"&gt;The People of the State of New York, Its Officers, Agents, and Employees are named as additional insureds.&lt;/div&gt;
+      &lt;div style=\"left:13px;top:983px;font-size:12px;color:#0000FF;\"&gt;30-Day Notice of Cancellation&lt;/div&gt;
+      &lt;div style=\"left:14px;top:1034px;font-size:12px;\"&gt;CERTIFICATE HOLDER&lt;/div&gt;
+      &lt;div style=\"left:480px;top:1034px;font-size:12px;\"&gt;CANCELLATION&lt;/div&gt;
+      &lt;div style=\"left:492px;top:1068px;font-size:10px;\"&gt;SHOULD ANY OF THE ABOVE DESCRIBED POLICIES BE CANCELLED BEFORE&lt;/div&gt;
+      &lt;div style=\"left:96px;top:1080px;font-size:11px;color:#0000FF;\"&gt;New York State Office of General Services&lt;/div&gt;
+      &lt;div style=\"left:492px;top:1081px;font-size:10px;\"&gt;THE EXPIRATION DATE THEREOF, NOTICE WILL BE DELIVERED IN&lt;/div&gt;
+      &lt;div style=\"left:96px;top:1095px;font-size:12px;color:#0000FF;\"&gt;Design &amp;amp; Construction Group&lt;/div&gt;
+      &lt;div style=\"left:492px;top:1095px;font-size:10px;\"&gt;ACCORDANCE WITH THE POLICY PROVISIONS.&lt;/div&gt;
+      &lt;div style=\"left:96px;top:1110px;font-size:11px;color:#0000FF;\"&gt;Bureau of Risk &amp;amp; Insurance Management&lt;/div&gt;
+      &lt;div style=\"left:96px;top:1125px;font-size:12px;color:#0000FF;\"&gt;32nd Floor, Corning Tower, GNARESP&lt;/div&gt;
+      &lt;div style=\"left:480px;top:1130px;font-size:8px;\"&gt;AUTHORIZED REPRESENTATIVE&lt;/div&gt;
+      &lt;div style=\"left:96px;top:1140px;font-size:12px;color:#0000FF;\"&gt;Albany, NY 12242&lt;/div&gt;
+      &lt;div style=\"left:562px;top:1188px;font-size:12px;\"&gt;© 1988-2010 ACORD CORPORATION. All rights reserved.&lt;/div&gt;
+      &lt;div style=\"left:14px;top:1208px;font-size:12px;\"&gt;ACORD 25 (2018/09)&lt;/div&gt;
+      &lt;div style=\"left:282px;top:1208px;font-size:12px;\"&gt;The ACORD name and logo are registered marks of ACORD&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=\"clear\"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  "
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p><span class="mention">@ismaen</span> thank you!<br/>
+<img alt="Will Ferrell Reaction GIF" class="animated" data-base62-sha1="pe3AawqGhE2lvzaVHeSQctETGaJ" height="230" src="../../../images/b0cd2866533faeaac7b9ae465ffb69ae7d56e669.webp" width="498"/></p>
+<p>What is the syntax to then introduce airscript inside of the HTML? For instance, if I wanted to add today’s date to the date div.</p>
+<p>FORMAT_DATE(TODAY(), “MM/DD/YYYY”)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Nice!! So you can use double curly braces <code>{{ }}</code> to use airscript inside of your html. This also applies to adding airscript inside of strings as well.</p>
+<pre><code class="lang-auto">&lt;div style=\"left:822px;top:24px;font-size:8px;\"&gt;{{FORMAT_DATE(TODAY(), "MM/DD/YYYY")}}&lt;/div&gt;
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@blschaef15</span>, great news! Our team took a look at why generated PDFs were editable and created a flag on the data operation to prevent the fields from being edited.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/aMG8T3rAy30GxRfDVBW4PVGqayX.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/4b9672a77da028bdbdf01099f39864d85935f20f.png" title="image"><img alt="image" data-base62-sha1="aMG8T3rAy30GxRfDVBW4PVGqayX" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4b9672a77da028bdbdf01099f39864d85935f20f_2_10x10.png" height="500" src="../../../images/4b9672a77da028bdbdf01099f39864d85935f20f_2_495x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4b9672a77da028bdbdf01099f39864d85935f20f_2_495x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/4b9672a77da028bdbdf01099f39864d85935f20f_2_742x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/4b9672a77da028bdbdf01099f39864d85935f20f.png 2x" width="495"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">857×865 24.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>If you are still using the Fill PDF data operation, feel free to give a try and let us know what you think <img alt=":slight_smile:" class="emoji" height="20" loading="lazy" src="../../../images/slight_smile.png" title=":slight_smile:" width="20"/></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p><span class="mention">@ismaen</span> this is amazing! Really awesome that they were able to add that so quickly. Big shoutout to you and your team.</p>
+<p>Thanks again for your help with all this.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

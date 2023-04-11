@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>UDFs - CSV to List of JSON objects transformation</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">UDFs - CSV to List of JSON objects transformation</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>This sample <a href="https://support.airkit.com/reference/user-defined-functions" rel="noopener nofollow ugc">UDF</a> takes a CSV (string of Text) as input and returns a List of JSON objs.</p>
+<p>Given the following input (<em>dataType: Text</em>):</p>
+<pre><code class="lang-auto">my,csv,headers
+this,is,one row
+this,is,another row
+and this,here is,yet another row
+</code></pre>
+<p>Let’s build a UDF that takes the CSV above and returns a list of JSON objects.</p>
+<p>First we need a list of the csv headers, which will be used as the JSON keys.</p>
+<pre><code class="lang-auto">SPLIT(
+  JOIN(
+    FROM row IN SPLIT(csv, "\n") WHERE index = 0 SELECT row
+  ),
+  ","
+)
+</code></pre>
+<p>The output <em>should</em> look like:</p>
+<pre><code class="lang-auto">[
+  "my",
+  "csv",
+  "headers"
+]
+</code></pre>
+<p>We’ll use a similar logic to get the rows of data, each row as a list of values to be used as the values of one JSON obj.</p>
+<pre><code class="lang-auto">FROM row IN SPLIT(csv, "\n") WHERE NOT(index = 0) SELECT SPLIT(row, ",")
+</code></pre>
+<p>The output <em>should</em> look like:</p>
+<pre><code class="lang-auto">[
+  [
+    "this",
+    "is",
+    "one row"
+  ],
+  [
+    "this",
+    "is",
+    "another row"
+  ],
+  [
+    "and this",
+    "here is",
+    "yet another row"
+  ]
+]
+</code></pre>
+<p>The last piece of the puzzle is to create one JSON object per each of the lists of values, using the headers list as the keys, and matching the indexes of header &lt;-&gt; value. In the sample below <em>body</em> is the list of lists of values and <em>headers</em> is the list of header values (json keys).</p>
+<pre><code class="lang-auto">FROM
+  row
+IN
+  body
+SELECT
+  MERGE_OBJECTS(
+    FROM valuex, index IN row SELECT 
+       FROM valuez, indez IN headers WHERE indez = index SELECT "{{valuez}}": valuex
+  )
+</code></pre>
+<p>Now group all the above into one UDF’s Function Body:</p>
+<pre><code class="lang-auto">FROM
+  row
+IN
+  FROM rows IN SPLIT(csv, "\n") WHERE NOT(index = 0) SELECT SPLIT(rows, ",")
+SELECT
+  MERGE_OBJECTS(
+    FROM
+      valuex,
+      index
+    IN
+      row
+    SELECT
+      FROM
+        valuez,
+        indez
+      IN
+        SPLIT(
+          JOIN(
+            FROM header IN SPLIT(csv, "\n") WHERE index = 0 SELECT header
+          ),
+          ","
+        )
+      WHERE
+        indez = index
+      SELECT
+        "{{valuez}}": valuex
+  )
+</code></pre>
+<p>The output of this is:</p>
+<pre><code class="lang-auto">[
+  {
+    "my": "this",
+    "csv": "is",
+    "headers": "one row"
+  },
+  {
+    "my": "this",
+    "csv": "is",
+    "headers": "another row"
+  },
+  {
+    "my": "and this",
+    "csv": "here is",
+    "headers": "yet another row"
+  }
+]
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>These are awesome, thanks <span class="mention">@juanchax</span>!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Math functions on a variable of type currency</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Math functions on a variable of type currency</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/33_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ackerman</div>
+          <div class="post_content">
+<p>I was struggling to do a math function on a variable set as type currency. I know that math functions on currency are coming in release 17.15, but I was looking for away to achieve this in the interim. I was about to do a convoluted hack of converting the currency to a string, string to number, then multiply the number, and then take it back to a currency, but found out that currency is an object that contains an amount attribute that is the numerical value of the currency. So if I have a currency variable called ‘myCurrency’, i can do math on it by addressing myCurrency.amount * whatever.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Welcome, and great call out! When using the currency type, the object will looks something like this:</p>
+<pre><code class="lang-auto">{
+  "amount": 12300,
+  "code": "USD",
+  "precision": 2
+}
+</code></pre>
+<p>Which means you can use the amount property and do any math accordingly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/73_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">joechrz</div>
+          <div class="post_content">
+<p>While this was a good workaround in older versions, It’s worth noting that as of 17.15, using <code>.amount</code> directly <strong>is not recommended</strong>.  (NOTE: All versions below 17.15 are no longer supported, and attempting to use this workaround in 17.15+ will throw an error diagnostic in Studio).</p>
+<p>The Airkit platform treats currencies differently from numbers, and using the built-in operators will give you more protections against potential app bugs.  For example, if you had:</p>
+<pre><code class="lang-auto">curr1 = { "amount": 10000, "code": "JPY", precision: 0 }
+curr2 = { "amount": 100, "code": "USD", precision: 2 }
+</code></pre>
+<p>If you attempted to add using only <code>amount</code>, such as:  <code>CURRENCY(curr1.amount + curr2.amount, "USD")</code>, then you’d end up with $10100.  However ¥10000 is only about $78.</p>
+<p>It’s an uncommon use case, but the Airkit platform will give you an error if you attempt to add/subtract currencies of different types to ensure you don’t end up with subtle bugs with your calculations.  You can never be too safe when it comes to your customer’s money! <img alt=":slight_smile:" class="emoji" height="20" loading="lazy" src="../../../images/slight_smile.png" title=":slight_smile:" width="20"/></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

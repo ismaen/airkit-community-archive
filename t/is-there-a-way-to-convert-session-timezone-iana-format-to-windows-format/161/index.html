@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Is there a way to convert session.timeZone(IANA format) to Windows Format?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Is there a way to convert session.timeZone(IANA format) to Windows Format?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/9_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Ankit_Chaudhari</div>
+          <div class="post_content">
+<p>I am using a MS Graph integration which requires time-zone in Windows format as input. Airkit uses IANA time-zone format in session.timeZone(session data). Is there a way to convert from IANA to Windows format?</p>
+<p><strong>Example of IANA format:</strong> America/New_York, America/Los_Angeles etc.</p>
+<p><strong>Example of Windows format:</strong> Eastern Standard Time, Pacific Standard Time etc. (<a href="https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11" rel="noopener nofollow ugc">Microsoft time-zones acceptable</a>)</p>
+<p><strong>Note:</strong> Researched and found a few public time-zone APIs, but they wont exactly convert the IANA format into Windows format.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>hey <span class="mention">@Ankit_Chaudhari</span> !<br/>
+Well, there’s no built-in way to do so, but the <a>World Time API</a> might get you closer.</p>
+<p>Here’s a sample request/response:</p>
+<pre><code class="lang-auto"># curl "http://worldtimeapi.org/api/timezone/America/Los_Angeles"
+{
+  "abbreviation": "PDT",
+  "client_ip": "192.184.48.10",
+  "datetime": "2022-05-05T14:41:39.630249-07:00",
+  "day_of_week": 4,
+  "day_of_year": 125,
+  "dst": true,
+  "dst_from": "2022-03-13T10:00:00+00:00",
+  "dst_offset": 3600,
+  "dst_until": "2022-11-06T09:00:00+00:00",
+  "raw_offset": -28800,
+  "timezone": "America/Los_Angeles",
+  "unixtime": 1651786899,
+  "utc_datetime": "2022-05-05T21:41:39.630249+00:00",
+  "utc_offset": "-07:00",
+  "week_number": 18
+}
+</code></pre>
+<p>As you can see it doesn’t return the exact naming you need, but this request coupled with a TZ reference table<br/>
+that lists the <a href="https://ss64.com/nt/timezones.html">full list of Time Zones</a>. might do.</p>
+<p>Let me know if this helps!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/9_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Ankit_Chaudhari</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@juanchax</span> ! You helped me think in the right direction. I created an AirData object from the mapping doc(<a href="https://secure.jadeworld.com/JADETech/JADE2020/OnlineDocumentation/content/resources/encyclosys2/jadetimezone_class/ianawindowstimezonemapping.htm" rel="noopener nofollow ugc">IANA to Windows format</a>). Then, used the IANA format as an input to the reference table and fetch Windows time-zone.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

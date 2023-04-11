@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How do I format a secure string input control for a social security number?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How do I format a secure string input control for a social security number?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/131_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">grakozy</div>
+          <div class="post_content">
+<p>How can I format a secure string input control to display the user input as a social security number, XXX-XX-XXXX?</p>
+<p>This way, as the user types, the values display as 555-55-5555.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/2LRGZgFt9paHIKDiNovgpeq4LHg.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/136d823d9685b5f0b72884c7ad78822b67aa4136.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="2LRGZgFt9paHIKDiNovgpeq4LHg" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/136d823d9685b5f0b72884c7ad78822b67aa4136_2_10x10.png" height="500" src="../../../images/136d823d9685b5f0b72884c7ad78822b67aa4136_2_192x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/136d823d9685b5f0b72884c7ad78822b67aa4136_2_192x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/136d823d9685b5f0b72884c7ad78822b67aa4136_2_288x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/136d823d9685b5f0b72884c7ad78822b67aa4136_2_384x1000.png 2x" width="192"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">696×1808 63.8 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@grakozy</span>! At the moment, this doesn’t seem possible as there isn’t a formatting option for SSN using the secure string input. An additional validation you can use though, is the maximum length property and pass “7” to it so the user provides you a valid SSN, as well as making sure the input mode is numeric. You can also do additional validation so that the value is only 7.</p>
+<p>Otherwise, you can use three Input control that are stacked side by side separated by “-” to look like this:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/tUfJbKBQDrpMJRzgtqFIdyDwanI.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d19aee43c2649e11aa9c784cf75c77bd649cdf56.png" title="image"><img alt="image" data-base62-sha1="tUfJbKBQDrpMJRzgtqFIdyDwanI" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d19aee43c2649e11aa9c784cf75c77bd649cdf56_2_10x10.png" height="363" src="../../../images/d19aee43c2649e11aa9c784cf75c77bd649cdf56_2_690x363.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d19aee43c2649e11aa9c784cf75c77bd649cdf56_2_690x363.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/d19aee43c2649e11aa9c784cf75c77bd649cdf56_2_1035x544.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/d19aee43c2649e11aa9c784cf75c77bd649cdf56.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1252×660 71 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

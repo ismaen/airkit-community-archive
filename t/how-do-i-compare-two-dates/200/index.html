@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How do I compare two dates?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How do I compare two dates?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/131_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">grakozy</div>
+          <div class="post_content">
+<p>I’m currently building an application that allows a user to review their loan, select a payment method and make a payment.</p>
+<p>One of the requirements is to allow Debit payments to be processed in the near future (up to 7 days).</p>
+<p>In order to do this, the user selects a payment date and then “schedules” their payment. A timer is set for the payment date, and the action chain is executed on the scheduled day.</p>
+<p>On the Airkit side, how do I compare the scheduled date against today’s date and then use the scheduled date as the value for the timer?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@grakozy</span>!</p>
+<p>This is how I would tackle this:</p>
+<ol>
+<li>If you are using the <a href="https://support.airkit.com/reference/date-picker-web-control#maximum-days-out">Date Picker Control</a> there is a property called <code>Maximum Days Out</code> which will determine the max number of days using today’s date as a starting point. So if you only wanted the user to pick a date up to 7 days, I would set this to 7. By doing this, is does all your validation for you.</li>
+</ol>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/1zheKOuv4TDzzxdKWVuqIXlHxZ6.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/0aff0f54896ca4554e5f30ca661280f3c1e83de8.png" title="image"><img alt="image" data-base62-sha1="1zheKOuv4TDzzxdKWVuqIXlHxZ6" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0aff0f54896ca4554e5f30ca661280f3c1e83de8_2_10x10.png" height="264" src="../../../images/0aff0f54896ca4554e5f30ca661280f3c1e83de8_2_690x264.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0aff0f54896ca4554e5f30ca661280f3c1e83de8_2_690x264.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0aff0f54896ca4554e5f30ca661280f3c1e83de8_2_1035x396.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/0aff0f54896ca4554e5f30ca661280f3c1e83de8_2_1380x528.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1447×555 49.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<ol start="2">
+<li>Once you’ve captured the date from the user, you want to set the timer. Let’s say i captured the date to a variable called <code>date_input</code>. This comes back to me as a date object that looks like this:</li>
+</ol>
+<pre><code class="lang-javascript">{  
+ "day": 8  
+ "month": 7  
+ "year": 2022  
+} 
+</code></pre>
+<p>This is only a date object, but the timer you will be using needs to be a <code>dateTime</code> object. So here you would use the <a href="https://support.airkit.com/reference/datetime">DATETIME()</a> function and create a <code>dateTime</code> object to pass to the timer. So if you wanted the timer to start at 12pm PT, the function would look like this:</p>
+<pre><code class="lang-javascript">DATETIME(
+  date_input,
+  {
+    "hour": 12,
+    "minute": 0,
+    "second": 0,
+    "millisecond": 0
+  },
+  "America/Los_Angeles"
+)
+
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/6jKWDhjIHqCsV4cuUVssysYduCY.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2c48c87718c90583868743e05c096a64bbef9740.png" title="image"><img alt="image" data-base62-sha1="6jKWDhjIHqCsV4cuUVssysYduCY" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2c48c87718c90583868743e05c096a64bbef9740_2_10x10.png" height="500" src="../../../images/2c48c87718c90583868743e05c096a64bbef9740_2_327x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2c48c87718c90583868743e05c096a64bbef9740_2_327x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2c48c87718c90583868743e05c096a64bbef9740.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2c48c87718c90583868743e05c096a64bbef9740.png 2x" width="327"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">390×596 21.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

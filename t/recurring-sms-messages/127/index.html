@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Recurring SMS messages</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Recurring SMS messages</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/165_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">rburns</div>
+          <div class="post_content">
+<p>Is there a way to send the same text message on a recurring basis? The use case in mind is similar to KYC, where banks need to periodically gather/confirm customer information.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey Ryan! Great question. You can definitely send recurring text messages using a <a href="https://support.airkit.com/docs/setting-up-periodic-tasks#overview">periodic task</a>.</p>
+<p>For example, lets say the bank needs to gather or confirm customer information every 30 days. If the data is stored in Airdata, I would use a periodic task to read through the airdata table and check against the table to see when I have last notified them. I’d get the records that i want to notify and send out a message to them to gather or confirm their information.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

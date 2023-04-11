@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to build a dynamic list custom control</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to build a dynamic list custom control</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/39_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Etu</div>
+          <div class="post_content">
+<p>Hi all,<br/>
+I am building a custom control like the one below (attached screenshot and custom control structure), that intents to handle dynamic and editable list.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/gwMzYDbjQhW8B1MzJO2JkElIvk8.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/73d77bc42685d2b8cccfe5664cf2743d6a7f85cc.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="gwMzYDbjQhW8B1MzJO2JkElIvk8" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/73d77bc42685d2b8cccfe5664cf2743d6a7f85cc_2_10x10.png" height="201" src="../../../images/73d77bc42685d2b8cccfe5664cf2743d6a7f85cc_2_690x201.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/73d77bc42685d2b8cccfe5664cf2743d6a7f85cc_2_690x201.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/73d77bc42685d2b8cccfe5664cf2743d6a7f85cc.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/73d77bc42685d2b8cccfe5664cf2743d6a7f85cc.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">879×257 10.4 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Custom control structure looks like:<br/>
+<img alt="image" data-base62-sha1="seG0uLIr637y0Mr27B2SULts4bp" height="456" src="../../../images/c5e59d4174aa2a29bd2033287a4b2eba40ba18e3.png" width="362"/></p>
+<p>So far, I have only focused on Add action/button: when clicking on Add button, I am adding an empty object to the list used in the main custom control (Dynamic List Custom Control).</p>
+<p>I was wondering if someone else has already built a control like this one before, to check if there is another approach (and maybe a better one) to accomplish this.</p>
+<p>Thanks in advance!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/62_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">dinesh</div>
+          <div class="post_content">
+<p><span class="mention">@kyung</span> built a version of this with read/edit views (which I borrowed heavily from for one of my apps).  Essentially - each list entry would have a read container and an edit container and a boolean value that controls which view is shown.  The boolean value (really an array of boolean values) is managed by the control.</p>
+<p>it’s more visually lightweight view with a read-view but has additional housekeeping overhead.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/rKLrf3s4rV9DvZ6byyXuoXRAdRn.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/c284002bfa6c17c413bfe2279dc07dd5b0e868f1.png" rel="noopener nofollow ugc" title="Screen Shot 2022-02-28 at 8.55.26 AM"><img alt="Screen Shot 2022-02-28 at 8.55.26 AM" data-base62-sha1="rKLrf3s4rV9DvZ6byyXuoXRAdRn" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c284002bfa6c17c413bfe2279dc07dd5b0e868f1_2_10x10.png" height="306" src="../../../images/c284002bfa6c17c413bfe2279dc07dd5b0e868f1_2_690x306.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c284002bfa6c17c413bfe2279dc07dd5b0e868f1_2_690x306.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c284002bfa6c17c413bfe2279dc07dd5b0e868f1_2_1035x459.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/c284002bfa6c17c413bfe2279dc07dd5b0e868f1_2_1380x612.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-02-28 at 8.55.26 AM</span><span class="informations">1606×714 35.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div><br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/wsN2ECKn1Npd23NJehfjzv3YTOi.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e386bacd1dc9968955bd93a81a6372b73d5cb4ba.png" rel="noopener nofollow ugc" title="Screen Shot 2022-02-28 at 8.55.40 AM"><img alt="Screen Shot 2022-02-28 at 8.55.40 AM" data-base62-sha1="wsN2ECKn1Npd23NJehfjzv3YTOi" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e386bacd1dc9968955bd93a81a6372b73d5cb4ba_2_10x10.png" height="169" src="../../../images/e386bacd1dc9968955bd93a81a6372b73d5cb4ba_2_690x169.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e386bacd1dc9968955bd93a81a6372b73d5cb4ba_2_690x169.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e386bacd1dc9968955bd93a81a6372b73d5cb4ba_2_1035x253.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e386bacd1dc9968955bd93a81a6372b73d5cb4ba_2_1380x338.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-02-28 at 8.55.40 AM</span><span class="informations">1582×388 27.1 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/39_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Etu</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@dinesh</span> for your reply!<br/>
+Yes, I think the option you mentioned would work perfectly for the use case… I think we will give it a try to make the dynamic and editable list  including add/edit/delete actions in the same visual component (as there a mock-up that shows in that way), and if it turns too complex I will ask if we can use this as the main alternative. Is there any place/app where I can take a look at it more deeply if it is needed?</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@Etu</span> you’re off to a great start!</p>
+<p>I think the post on <a href="https://community.airkit.com/t/ccs-dynamic-lists-control-w-per-row-actions/117">Dynamic Lists Custom Controls</a> might be just what you’re after (it’s a bit extensive for the content to be shared in a reply hehe).<br/>
+It’s a guide for building a set of Custom Controls that display rows of data, both with a View and an Edit state per row, as well as edit/save/remove buttons.</p>
+<p>Remember to leave a <img alt=":+1:" class="emoji" height="20" loading="lazy" src="../../../images/+1.png" title=":+1:" width="20"/> or a comment if you find the post helpful.</p>
+<p>cheers!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/39_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Etu</div>
+          <div class="post_content">
+<p>hey <span class="mention">@juanchax</span> thanks for your post!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

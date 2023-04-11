@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Creating a new empty list from a number</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Creating a new empty list from a number</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/33_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ackerman</div>
+          <div class="post_content">
+<p>I was building a form yesterday where a builder could set up a multi step file upload based on how many files they wanted to ask a customer for. The puzzle came when I wanted build a repeater based on the variable of that number; I wasn’t sure how to build a list with a variable number of empty objects.</p>
+<p>The mighty <span class="mention">@joechrz</span> passed this on to me, so I thought I’d share here:</p>
+<p>First I bound the number input to a variable called <code>file_uploads</code>. Then I referenced that variable in the data field of the repeater using this expression:</p>
+<p><code>FROM RANGE(1, file_uploads) SELECT {  }</code></p>
+<p>And like magic, it was working.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/o86TcBuU0jHNyrZCahqVsyuxbLZ.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a91ee5cb2be09ae075d8800ed0ecbf6ff13fa2e3.png" rel="noopener nofollow ugc" title="Screen Shot 2022-05-25 at 11.47.17 AM"><img alt="Screen Shot 2022-05-25 at 11.47.17 AM" data-base62-sha1="o86TcBuU0jHNyrZCahqVsyuxbLZ" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a91ee5cb2be09ae075d8800ed0ecbf6ff13fa2e3_2_10x10.png" height="500" src="../../../images/a91ee5cb2be09ae075d8800ed0ecbf6ff13fa2e3_2_689x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a91ee5cb2be09ae075d8800ed0ecbf6ff13fa2e3_2_689x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a91ee5cb2be09ae075d8800ed0ecbf6ff13fa2e3_2_1033x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a91ee5cb2be09ae075d8800ed0ecbf6ff13fa2e3.png 2x" width="689"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-05-25 at 11.47.17 AM</span><span class="informations">1057×766 54.6 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

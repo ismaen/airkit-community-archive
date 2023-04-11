@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Create key-value pairs from two lists</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Create key-value pairs from two lists</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/17_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ian</div>
+          <div class="post_content">
+<p><strong>Background</strong><br/>
+This is for an internationalized app.  I have an AirData table with translations for all the labels in the app as well as a <em>Base</em> language which will serve as the key (first screenshot).  When a user loads the app, I want to dynamically pull the correct labels for their preferred language and pair them up with the Base/key so that I can put them on buttons, etc. (second screenshot)</p>
+<p><em>AirData Table</em><br/>
+<img alt="Screen Shot 2022-01-04 at 3.13.35 PM" data-base62-sha1="beKAt00TmeBhht7NcnXl16Aj9tu" height="198" src="../../../images/4ec2cb6a8f5310ce47d50658f89c6a1c4dc6faf0.png" width="258"/><br/>
+<br/><br/>
+<em>Dynamic Button Label</em><br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/5VZ6qPAzpdO9Mv1x7YXoHFhBPik.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2998df514fa070f17fa474c6a5d31f7d644eadc4.png" rel="noopener nofollow ugc" title="Screen Shot 2022-01-04 at 3.14.55 PM"><img alt="Screen Shot 2022-01-04 at 3.14.55 PM" data-base62-sha1="5VZ6qPAzpdO9Mv1x7YXoHFhBPik" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2998df514fa070f17fa474c6a5d31f7d644eadc4_2_10x10.png" height="87" src="../../../images/2998df514fa070f17fa474c6a5d31f7d644eadc4_2_517x87.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2998df514fa070f17fa474c6a5d31f7d644eadc4_2_517x87.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2998df514fa070f17fa474c6a5d31f7d644eadc4_2_775x130.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2998df514fa070f17fa474c6a5d31f7d644eadc4_2_1034x174.png 2x" width="517"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-01-04 at 3.14.55 PM</span><span class="informations">1330×224 17.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<br/>
+<p>What I want is something like this:</p>
+<pre><code class="lang-auto">{
+  "Good afternoon": "Buenas tardes",
+  "First Name": "Primer nombre",
+  "Account Number": "Número de cuenta"
+}
+</code></pre>
+<p><strong>Where I’m Stuck</strong><br/>
+I have no idea how to go from the AirData table to the key-value pairs / dictionary.  If I was doing this in Python I’d use the <strong>zip()</strong> function.  How do I do this in Airscript?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/26_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">kyung</div>
+          <div class="post_content">
+<p>Given a list of objects “phrases” (from AirData) and a language code “lang”, use the following AirScript:</p>
+<pre><code class="lang-auto">FROM phrase IN phrases SELECT "{{phrase.Base}}": "{{phrase[lang]}}"
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/17_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ian</div>
+          <div class="post_content">
+<p>That’s so clean, thanks <span class="mention">@kyung</span>!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

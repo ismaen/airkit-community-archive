@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How to capture a list?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How to capture a list?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p>I’m working on an admin tool that will allow a user to:</p>
+<ol>
+<li>Enter a list (this will be copied from excel)</li>
+<li>Run a Data Connection for each of the entries within that list</li>
+</ol>
+<p>I understand I can use the repeat data flow for <span class="hashtag">#2</span> but what I don’t understand is how to actually take in the list for <span class="hashtag">#1</span>. My first thought was a text area where a user could add content, then I’d parse through that to create a list (eg: create list item with string following each line break) but not sure how to do this.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>What is the format of your list? Are the values just separated by line breaks?</p>
+<p>You can do something like this:</p>
+<p><strong>Sample list</strong><br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/qjikhZlQTlm5sKaA29WhvtBu75v.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/b866e7a6804e0817580d9a6853b40c3188c86d71.png" title="image"><img alt="image" data-base62-sha1="qjikhZlQTlm5sKaA29WhvtBu75v" data-dominant-color="FDFDFD" height="309" src="../../../images/b866e7a6804e0817580d9a6853b40c3188c86d71_2_690x309.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b866e7a6804e0817580d9a6853b40c3188c86d71_2_690x309.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b866e7a6804e0817580d9a6853b40c3188c86d71_2_1035x463.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/b866e7a6804e0817580d9a6853b40c3188c86d71_2_1380x618.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1380×619 31.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Create an array from the list using <code>SPLIT(list,"\n")</code></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/6amhXdiiYUYHnvfupvsAZv1pdSm.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2b38d48eeba688195cad828c588c49cc7d174a06.png" title="image"><img alt="image" data-base62-sha1="6amhXdiiYUYHnvfupvsAZv1pdSm" data-dominant-color="FDFDFE" height="499" src="../../../images/2b38d48eeba688195cad828c588c49cc7d174a06_2_583x499.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2b38d48eeba688195cad828c588c49cc7d174a06_2_583x499.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2b38d48eeba688195cad828c588c49cc7d174a06_2_874x748.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2b38d48eeba688195cad828c588c49cc7d174a06.png 2x" width="583"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">961×824 27.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>From there you can use run a data flow within the data flow to run operations on each entry.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">blschaef15</div>
+          <div class="post_content">
+<p><span class="mention">@ismaen</span> that worked perfectly! Much appreciated as always.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

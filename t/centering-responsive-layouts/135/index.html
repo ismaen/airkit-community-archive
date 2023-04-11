@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Centering responsive layouts</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Centering responsive layouts</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/33_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ackerman</div>
+          <div class="post_content">
+<p>Airkit studio makes it easy to manage your web views. You can create different layouts for small screen, tablet, large screens, and any other breakpoints you wish.</p>
+<p><img alt="responsive_sm" class="animated" data-base62-sha1="hwTpFm6kvyV5anLBEQJ7iby26LF" height="324" src="../../../images/7adcd8d744d52ee48832cc322b70622e17f67653.gif" width="576"/></p>
+<p>On the Web flows view in the studio, you will see a “Page layouts” section in the left hand tree. In there you will see an option for standard layouts. You can create as many layouts as you wish for the breakpoints you are targeting. In this example, we have two - mobile and desktop.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/hqr0yNnovUrTnpjsioYl64HCb21.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/7a21f59a93eed134b1fb292c0f68fd4f12251ba9.png" rel="noopener nofollow ugc" title="Screen Shot 2022-03-24 at 1.20.07 PM"><img alt="Screen Shot 2022-03-24 at 1.20.07 PM" data-base62-sha1="hqr0yNnovUrTnpjsioYl64HCb21" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7a21f59a93eed134b1fb292c0f68fd4f12251ba9_2_10x10.png" height="332" src="../../../images/7a21f59a93eed134b1fb292c0f68fd4f12251ba9_2_690x332.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7a21f59a93eed134b1fb292c0f68fd4f12251ba9_2_690x332.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7a21f59a93eed134b1fb292c0f68fd4f12251ba9_2_1035x498.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/7a21f59a93eed134b1fb292c0f68fd4f12251ba9_2_1380x664.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-03-24 at 1.20.07 PM</span><span class="informations">2458×1184 288 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>To set when a layout is used, select a layout, and in the advanced options on the right, set your breakpoint. My breakpoint is at 800 pixels, so for mobile I am using <code>browser.width &lt;= 800</code> and for desktop I am using <code>browser.width &gt; 800</code>.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/n2NvLam9Aoi0zxTahi4dklinisF.jpeg?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/a182fccff7b172c62091de9111248a4578cf1e81.jpeg" rel="noopener nofollow ugc" title="Screen Shot 2022-03-24 at 1.40.51 PM"><img alt="Screen Shot 2022-03-24 at 1.40.51 PM" data-base62-sha1="n2NvLam9Aoi0zxTahi4dklinisF" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a182fccff7b172c62091de9111248a4578cf1e81_2_10x10.png" height="240" src="../../../images/a182fccff7b172c62091de9111248a4578cf1e81_2_690x240.jpeg" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a182fccff7b172c62091de9111248a4578cf1e81_2_690x240.jpeg, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a182fccff7b172c62091de9111248a4578cf1e81_2_1035x360.jpeg 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/a182fccff7b172c62091de9111248a4578cf1e81_2_1380x480.jpeg 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-03-24 at 1.40.51 PM</span><span class="informations">3074×1070 152 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Now, to keep the desktop constrained to a width on large monitors (you don’t necessarily want your content to take up full width on wide screens), I have a master container that I call “Page container” on the layout, with everything else inside of that.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/ansdBtkz4aJU32zxiiKqMG24OMK.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/48bc7dde7c28f74a328648b1b496dbecf9a69256.png" rel="noopener nofollow ugc" title="Screen Shot 2022-03-24 at 1.42.27 PM"><img alt="Screen Shot 2022-03-24 at 1.42.27 PM" data-base62-sha1="ansdBtkz4aJU32zxiiKqMG24OMK" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/48bc7dde7c28f74a328648b1b496dbecf9a69256_2_10x10.png" height="500" src="../../../images/48bc7dde7c28f74a328648b1b496dbecf9a69256_2_570x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/48bc7dde7c28f74a328648b1b496dbecf9a69256_2_570x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/48bc7dde7c28f74a328648b1b496dbecf9a69256.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/48bc7dde7c28f74a328648b1b496dbecf9a69256.png 2x" width="570"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-03-24 at 1.42.27 PM</span><span class="informations">634×556 24.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>On that container, set the max width to your desired max width (I’m using 800px, same as my breakpoint). Max width is hidden in the studio settings, but you can find it by looking in the Dimensions section in the editor on the right side of the page. Click on the ‘…’ options, and you’ll see it pop up, and you can add your desired max width.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/fwbRxf2N5sDVnZNDlDWruAC4qEa.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/6cc42c0b736336e7dd697a136ab515acd3cd5be2.png" rel="noopener nofollow ugc" title="Screen Shot 2022-03-24 at 1.30.21 PM"><img alt="Screen Shot 2022-03-24 at 1.30.21 PM" data-base62-sha1="fwbRxf2N5sDVnZNDlDWruAC4qEa" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6cc42c0b736336e7dd697a136ab515acd3cd5be2_2_10x10.png" height="500" src="../../../images/6cc42c0b736336e7dd697a136ab515acd3cd5be2_2_288x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6cc42c0b736336e7dd697a136ab515acd3cd5be2_2_288x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6cc42c0b736336e7dd697a136ab515acd3cd5be2_2_432x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/6cc42c0b736336e7dd697a136ab515acd3cd5be2_2_576x1000.png 2x" width="288"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-03-24 at 1.30.21 PM</span><span class="informations">826×1434 53.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>Now to get it to center, we just have to add ‘auto’ to the left and right margin. We do that by clicking on the icon in the ‘Spacing’ section, and it will bring up a dialog box where you can type in the values.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/oqw0aAqdQUBY8XDnuJq7lgqYDvK.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ab33820a09c63a41ee20c50b77ca5b698c29e4cc.png" rel="noopener nofollow ugc" title="Screen Shot 2022-03-24 at 1.33.49 PM"><img alt="Screen Shot 2022-03-24 at 1.33.49 PM" data-base62-sha1="oqw0aAqdQUBY8XDnuJq7lgqYDvK" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ab33820a09c63a41ee20c50b77ca5b698c29e4cc_2_10x10.png" height="500" src="../../../images/ab33820a09c63a41ee20c50b77ca5b698c29e4cc_2_491x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ab33820a09c63a41ee20c50b77ca5b698c29e4cc_2_491x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ab33820a09c63a41ee20c50b77ca5b698c29e4cc.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ab33820a09c63a41ee20c50b77ca5b698c29e4cc.png 2x" width="491"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-03-24 at 1.33.49 PM</span><span class="informations">680×692 22.9 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>And there you have it - thanks <span class="mention">@davidpairkit</span> for schooling me on this!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/17_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ian</div>
+          <div class="post_content">
+<p>My only regret is that I cannot like this post more than once.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>I was just running into this. Setting the margins to <code>auto</code> worked for me! Thank you <span class="mention">@ackerman</span>!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/9_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Ankit_Chaudhari</div>
+          <div class="post_content">
+<p>Thanks <span class="mention">@ackerman</span>, this was very helpful in creating a client document on responsive design!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

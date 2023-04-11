@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Filtering data from an AirData request</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Filtering data from an AirData request</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/62_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">dinesh</div>
+          <div class="post_content">
+<p>I want to query an Airdata table for a particular value and unsure how to reference the query results.</p>
+<p>I’m using an Airdata Request with a QUERY type but unsure what to put in the filter box.</p>
+<pre><code class="lang-auto">FROM item in collection WHERE item.email=email_input SELECT Item
+</code></pre>
+<p>collection isn’t the right keyword but not sure what to substitute here.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hi <span class="mention">@dinesh</span>,</p>
+<p>When querying data in AirData using the QUERY operation, you have to use specific syntax to create your query. This can be found in the doc <a href="https://support.airkit.com/docs/airdata-querying-capabilities">AirData Querying Capabilities</a>.</p>
+<p>For example, if you wanted to find all the records that match a specific email address (i.e. <a href="mailto:ismaen@airkit.com">ismaen@airkit.com</a>) you would have to do the following:</p>
+<p>Example Data:<br/>
+<img alt="2022-01-18_14-57-31" data-base62-sha1="u7IwHtJJYjXsf7WUaUXV3cP1QGg" height="162" src="../../../images/d32091f3d83d903f54b18a6f596b788508ba8af4.png" width="362"/></p>
+<p>Query:</p>
+<pre><code class="lang-auto">{ "email": { "eq": "ismaen@airkit.com" } }
+</code></pre>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/A1hucyo3jVtzY9Oh19i9cyN4coR.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fc735cfcbf68b93ca3e46fc1f1bc8d5e6a45cf65.png" title="2022-01-18_14-59-03"><img alt="2022-01-18_14-59-03" data-base62-sha1="A1hucyo3jVtzY9Oh19i9cyN4coR" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fc735cfcbf68b93ca3e46fc1f1bc8d5e6a45cf65_2_10x10.png" height="338" src="../../../images/fc735cfcbf68b93ca3e46fc1f1bc8d5e6a45cf65_2_690x338.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/fc735cfcbf68b93ca3e46fc1f1bc8d5e6a45cf65_2_690x338.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fc735cfcbf68b93ca3e46fc1f1bc8d5e6a45cf65.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/fc735cfcbf68b93ca3e46fc1f1bc8d5e6a45cf65.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">2022-01-18_14-59-03</span><span class="informations">900×441 15 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>This would result in only records where the email column is equal to “<a href="mailto:ismaen@airkit.com">ismaen@airkit.com</a>”</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

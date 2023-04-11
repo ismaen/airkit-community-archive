@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>How do I deploy different environments for my app?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">How do I deploy different environments for my app?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/23_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Jake_Hanson</div>
+          <div class="post_content">
+<p>As a builder, it would be helpful for me to have a QA environment for the app I’m building to be able to test in, but also have a Production environment in which end users would go through. How would I go about creating this in Airkit?</p>
+<p>I can see that my application already has profiles built for Development, QA, and Production.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/z846LN32mlm61uzKMfjbLfQBoxm.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f635836048ca45f5c9ac206d6f1339f4bf2146ec.png" rel="noopener nofollow ugc" title="Screen Shot 2022-01-04 at 10.33.46 AM"><img alt="Screen Shot 2022-01-04 at 10.33.46 AM" data-base62-sha1="z846LN32mlm61uzKMfjbLfQBoxm" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f635836048ca45f5c9ac206d6f1339f4bf2146ec_2_10x10.png" height="228" src="../../../images/f635836048ca45f5c9ac206d6f1339f4bf2146ec_2_517x228.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f635836048ca45f5c9ac206d6f1339f4bf2146ec_2_517x228.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/f635836048ca45f5c9ac206d6f1339f4bf2146ec_2_775x342.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/f635836048ca45f5c9ac206d6f1339f4bf2146ec.png 2x" width="517"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-01-04 at 10.33.46 AM</span><span class="informations">970×430 16.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>How do I make sure that I have separate links that take me to each version of the live app and how would I handle this in the Airkit platform?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/20_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">nico</div>
+          <div class="post_content">
+<p>Hey Jake, this is great question!</p>
+<p>As you mention Airkit Apps come with the 3 environments you show (you edit/create more envs to suit your app deployment and testing process). Each one will have a different resources assigned to it, like phone numbers, URLs, integrations credentials, etc.</p>
+<p>Basically once your application is ready, you’ll need to create “locked branches” to be deployed to the different Environments/Profiles. This can be done in the Console &gt; Select App &gt; Branches &gt; Pick the unlocked branch you are editing and create a “locked” copy of the branch. Make sure to use a naming convention that makes sense to name the branches (like “QA-2022-01-03”).</p>
+<p>Once your branches are created, you are ready to deploy them. Go to Console &gt; Select your App &gt; Deployments &gt; Create New. At this point you’ll be selecting a Branch and Profile for this deployment. You’ll need to create as many deployments as environments needed! Deployments can be updated when new versions of the App are ready to go. Keep in mind deleting a deployment will expire the active sessions on that specific deployment.</p>
+<p>More info can be found in the Airkit  Documentation website: <a class="inline-onebox" href="https://support.airkit.com/docs/using-profiles-for-deployment-settings-and-configurations" rel="noopener nofollow ugc">Using Profiles for Deployment settings and Configurations</a></p>
+<p>Cheers</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Add simple pie chart to app</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Add simple pie chart to app</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">mmarzol</div>
+          <div class="post_content">
+<p>Hi there,</p>
+<p>I’d like to show a simple pie chart to the user at the end of the journey, based on an array of 2 categories and 2 values (percentages), like the following image:</p>
+<p><img alt="Screen Shot 2022-11-01 at 02.28.06" data-base62-sha1="d24pvBCEIrNhsx7UYdBGfar9otr" height="348" src="../../../images/5b58327bf01cc3ecf65e872d7537874089ea6469.png" width="388"/></p>
+<p>Could you please advise about how to achieve this?</p>
+<p>Thank you!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/53_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Elliot_Fiske</div>
+          <div class="post_content">
+<p>Hello! The easiest way to accomplish this is with <a href="https://www.image-charts.com/" rel="noopener nofollow ugc">https://www.image-charts.com/</a></p>
+<p>Here’s a pie chart similar to your image:<br/>
+<img alt="img" data-base62-sha1="1LWC41TT26DbZwHkdAZs85TYchD" height="400" src="../../../images/0c6da1a6f41029b97c997c5c0bec4ac00c07c665.png" width="300"/></p>
+<p>You could make this with Airscript like this:</p>
+<pre><code class="lang-auto">LET data = JOIN(["90", "10"], ",") IN
+URL_ENCODE(
+  "https://image-charts.com/chart?chco=3577C6,93C6F1&amp;chd=t:{{data}}&amp;chs=300x400&amp;cht=p3"
+)
+</code></pre>
+<p>You could add an “Image” control and set the “source” to the Airscript above.</p>
+<p>You can explore the different options for a Pie Chart here: <a href="https://editor.image-charts.com/?tab_viewer=url&amp;tab_editor=form#https:/image-charts.com/chart.js/2.8.0?bkg=white&amp;c=%7B%0A%20%20%22type%22%3A%20%22pie%22%2C%0A%20%20%22data%22%3A%20%7B%0A%20%20%20%20%22datasets%22%3A%20%5B%0A%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22data%22%3A%20%5B84%2C%2028%2C%2057%2C%2019%2C%2097%5D%2C%0A%20%20%20%20%20%20%20%20%22backgroundColor%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%22rgba%28255%2C99%2C132%2C0.5%29%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22rgba%28255%2C159%2C64%2C0.5%29%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22rgba%28255%2C205%2C86%2C0.5%29%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22rgba%2875%2C192%2C192%2C0.5%29%22%2C%0A%20%20%20%20%20%20%20%20%20%20%22rgba%2854%2C162%2C235%2C0.5%29%22%0A%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%22label%22%3A%20%22Dataset%201%22%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%5D%2C%0A%20%20%20%20%22labels%22%3A%20%5B%22Red%22%2C%20%22Orange%22%2C%20%22Yellow%22%2C%20%22Green%22%2C%20%22Blue%22%5D%0A%20%20%7D%0A%7D" rel="noopener nofollow ugc">https://editor.image-charts.com/</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>This is a sweet solution <span class="mention">@Elliot_Fiske</span>!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

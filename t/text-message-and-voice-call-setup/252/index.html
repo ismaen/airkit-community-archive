@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Text message and voice call setup</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Text message and voice call setup</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>How do i set up the app so that i get a text message on my phone. I did create sms trigger from journey and gave the verbiage but i was not getting texts, when i click on the chat option and send any message i’m receiving a message on chat bot console. The expectation is to receive the text on my mobile phone after i change the customer preference of communication.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>To receive an SMS on an IRL phone, you’re going to make sure you’ve done two things:</p>
+<ol>
+<li>Published your application</li>
+<li>Configured a Twilio number to process the SMS messages associated with your application. You can read more about that <a href="https://support.airkit.com/docs/connecting-twilio-numbers#setting-up-the-integration-in-the-console">here</a>.</li>
+</ol>
+<p>If both of these things have been done correctly, you can properly create an SMS communication channel between the configured Twilio number and the Actor (whose phone number you must set before initialization; for more on what Actors are and why they must be initialized, see <a href="https://support.airkit.com/docs/actors">this doc</a>).</p>
+<p>Does that answer your question? If not, could you go into a little more detail on your use case?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>The setting up phone number as a resource is already done in resources and also at the app level. But no texts are being received on my mobile. My use case is i have built a basic app to change the customers communication preference, once the preference is selected the customer should be receiving a text message.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Did the intended flow work in the Preview window?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p><span class="mention">@Shivashankar_Yadav</span> if you can export your app and attach it here, that would be helpful and can walk you through how to make it so your app can send SMS.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p>The flow works , until the customer communication preference is changed but i was not receiving the text message on the chat console unless and until i send a message  to invoke the text.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/eOs3uCDyWatmAyofXMBQBCz2UYJ.jpeg?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/67d271fcc7a469d227fcbdc0b97a88038a6f3335.jpeg" rel="noopener nofollow ugc" title="Screen Shot 2022-08-29 at 5.47.55 PM"><img alt="Screen Shot 2022-08-29 at 5.47.55 PM" data-base62-sha1="eOs3uCDyWatmAyofXMBQBCz2UYJ" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/67d271fcc7a469d227fcbdc0b97a88038a6f3335_2_10x10.png" height="499" src="../../../images/67d271fcc7a469d227fcbdc0b97a88038a6f3335_2_677x499.jpeg" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/67d271fcc7a469d227fcbdc0b97a88038a6f3335_2_677x499.jpeg, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/67d271fcc7a469d227fcbdc0b97a88038a6f3335_2_1015x748.jpeg 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/67d271fcc7a469d227fcbdc0b97a88038a6f3335.jpeg 2x" width="677"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-08-29 at 5.47.55 PM</span><span class="informations">1303×961 138 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>What is your <code>actor.phone</code> set as? if you look in the state viewer under “Entire” and look for “Actor” you should see <code>actor.phone</code> should be equal to your phone number.</p>
+<p>Also, is your SMS resource attached to your app in “Settings” as well?</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/w9pA9q5h970q6PHTeC5MaRGCydG.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/e155f3d2d8f1d47d84e8e0eb4d4bb1523ca69628.png" title="image"><img alt="image" data-base62-sha1="w9pA9q5h970q6PHTeC5MaRGCydG" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e155f3d2d8f1d47d84e8e0eb4d4bb1523ca69628_2_10x10.png" height="433" src="../../../images/e155f3d2d8f1d47d84e8e0eb4d4bb1523ca69628_2_690x433.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e155f3d2d8f1d47d84e8e0eb4d4bb1523ca69628_2_690x433.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e155f3d2d8f1d47d84e8e0eb4d4bb1523ca69628_2_1035x649.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/e155f3d2d8f1d47d84e8e0eb4d4bb1523ca69628_2_1380x866.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">1788×1124 131 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/365_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Shivashankar_Yadav</div>
+          <div class="post_content">
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/toS2Jt8xZLcmhvGPDTaITVKKkSS.jpeg?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ce0ec9f87a6e26a9a8ccfc05ca2bc7158da9c9aa.jpeg" rel="noopener nofollow ugc" title="Screen Shot 2022-08-29 at 6.23.00 PM"><img alt="Screen Shot 2022-08-29 at 6.23.00 PM" data-base62-sha1="toS2Jt8xZLcmhvGPDTaITVKKkSS" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ce0ec9f87a6e26a9a8ccfc05ca2bc7158da9c9aa_2_10x10.png" height="499" src="../../../images/ce0ec9f87a6e26a9a8ccfc05ca2bc7158da9c9aa_2_677x499.jpeg" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ce0ec9f87a6e26a9a8ccfc05ca2bc7158da9c9aa_2_677x499.jpeg, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ce0ec9f87a6e26a9a8ccfc05ca2bc7158da9c9aa_2_1015x748.jpeg 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ce0ec9f87a6e26a9a8ccfc05ca2bc7158da9c9aa.jpeg 2x" width="677"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-08-29 at 6.23.00 PM</span><span class="informations">1303×961 148 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div><br/>
+Actor.phone is set to my phone. number and also the sms resource is attached to the app as well.</p>
+<p>Seeing this error(400) in the debug console.</p>
+<p>httpStatus":</p>
+<p>400</p>
+<p>“message”:</p>
+<p>“Activity with id undefined does not exist for savepoint eb76c2d7-9e2c-4113-94e5-388cf198805b. This can be caused by the removal of: UI elements, voice/SMS prompts”</p>
+<p>“stack”:</p>
+<p>“ApplicationError: Activity with id undefined does not exist for savepoint eb76c2d7-9e2c-4113-94e5-388cf198805b. This can be caused by the removal of: UI elements, voice/SMS prompts at WebSocketServer.loadActivity (/18.0.411/runtime.js:427146:19) at runMicrotasks () at processTicksAndRejections (node:internal/process/task_queues:96:5) at async Object.VoiceStart (/18.0.411/runtime.js:418806:22) at async serverRunActionChain (/18.0.411/runtime.js:417364:23) at async processVoiceEvent (/18.0.411/runtime.js:421198:13) at async processSessionEvent (/18.0.411/runtime.js:421584:18) at async /usr/src/app/1.0.1106/server/session-router-internal.js:118:25”</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>can you send a screenshot of the action chain where you are doing the set variable of session.phone &gt; actor.phone as well as what your chatbot/notification looks like?</p>
+<p>One thing that comes to mind is that you are not running the initialize actor action after you set the variable and then once the actor is initialized, you want to send the sms message.</p>
+<p><img alt="image" data-base62-sha1="j78GbTCyVDAmMA4ExqVRfa2gs0w" height="258" src="../../../images/85f7eccf4df849e226e30f2d53b86ee1935b5d30.png" width="406"/></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

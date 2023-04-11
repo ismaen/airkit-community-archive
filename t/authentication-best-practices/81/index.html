@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Authentication Best Practices?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Authentication Best Practices?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/14_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">davidpairkit</div>
+          <div class="post_content">
+<p>Hey everyone! Quick question: does anyone have any best practices around how they authenticate users and validate them prior to granting them access into a journey?</p>
+<p>For example, if I am a bank, and I have someone logging in to view their account details and make a payment, how should I go about making sure they’re the right person? What are my options and what have you all seen?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Hey David!</p>
+<p>So there are a few ways you can authenticate a journey in Airkit, depending on what your requirements are as well as what systems you have in place.</p>
+<h1>
+<a class="anchor" href="#saml-authentication-1" name="saml-authentication-1"></a>SAML Authentication</h1>
+<p>If you have your own Identity provider, you have the ability to add SAML authentication to your Airkit app. You will have to upload the XML file that comes from your IDP and then in configuration builder of your app, you can set that from Public App to Secure App and select Custom as your Authentication Method. Once you publish your app, users will be required to sign in and redirected to authenticate before accessing your app. For more detailed information on this, see here: <a class="inline-onebox" href="https://support.airkit.com/docs/saml-authentication">SAML Authentication</a></p>
+<h1>
+<a class="anchor" href="#authenticatedsecure-apps-2" name="authenticatedsecure-apps-2"></a>Authenticated/Secure Apps</h1>
+<p>If you don’t have an IDP but you want to manage the authentication using Airkit’s out of the box features, we have a concept of what we call Authenticated Apps and Secure Apps. These are two types of apps that can be configured in Configuration Builder under App Type.</p>
+<p>Authenticated Apps are configured as a separate Airkit application that can act as the “Sign in” page for your secure app. Whether the user needs to enter in a username/password that you manage in another system, or maybe you have security questions you need to validate, the authentication app is the “barrier” before you are able to get to your “Secure App”.</p>
+<p>The Secure App is the protected app that only if you are able to authenticate using the <a href="https://support.airkit.com/reference/the-set-authentication-action">Set Authentication action</a> are you able to access the secure app, otherwise you will be redirected to the Authenticated app. This is where you’d add logic to check to see if a user has met the success criteria and you can run the set authentication action to direct them to the secure app.</p>
+<h1>
+<a class="anchor" href="#one-time-passcode-3" name="one-time-passcode-3"></a>One Time Passcode</h1>
+<p>You can also create OTP flows to either SMS or email to provide additional security to your application. This could be used in conjunction with the Authenticated/Secure Apps as well as a part of the success criteria before routing them to the secure app.</p>
+<p>These are just some methods that I’ve seen in Airkit, but not necessarily limited to. Hope this helps!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

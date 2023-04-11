@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Is it possible to pass an object in a data flow Patch function in an Airdata request?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Is it possible to pass an object in a data flow Patch function in an Airdata request?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/33_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ackerman</div>
+          <div class="post_content">
+<p>On a patch function in the connection builder, is there a way to pass a data object as the second argument instead of passing each updated column separately?</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/ez3VmBXRQCpeAGrePQO0OdbZF7f.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/66151b98bcfb357941211570eb891033a626ac0d.png" rel="noopener nofollow ugc" title="Screen Shot 2022-01-07 at 2.42.50 PM"><img alt="Screen Shot 2022-01-07 at 2.42.50 PM" data-base62-sha1="ez3VmBXRQCpeAGrePQO0OdbZF7f" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/66151b98bcfb357941211570eb891033a626ac0d_2_10x10.png" height="402" src="../../../images/66151b98bcfb357941211570eb891033a626ac0d_2_690x402.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/66151b98bcfb357941211570eb891033a626ac0d_2_690x402.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/66151b98bcfb357941211570eb891033a626ac0d_2_1035x603.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/66151b98bcfb357941211570eb891033a626ac0d_2_1380x804.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Screen Shot 2022-01-07 at 2.42.50 PM</span><span class="informations">1502×876 38.4 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p>For instance, if i have a complex data object that gets updated in the ui, i’d rather pass the whole data object like this:</p>
+<pre><code class="lang-auto">[ { "__id": id, {my_data_object} } ]
+</code></pre>
+<p>rather than something like</p>
+<pre><code class="lang-auto">[ { "__id": id, "column1": column1_update, "column2": column2_update, etc.. } ]
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/34_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">AirkitJeremy</div>
+          <div class="post_content">
+<p>The <code>MERGE_OBJECTS</code> function is your savior here:</p>
+<pre><code class="lang-auto">[
+  MERGE_OBJECTS(
+    my_data_object,
+    { __id: id }
+  )
+]
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

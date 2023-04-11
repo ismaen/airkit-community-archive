@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Multiple Data Sources For One Input Box</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Multiple Data Sources For One Input Box</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>Can the input fields on a form use more than one data binding?</p>
+<p>For example, the first time a form is filled out, data will be pulled from Salesforce. Later on, if the response is opened to edit, the info will pull from an Airdata object.</p>
+<p>For editing the responses, would we need to create a second version of the same form that would use the response object for the data binding?</p>
+<p>Please let me know if more info is needed for clarification.</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p>If I understand what you’re trying to do correctly, I think you might need to create a second version of the same form. (Elements within a Web can be copy/pasted, so hopefully this won’t be too cumbersome in practice.)</p>
+<p>An input box can only be bound to a single variable - there is no way to specify when it ought to use one variable over another.</p>
+<p>That said, the value of individual variables can be overwritten. It is possible to define a variable from data pulled from Salesforce, and then, later in the flow, define that same variable from data pulled from an AirData Object. And if that variable was bound to an input box, any changes made to the value displayed in the input box would also change the value bound to the variable.</p>
+<p>Does that help? If not, I think I might need to know a little bit more about the intended flow and the scope of the variables in question.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>I think you might be able to use the same form with the same data binding, you just need to essentialy overwrite the variable using a dataflow.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Sounds like one of the following options might work?</p>
+<ol>
+<li>Create the form with data binding for reloading responses, but use Set Variable to match the data binding when importing from Sales Force.<br/>
+or</li>
+<li>Use the output binding of the data flow that will import the info to match the data binding?</li>
+</ol>
+<p>Do those basically achieve the same thing or would be more likely to work?</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>The second option is more efficient (and probably the “best practice”), but both options could feasible work!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

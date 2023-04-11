@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>UDFs - List of JSON objects to CSV string transformation</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">UDFs - List of JSON objects to CSV string transformation</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>This sample <a href="https://support.airkit.com/reference/user-defined-functions" rel="noopener nofollow ugc">UDF</a> takes a List of JSON objs as input and returns a CSV stored as a string of Text. The CSV output can be copied and saved in a text editor as *.csv or the <a href="https://support.airkit.com/reference/the-create-file-data-operation" rel="noopener nofollow ugc">Create File</a> data operation can be used to create a CSV file directly in Airkit.</p>
+<p>Given the following json input  (<em>dataType: List of &lt;JSON&gt;</em>):</p>
+<pre><code class="lang-auto">[
+    {
+        "my": "this",
+        "csv": "is",
+        "headers": "one row"
+    },
+    {
+        "my": "this",
+        "csv": "is",
+        "headers": "another row"
+    },
+    {
+        "my": "and this",
+        "csv": "here is",
+        "headers": "yet another row"
+    }
+]
+</code></pre>
+<p>We use this transformation in a UDF’s Function Body to transform it into a CSV string (<em>json</em> is referring to the json payload above).</p>
+<pre><code class="lang-auto">"{{JOIN(
+  KEYS(
+    json[0]
+  ),
+  ","
+)}}\n{{JOIN(
+  FROM obj IN json SELECT JOIN(VALUES(obj), ","),
+  "\n"
+)}}"
+</code></pre>
+<p>To get this CSV output (<em>dataType: Text</em>):</p>
+<pre><code class="lang-auto">my,csv,headers
+this,is,one row
+this,is,another row
+and this,here is,yet another row
+</code></pre>
+<p>This can easily be tested in a Data Flow using a Transform data operation:<br/>
+<div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/Ar7hesmG3ZemQWLeYq16fWxeXEv.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ff5efe60dfe2b65fc3c022e8c34b7e3f17d3b1db.png" rel="noopener nofollow ugc" title="Json2csv"><img alt="Json2csv" data-base62-sha1="Ar7hesmG3ZemQWLeYq16fWxeXEv" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ff5efe60dfe2b65fc3c022e8c34b7e3f17d3b1db_2_10x10.png" height="433" src="../../../images/ff5efe60dfe2b65fc3c022e8c34b7e3f17d3b1db_2_690x433.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ff5efe60dfe2b65fc3c022e8c34b7e3f17d3b1db_2_690x433.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ff5efe60dfe2b65fc3c022e8c34b7e3f17d3b1db_2_1035x649.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ff5efe60dfe2b65fc3c022e8c34b7e3f17d3b1db_2_1380x866.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Json2csv</span><span class="informations">1764×1107 51.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

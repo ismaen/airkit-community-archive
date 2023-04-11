@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Why should I use PARSE_PHONE vs FORMAT_PHONE?</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Why should I use PARSE_PHONE vs FORMAT_PHONE?</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/38_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Drew</div>
+          <div class="post_content">
+<p>Looking at the docs for PARSE_PHONE and FORMAT_PHONE, it looks like they can both achieve the same mission. Why should I use one vs the other?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>This is an interesting question!</p>
+<p><a href="https://support.airkit.com/reference/parse_phone">PARSE_PHONE</a> and <a href="https://support.airkit.com/reference/format_phone">FORMAT_PHONE</a> are subtly different. Crucially, PARSE_PHONE <em>always</em> returns input that counts as a <a href="https://support.airkit.com/reference/the-phone-variable-data-type">Phone Data Type</a>, whereas FORMAT_PHONE does not.</p>
+<p>You can think of PARSE_PHONE as a function that makes phone number easily-readable for computers, while FORMAT_PHONE is a function that make phone numbers easily-readable for people.</p>
+<p>A common use case for PARSE_PHONE is to take a phone number entered by an app user (which might use local formatting conventions and lack details like the country code) and ensure that it gets saved in a format that can be used to automatically send texts and phone calls (which requires a standardized format that encompasses details like the country code).</p>
+<p>A common use case for FORMAT_PHONE is to take a phone number collected from an incoming call (and automatically saved in <a href="https://en.wikipedia.org/wiki/E.164">E.164</a> format) and return a string that formats the phone number according to local standards. Using local formatting conventions makes it easier for humans to read, even though the lack of standardization makes it a pain for computers to parse.</p>
+<p>The format of the output of FORMAT_PHONE can vary, because it can return phone number formatted according to different specifications – including E.164. In practice, this means that there is some overlap in what PARSE_PHONE and FORMAT_PHONE can do, but they’re ultimately optimized for different use cases.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

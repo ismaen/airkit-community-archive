@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Count the occurrence of an unknown element in an array</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Count the occurrence of an unknown element in an array</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/9_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Ankit_Chaudhari</div>
+          <div class="post_content">
+<p><strong>Overview:</strong> As part of implementing a client use-case, I have a requirement to fetch intersection meeting times for a group of participants. The application is leveraging Graph API to fetch timings for individual participants(screenshot below).</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/rjk9QyK46NKNatfmoIb0zFzByvd.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/bf69ef09350df23c2dba01e0e9ed5ead9ab158bf.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="rjk9QyK46NKNatfmoIb0zFzByvd" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bf69ef09350df23c2dba01e0e9ed5ead9ab158bf_2_10x10.png" height="500" src="../../../images/bf69ef09350df23c2dba01e0e9ed5ead9ab158bf_2_295x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bf69ef09350df23c2dba01e0e9ed5ead9ab158bf_2_295x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bf69ef09350df23c2dba01e0e9ed5ead9ab158bf_2_442x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/bf69ef09350df23c2dba01e0e9ed5ead9ab158bf_2_590x1000.png 2x" width="295"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">630×1066 42.5 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><strong>Issue:</strong> When fetching meeting times for multiple participants, the intersection time-slots are received as duplicates. Example: The data-flow to fetch intersection time-slot availability returns ‘n’ duplicate time-slot(in an array) for ‘n’ participants. Screenshot below displaying duplicate time-slots.</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/2ZqLSFnFDp50GZsxqSw2kw4BWkt.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/14f614597e951e264f3d7cbc6386e4fd86a8adf5.png" rel="noopener nofollow ugc" title="image"><img alt="image" data-base62-sha1="2ZqLSFnFDp50GZsxqSw2kw4BWkt" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/14f614597e951e264f3d7cbc6386e4fd86a8adf5_2_10x10.png" height="488" src="../../../images/14f614597e951e264f3d7cbc6386e4fd86a8adf5_2_690x488.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/14f614597e951e264f3d7cbc6386e4fd86a8adf5_2_690x488.png, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/14f614597e951e264f3d7cbc6386e4fd86a8adf5.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/14f614597e951e264f3d7cbc6386e4fd86a8adf5.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">image</span><span class="informations">966×684 53.4 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<p><strong>Question:</strong> Can we transform the resultant array(whose elements are unknown time-slots) to display the count of each elements in the array(instead of duplicates)?</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>You can use <a href="https://support.airkit.com/hc/en-us/articles/1500003204862-Filtering-Data-using-Query-Expression">query syntax</a> to create another object to display the count of each element.</p>
+<p>If <code>foo</code> is your array you can do something like this:</p>
+<p><code>FROM i IN foo SELECT DISTINCT { "value": i, "count": LENGTH(FROM j IN foo WHERE j = i) }</code></p>
+<p>This will output something like this:</p>
+<pre><code class="lang-auto">[
+  {
+    "value": {
+      "start": {
+        "dateTime": "2022-01-06T10:00",
+        "timeZone": "Eastern Standard Time"
+      },
+      "end": {
+        "dateTime": "2022-01-06T10:00",
+        "timeZone": "Eastern Standard Time"
+      }
+    },
+    "count": 2
+  }
+]
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

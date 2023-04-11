@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>APP Standard Practices</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">APP Standard Practices</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tanmay.sardar</div>
+          <div class="post_content">
+<p>Hi team,</p>
+<p>Any best practices/coding standards for developing an Airkit app if there is any document available it would be helpful</p>
+<p>ex: If i  have created an form does it need to follow any standard for webflow , button ,label,input tag and connection</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>hi <span class="mention">@tanmay.sardar</span>, what kind of best practices are you looking for? Like naming conventions?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tanmay.sardar</div>
+          <div class="post_content">
+<p><span class="mention">@ismaen</span> yes naming convention beside that variable also and any other practice to follow while designing the webpage</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>Got it! Great question! So some best practices when it comes to naming in Airkit is really about consistency in my opinion. You want to make sure that your variables, web pages, data flow inputs… etc all follow the same pattern-- whether its camelCase or snake_case or any other case, its really up to the developer.</p>
+<p>These are the practices that I try to follow, though I know it varies from each builder!</p>
+<h1>
+<a class="anchor" href="#naming-conventions-1" name="naming-conventions-1"></a>Naming Conventions</h1>
+<h2>
+<a class="anchor" href="#web-flows-2" name="web-flows-2"></a>Web Flows</h2>
+<ul>
+<li>I make my webflows human readable and use it to describe the workflow</li>
+<li>Example: <code>Terms and Conditions Flow</code>
+</li>
+</ul>
+<h2>
+<a class="anchor" href="#web-pages-3" name="web-pages-3"></a>Web Pages</h2>
+<ul>
+<li>Used to describe the particular page. I like to add the word “page” on each web page</li>
+<li>Example: <code>Home Page</code> or <code>Confirmation Page</code>
+</li>
+</ul>
+<h2>
+<a class="anchor" href="#web-controls-4" name="web-controls-4"></a>Web Controls</h2>
+<ul>
+<li>These should describe what the control represents. This makes it easier to parse through your tree.</li>
+<li>Example: Container → <code>Section Container</code> or a title label → <code>Header </code>
+</li>
+</ul>
+<h2>
+<a class="anchor" href="#variables-5" name="variables-5"></a>Variables</h2>
+<ul>
+<li>I like to use snake_case to name my variables. If i’m have an input control, i would normally have the input control be something like the input it’s capturing and append <code>input</code> at the end.</li>
+<li>Example: instead of <code>text_input</code> → first_name_input</li>
+</ul>
+<h1>
+<a class="anchor" href="#design-6" name="design-6"></a>Design</h1>
+<p>From a design perspective, best practices are to try to reduce the amount of style overrides you do. That means managing the styles in the inspector of a control. I would recommend to manage and change your styles in the variants in Theme builder so that you have consistency across your application, and that all/most styles are essentially inherited from your themes. This will help in the long run as you build out bigger and more complex applications.</p>
+<p>Hope this is helpful!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>These are all good points!</p>
+<p>One other thing I would add is that, whenever it’s relevant (whenever a UI component depends on the value of a variable), is to make sure you include a dummy value in the <a href="https://support.airkit.com/docs/variable-tree">Variable Tree</a>, so that you can confirm how styling elements look in the Stage without having to preview.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/{size}.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">tanmay.sardar</div>
+          <div class="post_content">
+<p>Thank you for the update</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

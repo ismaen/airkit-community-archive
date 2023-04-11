@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Running a Data Flow at a specific time</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Running a Data Flow at a specific time</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>I am attempting to run a Data Flow via a timer e.g. run the Data Flow at 8:00 am every day. I tried doing this using a Custom Expression but I am a bit lost as to how the Executing Time DateTime input should be structured for the Flow to run every day since day/month/year must be specified in a DateTime. Could a wildcard be used for these values? Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/3_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">ismaen</div>
+          <div class="post_content">
+<p>In case anyone is following, I figured it out:</p>
+<p>This essentially will create a datetime that will send at 8am either the same or the next day depending on the time. I passed <code> NOW()</code> which will default the datetime UTC but can <a href="https://support.airkit.com/reference/now">pass a specific timezone</a> through that. You can also just pass the timezone of the user’s device through <code>session.timeZone </code> as well through the <code> NOW()</code> function.</p>
+<pre><code class="lang-auto">IF(
+  NOW().time.hour &gt; 8,
+  UPDATE_MINUTE(
+    UPDATE_HOUR(
+      ADD_TO_DATETIME(
+        NOW(),
+        1,
+        "day"
+      ),
+      7
+    ),
+    60
+  ),
+  UPDATE_MINUTE(
+    UPDATE_HOUR(
+      NOW(),
+      7
+    ),
+    60
+  )
+)
+</code></pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

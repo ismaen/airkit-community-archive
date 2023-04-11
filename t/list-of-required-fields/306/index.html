@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>List of Required Fields</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">List of Required Fields</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Hi,</p>
+<p>Looking for the best way to create a list of required fields on a page.</p>
+<p>Would we use the “is disabled” feature on the save button for the page, with conditions such as<br/>
+If(input1) = NULL AND if(input2) = NULL.</p>
+<p>Or would there be a better way? The forms contain about 50 variables each but not all are required.</p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>Hi!</p>
+<p>You’ve figured out the crux of it! Using the “is disabled” feature under those conditions is absolutely a valid way to approach this problem, and if the form only contained 2 or 3 variables, I imagine we’d be content calling this the “best” way forward.</p>
+<p>But you’re right – 50 variables seems like an awful lot to check that way. From here on out, the “best” way strikes me as a matter of personal preference. Here’s how I might go about it:</p>
+<p>The “is disabled”  feature disables the button when given input that evaluates to <code>TRUE</code>, so I want to deal with a lot of the logic behind that by making a UDF that evaluates to <code>TRUE</code> if any of the values it checks is <code>NULL</code>. It’ll take input in the form of a List, which I’ll call <code>test_list</code>, and the UDF will look as follows:</p>
+<pre><code class="lang-auto">CONTAINS(
+  FROM
+    item
+  IN
+   test_list
+  SELECT
+    ISEMPTY(item),
+  TRUE
+)
+</code></pre>
+<p>This uses the cycles through each item in the List and checks if it’s empty. If any of the  items are, it will return <code>TRUE</code>; otherwise, <code>FALSE</code>.</p>
+<p>I can then call on this UDF (call it <code>UDF</code> for example purposes) in the “is disabled” feature, and feed it a list generated from the variables I want to require. In your simple example, when these variables consist only of <code>input1</code> and <code>input2</code>, it would look like this:</p>
+<pre><code class="lang-auto">UDF([input1, input2])
+</code></pre>
+<p>That List gets longer and more cumbersome to write the more fields you want to require, but at least you don’t have to write out “ = NULL” as many times.</p>
+<p>Is this truly better? I don’t know! It might run a little slower, but in a way that’s probably pretty negligible. Does it save you time writing out Airscript expressions and make things easier to conceptualize? I would say yes, but the margin isn’t as wide as I would prefer. On the plus side, the UDF can be reused, so if you have a multi-page form, it might save time repeatedly.</p>
+<p>Does that help? I’m curious if anyone else has any other ideas for ways that might be considered “better” in cases like this!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>Thanks!</p>
+<p>Would there also be a way to have different conditions on which fields are required? We have many questions that are conditional based on preview answers.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>It’s always possible to have different conditions on which fields are required! We just run into that problem of the “best” way to do it being debatable again.</p>
+<p>The simplest way I can imagine for handling something like this would be to implement that earlier solution, and then run some conditionals while generating the List that’s given to the UDF.</p>
+<p>So say we have a form with three inputs: <code>input1</code>, <code>input2</code>, and <code>input3</code>. <code>input1</code> and <code>input2</code> are always required, but <code>input3</code> is only required if <code>input1=100</code>. We can call on the UDF created above as follows:</p>
+<pre><code class="lang-auto">UDF(
+  [
+    input1,
+    input2,
+    IF(
+      input1 = 100,
+      input3,
+      "not required"
+    )
+  ]
+)
+</code></pre>
+<p>This uses the <a href="https://support.airkit.com/reference/if">IF</a> function to check if <code>input1</code> is equal to 100. If that is the case, it returns <code>input3</code>, and the UDF will check if <code>input3</code> is NULL, same as all the other input values it’s given. If that isn’t the case, it returns the string “not required” - a value that’s only important because it’s not NULL, and therefore won’t be considered an empty value by the UDF.</p>
+<p>This seems like a straightforward way to do this. But of course, it can always get more complicated.</p>
+<p>So say we have a form of four inputs: <code>input1</code>, <code>input2</code>, <code>input3</code>, and <code>input4</code>. <code>input1</code> and <code>input2</code> are always required, but <code>input3</code> and <code>input4</code> are only required if <code>input1=100</code>. We can do the exact same thing we did above and run the check twice:</p>
+<pre><code class="lang-auto">UDF(
+  [
+    input1,
+    input2,
+    IF(
+      input1 = 100,
+      input3,
+      "not required"
+    ),
+    IF(
+      input1 = 100,
+      input4,
+      "not required"
+    )
+  ]
+)
+</code></pre>
+<p>but if we have to do this too often, we’re once again back to the original problem, which is that the associated Airscript expression is extremely long and clunky.</p>
+<p>To help lessen that problem, we can run the check only once and have it return a List of all the input required if the condition is met. Then we can use the <a href="https://support.airkit.com/reference/flat">FLAT</a> function to “flatten” the List potentially returned by the IF function into the broader List we’re giving to the UDF:</p>
+<pre><code class="lang-auto">UDF(
+  FLAT(
+    [
+      input1,
+      input2,
+      IF(
+        input1 = 100,
+        [ input3, input4 ],
+        "not required"
+      )
+    ]
+  )
+)
+</code></pre>
+<p>Once again, I don’t know if that’s actually better! It seems like it could be less cumbersome to write, and if you’re dealing with 50+ variables on a form, that seems potentially worth it? There might also be ways to make some of the conditionals themselves UDFs to help them scale, depending on the details of how the variables relate to each other.</p>
+<p>What do you think? Does that help, or do the additional layers of abstraction just make things harder to debug?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/233_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chris_Phillips</div>
+          <div class="post_content">
+<p>With the “is disabled” box, does the logic have to be one string with AND/OR statements, or can it use many conditions separated by commas?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/101_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Chandra_Bergmann</div>
+          <div class="post_content">
+<p>It doesn’t recognize commas in that context, no. Airscript expressions need to be separated by AND/OR statements, and each of those Airscript expressions need to ultimately evaluate to a Boolean.</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>

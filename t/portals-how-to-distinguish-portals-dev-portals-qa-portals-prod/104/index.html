@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>Portals - How to distinguish Portals DEV/Portals QA/Portals PROD</title>
+    <link rel="stylesheet" href="../../../archived.css" />
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+  </head>
+  
+  <body>
+    <header class="header">
+      <div class="title-span">
+        <a href="../../../">
+          <img src="../../../images/site-logo.png" height="66" alt="Airkit Builders - The Official Airkit Builder Community" id="site-logo" />
+        </a>
+      </div>
+    </header>
+
+    <div class="main">
+    <div class="archive-span">An archive of community.airkit.com as of Monday April 10, 2023.</div>
+    <h1 class="topic-title">Portals - How to distinguish Portals DEV/Portals QA/Portals PROD</h1>
+            <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/39_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Etu</div>
+          <div class="post_content">
+<p>Hi all,<br/>
+I am trying to see/analyze data from Portals on the different environments (DEV/QA/PROD), and I am wondering how I can distinguish between Portals DEV-Portals QA-Portals PROD, as I am seeing exact same name and no distinction on which one belong to which environment.<br/>
+<img alt="image" data-base62-sha1="uhrKDcKIUhfHzjDLhbUw5pQKywY" height="253" src="../../../images/d43a1f8a94618d51cb518ae37699c094d606a274.png" width="525"/></p>
+<p>Thanks!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/55_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">juanchax</div>
+          <div class="post_content">
+<p>Hey <span class="mention">@Etu</span> !!</p>
+<p>Well, there’s a couple of options for this:</p>
+<ol>
+<li>When publishing the app from Studio (publish dialog)</li>
+<li>Edit the currently deployed app Portal (App/Deployments)</li>
+</ol>
+<p>Let’s walk through each one.</p>
+<hr/>
+<h2>
+<a class="anchor" href="#naming-your-portal-upon-publishing-your-airkit-app-1" name="naming-your-portal-upon-publishing-your-airkit-app-1"></a>Naming your Portal upon publishing your Airkit App</h2>
+<ol>
+<li>
+<p>When you click the <code>Publish</code> button in Airkit Studio, the Publish dialog is shown</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/6ghFkRbhshnelItzu8XMU6PNmY3.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/2be44d6586e43ac4cbf216a88c737ede46547dcb.png" rel="noopener nofollow ugc" title="publish"><img alt="publish" data-base62-sha1="6ghFkRbhshnelItzu8XMU6PNmY3" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2be44d6586e43ac4cbf216a88c737ede46547dcb_2_10x10.png" height="354" src="../../../images/2be44d6586e43ac4cbf216a88c737ede46547dcb_2_690x354.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2be44d6586e43ac4cbf216a88c737ede46547dcb_2_690x354.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2be44d6586e43ac4cbf216a88c737ede46547dcb_2_1035x531.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/2be44d6586e43ac4cbf216a88c737ede46547dcb_2_1380x708.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">publish</span><span class="informations">1646×846 37.2 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+<li>
+<p>Go ahead and expand the <code>Advanced</code> section, where the <code>Show Portals</code> section (amongst other options) will be shown</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/vT9ZsrpHy5d2H1uaUYdwKrnWVIs.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/df7fa990e2d85b01f2d813302a6a807c7d4d3168.png" rel="noopener nofollow ugc" title="publish-advanced"><img alt="publish-advanced" data-base62-sha1="vT9ZsrpHy5d2H1uaUYdwKrnWVIs" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/df7fa990e2d85b01f2d813302a6a807c7d4d3168_2_10x10.png" height="500" src="../../../images/df7fa990e2d85b01f2d813302a6a807c7d4d3168_2_522x500.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/df7fa990e2d85b01f2d813302a6a807c7d4d3168_2_522x500.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/df7fa990e2d85b01f2d813302a6a807c7d4d3168_2_783x750.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/df7fa990e2d85b01f2d813302a6a807c7d4d3168_2_1044x1000.png 2x" width="522"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">publish-advanced</span><span class="informations">1646×1576 143 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+<li>
+<p>Edit the name to be displayed when accessing the Portal from the Portals’ hamburger menu and hit the <code>Deploy</code>.</p>
+</li>
+</ol>
+<p>Voilá, all done.</p>
+<hr/>
+<h2>
+<a class="anchor" href="#namingrenaming-your-portal-for-a-currently-deployed-app-wportals-2" name="namingrenaming-your-portal-for-a-currently-deployed-app-wportals-2"></a>Naming/renaming your Portal for a currently deployed app (w/Portals)</h2>
+<ol>
+<li>
+<p>After logging in to <a href="https://console.airkit.com" rel="noopener nofollow ugc">Airkit</a>, select the app from <a href="https://console.airkit.com/app" rel="noopener nofollow ugc">the app list view</a></p>
+</li>
+<li>
+<p>Click on <code>Deployments</code> to access the app’s deployments</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/11s0bY0z9ooHHB0N95AtMeiptZj.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/072c2ebffc12072d36ee2b8325f3dbc748107765.png" rel="noopener nofollow ugc" title="app-list"><img alt="app-list" data-base62-sha1="11s0bY0z9ooHHB0N95AtMeiptZj" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/072c2ebffc12072d36ee2b8325f3dbc748107765_2_10x10.png" height="390" src="../../../images/072c2ebffc12072d36ee2b8325f3dbc748107765_2_690x390.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/072c2ebffc12072d36ee2b8325f3dbc748107765_2_690x390.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/072c2ebffc12072d36ee2b8325f3dbc748107765_2_1035x585.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/072c2ebffc12072d36ee2b8325f3dbc748107765_2_1380x780.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">app-list</span><span class="informations">3356×1898 143 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+<li>
+<p>Edit the name to be displayed when accessing the Portal from the Portals’ hamburger menu and hit the <code>Deploy</code></p>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/on7hjySdwfGIcpLF319Rn3j0ISo.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/aad1274bc0827086c183b242d86f441e36f26cec.png" rel="noopener nofollow ugc" title="Portal name"><img alt="Portal name" data-base62-sha1="on7hjySdwfGIcpLF319Rn3j0ISo" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aad1274bc0827086c183b242d86f441e36f26cec_2_10x10.png" height="390" src="../../../images/aad1274bc0827086c183b242d86f441e36f26cec_2_690x390.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aad1274bc0827086c183b242d86f441e36f26cec_2_690x390.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aad1274bc0827086c183b242d86f441e36f26cec_2_1035x585.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aad1274bc0827086c183b242d86f441e36f26cec_2_1380x780.png 2x" width="690"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">Portal name</span><span class="informations">3354×1896 298 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+</li>
+</ol>
+<hr/>
+<h1>
+<a class="anchor" href="#portal-rename-result-3" name="portal-rename-result-3"></a>Portal rename result</h1>
+<h3>
+<a class="anchor" href="#original-4" name="original-4"></a>Original</h3>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/oIRjxtKD7KFsxFJ12k9FZ0fZ0kR.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/ad46583cb23716c9e87f625399f30f3e511d2ed5.png" rel="noopener nofollow ugc" title="portal-old"><img alt="portal-old" data-base62-sha1="oIRjxtKD7KFsxFJ12k9FZ0fZ0kR" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ad46583cb23716c9e87f625399f30f3e511d2ed5_2_10x10.png" height="250" src="../../../images/ad46583cb23716c9e87f625399f30f3e511d2ed5_2_321x250.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ad46583cb23716c9e87f625399f30f3e511d2ed5_2_321x250.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ad46583cb23716c9e87f625399f30f3e511d2ed5_2_481x375.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/ad46583cb23716c9e87f625399f30f3e511d2ed5_2_642x500.png 2x" width="321"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">portal-old</span><span class="informations">786×612 24.3 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+<h3>
+<a class="anchor" href="#after-rename-5" name="after-rename-5"></a>After rename</h3>
+<p><div class="lightbox-wrapper"><a class="lightbox" data-download-href="/uploads/short-url/omxwb0ODyaEbaAkt05kMMRiaFxT.png?dl=1" href="https://global.discourse-cdn.com/standard11/uploads/airkit/original/1X/aac07666cdcfd165d203bf6a14bb79b0132b7209.png" rel="noopener nofollow ugc" title="portal-new"><img alt="portal-new" data-base62-sha1="omxwb0ODyaEbaAkt05kMMRiaFxT" data-small-upload="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aac07666cdcfd165d203bf6a14bb79b0132b7209_2_10x10.png" height="250" src="../../../images/aac07666cdcfd165d203bf6a14bb79b0132b7209_2_330x250.png" srcset="https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aac07666cdcfd165d203bf6a14bb79b0132b7209_2_330x250.png, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aac07666cdcfd165d203bf6a14bb79b0132b7209_2_495x375.png 1.5x, https://global.discourse-cdn.com/standard11/uploads/airkit/optimized/1X/aac07666cdcfd165d203bf6a14bb79b0132b7209_2_660x500.png 2x" width="330"/><div class="meta">
+<svg aria-hidden="true" class="fa d-icon d-icon-far-image svg-icon"><use href="#far-image"></use></svg><span class="filename">portal-new</span><span class="informations">838×634 25.8 KB</span><svg aria-hidden="true" class="fa d-icon d-icon-discourse-expand svg-icon"><use href="#discourse-expand"></use></svg>
+</div></a></div></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="post_container">
+        <div class="avatar_container">
+          <img src="../../../images/39_2.png" class="avatar" />
+        </div>
+        <div class="post">
+          <div class="user_name">Etu</div>
+          <div class="post_content">
+<p>This is great!<br/>
+Thanks <span class="mention">@juanchax</span> !!</p>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </body>
+</html>
